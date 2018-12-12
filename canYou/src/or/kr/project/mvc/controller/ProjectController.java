@@ -270,14 +270,14 @@ public class ProjectController {
 		System.out.println("replylist 크기 : "+ replylist.size());
 		
 		HttpSession s=req.getSession();
-		s.setAttribute("projnum", num);
+		s.setAttribute("projnum", num);		// 프로젝트 세션을 추가
 		
 		return "detail";
 	}
 
 		// 프로젝트 수정
 		@PostMapping("/modify")
-		public ModelAndView modifyView(@ModelAttribute("projvo") ProjectVO vo, HttpServletRequest request) {
+		public ModelAndView modifyView(@ModelAttribute("projvo") ProjectVO vo, HttpServletRequest request, HttpSession s) {
 			// 프로젝트 수정 - 파일업로드
 			String img_path = "resources\\images";
 			String r_path = request.getRealPath("/");
@@ -294,10 +294,14 @@ public class ProjectController {
 			}
 			vo.setProjectMainImage(vo.getMultipartFile().getOriginalFilename());
 			
+			int projnum=Integer.parseInt((String)s.getAttribute("projnum"));
+			vo.setProjectNo(projnum);
+			s.removeAttribute("projnum");
+			
 			// 프로젝트 모두수정 - 메소드 호출
 			dao.modify(vo);
 			ModelAndView mav = new ModelAndView();
-			mav.setViewName("redirect:list");
+			mav.setViewName("redirect:list?num="+projnum);
 			return mav;
 		}
 		

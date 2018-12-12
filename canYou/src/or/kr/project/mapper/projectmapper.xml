@@ -4,12 +4,12 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="project">
 	<!-- 모든 카테고리 목록 불러옴 -->
-	<select id="casel1" resultType="cvo">
+	<select id="casel" resultType="cvo">
 		select * from category
 	</select>
 	
 	<!-- 둘러보기 -->
-	<select id="lookaround1" resultType="cvo">
+	<select id="lookaround" resultType="cvo">
 		select categoryname
 		from
 		category
@@ -168,7 +168,7 @@
 	<!-- 수정 -->
 	<update id="modify" parameterType="projvo" timeout="20">
 		update project SET projectName = #{projectName} , projectCost = #{projectCost} , projectMainImage =
-		#{projectMainImage} , projectStory = #{projectStory} WHERE projectNo=1
+		#{projectMainImage} , projectStory = #{projectStory} WHERE projectNo=#{projectNo}
 	</update>
 
 	<!-- 댓글 등록하기 -->
