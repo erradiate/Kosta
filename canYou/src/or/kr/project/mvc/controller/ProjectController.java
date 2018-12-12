@@ -563,15 +563,25 @@ public class ProjectController {
 		String implstr=impl.getAuthentication().getName();	// security 정보에서 세션에 담겨있는 로그인 정보 중 ID 가져옴
 		MemberVO vo2=dao.memname(implstr);	// ID를 토대로 회원정보 가져옴 (회원 번호, 회원 이름)
 		int memno = vo2.getMemberNo();
+	
 		
 		ProjectDonateVO vo = new ProjectDonateVO();
 		vo.setDonateNo(donateNo);
 		vo.setMemberNo(memno);
-		
+	    System.out.println("확인확인"+vo.getDonateNo());
+       
+	  
+
 		// 사용자의 돈을 반환
 		dao.returnMoney(vo);
+		 // 후원자 수 감소
+	 	dao.returnFundCnt(vo);
 		// 돈 돌려 준 후에 행 삭제
 		dao.donateCancle(vo);
+		
+		
+	
+	
 		return "redirect:/AllList"; // 다시 리스트 화면으로
 	}
 	

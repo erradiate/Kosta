@@ -134,8 +134,10 @@ $(document).ready(function(){
 <ul>
 	<li>진행자 이름 : ${memberName }</li>
 	<li>프로젝트 이름 : <input type="text" name="projectName" required></li>
+
 	<li>프로젝트 대표 이미지 : <input type="file" name="mfile"></li>
 	<li>프로젝트 카테고리 : <select id="categoryNo" name="categoryNo" required>
+
 					<option value="" selected>선택</option>
 					<c:forEach var="v" items="${category}">
 						<option value="${v.categoryNo}">${v.categoryName}</option>
