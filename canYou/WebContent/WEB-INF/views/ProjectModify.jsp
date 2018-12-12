@@ -48,9 +48,10 @@ $(document).ready(function(){
 						</tr>
 					</tfoot>
 				</table>
+				<input type="hidden" id="projectNo" name="projectNo"
+				value="${project.projectNo}">
 			</form>
-			<input type="hidden" id="projectNo" name="projectNo"
-				value="${list.projectNo}">
+			
 		</fieldset>
 	</div>
 </body>
