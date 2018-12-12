@@ -35,7 +35,7 @@
 				<tfoot>
 					<tr>
 						<td>
-						<input type="submit" id="wBtn" value="¼öÁ¤">
+						<input type="submit" id="wBtn" value="ÀüÀ±Áö ¸ÛÅÖ±¸¸®">
 					</td>
 					</tr>
 				</tfoot>
