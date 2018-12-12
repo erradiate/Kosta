@@ -135,7 +135,9 @@ $(document).ready(function(){
 	<li>진행자 이름 : ${memberName }</li>
 	<li>프로젝트 이름 : <input type="text" name="projectName" required></li>
 
-	<li>프로젝트 대표 이미지 : <input type="file" name="mfile"></li>
+	<li>프로젝트 대표 이미지 : <input type="file" class="custom-file-input" id="mfile" name="mfile" >
+			<label class="custom-file-label" for="customFile"></label> 
+			<img id="projectMainImage" style="margin: 60px 10px 10px 10px; width: 260px; height: 280px;"></li>
 	<li>프로젝트 카테고리 : <select id="categoryNo" name="categoryNo" required>
 
 					<option value="" selected>선택</option>
@@ -201,4 +203,20 @@ $('#productCost').keypress(function(event){
 });
 </script>
 </body>
+<script>
+$(function() {
+	$('#projectMainImage').hide(0,function(){});
+	$('#mfile').on('change', function() {
+		let mfile = $(this).val();
+		 let pass = mfile.substr(12);
+		 if(mfile != null){
+			 $('#projectMainImage').attr('src', 'resources/images/' + pass).show(0,function(){});
+			 
+		 } else{
+			 $('#projectMainImage').attr('src', 'resources/images/' + pass).hide(0,function(){});
+			 
+		 }
+	});
+});
+</script>
 </html>
