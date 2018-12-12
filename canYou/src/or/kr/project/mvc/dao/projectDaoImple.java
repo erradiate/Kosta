@@ -15,7 +15,8 @@ import or.kr.project.dto.ProjectDonateVO;
 import or.kr.project.dto.ProjectVO;
 import or.kr.project.dto.ReplyVO;
 import or.kr.project.dto.SearchVO;
-import oracle.net.aso.s;
+import or.kr.project.dto.SubCategoryVO;
+
 
 
 @Repository
@@ -25,6 +26,10 @@ public class projectDaoImple implements projectDao{
 		
 		public List<CategoryVO> casel(){
 			return ss.selectList("project.casel");		// 카테고리 이름 가져오는 sql문
+		}
+		
+		public List<SubCategoryVO> subcasel(int i){
+			return ss.selectList("project.subcasel", i);
 		}
 		
 		public MemberVO memname(String s) {		// 회원이 누구인지 가져오기 위한 sql문(회원 아이디로 가져옴)

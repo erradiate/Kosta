@@ -31,8 +31,13 @@
 					<thead></thead>
 					<tbody>
 						<tr>
+
 							<td>프로젝트 명 : <input type="text" name="projectName"
-								value=${project.projectName }></td>
+								value=${project.projectName } required></td>
+						</tr>
+						<tr>
+							<td>프로젝트 이미지 :</td>
+							<td><input type="file" name="multipartFile"></td>
 						</tr>
 						<tr>
 							<td>프로젝트 스토리 : <textarea rows="20" cols="20"
@@ -53,9 +58,9 @@
 	</div>
 </body>
 <script>
-$(function() {
-	
-});
+	$(function() {
+
+	});
 </script>
 </html>
 
