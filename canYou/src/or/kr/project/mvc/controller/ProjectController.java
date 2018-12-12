@@ -19,6 +19,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationTrustResolver;
 import org.springframework.security.authentication.AuthenticationTrustResolverImpl;
 import org.springframework.security.core.context.SecurityContext;
@@ -42,6 +44,7 @@ import or.kr.project.dto.ProjectDonateVO;
 import or.kr.project.dto.ProjectVO;
 import or.kr.project.dto.ReplyVO;
 import or.kr.project.dto.SearchVO;
+import or.kr.project.dto.SubCategoryVO;
 import or.kr.project.mvc.dao.projectDaoImple;
 
 @Controller
@@ -128,6 +131,13 @@ public class ProjectController {
 		mav.addObject("category", category);	// 카테고리 목록 붙임
 		mav.addObject("memberName", name);		// name을 object로 붙여서 같이 전송
 		return mav;
+	}
+	
+	@RequestMapping(value="/subcasel")	// 서브 카테고리 불러오는 페이지 (json)
+	public ResponseEntity<List<SubCategoryVO>> subcasel(int categoryNo){
+		List<SubCategoryVO> l=dao.subcasel(categoryNo);
+		
+		return new ResponseEntity<>(l, HttpStatus.OK);
 	}
 	
 	@RequestMapping(value="/proup")		// 프로젝트 업로드
@@ -289,12 +299,12 @@ public class ProjectController {
 			System.out.println("projectMainImage : " + projectMainImage);
 			try {
 				vo.getMultipartFile().transferTo(f);
+				vo.setProjectMainImage(vo.getMultipartFile().getOriginalFilename());
 			} catch (IllegalStateException | IOException e) {
 				e.printStackTrace();
 			}
-			vo.setProjectMainImage(vo.getMultipartFile().getOriginalFilename());
 			
-			int projnum=Integer.parseInt((String)s.getAttribute("projnum"));
+			int projnum=Integer.parseInt((String)s.getAttribute("projnum"));	// 세션에 저장되어있는 프로젝트 번호를 넣어줌
 			vo.setProjectNo(projnum);
 			s.removeAttribute("projnum");
 			

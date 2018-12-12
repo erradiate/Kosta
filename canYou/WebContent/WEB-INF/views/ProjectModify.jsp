@@ -31,7 +31,7 @@ $(document).ready(function(){
 					<thead></thead>
 					<tbody>
 						<tr>
-							<td>프로젝트 명 : <input type="text" name="projectName" value=${project.projectName }></td>
+							<td>프로젝트 명 : <input type="text" name="projectName" value=${project.projectName } required></td>
 						</tr>					
 					    <tr>
 							<td>프로젝트 이미지 :</td>

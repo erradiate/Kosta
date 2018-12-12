@@ -8,6 +8,11 @@
 		select * from category
 	</select>
 	
+	<!-- 선택한 카테고리에 따라서 서브 카테고리 불러옴 -->
+	<select id="subcasel" parameterType="int" resultType="scvo">
+		select * from subcategory where categoryNo=#{categoryNo}
+	</select>
+	
 	<!-- 둘러보기 -->
 	<select id="lookaround" resultType="cvo">
 		select categoryname
@@ -29,10 +34,10 @@
 	<!-- 프로젝트 업로드 -->
 	<insert id="proin" parameterType="projvo">
 		insert into project
-		values(project_seq.nextVal, #{memberNo}, #{projectName}, 
-		#{projectCost}, sysdate, TO_DATE(#{projectEndDate},'yyyy-mm-dd'),
+		values(project_seq.nextVal,#{categoryNo},#{subCategoryNo}, #{memberNo}, #{projectName}, 
+		#{projectCost}, sysdate, TO_DATE(#{projectStartDate}, 'yyyy-mm-dd'), TO_DATE(#{projectEndDate},'yyyy-mm-dd'),
 		 0, #{projectMainImage}, #{projectStory}, 
-		 'Z', 2, 0, #{categoryNo})
+		 'Z', 2, 0)
 		<selectKey keyProperty="projectNo" resultType="int" order="AFTER">
        		SELECT project_seq.CURRVAL FROM dual
     	</selectKey>
@@ -167,8 +172,9 @@
 	
 	<!-- 수정 -->
 	<update id="modify" parameterType="projvo" timeout="20">
-		update project SET projectName = #{projectName} , projectCost = #{projectCost} , projectMainImage =
-		#{projectMainImage} , projectStory = #{projectStory} WHERE projectNo=#{projectNo}
+		update project SET projectName = #{projectName} , projectStory = #{projectStory} 
+		<if test="projectMainImage != null">, projectMainImage=#{projectMainImage}</if>
+		WHERE projectNo=#{projectNo}
 	</update>
 
 	<!-- 댓글 등록하기 -->
