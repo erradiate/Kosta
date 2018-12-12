@@ -17,7 +17,22 @@ public class ProjectVO {
 	private int categoryNo;
 	private int projectCurCost;
 	private MultipartFile multipartFile;
+	private int subCategoryNo;
+	private String UDate;
+	
 
+	public int getSubCategoryNo() {
+		return subCategoryNo;
+	}
+	public void setSubCategoryNo(int subCategoryNo) {
+		this.subCategoryNo = subCategoryNo;
+	}
+	public String getUDate() {
+		return UDate;
+	}
+	public void setUDate(String uDate) {
+		UDate = uDate;
+	}
 	public MultipartFile getMultipartFile() {
 		return multipartFile;
 	}
