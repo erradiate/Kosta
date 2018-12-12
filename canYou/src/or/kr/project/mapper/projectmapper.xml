@@ -9,7 +9,7 @@
 	</select>
 	
 	<!-- 둘러보기 -->
-	<select id="lookaround" resultType="cvo">
+	<select id="lookaround1" resultType="cvo">
 		select categoryname
 		from
 		category
