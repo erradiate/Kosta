@@ -63,8 +63,6 @@ $(document).ready(function(){
 								src="resources/images/${list.projectMainImage }"
 								style="margin: 60px 10px 10px 10px; width: 260px; height: 280px;">
 							</td>
-							</tr>
-
 						<tr>
 							<td>프로젝트 스토리 : ${list.projectStory}</td>
 						</tr>
@@ -175,6 +173,11 @@ $(document).ready(function(){
 			});
 		});
 	});
+</script>
+<script>
+$(function() {
+
+});
 </script>
 </html>
 

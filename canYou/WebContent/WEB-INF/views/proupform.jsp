@@ -97,7 +97,10 @@ $(document).ready(function(){
 <ul>
 	<li>진행자 이름 : ${memberName }</li>
 	<li>프로젝트 이름 : <input type="text" name="projectName" required></li>
-	<li>프로젝트 대표 이미지 : <input type="file" name="mfile"></li>
+	<li>프로젝트 대표 이미지 : <input type="file" name="mfile">	</li>
+	
+						
+								
 	<li>프로젝트 카테고리 : <select name="categoryNo" required>
 					<option value="" selected>선택</option>
 					<c:forEach var="v" items="${category}">
@@ -138,4 +141,22 @@ $(document).ready(function(){
 </ul>
 </form>
 </body>
+<script>
+$(function() {
+	$('#projectMainImage2').hide(0,function(){});
+	$('#projectMainImage').on('change', function() {
+		let projectMainImage = $(this).val();
+		 let pass = projectMainImage.substr(12);
+			 console.log(projectMainImage)
+			  console.log(pass)
+		 if(projectMainImage != null){
+			 $('#projectMainImage2').attr('src', 'resources/images/' + pass).show(0,function(){});
+			 $('#projectMainImage').attr('src', 'resources/images/' + pass).hide(0,function(){});
+		 } else{
+			 $('#projectMainImage2').attr('src', 'resources/images/' + pass).hide(0,function(){});
+			 $('#projectMainImage').attr('src', 'resources/images/' + pass).show(0,function(){});
+		 }
+	});
+});
+</script>
 </html>

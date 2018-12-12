@@ -14,12 +14,12 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="//cdn.ckeditor.com/4.4.7/full/ckeditor.js"></script>
 <script>
-$(document).ready(function(){
-	CKEDITOR.replace('cont', {
-		height: '500px' ,
-		filebrowserImageUploadUrl: 'imageUpload'
-	})
-});
+	$(document).ready(function() {
+		CKEDITOR.replace('cont', {
+			height : '500px',
+			filebrowserImageUploadUrl : 'imageUpload'
+		})
+	});
 </script>
 </head>
 <body>
@@ -31,32 +31,31 @@ $(document).ready(function(){
 					<thead></thead>
 					<tbody>
 						<tr>
-							<td>프로젝트 명 : <input type="text" name="projectName" value=${project.projectName }></td>
-						</tr>					
-					    <tr>
-							<td>프로젝트 이미지 :</td>
-							<td><input type="file" name="multipartFile"></td>
-						<tr>
-							<td>프로젝트 스토리 : <textarea rows="20" cols="20" name="projectStory" id="cont">${project.projectStory }</textarea></td>
+							<td>프로젝트 명 : <input type="text" name="projectName"
+								value=${project.projectName }></td>
 						</tr>
+						<tr>
+							<td>프로젝트 스토리 : <textarea rows="20" cols="20"
+									name="projectStory" id="cont">${project.projectStory }</textarea></td>
+						</tr>
+
 					</tbody>
 
 					<tfoot>
 						<tr>
-						<td>
-							<input type="submit" id="wBtn" value="수정"></td>
+							<td><input type="submit" id="wBtn" value="수정"></td>
 						</tr>
 					</tfoot>
 				</table>
 			</form>
-			
+
 		</fieldset>
 	</div>
 </body>
 <script>
-	$(function() {
-
-	});
+$(function() {
+	
+});
 </script>
 </html>
 

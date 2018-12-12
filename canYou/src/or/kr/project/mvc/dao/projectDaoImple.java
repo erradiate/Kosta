@@ -15,6 +15,7 @@ import or.kr.project.dto.ProjectDonateVO;
 import or.kr.project.dto.ProjectVO;
 import or.kr.project.dto.ReplyVO;
 import or.kr.project.dto.SearchVO;
+import oracle.net.aso.s;
 
 
 @Repository
@@ -71,6 +72,7 @@ public class projectDaoImple implements projectDao{
 			
 			ss.update("project.projectFundCnt", vo);	// 프로젝트의 카운트 수를 하나 늘림
 			ss.update("project.projectCurCost",vo);		// 프로젝트의 모인 금액을 올림
+			
 		}
 
 
@@ -90,9 +92,15 @@ public class projectDaoImple implements projectDao{
 			m.put("donateMoney", total);
 			m.put("memberNo", vo.getMemberNo());
 			
-			ss.update("project.returnMoney", m);	// 반환해서 회원의 돈으로 추가시켜줌
+			ss.update("project.returnMoney", m);// 반환해서 회원의 돈으로 추가시켜줌
+			
+		}
+		// 후원자 감소
+		public void returnFundCnt(ProjectDonateVO vo) {
+			ss.update("project.returnFundCnt",vo); // 프로젝트의 카운트 수를 하나 줄임
 		}
 
+		
 		// 후원 취소2 (행 삭제)
 		public void donateCancle(ProjectDonateVO vo) {
 			ss.delete("project.cancle", vo);	// 후원 취소
