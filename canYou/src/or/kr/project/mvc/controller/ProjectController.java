@@ -631,8 +631,27 @@ public class ProjectController {
 		return mav;
 	}
 	
+	//프로젝트 보는 기준
 	@RequestMapping("/projectlook")
 	public String projectLook() {
 		return "projectlook";
+	}
+	
+	//프로젝트 스토리 보기
+	@RequestMapping("/storypage")
+	public String story() {
+		return "storypage";
+	}
+	
+	//프로젝트 상품 상세 보기
+	@RequestMapping("/productdetailpage")
+	public String productDetail() {
+		return "productdetailpage";
+	}
+	
+	//프로젝트 커뮤니티 페이지로 이동
+	@RequestMapping("/communitypage")
+	public String community() {
+		return "communitypage";
 	}
 }
