@@ -137,6 +137,9 @@ $(document).ready(function(){
 					</td>
 					<td><input type="submit" value="작성"></td>
 				</tr>
+				<tr>
+					<td><input type="button" id="wordBtn" value="워드로 보기"></td>
+				</tr>
 			</table>
 		</form>
 		</fieldset>
@@ -157,6 +160,9 @@ $(document).ready(function(){
 </body>
 <script>
 	$(function() {
+		$('#wordBtn').click(function(){
+			location.href="download?projectNo="+$('#projectNo').val();
+		});
 		$('.donateBtn').each(function(index, item) {
 			$(this).click(function() {
 				var result = confirm('후원하시겠습니까?');

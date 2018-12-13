@@ -29,14 +29,10 @@ import or.kr.project.dto.ProjectDonateVO;
 import or.kr.project.dto.ProjectVO;
 
 public class WordBuilder{
+	int row;
 	// 주석 부분 vo 해야함
-	public void wordCD(/*Map<String, Object> map, */HttpServletRequest req, HttpServletResponse resp) throws Exception {
-		/*// 프로젝트 진행자의 정보를 담은 vo 객체 받아오기
-		MemberVO mvo = (MemberVO)map.get("member");
-		ProjectVO pvo = (ProjectVO)map.get("project");
-		ProjectDonateVO dvo = (ProjectDonateVO)map.get("projectDonate");
-		@SuppressWarnings("unchecked")
-		List<ProductVO> list = (List<ProductVO>)map.get("productList");*/
+	public void wordCD(MemberVO vo, HttpServletRequest req, HttpServletResponse resp) throws Exception {
+		List<ProductVO> list = vo.getProject().getProduct();
 		
 		// 빈 문서 만들기
 		XWPFDocument document = new XWPFDocument();
@@ -65,7 +61,7 @@ public class WordBuilder{
 		mergeCellHorizontally(table, 14, 0, 2);
 		
 		// Table 첫번째 행
-		XWPFTableRow firstRow = table.getRow(0);
+		XWPFTableRow firstRow = table.getRow(row++); //0
 		firstRow.getCell(0).setColor("3366FF");
 		firstRow.getCell(0).setVerticalAlignment(XWPFVertAlign.CENTER);
 
@@ -78,7 +74,7 @@ public class WordBuilder{
 		paragraphRunOne.setText("프로젝트 보고서");
 
 		// Table 두번째 행
-		XWPFTableRow secondRow = table.getRow(1);
+		XWPFTableRow secondRow = table.getRow(row++); //1
 		secondRow.getCell(0).setVerticalAlignment(XWPFVertAlign.CENTER);
 		
 		paragraph = secondRow.getCell(0).getParagraphs().get(0);
@@ -90,36 +86,36 @@ public class WordBuilder{
 		paragraphRunOne.setText("진행자 정보");
 		
 		// Table 세번째 행
-		XWPFTableRow thirdRow = table.getRow(2);
+		XWPFTableRow thirdRow = table.getRow(row++); //2
 		thirdRow.getCell(0).setText("프로필 이미지");
 		thirdRow.getCell(1).setText("진행자 이름");
-		thirdRow.getCell(2).setText("조현무"/*mvo.getMemberName()*/);
+		thirdRow.getCell(2).setText(vo.getMemberName());
 		
-		XWPFTableRow fourthRow = table.getRow(3);
+		XWPFTableRow fourthRow = table.getRow(row++); //3
 		fourthRow.getCell(1).setText("진행자 전화번호");
-		fourthRow.getCell(2).setText("010-7156-1122" /*mvo.getMemberPhone()*/);
+		fourthRow.getCell(2).setText(vo.getMemberPhone());
 		
-		XWPFTableRow fifthRow = table.getRow(4);
+		XWPFTableRow fifthRow = table.getRow(row++); //4
 		fifthRow.getCell(1).setText("진행자 이메일");
-		fifthRow.getCell(2).setText("chomu2004@naver,com" /*mvo.getMemberEmail()*/);
+		fifthRow.getCell(2).setText(vo.getMemberEmail());
 		
-		XWPFTableRow sixthRow = table.getRow(5);
+		XWPFTableRow sixthRow = table.getRow(row++); //5
 		sixthRow.getCell(1).setText("진행자 성별");
-		sixthRow.getCell(2).setText("남" /*mvo.getMemberGender()*/);
+		sixthRow.getCell(2).setText(vo.getMemberGender());
 		
-		XWPFTableRow seventhRow = table.getRow(6);
+		XWPFTableRow seventhRow = table.getRow(row++); //6
 		seventhRow.getCell(1).setText("진행자 나이");
-		seventhRow.getCell(2).setText("25" /*mvo.getMemberAge()*/);
+		seventhRow.getCell(2).setText(Integer.toString(vo.getMemberAge()));
 		
 		// 프로필 이미지 부분 셀을 합쳐서 하나로
-		mergeCellVertically(table, 0, 2, 6);
+		mergeCellVertically(table, 0, 2, row-1);
 		
-		for(int i=2;i<=6;i++) {
+		for(int i=2;i<=row-1;i++) {
 			table.getRow(i).getCell(1).setColor("6699FF");
 		}
 		
 		// 프로젝트 정보 부분
-		XWPFTableRow eighthRow = table.getRow(7);
+		XWPFTableRow eighthRow = table.getRow(row++); //7
 		eighthRow.getCell(0).setVerticalAlignment(XWPFVertAlign.CENTER);
 		
 		paragraph = eighthRow.getCell(0).getParagraphs().get(0);
@@ -130,36 +126,36 @@ public class WordBuilder{
 		paragraphRunOne.setFontSize(11);
 		paragraphRunOne.setText("프로젝트 정보");
 		
-		XWPFTableRow ninethRow = table.getRow(8);
+		XWPFTableRow ninethRow = table.getRow(row++); //8
 		ninethRow.getCell(0).setText("프로젝트 대표 이미지");
 		ninethRow.getCell(1).setText("프로젝트 등급");
-		ninethRow.getCell(2).setText("A" /*pvo.getProjectStep()*/);
+		ninethRow.getCell(2).setText(vo.getProject().getProjectStep());
 		
-		XWPFTableRow tenRow = table.getRow(9);
+		XWPFTableRow tenRow = table.getRow(row++); //9
 		tenRow.getCell(1).setText("프로젝트 이름");
-		tenRow.getCell(2).setText("맛있는 떡볶이" /*pvo.getProjectName()*/);
+		tenRow.getCell(2).setText(vo.getProject().getProjectName());
 		
-		XWPFTableRow elevenRow = table.getRow(10);
+		XWPFTableRow elevenRow = table.getRow(row++); //10
 		elevenRow.getCell(1).setText("프로젝트 시작 날짜");
-		elevenRow.getCell(2).setText("18.12.07" /*pvo.getProjectStartDate()*/);
+		elevenRow.getCell(2).setText(vo.getProject().getProjectStartDate());
 		
-		XWPFTableRow twelveRow = table.getRow(11);
+		XWPFTableRow twelveRow = table.getRow(row++); //11
 		twelveRow.getCell(1).setText("프로젝트 마감 날짜");
-		twelveRow.getCell(2).setText("18.12.28" /*pvo.getProjectEndDate()*/);
+		twelveRow.getCell(2).setText(vo.getProject().getProjectEndDate());
 		
-		XWPFTableRow thirteenRow = table.getRow(12);
-		thirteenRow.getCell(1).setText("프로젝트 활동 지역");
-		thirteenRow.getCell(2).setText("가산 디지털 단지" /*이거안정함*/);
+		XWPFTableRow thirteenRow = table.getRow(row++); //12
+		thirteenRow.getCell(1).setText("프로젝트 목표 금액");
+		thirteenRow.getCell(2).setText(Integer.toString(vo.getProject().getProjectCost()));
 		
 		// 프로젝트 프로필 이미지 병합 부분
-		mergeCellVertically(table, 0, 8, 12);
+		mergeCellVertically(table, 0, 8, row-1);
 		
-		for(int i=8;i<=12;i++) {
+		for(int i=8;i<=row-1;i++) {
 			table.getRow(i).getCell(1).setColor("6699FF");
 		}
 		
 		// 프로젝트 상세정보, 스토리
-		XWPFTableRow fourteenRow = table.getRow(13);
+		XWPFTableRow fourteenRow = table.getRow(row++); //13
 		fourteenRow.getCell(0).setVerticalAlignment(XWPFVertAlign.CENTER);
 		
 		paragraph = fourteenRow.getCell(0).getParagraphs().get(0);
@@ -170,11 +166,11 @@ public class WordBuilder{
 		paragraphRunOne.setFontSize(11);
 		paragraphRunOne.setText("프로젝트 상세정보 및 스토리");
 		
-		XWPFTableRow fifteenRow = table.getRow(14);
+		XWPFTableRow fifteenRow = table.getRow(row++); //14
 		fifteenRow.getCell(0).setText("프로젝트 스토리 뭐시기뭐시기" /*pvo.getProjectStory()*/);
 				
 		// 상품 상세 설명
-		XWPFTableRow sixteenRow = table.getRow(15);
+		XWPFTableRow sixteenRow = table.getRow(row++); //15
 		sixteenRow.getCell(0).setVerticalAlignment(XWPFVertAlign.CENTER);
 		
 		paragraph = sixteenRow.getCell(0).getParagraphs().get(0);
@@ -185,56 +181,26 @@ public class WordBuilder{
 		paragraphRunOne.setFontSize(11);
 		paragraphRunOne.setText("프로젝트 상품");
 		
-		mergeCellHorizontally(table, 15, 0, 2);
+		mergeCellHorizontally(table, row-1, 0, 2);
 		
-		/*// 상품 관련 표 만들기
+		//16
 		for (ProductVO productVO : list) {
-			// 위쪽의 프로젝트 상품에 관한 정보
-			XWPFTableRow list_Row = table.getRow(15);
-			list_Row.getCell(0).setVerticalAlignment(XWPFVertAlign.CENTER);
-			
-			paragraph = list_Row.getCell(0).getParagraphs().get(0);
-			paragraph.setAlignment(ParagraphAlignment.CENTER);
-			
-			paragraphRunOne = paragraph.createRun();
-			paragraphRunOne.setBold(true);
-			paragraphRunOne.setFontSize(11);
-			paragraphRunOne.setText("프로젝트 상품");
-			
-			// 상품 설명 행
-			list_Row = table.createRow();
-			list_Row.getCell(0).setVerticalAlignment(XWPFVertAlign.CENTER);
-			
-			paragraph = list_Row.getCell(0).getParagraphs().get(0);
-			paragraph.setAlignment(ParagraphAlignment.CENTER);
-			paragraphRunOne = paragraph.createRun();
-			paragraphRunOne.setFontSize(10);
-			paragraphRunOne.setText("상품 개수"); // 1열 완료
-			
-			paragraph = list_Row.createCell().getParagraphs().get(0);
-			paragraph.setAlignment(ParagraphAlignment.CENTER);
-			paragraphRunOne = paragraph.createRun();
-			paragraphRunOne.setFontSize(10);
-			paragraphRunOne.setText(Integer.toString(productVO.getProductCnt())); // 1열 완료
-			
-			// 상품 설명 행 3
-			paragraph = list_Row.createCell().getParagraphs().get(0);
-			
-		}*/
+			// 상품 설명행 만들기
+			create_Product_Row(table, paragraph, paragraphRunOne, productVO);
+		}
 		
 		System.out.println("create_table 생성!");
 		
 		// 파일 전송을 위한 마임타입과 헤더 설정
 		resp.setContentType("Application/Msword");
 		resp.setHeader("Content-Disposition",
-				"attachment; filename=create_table.docx");
+				"attachment; filename="+vo.getProject().getProjectName()+".docx");
 		
 		// 요청한 브라우저와의 아웃풋 스트림 연결
 		OutputStream outStream = resp.getOutputStream();
-		
 		document.write(outStream);
-		outStream.close();
 		System.out.println("create_table 전송!");
+		outStream.close();
 	}
 	//세로 부분의 셀을 합치는 함수
 		private static void mergeCellVertically(XWPFTable table, int col, int fromRow, int toRow){
@@ -264,23 +230,85 @@ public class WordBuilder{
 		    }
 		}
 		
-		private static void create_Product_Row(XWPFTable table, XWPFParagraph paragraph, 
-				XWPFRun paragraphRunOne, ProductVO productVO, String setText) {
-			// 상품 설명 행
+		private void create_Product_Row(XWPFTable table, XWPFParagraph paragraph, 
+				XWPFRun paragraphRunOne, ProductVO productVO) {
+			// row = 16
+			// 상품 설명 행 제목행
 			XWPFTableRow list_Row = table.createRow();
+			
+			paragraph = list_Row.getCell(0).getParagraphs().get(0);
+			paragraph.setAlignment(ParagraphAlignment.CENTER);
+			paragraphRunOne = paragraph.createRun();
+			paragraphRunOne.setFontSize(10);
+			paragraphRunOne.setText(productVO.getProductName()); // 1열 완료
+			
+			mergeCellHorizontally(table, row++, 0, 2);
+			
+			// 상품 설명 행 1행
+			list_Row = table.createRow();
 			list_Row.getCell(0).setVerticalAlignment(XWPFVertAlign.CENTER);
 			
 			paragraph = list_Row.getCell(0).getParagraphs().get(0);
 			paragraph.setAlignment(ParagraphAlignment.CENTER);
 			paragraphRunOne = paragraph.createRun();
 			paragraphRunOne.setFontSize(10);
-			paragraphRunOne.setText(setText); // 1열 완료
+			paragraphRunOne.setText("상품 개수"); // 1열 완료
 			
-			paragraph = list_Row.createCell().getParagraphs().get(0);
+			paragraph = list_Row.getCell(1).getParagraphs().get(0);
 			paragraph.setAlignment(ParagraphAlignment.CENTER);
 			paragraphRunOne = paragraph.createRun();
 			paragraphRunOne.setFontSize(10);
-			paragraphRunOne.setText(Integer.toString(productVO.getProductCnt())); // 1열 완료			
+			paragraphRunOne.setText(Integer.toString(productVO.getProductCnt())); // 2열 완료
+			
+			mergeCellHorizontally(table, row++, 1, 2);
+			
+			// 상품 설명 행 2행
+			list_Row = table.createRow();
+			paragraph = list_Row.getCell(0).getParagraphs().get(0);
+			paragraph.setAlignment(ParagraphAlignment.CENTER);
+			paragraphRunOne = paragraph.createRun();
+			paragraphRunOne.setFontSize(10);
+			paragraphRunOne.setText("상품 명"); // 1열 완료
+			
+			paragraph = list_Row.getCell(1).getParagraphs().get(0);
+			paragraph.setAlignment(ParagraphAlignment.CENTER);
+			paragraphRunOne = paragraph.createRun();
+			paragraphRunOne.setFontSize(10);
+			paragraphRunOne.setText(productVO.getProductName()); // 2열 완료
+			
+			mergeCellHorizontally(table, row++, 1, 2);
+			
+			// 상품 설명 행 3행
+			list_Row = table.createRow();
+			paragraph = list_Row.getCell(0).getParagraphs().get(0);
+			paragraph.setAlignment(ParagraphAlignment.CENTER);
+			paragraphRunOne = paragraph.createRun();
+			paragraphRunOne.setFontSize(10);
+			paragraphRunOne.setText("상품 설명"); // 1열 완료
+			
+			paragraph = list_Row.getCell(1).getParagraphs().get(0);
+			paragraph.setAlignment(ParagraphAlignment.CENTER);
+			paragraphRunOne = paragraph.createRun();
+			paragraphRunOne.setFontSize(10);
+			paragraphRunOne.setText(productVO.getProductInfo()); // 2열 완료
+			
+			mergeCellHorizontally(table, row++, 1, 2);
+			
+			// 상품 설명 행 4행
+			list_Row = table.createRow();
+			paragraph = list_Row.getCell(0).getParagraphs().get(0);
+			paragraph.setAlignment(ParagraphAlignment.CENTER);
+			paragraphRunOne = paragraph.createRun();
+			paragraphRunOne.setFontSize(10);
+			paragraphRunOne.setText("상품 가격"); // 1열 완료
+			
+			paragraph = list_Row.getCell(1).getParagraphs().get(0);
+			paragraph.setAlignment(ParagraphAlignment.CENTER);
+			paragraphRunOne = paragraph.createRun();
+			paragraphRunOne.setFontSize(10);
+			paragraphRunOne.setText(Integer.toString(productVO.getProductCost())); // 2열 완료
+			
+			mergeCellHorizontally(table, row++, 1, 2);
 		}
 }
 

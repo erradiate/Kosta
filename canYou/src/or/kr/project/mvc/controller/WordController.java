@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import or.kr.project.dto.MemberVO;
+import or.kr.project.mvc.dao.WordDao;
 import or.kr.project.mvc.dao.projectDao;
 import or.kr.project.word.WordBuilder;
 
@@ -18,17 +20,26 @@ public class WordController {
 	private WordBuilder wb;
 	
 	@Autowired
-	private projectDao dao;
+	private WordDao dao;
 	
 	public WordController() {
 		wb = new WordBuilder();
 	}
 	
 	@RequestMapping(value="/download")
-	public String downloadWord(HttpServletRequest req, HttpServletResponse resp) throws Exception {
-		/*Map<String, Object> map = new HashMap<>();*/
-		
-		wb.wordCD(/*map,*/req, resp);
-		return "redirect:/";
+	public String downloadWord(int projectNo,HttpServletRequest req, HttpServletResponse resp) throws Exception {
+		System.out.println("프로젝트 번호: "+projectNo);
+		MemberVO vo = dao.getMember_Project(projectNo);
+		System.out.println(vo.getProject().getProduct().size());
+		System.out.println(vo.getProject().getProduct().get(0).getProductName());
+		wb.wordCD(vo,req, resp);
+		// resp가 commit 될때 까지 대기하는 코드
+		while(true) {
+			if(resp.isCommitted()) {
+				return "redirect:list?num="+projectNo;
+			} else {
+				continue;
+			}
+		}
 	}
 }

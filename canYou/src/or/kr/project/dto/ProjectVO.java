@@ -1,5 +1,7 @@
 package or.kr.project.dto;
 
+import java.util.List;
+
 import org.springframework.web.multipart.MultipartFile;
 
 public class ProjectVO {
@@ -19,8 +21,15 @@ public class ProjectVO {
 	private MultipartFile multipartFile;
 	private int subCategoryNo;
 	private String UDate;
-	
 
+	private List<ProductVO> product;
+	
+	public List<ProductVO> getProduct() {
+		return product;
+	}
+	public void setProduct(List<ProductVO> product) {
+		this.product = product;
+	}
 	public int getSubCategoryNo() {
 		return subCategoryNo;
 	}

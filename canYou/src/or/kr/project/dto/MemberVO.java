@@ -1,5 +1,7 @@
 package or.kr.project.dto;
 
+import java.util.List;
+
 public class MemberVO {
 	private int memberNo;
 	private String memberId;
@@ -14,6 +16,16 @@ public class MemberVO {
 	private String memberImage;
 	private char memberGrant;
 	private int memberCash;
+	
+	// 자신이 수행한 프로젝트를 뽑아내기위한 resultMap 사용 필드
+	private ProjectVO project;
+	
+	public ProjectVO getProject() {
+		return project;
+	}
+	public void setProject(ProjectVO project) {
+		this.project = project;
+	}
 	
 	public int getMemberNo() {
 		return memberNo;
