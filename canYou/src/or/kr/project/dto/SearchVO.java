@@ -2,6 +2,16 @@ package or.kr.project.dto;
 
 public class SearchVO {
 	private String searchType,searchValue,begin,end;
+	private int memberNo;
+	
+
+	public int getMemberNo() {
+		return memberNo;
+	}
+
+	public void setMemberNo(int memberNo) {
+		this.memberNo = memberNo;
+	}
 
 	public String getSearchType() {
 		return searchType;

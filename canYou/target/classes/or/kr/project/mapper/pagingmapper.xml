@@ -85,4 +85,26 @@
 		from project
 		where categoryNo=#{categoryNo}
 	</select>
+	
+	<!-- 마이페이지 내가 만든 프로젝트 리스트 -->
+	<select id="myProjectlist" parameterType="searchvo"
+		resultType="projvo">
+		select projectNo, memberNo, projectName, projectCost,
+		projectStartDate,
+		projectEndDate, projectFundCnt, projectMainImage,projectStory,
+		projectStep, projectStatus, categoryNo, projectCurCost
+		from 
+		(
+		select rownum as r_num, a.*
+		from
+		(select * from project order by projectNo
+		) a
+		)
+		project
+		where memberNo=#{memberNo} and r_num between #{begin} and #{end}	
+	</select>
+	<!-- 내가 만든 프로젝트 리스트 총 갯수 -->
+	<select id="myPlistTotal" parameterType="int" resultType="int">
+		select count(*) cnt from project where memberNo=#{memberNo}
+	</select>
 </mapper>
