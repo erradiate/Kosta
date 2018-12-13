@@ -630,4 +630,9 @@ public class ProjectController {
 		
 		return mav;
 	}
+	
+	@RequestMapping("/projectlook")
+	public String projectLook() {
+		return "projectlook";
+	}
 }

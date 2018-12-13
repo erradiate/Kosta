@@ -1,16 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
-<head>
 <style>
 #tv {
     border: 1px solid black;
 }
+.left-box {
+  float: left;
+  width: 50%;
+}
+.right-box {
+  float: right;
+  width: 50%;
+}
+
 </style>
-<meta charset="EUC-KR">
-<title>${list.projectName }</title>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
 $(document).ready(function(){
@@ -28,8 +32,13 @@ $(document).ready(function(){
 <div>
 		<fieldset>
 			<legend>Project</legend>
-			<form action="update" method="POST" >
+			<form action="update" method="POST" >	
 			<input type="hidden" id="projectNo" name="projectNo" value="${list.projectNo}">
+				<h1 style="margin:30px 100px 30px 370px;">프로젝트 이름 : ${list.projectName}</h1>
+				<div class="left-box">
+				<img id="projectMainImage"
+						src="resources/images/${list.projectMainImage }"
+						style="margin: 10px 30px 30px 100px; width: 300px; height: 320px;"></div>
 			<table>
 				<thead></thead>
 				<tbody>
@@ -64,23 +73,16 @@ $(document).ready(function(){
 							<td>후원자 수 : ${list.projectFundCnt}명</td>
 						</tr>
 						<tr>
-							<td>프로젝트 이미지 :</td>
-							<td><img id="projectMainImage"
-								src="resources/images/${list.projectMainImage }"
-								style="margin: 60px 10px 10px 10px; width: 260px; height: 280px;">
-							</td>
-						<tr>
 							<td>프로젝트 스토리 : ${list.projectStory}</td>
 						</tr>
 						<tr>
 							<td>프로젝트 등급 : ${list.projectStep}</td>
-						</tr>
-						
-						<tr>
-							<td>
-								<c:forEach var="e2" items="${prodlist}">
-									<div class="prodview" style="border:1px solid gold;">
-										<div>
+						</tr>	
+				</tbody>
+			</table>	
+				<c:forEach var="e2" items="${prodlist}">
+					<div class="prodview" style="border:1px solid gold;">
+						<div>
 											<input type="hidden" name="productNo" id="productNo" value="${e2.productNo }">
 											<p>${e2.productCost }원 이상 구매 시</p>
 											<h2>${e2.productName }</h2>
@@ -90,26 +92,16 @@ $(document).ready(function(){
 									<input id="donadd" type="button" value="이걸로 후원하기">
 									</div>
 								</c:forEach>
-							</td>
-						</tr>
-						<tr>
-							<td>
+						
 								<h2>현재 선택중인 선물</h2>
 								<div id="selprod">
 									
 								</div>
-							</td>
-						</tr>
-						<tr>
-							<td>추가 후원 : <input type="text" name="donateMoney" id="donateMoney"></td>
-						</tr>
-						<tr>
-							<td><input type="button" class="donateBtn" value="후원"></td>
-						</tr>
 						
-				</tbody>
+							추가 후원 : <input type="text" name="donateMoney" id="donateMoney">
 					
-				<tfoot>
+						<input type="button" class="donateBtn" value="후원">
+
 				<c:choose>
 					<c:when test="${pageContext.request.userPrincipal.name eq member.memberId }">
 					<tr>
@@ -118,10 +110,9 @@ $(document).ready(function(){
 						</td>
 					</tr>
 					</c:when>
-				</c:choose>
-				</tfoot>
-			</table>
+				</c:choose>	
 			</form>
+			
 			<form method="post" action="reply1">
 			<table>
 				<tr>
@@ -157,7 +148,7 @@ $(document).ready(function(){
 
 		</table> 
 	</div>
-</body>
+
 <script>
 	$(function() {
 		$('#wordBtn').click(function(){
@@ -186,5 +177,4 @@ $(function() {
 
 });
 </script>
-</html>
 
