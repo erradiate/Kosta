@@ -94,19 +94,20 @@ public class projectDaoImple implements projectDao {
 		return list;
 	}
 
-	// 후원 취소1 (돈 반환)
+	// 후원 취소1 (돈 반환 + 선물 반환)
 	public void returnMoney(ProjectDonateVO vo) {
 		Map<String, Integer> m = new HashMap<>();
+		
 		// 돈을 반환하기 위해 취소할 프로젝트에 투자한 돈을 가져옴
-		int total = ss.selectOne("project.mydonatelist", vo);
-
+		int total=ss.selectOne("project.mydonatelist", vo);
+				
 		m.put("donateMoney", total);
 		m.put("memberNo", vo.getMemberNo());
-
-		ss.update("project.returnMoney", m);// 반환해서 회원의 돈으로 추가시켜줌
-
+				
+		ss.update("project.returnMoney", m);	// 반환해서 회원의 돈으로 추가시켜줌
+		ss.update("project.prodout",vo); // 상품 돌려 줌
 	}
-
+			
 	// 후원자 감소
 	public void returnFundCnt(ProjectDonateVO vo) {
 		ss.update("project.returnFundCnt", vo); // 프로젝트의 카운트 수를 하나 줄임

@@ -14,7 +14,7 @@
 	<legend> 내가 투자한 프로젝트 </legend>
 		<table border="1">
 			<thead>
-			<c:forEach items="${list}" var="listv">
+			<c:forEach items="${list}" var="listv"> <!-- projectDonate -->
 				<tr>
 					<td>
 						${listv.DONATEDAY }
@@ -27,6 +27,7 @@
 					<td>
 					<input id="donateNo" type="hidden" value="${listv.DONATENO}">
 					<input type="button" class="deleteBtn" value="기부 취소">
+					<input type="hidden" class="productNo" value="${listv.PRODUCTNO}"> <!-- 상품 번호 -->
 					</td>
 				</tr>
 			</c:forEach>
@@ -40,9 +41,10 @@ $(function(){
 	$('.deleteBtn').each(function(index, item) { 
 		$(this).click(function(){
 			var result = confirm('후원을 취소 하시겠습니까?');
+			console.log($(this).next().val());
 			
 			if(result){
-				location.href='cancle?donateNo='+$(this).prev().val();
+				location.href='cancle?donateNo='+$(this).prev().val()+'&productNo='+$(this).next().val();
 			}
 		});
 	});

@@ -562,30 +562,25 @@ public class ProjectController {
 
 	// 후원 취소
 	@RequestMapping(value = "/cancle")
-	public String cancle(int donateNo/*이후에 프로젝트 선택해서 할 경우를 대비해서*/) {
+	public String cancle(int donateNo/*이후에 프로젝트 선택해서 할 경우를 대비해서*/,int productNo) {
 		SecurityContext impl=SecurityContextHolder.getContext();	// 세션에서 spring security 정보를 가져옴
 		String implstr=impl.getAuthentication().getName();	// security 정보에서 세션에 담겨있는 로그인 정보 중 ID 가져옴
 		MemberVO vo2=dao.memname(implstr);	// ID를 토대로 회원정보 가져옴 (회원 번호, 회원 이름)
 		int memno = vo2.getMemberNo();
 	
-		
 		ProjectDonateVO vo = new ProjectDonateVO();
 		vo.setDonateNo(donateNo);
 		vo.setMemberNo(memno);
+		vo.setProductNo(productNo);
 	    System.out.println("확인확인"+vo.getDonateNo());
        
-	  
-
-		// 사용자의 돈을 반환
+	    // 사용자의 돈을 반환 + 선물 갯수 돌려줌
 		dao.returnMoney(vo);
 		 // 후원자 수 감소
 	 	dao.returnFundCnt(vo);
 		// 돈 돌려 준 후에 행 삭제
 		dao.donateCancle(vo);
-		
-		
-	
-	
+
 		return "redirect:/AllList"; // 다시 리스트 화면으로
 	}
 	

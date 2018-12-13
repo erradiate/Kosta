@@ -77,7 +77,8 @@
 	<select id="mydonate" parameterType="int" resultType="HashMap">
 		select
 		d.donateNo, p.projectName, to_char(d.donateDay, 'yyyy.MM.dd')
-		donateDay, d.donateMoney from projectdonate d, project p
+		donateDay, d.donateMoney , d.productNo
+		from projectdonate d, project p
 		where
 		d.projectNo=p.projectNo and d.memberNo=#{memberNo}
 	</select>
@@ -188,15 +189,14 @@
 	</update>
 
 
-	<!-- 리스트 현무스 -->
+		<!-- 리스트 현무스-->
 	<select id="list" parameterType="String" resultType="projvo">
-		select
-		memberNo
+		select projectNo ,memberNo
 		,projectName ,projectCost
-		,to_char(projectStartDate, 'yyyy-mm-dd') projectStartDate,
-		to_char(projectEndDate,'yyyy-mm-dd') projectEndDate,projectFundCnt,
+		,projectStartDate,
+		projectEndDate,projectFundCnt,
 		projectMainImage,projectStory,projectStep,projectStatus
-		,categoryNo, subCategoryNo,
+		,categoryNo,
 		projectCurCost from project where projectNo=#{projectNo}
 	</select>
 
@@ -223,6 +223,7 @@
 		#{projectNo},#{memberNo}
 		)
 	</insert>
+	
 	<!-- 댓글 리스트 -->
 	<select id="replyList" parameterType="String"
 		resultType="replyvo">
@@ -232,4 +233,11 @@
 		projectNo=#{projectNo}
 		order by replyDate
 	</select>
+	
+	<!-- 후원취소했을 때, 선물 반환 -->
+	<update id="prodout" parameterType="dvo">
+	 	update product
+	 	set productCnt = productCnt+1
+		where productNo=#{productNo}
+	</update>
 </mapper>
