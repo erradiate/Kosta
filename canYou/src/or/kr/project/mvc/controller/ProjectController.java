@@ -54,7 +54,7 @@ public class ProjectController {
 	
 	@RequestMapping(value="/")
 	public String index(HttpServletRequest request, Model model) {
-		return "index";
+		return "main";
 	}
 	
 	@RequestMapping(value="index")
