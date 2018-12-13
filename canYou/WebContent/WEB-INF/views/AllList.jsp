@@ -1,13 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
-<head>
 
-<meta charset="EUC-KR">
-<title>AllList.jsp</title>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <style type="text/css">
 #t1 {
 	text-align: center;
@@ -23,8 +17,7 @@
 	height: 260px;
 }
 </style>
-</head>
-<body>
+
 	<div id="AllList">
 		<c:set var="i" value="0" />
 		<c:set var="j" value="3" />
@@ -163,5 +156,3 @@
 			</tfoot>
 		</table>
 	</div>
-</body>
-</html>

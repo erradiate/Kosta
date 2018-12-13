@@ -1,13 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="EUC-KR">
-<title>canYou</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="//cdn.ckeditor.com/4.4.7/full/ckeditor.js"></script>
+
 <script>
 $(document).ready(function(){
 	var d = new Date();
@@ -124,8 +118,7 @@ $(document).ready(function(){
 
 });
 </script>
-</head>
-<body>
+
 <h1>프로젝트 업로드</h1>
 <form action="proup" method="post" enctype="multipart/form-data">
 <input type="hidden" id="proname" name="proname">
@@ -202,9 +195,7 @@ $('#productCost').keypress(function(event){
 		event.preventDefault(); 
 	}
 });
-</script>
-</body>
-<script>
+
 $(function() {
 	$('#projectMainImage').hide(0,function(){});
 	$('#mfile').on('change', function() {
@@ -220,4 +211,3 @@ $(function() {
 	});
 });
 </script>
-</html>

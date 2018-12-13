@@ -2,14 +2,6 @@
     pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 
-<!DOCTYPE html>
-<html>
-<head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<meta charset="EUC-KR">
-<title>Insert title here</title>
-</head>
 <style type="text/css">
 #bgy {
 	text-align: center;
@@ -25,7 +17,6 @@
 	height: 260px;
 }
 </style>
-<body>
 
 	<c:choose>
 		<c:when test="${pageContext.request.userPrincipal.name != null}">
@@ -178,14 +169,3 @@
 			
 		</table>
 	</div>
-</body>
-
-<script>
-
-$(function(){
-	console.log($('#categoryNo').val());
-});
-
-</script>
-
-</html>
