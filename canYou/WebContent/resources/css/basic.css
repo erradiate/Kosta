@@ -1,6 +1,6 @@
 @CHARSET "EUC-KR";
 ul li { list-style: none}
-ul li { background-color: #8080c0}
+ul li { background-color: white}
 .footer{ background: orange;}
 a{ color:blue; font-weight: bold; font-size: 15px;
 	text-decoration: none; line-height: 12px;
