@@ -82,16 +82,6 @@
 		d.projectNo=p.projectNo and d.memberNo=#{memberNo}
 	</select>
 
-	<!-- 마이페이지 내가 만든 프로젝트 리스트 -->
-	<select id="myProjectlist" parameterType="int"
-		resultType="projvo">
-		select projectNo, memberNo, projectName, projectCost,
-		projectStartDate,
-		projectEndDate, projectFundCnt, projectMainImage,projectStory,
-		projectStep, projectStatus, categoryNo, projectCurCost
-		from project
-		where memberNo=#{memberNo}
-	</select>
 
 	<!-- 개인정보 수정 -->
 	<update id="editinfo" parameterType="mvo">

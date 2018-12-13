@@ -523,7 +523,7 @@ public class ProjectController {
 		   return "redirect:list?num="+vo.getProjectNo();
 	   }
 
-		/*// 마이페이지
+		/*// 페이지
 		@RequestMapping(value = "/mylist")
 		public String getDonateList(Model m) {
 			SecurityContext impl=SecurityContextHolder.getContext();	// 세션에서 spring security 정보를 가져옴
@@ -604,17 +604,35 @@ public class ProjectController {
 		return "mydonate";
 	}
 	
+	
 	// 내가 만든 프로젝트
 	@RequestMapping("/myProject")
-	public String moveMyProject(Model m) {
+	public ModelAndView moveMyProject(Integer page, SearchVO vo,Principal principal) {
 		SecurityContext impl=SecurityContextHolder.getContext();	// 세션에서 spring security 정보를 가져옴
 		String implstr=impl.getAuthentication().getName();	// security 정보에서 세션에 담겨있는 로그인 정보 중 ID 가져옴
 		MemberVO vo2=dao.memname(implstr);	// ID를 토대로 회원정보 가져옴 (회원 번호, 회원 이름)
 		int memno = vo2.getMemberNo();
+		vo.setMemberNo(memno);
+		 System.out.println("memno:"+vo.getMemberNo());
 		
-		List<ProjectVO> list = dao.myProjectlist(memno);
-		m.addAttribute("list", list);
-		   
-		return "myProject";
+		// pageVO의 획득
+		  int totalRows = dao.myPTotalCount(memno);
+		  PageVO pageInfo = makePageVO(page, totalRows);
+
+		  // 보여줄 페이지 설정
+		  vo.setBegin(String.valueOf(pageInfo.getStartRow()));
+		  vo.setEnd(String.valueOf(pageInfo.getEndRow()));
+		  
+		List<ProjectVO> list = dao.myProjectlist(vo);
+		
+		System.out.println(list.size());
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("myProject");
+		mav.addObject("list", list);
+		mav.addObject("pageInfo", pageInfo);
+		if(principal != null)
+		mav.addObject("principal", principal.getName());
+		
+		return mav;
 	}
 }

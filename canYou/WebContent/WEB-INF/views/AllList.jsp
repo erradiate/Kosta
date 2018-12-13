@@ -9,14 +9,14 @@
 <title>AllList.jsp</title>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <style type="text/css">
-#bgy {
+#t1 {
 	text-align: center;
 	margin: 0 auto;
 	border-spacing: 40px;
 	/* border-collapse: separate; */
 }
 
-.bgy1 {
+.t2 {
 	border: 3px double black;
 	padding: 0px;
 	width: 280px;
@@ -28,8 +28,7 @@
 	<div id="AllList">
 		<c:set var="i" value="0" />
 		<c:set var="j" value="3" />
-
-		<table id="bgy">
+		<table id="t1">
 			<thead>
 			</thead>
 
@@ -38,7 +37,7 @@
 					<c:if test="${i%j == 0 }">
 						<tr>
 					</c:if>
-					<td class="bgy1">
+					<td class="t2">
 						<div id="">
 						<a href="list?num=${e.projectNo }">
 							<img id="projectMainImage"
