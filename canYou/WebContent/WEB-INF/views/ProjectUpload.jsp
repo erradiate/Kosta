@@ -75,8 +75,6 @@
 </div>
 <input type="submit" id="add" value="½ÅÃ»">
 </form>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="//cdn.ckeditor.com/4.4.7/full/ckeditor.js"></script>
 
 <script>
 $(document).ready(function(){

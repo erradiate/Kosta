@@ -1,10 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Learn D3 in 5 minutes</title>
-</head>
+
 <script src='https://d3js.org/d3.v4.min.js'></script>
 <style> 
 svg { border: 1px solid; } 
@@ -13,7 +9,6 @@ svg { border: 1px solid; }
 .text { fill: white; font-weight:bold; } 
 </style> 
 
-<body>
 <svg width="800" height="500"></svg> 
 
 <script> 
@@ -63,6 +58,3 @@ var dataset = [{x:'A', y:9 }, {x:'B', y:19}, {x:'C', y:29}, {x:'D', y:39},
 	    .call(d3.axisBottom(xScale)); //x축은 axisBottom로 축을 그림
 
 </script>
-
-</body>
-</html>

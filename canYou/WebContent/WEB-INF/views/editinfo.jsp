@@ -1,12 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="EUC-KR">
-<title>Insert title here</title>
-</head>
-<body>
+
 <h2>개인정보 수정</h2>
 <form action="success" method="POST">
 	<p><label>Pwd : </label><input type="password" name="memberPwd"></p>
@@ -20,5 +14,3 @@
 	
 	<p><input type="submit" value="수정하기"></p>
 </form>
-</body>
-</html>

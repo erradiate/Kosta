@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
-<head>
+
 <style>
 #tv {
 	border: 1px solid black;
@@ -11,8 +9,7 @@
 </style>
 <meta charset="EUC-KR">
 <title>projectModify.jsp</title>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="//cdn.ckeditor.com/4.4.7/full/ckeditor.js"></script>
+
 <script>
 	$(document).ready(function() {
 		CKEDITOR.replace('cont', {
@@ -21,8 +18,7 @@
 		})
 	});
 </script>
-</head>
-<body>
+
 	<div>
 		<fieldset>
 			<legend>Project List</legend>
@@ -56,11 +52,4 @@
 
 		</fieldset>
 	</div>
-</body>
-<script>
-	$(function() {
-
-	});
-</script>
-</html>
 

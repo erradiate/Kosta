@@ -24,7 +24,6 @@ td{
 
 
 </style>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
 $(document).ready(function(){
 	$('.prodview #donadd').each(function(){
@@ -37,7 +36,7 @@ $(document).ready(function(){
 }); 
 </script>
 </head>
-<body>
+
 <div>
 		<fieldset>
 			<legend>Project</legend>
@@ -202,10 +201,5 @@ $(document).ready(function(){
 			});
 		});
 	});
-</script>
-<script>
-$(function() {
-
-});
 </script>
 
