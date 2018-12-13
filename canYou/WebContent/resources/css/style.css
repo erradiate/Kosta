@@ -137,10 +137,13 @@ p#time{
 	font-size: 1.5em; color:#000;
 }
 
+.upmenu{
+	list-style: none;
+}
 
-
-
-
+.upmenu li{
+	display:inline; margin : 10px; font-size:20px;
+}
 
 
 

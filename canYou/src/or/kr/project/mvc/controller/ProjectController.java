@@ -654,4 +654,23 @@ public class ProjectController {
 	public String community() {
 		return "communitypage";
 	}
+	
+	// 프로젝트 업로드 폼
+	@RequestMapping(value="/ProjectUpload")
+	public ModelAndView ProjectUpload() {
+		List<CategoryVO> category=dao.casel();		// 프로젝트 업로드에 필요한 카테고리 목록을 가져옴
+		
+		// 세션에서 로그인 된 ID를 가져오는 작업
+		SecurityContext impl=SecurityContextHolder.getContext();
+		String implstr=impl.getAuthentication().getName(); 
+		// 끝-------------------
+		MemberVO vo=dao.memname(implstr);	// 가져온 ID를 토대로 회원 번호, 이름을 가져온다
+		String name=vo.getMemberName();		// 이름을 name 변수에 저장
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("ProjectUpload");
+		mav.addObject("category", category);	// 카테고리 목록 붙임
+		mav.addObject("memberName", name);		// name을 object로 붙여서 같이 전송
+		return mav;
+	}
 }
