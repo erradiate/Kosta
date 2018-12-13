@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-신청에 성공했습니다!
+<p>신청에 성공했습니다!</p>
+<a href="index">메인으로</a>
 </body>
 </html>

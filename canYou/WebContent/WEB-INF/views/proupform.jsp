@@ -77,6 +77,7 @@ $(document).ready(function(){
 				success: function(jqXHR){
 					var obj = JSON.parse(jqXHR);
 					$('#subCategoryNo').empty();
+					$('#subCategoryNo').append("<option value='-1'>º±≈√</option>");
 					$.each(obj,function(index,item){
 	                   var option=$("<option value="+item.subcategoryNo+">"+item.subcategoryName+"</option>")
 	                   $('#subCategoryNo').append(option);

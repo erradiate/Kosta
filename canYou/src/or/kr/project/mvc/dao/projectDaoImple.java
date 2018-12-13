@@ -170,4 +170,12 @@ public class projectDaoImple implements projectDao{
 			
 			return list;
 		}
+
+		public String caselone(int i) {
+			return ss.selectOne("project.caselone", i);
+		}
+		
+		public String subcaselone(int i) {
+			return ss.selectOne("project.subcaselone", i);
+		}
 }

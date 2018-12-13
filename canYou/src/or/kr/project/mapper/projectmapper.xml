@@ -7,10 +7,20 @@
 	<select id="casel" resultType="cvo">
 		select * from category
 	</select>
+	
+	<!-- 카테고리 번호를 통해 카테고리 이름을 가져옴 -->
+	<select id="caselone" parameterType="int" resultType="String">
+		select categoryName from category where categoryNo=#{categoryNo}
+	</select>
 
 	<!-- 선택한 카테고리에 따라서 서브 카테고리 불러옴 -->
 	<select id="subcasel" parameterType="int" resultType="scvo">
 		select * from subcategory where categoryNo=#{categoryNo}
+	</select>
+	
+	<!-- 서브 카테고리 번호를 통해 이름을 가져옴 -->
+	<select id="subcaselone" parameterType="int" resultType="String">
+		select subCategoryName from subCategory where subCategoryNo=#{subCategoryNo}
 	</select>
 
 	<!-- 둘러보기 -->
@@ -37,7 +47,10 @@
 	<insert id="proin" parameterType="projvo">
 		insert into project
 
-		values(project_seq.nextVal,#{categoryNo},#{subCategoryNo}, #{memberNo}, #{projectName}, 
+		values(project_seq.nextVal,#{categoryNo},
+		<if test="subCategoryNo==-1">null,</if>	<!-- 서브 카테고리 미등록일 경우(-1) null이 들어감 -->
+		<if test="subCategoryNo!=-1">#{subCategoryNo},</if> 
+		#{memberNo}, #{projectName}, 
 		#{projectCost}, sysdate, TO_DATE(#{projectStartDate}, 'yyyy-mm-dd'), TO_DATE(#{projectEndDate},'yyyy-mm-dd'),
 		 0, #{projectMainImage}, #{projectStory}, 
 		 'Z', 2, 0)
@@ -188,12 +201,12 @@
 	<!-- 리스트 현무스 -->
 	<select id="list" parameterType="String" resultType="projvo">
 		select
-		projectNo ,memberNo
+		memberNo
 		,projectName ,projectCost
-		,projectStartDate,
-		projectEndDate,projectFundCnt,
+		,to_char(projectStartDate, 'yyyy-mm-dd') projectStartDate,
+		to_char(projectEndDate,'yyyy-mm-dd') projectEndDate,projectFundCnt,
 		projectMainImage,projectStory,projectStep,projectStatus
-		,categoryNo,
+		,categoryNo, subCategoryNo,
 		projectCurCost from project where projectNo=#{projectNo}
 	</select>
 

@@ -10,7 +10,7 @@
 }
 </style>
 <meta charset="EUC-KR">
-<title>detail.jsp</title>
+<title>${list.projectName }</title>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
 $(document).ready(function(){
@@ -27,23 +27,29 @@ $(document).ready(function(){
 <body>
 <div>
 		<fieldset>
-			<legend>Project List</legend>
+			<legend>Project</legend>
 			<form action="update" method="POST" >
 			<input type="hidden" id="projectNo" name="projectNo" value="${list.projectNo}">
 			<table>
 				<thead></thead>
 				<tbody>
 						<tr>
-							<td>프로젝트 번호 : ${list.projectNo}</td>
+							<td>프로젝트 주최자 : ${member.memberName}</td>
 						</tr>
 						<tr>
-							<td>회원이름 : ${member.memberName}</td>
+							<td>카테고리 이름 : <b>[${c}]</b>
+							<c:choose>
+								<c:when test="${sc!=null}">
+									-${sc}
+                            	</c:when>
+                            </c:choose>
+							</td>
 						</tr>
 						<tr>
-							<td>프로젝트 명 : ${list.projectName}</td>
+							<td>프로젝트 이름 : ${list.projectName}</td>
 						</tr>
 						<tr>
-							<td>목표금액 : ${list.projectCost}</td>
+							<td>목표금액 : ${list.projectCost}원</td>
 						</tr>
 						<tr>
 							<td>프로젝트 시작날짜 : ${list.projectStartDate}</td>
@@ -52,10 +58,10 @@ $(document).ready(function(){
 							<td>프로젝트 마감날짜 : ${list.projectEndDate}</td>
 						</tr>
 						<tr>
-							<td>모인 후원 금액: ${list.projectCurCost}</td>
+							<td>모인 후원 금액: ${list.projectCurCost}원</td>
 						</tr>
 						<tr>
-							<td>후원자 수 : ${list.projectFundCnt}</td>
+							<td>후원자 수 : ${list.projectFundCnt}명</td>
 						</tr>
 						<tr>
 							<td>프로젝트 이미지 :</td>
@@ -69,12 +75,7 @@ $(document).ready(function(){
 						<tr>
 							<td>프로젝트 등급 : ${list.projectStep}</td>
 						</tr>
-						<tr>
-							<td>진행여부 : ${list.projectStatus}</td>
-						</tr>
-						<tr>
-							<td>카테고리 번호 : ${list.categoryNo}</td>
-						</tr>
+						
 						<tr>
 							<td>
 								<c:forEach var="e2" items="${prodlist}">

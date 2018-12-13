@@ -264,7 +264,11 @@ public class ProjectController {
 	public String listView(Model m, String num, HttpServletRequest req) {
 		// project 관련한 정보 빼오기
 		ProjectVO list = dao.projectlist(num);
+		String c=dao.caselone(list.getCategoryNo());
+		String sc=dao.subcaselone(list.getSubCategoryNo());
 		m.addAttribute("list",list);
+		m.addAttribute("c", c);
+		m.addAttribute("sc", sc);
 		
 		// project와 연결된 product 가져오기
 		List<ProductVO> list2=dao.prodsel(num);
