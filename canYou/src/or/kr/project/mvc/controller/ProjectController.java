@@ -559,7 +559,6 @@ public class ProjectController {
 				  vo.setEnd(String.valueOf(pageInfo.getEndRow()));
 				
 				List<HashMap> list = dao.myDonateProject(vo);
-				System.out.println("list"+list.get(0).toString());
 				System.out.println(list.size());
 				ModelAndView mav = new ModelAndView();
 				mav.setViewName("mydonate");

@@ -15,4 +15,11 @@ public class GraphController {
 	public String graphLook() {
 		return "graphpage";
 	}
+	
+	@RequestMapping(value = "/ageGraph")
+	public String ageGraph() {
+		
+		
+		return "graphpage";
+	}
 }
