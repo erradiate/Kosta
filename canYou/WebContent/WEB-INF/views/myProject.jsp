@@ -65,7 +65,22 @@
 							<p id="">프로젝트 명 : ${e.projectName}</p>
 							<hr>
 							<p id="">프로젝트 등급 : ${e.projectStep}</p>
-							<p id="">진행여부 : ${e.projectStatus}</p>
+							<p id="">진행여부 : 
+							<c:choose>
+							<c:when test="${e.projectStatus==1}">
+								검토중
+							</c:when>
+							<c:when test="${e.projectStatus==2}">
+								진행중
+							</c:when>
+							<c:when test="${e.projectStatus==3}">
+								진행 마감
+							</c:when>
+							<c:when test="${e.projectStatus==4}">
+								심사 거부
+							</c:when>
+						</c:choose>
+							</p>
 							<p id="">목표금액 : ${e.projectCost}</p>
 							<p id="">프로젝트 시작날짜 : ${e.projectStartDate}</p>
 							<p id="">프로젝트 마감날짜 : ${e.projectEndDate}</p>
