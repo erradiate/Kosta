@@ -32,7 +32,7 @@ access-decision-manager-ref="accessDecisionManager">
 	authentication-failure-url="/denied"
 		username-parameter="username"
 		password-parameter="password"
-		default-target-url="/index"/>
+		default-target-url="/main"/>
 	<logout invalidate-session="true" logout-success-url="/logout"
 		logout-url="/j_spring_security_logout" />
 	<access-denied-handler error-page="/denied"/>
@@ -41,6 +41,7 @@ access-decision-manager-ref="accessDecisionManager">
 			expired-url="/login"/>
 	</session-management>
 </http>
+
 
 <!--  삭제 예정 -->
 <!-- <authentication-manager id="in-memory-auth">

@@ -673,4 +673,12 @@ public class ProjectController {
 		mav.addObject("memberName", name);		// name을 object로 붙여서 같이 전송
 		return mav;
 	}
+	
+	//로그아웃 12/14
+	@RequestMapping(value="/logout")
+	public String logout(Model m,HttpServletRequest request) {
+		SecurityContextHolder.getContext().getAuthentication().setAuthenticated(false); 
+		
+		return "main";
+	}
 }
