@@ -36,7 +36,7 @@ body div#header1 #hgroup h1{
 body div#header1 #hgroup h2{
 	font-size: 0.8em;
 	color: #312d2d;
-	font-style: italic;
+	font-style: italic; //ggg
 }
 
 #navigation{
