@@ -139,9 +139,9 @@ public class projectDaoImple implements projectDao {
 
 	// 댓글 리스트 보여줌
 
-	public List<ReplyVO> replyList(String num) {
-		return ss.selectList("project.replyList", num);
-
+	public List<ReplyVO> replyList(String i) {
+		return  ss.selectList("project.replyList", i);
+		
 	}
 
 	// 모든 프로젝트 둘러보기 -페이징 처리

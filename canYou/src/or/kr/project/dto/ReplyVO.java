@@ -6,6 +6,14 @@ public class ReplyVO {
 	private String replyDate;
 	private int projectNo;
 	private int memberNo;
+	private MemberVO mvo_Result; 
+	
+	public MemberVO getMvo_Result() {
+		return mvo_Result;
+	}
+	public void setMvo_Result(MemberVO mvo_Result) {
+		this.mvo_Result = mvo_Result;
+	}
 	public int getReplyNo() {
 		return replyNo;
 	}

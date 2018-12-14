@@ -125,8 +125,8 @@
 	<select id="myProjectlist" parameterType="searchvo"
 		resultType="projvo">
 		select projectNo, memberNo, projectName, projectCost,
-		projectStartDate,
-		projectEndDate, projectFundCnt,
+		to_char(projectStartDate,'yyyy-MM-dd') projectStartDate,
+		to_char(projectEndDate,'yyyy-MM-dd') projectEndDate, projectFundCnt,
 		projectMainImage,projectStory,
 		projectStep, projectStatus, categoryNo,
 		projectCurCost

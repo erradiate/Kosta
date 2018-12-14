@@ -7,25 +7,29 @@
 	<select id="casel" resultType="cvo">
 		select * from category
 	</select>
-	
+
 	<!-- 카테고리 번호를 통해 카테고리 이름을 가져옴 -->
 	<select id="caselone" parameterType="int" resultType="String">
-		select categoryName from category where categoryNo=#{categoryNo}
+		select
+		categoryName from category where categoryNo=#{categoryNo}
 	</select>
 
 	<!-- 선택한 카테고리에 따라서 서브 카테고리 불러옴 -->
 	<select id="subcasel" parameterType="int" resultType="scvo">
-		select * from subcategory where categoryNo=#{categoryNo}
+		select *
+		from subcategory where categoryNo=#{categoryNo}
 	</select>
-	
+
 	<!-- 서브 카테고리 번호를 통해 이름을 가져옴 -->
 	<select id="subcaselone" parameterType="int" resultType="String">
-		select subCategoryName from subCategory where subCategoryNo=#{subCategoryNo}
+		select
+		subCategoryName from subCategory where subCategoryNo=#{subCategoryNo}
 	</select>
 
 	<!-- 둘러보기 -->
 	<select id="lookaround" resultType="cvo">
-		select categoryno, categoryname
+		select categoryno,
+		categoryname
 		from
 		category
 		order by categoryno
@@ -46,17 +50,20 @@
 	<!-- 프로젝트 업로드 -->
 	<insert id="proin" parameterType="projvo">
 		insert into project
-
 		values(project_seq.nextVal,#{categoryNo},
 		<if test="subCategoryNo==-1">null,</if>	<!-- 서브 카테고리 미등록일 경우(-1) null이 들어감 -->
-		<if test="subCategoryNo!=-1">#{subCategoryNo},</if> 
-		#{memberNo}, #{projectName}, 
-		#{projectCost}, sysdate, TO_DATE(#{projectStartDate}, 'yyyy-mm-dd'), TO_DATE(#{projectEndDate},'yyyy-mm-dd'),
-		 0, #{projectMainImage}, #{projectStory}, 
-		 'Z', 2, 0)
-		<selectKey keyProperty="projectNo" resultType="int" order="AFTER">
-       		SELECT project_seq.CURRVAL FROM dual
-    	</selectKey>
+		<if test="subCategoryNo!=-1">#{subCategoryNo},</if>
+		#{memberNo}, #{projectName},
+		#{projectCost}, sysdate,
+		TO_DATE(#{projectStartDate}, 'yyyy-mm-dd'),
+		TO_DATE(#{projectEndDate},'yyyy-mm-dd'),
+		0, #{projectMainImage},
+		#{projectStory},
+		'Z', 2, 0)
+		<selectKey keyProperty="projectNo" resultType="int"
+			order="AFTER">
+			SELECT project_seq.CURRVAL FROM dual
+		</selectKey>
 
 	</insert>
 
@@ -141,7 +148,8 @@
 	<update id="projectCurCost" parameterType="dvo">
 		update project set
 		projectCurCost=projectCurCost+#{donateMoney}
-		where projectNo=#{projectNo}
+		where
+		projectNo=#{projectNo}
 	</update>
 
 	<!-- 후원 취소2 (행 삭제) : 세션에서 가져온 회원 번호와 후원 번호가 일치해야 삭제가 됨 -->
@@ -168,22 +176,24 @@
 		where memberNo=#{memberNo} and
 		donateNo=#{donateNo}
 	</select>
-	
+
 	<!-- 후원 취소3(후원자수 감소) -->
 	<update id="returnFundCnt" parameterType="dvo">
 		update project
 		set
 		projectFundCnt=projectFundCnt-1
-		where projectNo=(select projectNo from projectdonate where donateNo=#{donateNo})
+		where projectNo=(select projectNo from
+		projectdonate where donateNo=#{donateNo})
 	</update>
 
 
-		<!-- 리스트 현무스-->
+	<!-- 리스트 현무스 -->
 	<select id="list" parameterType="String" resultType="projvo">
-		select projectNo ,memberNo
+		select
+		projectNo ,memberNo
 		,projectName ,projectCost
 		,projectStartDate,
-		projectEndDate,projectFundCnt,
+		to_char(projectEndDate,'yyyy-MM-dd') projectEndDate,projectFundCnt,
 		projectMainImage,projectStory,projectStep,projectStatus
 		,categoryNo,
 		projectCurCost from project where projectNo=#{projectNo}
@@ -198,8 +208,8 @@
 
 	<!-- 수정 -->
 	<update id="modify" parameterType="projvo" timeout="20">
-
-		update project SET projectName = #{projectName} , projectStory = #{projectStory} 
+		update project SET projectName = #{projectName} , projectStory =
+		#{projectStory}
 		<if test="projectMainImage != null">, projectMainImage=#{projectMainImage}</if>
 		WHERE projectNo=#{projectNo}
 
@@ -212,21 +222,37 @@
 		#{projectNo},#{memberNo}
 		)
 	</insert>
-	
+	<!-- 댓글 ResultMap -->
+
+
+	<resultMap type="replyvo" id="rvo_Result">
+		<id property="replyNo" column="replyNo"/>
+		<result column="replyContent" property="replyContent" javaType="String" />
+		<result column="replyDate" property="replyDate" javaType="String" />
+		<result column="projectNo" property="projectNo" javaType="int"/>
+		<association property="mvo_Result" column="memberNo" javaType="mvo">
+			<id property="memberNo" column="memberNo"/>
+			<result column="memberName" property="memberName" />
+			 <result column="memberImage" property="memberImage" />
+		</association>
+	</resultMap>
+
 	<!-- 댓글 리스트 -->
-	<select id="replyList" parameterType="String"
-		resultType="replyvo">
-		select replyContent,replyDate, memberNo
-		from reply
-		where
-		projectNo=#{projectNo}
+	<select id="replyList" parameterType="String" resultMap="rvo_Result">
+		select
+		r.replyContent,to_char(r.replyDate,'yyyy-MM-dd') replyDate,
+		m.memberName, r.projectNo, m.memberImage 
+		from reply r,member m 
+		where 
+		m.memberNo=r.memberNo and r.projectNo=#{projectNo} 
 		order by replyDate
 	</select>
-	
+
 	<!-- 후원취소했을 때, 선물 반환 -->
 	<update id="prodout" parameterType="dvo">
-	 	update product
-	 	set productCnt = productCnt+1
+		update product
+		set productCnt
+		= productCnt+1
 		where productNo=#{productNo}
 	</update>
 </mapper>

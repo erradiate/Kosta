@@ -1,5 +1,6 @@
 package or.kr.project.mvc.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -55,7 +56,8 @@ public class DetailController {
 		m.addAttribute("member", mem);
 		
 		//댓글 정보 가져오기
-		List<ReplyVO> replylist = dao.replyList(projectNo);
+		List<ReplyVO> replylist =dao.replyList(projectNo);
+		//List<ReplyVO> replylist = dao.replyList(projectNo);
 		m.addAttribute("replylist", replylist);
 		System.out.println("replylist 크기 : "+ replylist.size());
 				

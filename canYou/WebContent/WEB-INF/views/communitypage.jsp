@@ -1,7 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+	pageEncoding="EUC-KR"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ include file="detail.jsp" %>
+<%@ include file="detail.jsp"%>
+<style>
+#tv {
+	border: 1px solid;
+	width: 900px;
+	height: 300px;
+	margin: auto;
+}
+
+.rday {
+	font-size: x-small;
+}
+
+.cont {
+	width: 800px;
+	height: 150px;
+	border: 1px solid;
+	margin: auto;
+}
+</style>
 <form method="post" action="reply1">
 	<table>
 		<tr>
@@ -20,9 +39,16 @@
 	<table id="tv">
 		<c:forEach var="s" items="${replylist}">
 			<tr>
-				<td>멤버번호 : ${s.memberNo}</td>
-				<td>내용 : ${s.replyContent}</td>
-				<td>날짜 : ${s.replyDate}</td>
+				<td><img id="memberImage "
+					src="resources/images/${s.mvo_Result.memberImage }"
+					style="border: 1px solid; border-radius: 70px; -moz-border-radius: 70px; -khtml-border-radius: 70px; -webkit-border-radius: 70px; width: 35px; height: 35px;">
+
+					${s.mvo_Result.memberName}</td>
+			<tr>
+				<td class="rday">${s.replyDate}</td>
+			</tr>
+			<tr>
+				<td><div class="cont">${s.replyContent}</div></td>
 			</tr>
 		</c:forEach>
 	</table>
