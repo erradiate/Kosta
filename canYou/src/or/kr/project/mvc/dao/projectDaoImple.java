@@ -184,4 +184,8 @@ public class projectDaoImple implements projectDao {
 		return list;
 	}
 
+	public List<SubCategoryVO> subcaname(String categoryName) {
+		return ss.selectList("project.subcaname", categoryName);
+	}
+
 }

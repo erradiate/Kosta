@@ -16,5 +16,9 @@
             <li><a href="ProjectUpload">프로젝트 업로드</a></li>
             <li><a href="projectlook">프로젝트 둘러보기</a></li>
             <li><a href="mypage">마이 페이지</a></li>
+<<<<<<< HEAD
         </ul>
         <input type="hidden" id="session" value="${sessionScope.logInOut}">
+=======
+        </ul>
+>>>>>>> branch 'master' of https://github.com/erradiate/Kosta
