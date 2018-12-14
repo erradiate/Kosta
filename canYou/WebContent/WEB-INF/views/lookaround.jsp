@@ -30,6 +30,6 @@ $(document).ready(function(){
 <h2>카테고리 별 보기</h2>
 
 <c:forEach var="e" items="${list}" varStatus="idx">
-    <div class="category"> ▶<span class="caname">${e.categoryName}</span></div>
-      <!-- <a href="categoryproject?categoryNo=${idx.index+1}">▶${e.categoryName}</a>-->
+    <%-- <div class="category"> ▶<span class="caname">${e.categoryName}</span></div> --%>
+      <div><a href="categoryproject?categoryNo=${idx.index+1}">▶${e.categoryName}</a></div>
 </c:forEach>

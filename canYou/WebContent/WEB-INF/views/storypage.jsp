@@ -1,3 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-스토리페이지
+
+<%@ include file="detail.jsp" %>
+
+<!-- 스토리 부분 -->
+<p>${list.projectStory}</p>

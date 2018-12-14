@@ -32,7 +32,7 @@
 					</c:if>
 					<td class="t2">
 						<div id="">
-						<a href="list?num=${e.projectNo }">
+						<a href="story?projectNo=${e.projectNo }">
 							<img id="projectMainImage"
 								src="resources/images/${e.projectMainImage }"
 								style="margin: 0px 0px 0px 0px; width: 100%; height: 240px;">

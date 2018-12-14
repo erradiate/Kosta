@@ -59,7 +59,7 @@ public class ProjectController {
 	
 	@RequestMapping(value="index")
 	public String index2(HttpServletRequest request, Model model) {
-		return "index";
+		return "main";
 	}
 	
 	@RequestMapping(value="/login")
@@ -69,7 +69,7 @@ public class ProjectController {
 			return "login";
 		}
 		else{		// 로그인 상태에서 로그인 페이지로 이동하려고 할 때 index 페이지로 이동
-			return "index";
+			return "main";
 		}
 	}
 	
@@ -258,35 +258,6 @@ public class ProjectController {
 		 m.addAttribute("project", vo);
 		 	
 		return "ProjectModify";
-	}
-
-	@GetMapping("/list")
-	public String listView(Model m, String num, HttpServletRequest req) {
-		// project 관련한 정보 빼오기
-		ProjectVO list = dao.projectlist(num);
-		String c=dao.caselone(list.getCategoryNo());
-		String sc=dao.subcaselone(list.getSubCategoryNo());
-		m.addAttribute("list",list);
-		m.addAttribute("c", c);
-		m.addAttribute("sc", sc);
-		
-		// project와 연결된 product 가져오기
-		List<ProductVO> list2=dao.prodsel(num);
-		m.addAttribute("prodlist", list2);
-		
-		// project와 연결된 member 정보 가져오기
-		MemberVO mem=dao.memname2(list.getMemberNo());
-		m.addAttribute("member", mem);
-				
-		//댓글 정보 가져오기
-		List<ReplyVO> replylist = dao.replyList(num);
-		m.addAttribute("replylist", replylist);
-		System.out.println("replylist 크기 : "+ replylist.size());
-		
-		HttpSession s=req.getSession();
-		s.setAttribute("projnum", num);		// 프로젝트 세션을 추가
-		
-		return "detail";
 	}
 
 		// 프로젝트 수정
@@ -520,21 +491,8 @@ public class ProjectController {
 		   
 		   dao.replyInsert(vo); 
 
-		   return "redirect:list?num="+vo.getProjectNo();
+		   return "redirect:story?projectNo="+vo.getProjectNo();
 	   }
-
-		/*// 페이지
-		@RequestMapping(value = "/mylist")
-		public String getDonateList(Model m) {
-			SecurityContext impl=SecurityContextHolder.getContext();	// 세션에서 spring security 정보를 가져옴
-			String implstr=impl.getAuthentication().getName();	// security 정보에서 세션에 담겨있는 로그인 정보 중 ID 가져옴
-			MemberVO vo2=dao.memname(implstr);	// ID를 토대로 회원정보 가져옴 (회원 번호, 회원 이름)
-			
-			List<HashMap> list = dao.myDonateProject(vo2.getMemberNo());
-			System.out.println(list.size());
-			m.addAttribute("list", list);
-			return "mypage";
-		}*/
 
 	// 후원할때 들어오는 메소드
 	@RequestMapping(value = "/donate")
@@ -557,7 +515,7 @@ public class ProjectController {
 		
 		dao.donateMoney(m);
 		
-		return "redirect:/list?num="+vo.getProjectNo();
+		return "redirect:/story?projectNo="+vo.getProjectNo();
 	}
 
 	// 후원 취소
@@ -650,24 +608,6 @@ public class ProjectController {
 	@RequestMapping("/projectlook")
 	public String projectLook() {
 		return "projectlook";
-	}
-	
-	//프로젝트 스토리 보기
-	@RequestMapping("/storypage")
-	public String story() {
-		return "storypage";
-	}
-	
-	//프로젝트 상품 상세 보기
-	@RequestMapping("/productdetailpage")
-	public String productDetail() {
-		return "productdetailpage";
-	}
-	
-	//프로젝트 커뮤니티 페이지로 이동
-	@RequestMapping("/communitypage")
-	public String community() {
-		return "communitypage";
 	}
 	
 	// 프로젝트 업로드 폼

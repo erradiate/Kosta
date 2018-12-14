@@ -45,7 +45,7 @@
 					</c:if>
 					<td class="bgy1" >
 						<div id="">
-							<a href="list?num=${listv.projectNo }"><img id="projectMainImage"
+							<a href="story?projectNo=${listv.projectNo }"><img id="projectMainImage"
 								src="resources/images/${listv.projectMainImage }"
 								style="margin: 60px 10px 10px 10px; width: 260px; height: 280px;"></a>
 						</div>

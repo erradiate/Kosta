@@ -35,7 +35,6 @@ $(document).ready(function(){
 	});
 }); 
 </script>
-</head>
 
 <div>
 		<fieldset>
@@ -103,102 +102,26 @@ $(document).ready(function(){
 							<td class="tdclass">${list.projectStep}</td>
 						</tr>
 				</tbody>
-			</table>	
-			
-				<p><a href="storypage">프로젝트 스토리</a> ${list.projectStory}</p>
-				<p><a href="productdetailpage">상품 상세</a></p>
-				<p><a href="communitypage">커뮤니티</a></p>
-				<p><a href="">환불 및 교환</a></p>
-						
-				<c:forEach var="e2" items="${prodlist}">
-					<div class="prodview" style="border:1px solid gold;">
-						<div>
-											<input type="hidden" name="productNo" id="productNo" value="${e2.productNo }">
-											<p>${e2.productCost }원 이상 구매 시</p>
-											<h2>${e2.productName }</h2>
-											<p>${e2.productInfo }</p>
-											<p>${e2.productCnt }개 남음</p>
-										</div>
-									<input id="donadd" type="button" value="이걸로 후원하기">
-									</div>
-				</c:forEach>
-						
-								<h2>현재 선택중인 선물</h2>
-								<div id="selprod">
-									
-								</div>
-						
-							추가 후원 : <input type="text" name="donateMoney" id="donateMoney">
-					
-						<input type="button" class="donateBtn" value="후원">
+			</table>
 
-				<c:choose>
-					<c:when test="${pageContext.request.userPrincipal.name eq member.memberId }">
-					<tr>
-						<td colspan="14">
-						<input type="submit" id="wBtn" value="수정">
-						</td>
-					</tr>
-					</c:when>
-				</c:choose>	
-			</form>
-			
-			<form method="post" action="reply1">
 			<table>
-				<tr>
-					<td>
-					<c:choose>
-						<c:when test="${pageContext.request.userPrincipal.name==null}">
-							<textarea rows="3" cols="30" name="replyContent" disabled>로그인 해주세요</textarea>
-						</c:when>
-						<c:when test="${pageContext.request.userPrincipal.name!=null}">
-							<textarea rows="3" cols="30" name="replyContent"></textarea>
-						</c:when>
-					</c:choose>
-					</td>
-					<td><input type="submit" value="작성"></td>
-				</tr>
 				<tr>
 					<td><input type="button" id="wordBtn" value="워드로 보기"></td>
 				</tr>
-			</table>
-		</form>
-		</fieldset>
-		<table id= "tv">
-		
-			<c:forEach var="s" items="${replylist}">
-			
 				<tr>
-					<td>멤버번호 : ${s.memberNo}</td>	
-					<td>내용 : ${s.replyContent}</td>
-					<td>날짜 : ${s.replyDate}</td>
+					<td><a href="story?projectNo=${list.projectNo}">프로젝트 스토리</a></td>
+					<td style="padding-left: 30px"><a
+						href="productDetail?projectNo=${list.projectNo}">상품 상세</a></td>
+					<td style="padding-left: 30px"><a
+						href="community?projectNo=${list.projectNo}">커뮤니티</a></td>
+					<td style="padding-left: 30px"><a href="">환불 및 교환</a></td>
 				</tr>
-				
-			</c:forEach>
-
-		</table> 
-	</div>
+			</table></div>
 
 <script>
 	$(function() {
 		$('#wordBtn').click(function(){
 			location.href="download?projectNo="+$('#projectNo').val();
-		});
-		$('.donateBtn').each(function(index, item) {
-			$(this).click(function() {
-				var result = confirm('후원하시겠습니까?');
-
-				if (result) {
-					var projectNo = $('#projectNo').val();
-					var donateMoney = $('#donateMoney').val();
-					var productNo = $('#selprod #productNo').val();
-					
-					
-					//console.log("projectNo : "+projectNo+"/ donateMoney : "+donateMoney+"/ productNo:" + productNo);
-					
-					location.href ='donate?projectNo='+projectNo+'&donateMoney='+donateMoney+'&productNo='+productNo;
-				}
-			});
 		});
 	});
 </script>
