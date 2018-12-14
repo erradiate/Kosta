@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<style>
 
+</style>
+<div align="center">
 <table>
 	<tr align="center">
 		<td colspan="3"><h1>프로젝트 둘러보기</h1></td>
@@ -24,3 +27,4 @@
 		style="margin: 60px 10px 10px 10px; width: 250px; height: 300px;"></td>
 	</tr>
 </table>
+</div>

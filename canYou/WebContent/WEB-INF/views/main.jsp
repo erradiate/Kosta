@@ -9,7 +9,7 @@
 	font-weight: bold;
 }
 .proimg{
-	margin: 5px 35px 10px 20px; 
+	margin: 5px 35px 10px 70px; 
 	width: 180px; 
 	height: 140px;
 }
@@ -17,7 +17,7 @@
 </style>    
 
 <div><img src="resources/images/3.jpg"
-		style="margin: 40px 30px 30px 180px; width: 580px; height: 250px;">
+		style="margin: 40px 30px 30px 280px; width: 580px; height: 250px;">
 </div>
 			
 <table>
@@ -86,6 +86,6 @@
 </table>
 
 <div style="float: left; width: 50%"><img src="resources/images/1.jpg" 
-		style="margin: 80px 30px 30px 30px; width: 420px; height: 120px;"></div>
+		style="margin: 80px 30px 30px 60px; width: 460px; height: 120px;"></div>
 <div style="float: right; width: 50%"><img src="resources/images/2.jpg" class="rightimg"
-		style="margin: 80px 30px 30px 30px; width: 420px; height: 120px;"></div>
+		style="margin: 80px 30px 30px 60px; width: 460px; height: 120px;"></div>

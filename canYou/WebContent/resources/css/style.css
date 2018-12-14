@@ -8,10 +8,10 @@ html, body, div,h1,h2,h3,h4,h5,h6,p {
 }
 
 body{
-	width: 960px;
+	width: 1200px;
 	margin: 0 auto;
 	font-family: Arial, sans-serif;
-	color: #777;
+	color: #080808;
 }
 
 p{
@@ -21,28 +21,28 @@ p{
 }
 
 body div#header1 {
-	background: #777;
+	background: #f5f7ee;
 	padding: 20px;
-	height: 65px;
+	height: 80px;
 	clear: both;
 }
 
 body div#header1 #hgroup h1{
-	font-size: 3.0em;
+	font-size: 2.5em;
 	text-transform: uppercase;
-	color: #fff;
+	color: #2f2929;
 }
 
 body div#header1 #hgroup h2{
 	font-size: 0.8em;
-	color: #fff;
+	color: #312d2d;
 	font-style: italic;
 }
 
 #navigation{
-	height: 25px;
+	height: 40px;
 	padding: 10px;
-	background: #000;
+	background: #1d1b1b;
 	color:#FFFFFF;
 	font-weight: bold;
 	clear: both;
@@ -144,7 +144,3 @@ p#time{
 .upmenu li{
 	display:inline; margin : 10px; font-size:20px;
 }
-
-
-
-
