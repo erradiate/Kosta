@@ -4,17 +4,25 @@
 
 <style type="text/css">
 #bgy {
-	text-align: center;
-	margin: 0 auto;
-	border-spacing: 40px;
-	/* border-collapse: separate; */
+	margin:0 auto;
 }
 
-.bgy1 {
-	border: 3px double black;
-	padding: 0px;
-	width: 280px;
-	height: 260px;
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: auto;
+  height: auto;
+  margin-left: 30px;
+  margin-top: 20px;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.7);
+}
+
+.container {
+  padding-top: 3px;
+  padding-bottom: 3px;
 }
 </style>
 
@@ -34,31 +42,36 @@
 		
 			<c:set var="i" value="0" />
 			<c:set var="j" value="3" />
-			<table  id="bgy">
+			<table id="bgy">
 			<thead>
 			</thead>
 			
 			<tbody>
 				<c:forEach var="listv" items="${list}" varStatus="status">
 					<c:if test="${i%j == 0 }">
-						<tr>
+					<tr>
 					</c:if>
-					<td class="bgy1" >
-						<div id="">
-							<a href="story?projectNo=${listv.projectNo }"><img id="projectMainImage"
-								src="resources/images/${listv.projectMainImage }"
-								style="margin: 60px 10px 10px 10px; width: 260px; height: 280px;"></a>
+					<td>
+					<div class="card">
+						<a href="story?projectNo=${listv.projectNo }"><img
+							id="projectMainImage"
+							src="resources/images/${listv.projectMainImage }"
+							style="margin: 60px 10px 10px 10px; width: 260px; height: 240px;"></a>
+
+						<div class="container">
+						<p>프로젝트 명 : ${listv.projectName}</p>
+						<p>모인 금액 : ${listv.projectCost}</p>
+						<p>남은 날짜 : ${dateList[status.index]}</p>
 						</div>
-						<div id="">프로젝트 명 : ${listv.projectName}</div>
-						<div id="">모인 금액 : ${listv.projectCost}</div>
-						<div id="">남은 날짜 : ${dateList[status.index]}</div>							
+					</div>						
 					</td>
 					<c:if test="${i%j == j-1 }">
+					</tr>
 					</c:if>
 					<c:set var="i" value="${i+1}" />
 				</c:forEach>
 				</tbody>
-						<tfoot>
+				<tfoot>
 
 				<!-- 페이징 -->
 

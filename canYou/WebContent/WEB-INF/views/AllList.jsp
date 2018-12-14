@@ -16,7 +16,9 @@
 	width: 280px;
 	height: 260px;
 }
+
 </style>
+
 
 	<div id="AllList">
 		<c:set var="i" value="0" />
@@ -31,7 +33,7 @@
 						<tr>
 					</c:if>
 					<td class="t2">
-						<div id="">
+						<div>
 						<a href="story?projectNo=${e.projectNo }">
 							<img id="projectMainImage"
 								src="resources/images/${e.projectMainImage }"
