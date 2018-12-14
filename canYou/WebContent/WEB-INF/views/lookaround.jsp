@@ -4,25 +4,31 @@
 <script>
 $(document).ready(function(){
 	$('.caname').click(function(){
-		console.log($(this).html());
-		$.ajax({
-			url: 'subcaname',
-			async:true,
-			type:'POST',
-			data:{
-				categoryName: $(this).html()
-			},
-			dataType:'text',
-			success: function(jqXHR){
-				console.log(jqXHR)
-				var obj = JSON.parse(jqXHR);
-
-				$.each(obj,function(index,item){
-                   var option=$("<div>"+item.subcategoryName+"</div>");
-                   $(this).closest('div').append("whit");
-                });
-			}
-		})
+		if(!$(this).next().length){		// 세부 카테고리가 접혀 있을 때 (다음 요소가 없을 때)
+			var span=$(this);
+			var cn=$(this).prev().val();
+			$.ajax({
+				url: 'subcaname',
+				async:true,
+				type:'POST',
+				data:{
+					categoryNo: cn
+				},
+				dataType:'text',
+				success: function(jqXHR){
+					var obj = JSON.parse(jqXHR);
+					var option="<div><a href=\"categoryproject?categoryNo="+cn+"\">- 전체</a>";
+					$.each(obj,function(index,item){
+	                   option=option+"<p><a href=\"categoryproject2?categoryNo="+cn+"&subcategoryNo="+item.subcategoryNo+"\">-"+item.subcategoryName+"</a></p>";
+	                   
+	                });
+					option=option+"</div>"
+					span.closest('div').append(option);
+				}
+			});
+		}else{		// 세부 카테고리가 펼쳐져 있을 때 (다음 요소가 있을 때)
+			$(this).next().remove();
+		}
 	});
 });
 </script>
@@ -30,6 +36,8 @@ $(document).ready(function(){
 <h2>카테고리 별 보기</h2>
 
 <c:forEach var="e" items="${list}" varStatus="idx">
-    <%-- <div class="category"> ▶<span class="caname">${e.categoryName}</span></div> --%>
-      <div><a href="categoryproject?categoryNo=${idx.index+1}">▶${e.categoryName}</a></div>
+    <div class="category">
+     <input type="hidden" value="${e.categoryNo }"><span class="caname">▶${e.categoryName}</span>
+     </div>
+
 </c:forEach>

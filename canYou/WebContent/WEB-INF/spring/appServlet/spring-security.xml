@@ -33,7 +33,7 @@ access-decision-manager-ref="accessDecisionManager">
 		username-parameter="username"
 		password-parameter="password"
 		default-target-url="/index"/>
-	<logout invalidate-session="true" logout-success-url="/logout"
+	<logout invalidate-session="true" logout-success-url="/index"
 		logout-url="/j_spring_security_logout" />
 	<access-denied-handler error-page="/denied"/>
 	<session-management invalid-session-url="/login">

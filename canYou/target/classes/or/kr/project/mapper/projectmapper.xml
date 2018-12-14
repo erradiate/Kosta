@@ -25,7 +25,7 @@
 
 	<!-- 둘러보기 -->
 	<select id="lookaround" resultType="cvo">
-		select categoryname
+		select categoryno, categoryname
 		from
 		category
 		order by categoryno
@@ -229,9 +229,4 @@
 	 	set productCnt = productCnt+1
 		where productNo=#{productNo}
 	</update>
-	
-	<!-- 카테고리 이름으로 서브 카테고리 가져오기 -->
-	<select id="subcaname" parameterType="String" resultType="scvo">
-		select * from category c, subCategory sc where c.categoryNo=sc.categoryNo and categoryName=#{categoryName}
-	</select>
 </mapper>

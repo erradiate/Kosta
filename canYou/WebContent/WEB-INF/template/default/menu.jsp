@@ -10,7 +10,7 @@
 			<li><a href="login">로그인 </a></li>
 		</c:when>
 		<c:otherwise>
-			<li><a href="logout">로그아웃 </a></li>
+			<li><a href="j_spring_security_logout">로그아웃 </a></li>
 		</c:otherwise>
 	</c:choose>
 	<li><a href="ProjectUpload">프로젝트 업로드</a></li>

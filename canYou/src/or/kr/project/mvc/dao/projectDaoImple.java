@@ -190,6 +190,29 @@ public class projectDaoImple implements projectDao {
 
 		return list;
 	}
+	
+	//1214 추가
+	// 카테고리별 프로젝트의 수 구하기 (+서브 카테고리 12/14 김다솜 추가)
+	public int getCategoryCount2(SubCategoryVO vo) {
+		return ss.selectOne("paging.listCategory2", vo);
+	}
+	
+	
+	// 카테고리별 프로젝트 보기 + 서브 카테고리
+	public List<ProjectVO> lookCategoryProject2(Map<String, String> categoryList) {
+		System.out.println("-----------------------------");
+		System.out.println(categoryList.get("categoryNo"));
+		System.out.println(categoryList.get("begin"));
+		System.out.println(categoryList.get("end"));
+		System.out.println("-----------------------------");
+
+		List<ProjectVO> list = ss.selectList("paging.paginglist2", categoryList);
+		System.out.println("list size : " + list.size());
+
+		return list;
+	}
+	
+	//1214 추가 끝
 
 	public List<SubCategoryVO> subcaname(String categoryName) {
 		return ss.selectList("project.subcaname", categoryName);

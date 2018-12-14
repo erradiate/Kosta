@@ -69,7 +69,7 @@ public class ProjectController {
 			return "login";
 		}
 		else{		// 로그인 상태에서 로그인 페이지로 이동하려고 할 때 index 페이지로 이동
-			return "main";
+			return "index";
 		}
 	}
 	

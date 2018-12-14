@@ -92,6 +92,34 @@
 		from project
 		where categoryNo=#{categoryNo}
 	</select>
+	
+	<!-- 1214 수정한 것 -->
+	<!-- 프로젝트 카테고리별 보기 + 페이징 + 세부 -->
+	<select id="paginglist2" resultType="projvo"
+		parameterType="HashMap">
+		select projectNo,
+		subcategoryNo, projectMainImage,projectName,projectCost,projectEndDate
+		from
+		(
+		select rownum as r_num, p.*
+		from
+		(
+		select *
+		from project where categoryNo=#{categoryNo} and subcategoryNo=#{subcategoryNo}
+		order by projectStartDate
+		) p
+		)
+		where r_num between #{begin} and #{end}
+	</select>
+	
+	<!-- 카테고리 별 프로젝트 개수 보기 + 세부 -->
+	<select id="listCategory2" parameterType="scvo" resultType="int" >
+		select
+		count(*) cnt
+		from project
+		where categoryNo=#{categoryNo} and subcategoryNo=#{subcategoryNo}
+	</select>
+	<!-- 1214 수정 끝 -->
 
 	<!-- 마이페이지 내가 만든 프로젝트 리스트 -->
 	<select id="myProjectlist" parameterType="searchvo"
