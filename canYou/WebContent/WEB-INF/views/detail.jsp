@@ -116,8 +116,10 @@ $(document).ready(function(){
 						href="community?projectNo=${list.projectNo}">커뮤니티</a></td>
 					<td style="padding-left: 30px"><a href="">환불 및 교환</a></td>
 				</tr>
-			</table></div>
-
+			</table>
+			</form>
+			</fieldset>	
+		</div>
 <script>
 	$(function() {
 		$('#wordBtn').click(function(){

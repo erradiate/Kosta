@@ -488,7 +488,7 @@ public class ProjectController {
 		   vo.setMemberNo(vo2.getMemberNo());	// 프로젝트 테이블에 넣을 회원 번호를 넣음
 		   vo.setProjectNo(Integer.parseInt((String)s.getAttribute("projnum")));	// 세션에 등록한 projectNumber를 가져옴
 		   s.removeAttribute("projnum");	// 사용한 session 속성 제거
-		   
+		   System.out.println("reply1 옴");
 		   dao.replyInsert(vo); 
 
 		   return "redirect:story?projectNo="+vo.getProjectNo();
