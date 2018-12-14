@@ -7,14 +7,28 @@
 	text-align: center;
 	margin: 0 auto;
 	border-spacing: 40px;
-	/* border-collapse: separate; */
+}
+.imgmar{
+	margin: 10px 10px 10px 10px;
+	width: 280px; 
+	height: 240px;
+}
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: auto;
+  height: auto;
+  margin-left: 30px;
+  margin-top: 20px;
 }
 
-.t2 {
-	border: 3px double black;
-	padding: 0px;
-	width: 280px;
-	height: 260px;
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.7);
+}
+
+.container {
+  padding-top: 3px;
+  padding-bottom: 3px;
 }
 </style>
 <div id="myProjectList">
@@ -29,23 +43,24 @@
 				<c:if test="${i%j == 0 }">
 					<tr>
 				</c:if>
-				<td class="t2">
-					<div id="">
+				<td>
+				<div class="card">
 						<a href="list?num=${e.projectNo }"> <img id="projectMainImage"
 							src="resources/images/${e.projectMainImage }"
-							style="margin: 0px 0px 0px 0px; width: 100%; height: 240px;">
+							class="imgmar">
 						</a>
+					<div class="container">
+							<p id="">프로젝트 명 : ${e.projectName}</p>
+							<hr>
+							<p id="">프로젝트 등급 : ${e.projectStep}</p>
+							<p id="">진행여부 : ${e.projectStatus}</p>
+							<p id="">목표금액 : ${e.projectCost}</p>
+							<p id="">프로젝트 시작날짜 : ${e.projectStartDate}</p>
+							<p id="">프로젝트 마감날짜 : ${e.projectEndDate}</p>
+							<p id="">후원자 수 : ${e.projectFundCnt}</p>
 					</div>
-					<p id="">프로젝트 명 : ${e.projectName}</p>
-					<hr>
-					<p id="">프로젝트 등급 : ${e.projectStep}</p>
-					<p id="">진행여부 : ${e.projectStatus}</p>
-					<p id="">목표금액 : ${e.projectCost}</p>
-					<p id="">프로젝트 시작날짜 : ${e.projectStartDate}</p>
-					<p id="">프로젝트 마감날짜 : ${e.projectEndDate}</p>
-					<p id="">후원자 수 : ${e.projectFundCnt}</p>
+				</div>
 				</td>
-
 				<c:set var="i" value="${i+1 }" />
 
 			</c:forEach>

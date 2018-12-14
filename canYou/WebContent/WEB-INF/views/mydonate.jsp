@@ -7,14 +7,28 @@
 	text-align: center;
 	margin: 0 auto;
 	border-spacing: 40px;
-	/* border-collapse: separate; */
+}
+.imgmar{
+	margin: 10px 10px 10px 10px;
+	width: 280px; 
+	height: 240px;
+}
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: auto;
+  height: auto;
+  margin-left: 30px;
+  margin-top: 20px;
 }
 
-.t2 {
-	border: 3px double black;
-	padding: 0px;
-	width: 280px;
-	height: 260px;
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.7);
+}
+
+.container {
+  padding-top: 3px;
+  padding-bottom: 3px;
 }
 </style>
 <div id="mydonateList">
@@ -44,21 +58,23 @@
 					<tr>
 				</c:if>
 				<td class="t2">
-					<div id="">
+				<div class="card">
 						<a href="list?num=${e.PROJECTNO}"> 
 						<img id="projectMainImage"
 							src="resources/images/${e.PROJECTMAINIMAGE}"
-							style="margin: 0px 0px 0px 0px; width: 100%; height: 240px;">
+							class="imgmar">
 						</a>
+					<div class="container">
+						<p id="">후월날짜: ${e.DONATEDAY}</p>
+						<p id="">프로젝트 : ${e.PROJECTNAME}</p>
+						<p id="">후원 금액 : ${e.DONATEMONEY}</p>
+						<p id="">
+							<input id="donateNo" type="hidden" value="${e.DONATENO}">
+							<input type="button" class="deleteBtn" value="기부 취소"> <input
+								type="hidden" class="productNo" value="${e.PRODUCTNO}">
+						</p>
 					</div>
-					<p id="">후월날짜: ${e.DONATEDAY}</p>
-					<p id="">프로젝트 : ${e.PROJECTNAME}</p>
-					<p id="">후원 금액 : ${e.DONATEMONEY}</p>
-					<p id="">
-						<input id="donateNo" type="hidden" value="${e.DONATENO}">
-						<input type="button" class="deleteBtn" value="기부 취소"> <input
-							type="hidden" class="productNo" value="${e.PRODUCTNO}">
-					</p> <!-- 상품 번호 -->
+				</div>
 				</td>
 
 				<c:set var="i" value="${i+1 }" />
