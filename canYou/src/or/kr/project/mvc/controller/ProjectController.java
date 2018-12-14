@@ -581,7 +581,7 @@ public class ProjectController {
 		// 돈 돌려 준 후에 행 삭제
 		dao.donateCancle(vo);
 
-		return "redirect:/AllList"; // 다시 리스트 화면으로
+		return "redirect:/mydonate"; // 다시 리스트 화면으로
 	}
 	
 	// 내 후원현황
