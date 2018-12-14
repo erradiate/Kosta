@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 <link rel="stylesheet" href="resources/css/basic.css" type="text/css"  />
 <link rel="stylesheet" href="resources/css/style.css" type="text/css" />
+<link rel="stylesheet" href="resources/css/viewstyle.css" type="text/css" />
 
 <!-- ckeditor.js  -->
 <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>

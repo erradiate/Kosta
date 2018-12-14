@@ -24,6 +24,13 @@
   padding-top: 3px;
   padding-bottom: 3px;
 }
+
+.imgmar{
+	margin: 10px 10px 10px 10px;
+	width: 280px; 
+	height: 240px;
+}
+
 </style>
 
 	<c:choose>
@@ -53,10 +60,21 @@
 					</c:if>
 					<td>
 					<div class="card">
-						<a href="story?projectNo=${listv.projectNo }"><img
-							id="projectMainImage"
-							src="resources/images/${listv.projectMainImage }"
-							style="margin: 60px 10px 10px 10px; width: 260px; height: 240px;"></a>
+						<c:choose>
+							<c:when test="${listv.projectStatus==2}">
+								<a href="story?projectNo=${listv.projectNo }">
+									<img class="imgmar" src="resources/images/${listv.projectMainImage }">
+								</a>
+							</c:when>
+							<c:when test="${listv.projectStatus==3}">
+								<div class="endcontainer">
+								<a href="story?projectNo=${listv.projectNo }">
+										<img class="imgmar endpro" src="resources/images/${listv.projectMainImage }">
+								</a>
+								<div class="centered">진행<br>마감</div>
+								</div>
+							</c:when>
+						</c:choose>
 
 						<div class="container">
 						<p>프로젝트 명 : ${listv.projectName}</p>

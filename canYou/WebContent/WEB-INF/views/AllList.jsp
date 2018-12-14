@@ -17,6 +17,12 @@
 	height: 260px;
 }
 
+img{
+	margin: 0px 0px 0px 0px;
+	width: 100%;
+	height: 240px;
+}
+
 </style>
 
 
@@ -34,11 +40,30 @@
 					</c:if>
 					<td class="t2">
 						<div>
-						<a href="story?projectNo=${e.projectNo }">
-							<img id="projectMainImage"
-								src="resources/images/${e.projectMainImage }"
-								style="margin: 0px 0px 0px 0px; width: 100%; height: 240px;">
-						</a></div>
+						<c:choose>
+							<c:when test="${e.projectStatus==1 || e.projectStatus==2}">
+								<a href="story?projectNo=${e.projectNo }">
+									<img src="resources/images/${e.projectMainImage }">
+								</a>
+							</c:when>
+							<c:when test="${e.projectStatus==3}">
+								<div class="endcontainer">
+								<a href="story?projectNo=${e.projectNo }">
+										<img class="endpro" src="resources/images/${e.projectMainImage }">
+								</a>
+								<div class="centered">진행마감</div>
+								</div>
+							</c:when>
+							<c:when test="${e.projectStatus==4 }">
+								<div class="endcontainer">
+									<a href="story?projectNo=${e.projectNo }">
+										<img class="endpro" src="resources/images/${e.projectMainImage }">
+									</a>
+									<div class="centered">심사거부</div>
+								</div>
+							</c:when>
+						</c:choose>
+						</div>
 						<p id="">프로젝트 명 : ${e.projectName}</p>
 						<hr>
 						<p id="">모인 금액 : ${e.projectCurCost}</p>

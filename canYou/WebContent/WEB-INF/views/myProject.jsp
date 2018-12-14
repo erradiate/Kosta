@@ -30,6 +30,7 @@
   padding-top: 3px;
   padding-bottom: 3px;
 }
+
 </style>
 <div id="myProjectList">
 	<h1 style="font-size: 20px">내가 만든 프로젝트</h1>
@@ -45,10 +46,21 @@
 				</c:if>
 				<td>
 				<div class="card">
-						<a href="list?num=${e.projectNo }"> <img id="projectMainImage"
-							src="resources/images/${e.projectMainImage }"
-							class="imgmar">
-						</a>
+						<c:choose>
+							<c:when test="${e.projectStatus==2}">
+								<a href="story?projectNo=${e.projectNo }">
+									<img class="imgmar" src="resources/images/${e.projectMainImage }">
+								</a>
+							</c:when>
+							<c:when test="${e.projectStatus==3}">
+								<div class="endcontainer">
+								<a href="story?projectNo=${e.projectNo }">
+										<img class="imgmar endpro" src="resources/images/${e.projectMainImage }">
+								</a>
+								<div class="centered">진행<br>마감</div>
+								</div>
+							</c:when>
+						</c:choose>
 					<div class="container">
 							<p id="">프로젝트 명 : ${e.projectName}</p>
 							<hr>
