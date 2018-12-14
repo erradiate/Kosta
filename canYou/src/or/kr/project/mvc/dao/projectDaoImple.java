@@ -58,14 +58,13 @@ public class projectDaoImple implements projectDao {
 		ss.update("project.modify", vo);
 	}
 
+	public String caselone(int i) {
+		return ss.selectOne("project.caselone", i);
+	}
 
-		public String caselone(int i) {
-			return ss.selectOne("project.caselone", i);
-		}
-		
-		public String subcaselone(int i) {
-			return ss.selectOne("project.subcaselone", i);
-		}
+	public String subcaselone(int i) {
+		return ss.selectOne("project.subcaselone", i);
+	}
 
 	public int prodcost(int i) {
 		return ss.selectOne("project.prodcost", i);
@@ -87,27 +86,33 @@ public class projectDaoImple implements projectDao {
 
 	}
 
-	// 마이 페이지에서 자신이 투자한 프로젝트의 목록을 가져오는 메소드
-	public List<HashMap> myDonateProject(int num /* num은 회원의 멤버 번호 */) {
-		System.out.println("들어온 넘버 값:" + num);
-		List<HashMap> list = ss.selectList("project.mydonate", num);
+	// 마이페이지 - 후원현황
+	public List<HashMap> myDonateProject(SearchVO vo) {
+		System.out.println("들어온 넘버 값:" + vo);
+		List<HashMap> list = ss.selectList("paging.mydonate", vo);
 		return list;
+	}
+
+	// 투자한 프로젝트 총 개수
+	public int myDonateCount(int i) {
+		return ss.selectOne("paging.mydonateTotal", i);
+
 	}
 
 	// 후원 취소1 (돈 반환 + 선물 반환)
 	public void returnMoney(ProjectDonateVO vo) {
 		Map<String, Integer> m = new HashMap<>();
-		
+
 		// 돈을 반환하기 위해 취소할 프로젝트에 투자한 돈을 가져옴
-		int total=ss.selectOne("project.mydonatelist", vo);
-				
+		int total = ss.selectOne("project.mydonatelist", vo);
+
 		m.put("donateMoney", total);
 		m.put("memberNo", vo.getMemberNo());
-				
-		ss.update("project.returnMoney", m);	// 반환해서 회원의 돈으로 추가시켜줌
-		ss.update("project.prodout",vo); // 상품 돌려 줌
+
+		ss.update("project.returnMoney", m); // 반환해서 회원의 돈으로 추가시켜줌
+		ss.update("project.prodout", vo); // 상품 돌려 줌
 	}
-			
+
 	// 후원자 감소
 	public void returnFundCnt(ProjectDonateVO vo) {
 		ss.update("project.returnFundCnt", vo); // 프로젝트의 카운트 수를 하나 줄임
@@ -152,6 +157,8 @@ public class projectDaoImple implements projectDao {
 
 	// 마이페이지 - 내가만든 프로젝트 리스트
 	public List<ProjectVO> myProjectlist(SearchVO vo) {
+		System.out.println("begin : " + vo.getBegin());
+		System.out.println("End : " + vo.getEnd());
 		return ss.selectList("paging.myProjectlist", vo);
 	}
 

@@ -73,17 +73,6 @@
 		from product where projectNo=#{projectNo}
 	</select>
 
-	<!-- 마이페이지 후원 목록 리스트 -->
-	<select id="mydonate" parameterType="int" resultType="HashMap">
-		select
-		d.donateNo, p.projectName, to_char(d.donateDay, 'yyyy.MM.dd')
-		donateDay, d.donateMoney , d.productNo
-		from projectdonate d, project p
-		where
-		d.projectNo=p.projectNo and d.memberNo=#{memberNo}
-	</select>
-
-
 	<!-- 개인정보 수정 -->
 	<update id="editinfo" parameterType="mvo">
 		update member
