@@ -21,7 +21,7 @@ import or.kr.project.dto.SubCategoryVO;
 public class projectDaoImple implements projectDao {
 	@Autowired
 	private SqlSessionTemplate ss;
-
+	//hahahahahahaha
 	public List<CategoryVO> casel() {
 		return ss.selectList("project.casel"); // 카테고리 이름 가져오는 sql문
 	}
