@@ -50,8 +50,8 @@ public class projectDaoImple implements projectDao {
 		return ss.selectList("project.prodsel", s);
 	}
 
-	public ProjectVO modifyview(String s) {
-		return ss.selectOne("project.modifyview", s);
+	public ProjectVO modifyview(ProjectVO vo) {
+		return ss.selectOne("project.modifyview", vo);
 	}
 
 	public void modify(ProjectVO vo) {

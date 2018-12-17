@@ -106,13 +106,17 @@ $(document).ready(function(){
 						</tr>
 				</tbody>
 			</table>
-				<div>
-			<input type="button" id="wordBtn" value="워드로 보기" class="btns">			
+			<div>
+				<input type="button" id="wordBtn" value="워드로 보기" class="btns">	
+				<c:choose>
+				<c:when
+					test="${pageContext.request.userPrincipal.name eq member.memberId }">
+					<input type="submit" id="wBtn" class="btns" value="수정">
+				</c:when>
+				</c:choose>		
 			</div>
 			
 			<br>
-            
- 		
 <%-- 
 			<table>
 				<tr>

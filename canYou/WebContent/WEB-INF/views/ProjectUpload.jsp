@@ -100,9 +100,63 @@
 	}
 	
 	#pretable > th, td{
-		
 		border-bottom: 1px solid #ddd;
 	}
+	
+	#projectMainImage{
+		width:100%;
+		height:90%;
+		
+		margin-top:5%;
+	}
+	
+	.filebox input[type="file"] {
+    	position: absolute;
+    	width: 1px;
+    	height: 1px;
+    	padding: 0;
+    	overflow: hidden;
+		clip:rect(0,0,0,0);
+    	border: 0;
+	}
+
+	.filebox label {
+    	display: inline-block;
+    	padding: .5em .75em;
+    	color: #999;
+    	font-size: inherit;
+    	line-height: normal;
+    	vertical-align: middle;
+    	background-color: #fdfdfd;
+    	cursor: pointer;
+    	border: 1px solid #ebebeb;
+    	border-bottom-color: #e2e2e2;
+    	border-radius: .25em;
+        margin-bottom: 0
+	}
+
+/* named upload */
+.filebox .upload-name {
+    display: inline-block;
+    padding: .5em .75em;
+    font-size: inherit;
+    font-family: inherit;
+    line-height: normal;
+    vertical-align: middle;
+    background-color: #f5f5f5;
+  border: 1px solid #ebebeb;
+  border-bottom-color: #e2e2e2;
+  border-radius: .25em;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.filebox.bs3-primary label {
+  color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
 </style>
 <div id="pform">
 <h1 id="prouptitle">* 프로젝트 업로드 *</h1>
@@ -119,12 +173,20 @@
 <input type="hidden" id="proinfo" name="proinfo">
 <input type="hidden" id="procost" name="procost">
 <div id="info1">
+<div class="container-fluid">
+<div class="row">
+	<div class="col-md-8">
 	<p><span class="title">진행자 이름 : </span>${memberName }</p>
 	<p><span class="title">프로젝트 이름 : </span><input type="text" name="projectName" class="pupinput" required></p>
-
-	<span class="title">프로젝트 대표 이미지 : </span><input type="file" id="mfile" name="mfile">
-			<img id="projectMainImage" style="margin: 60px 10px 10px 10px; width: 260px; height: 280px;">
-	<div>
+	<div class="filebox preview-image">
+		<p><span class="title">프로젝트 대표 이미지 : </span>
+		<input class="upload-name" value="파일선택" disabled="disabled">
+		<label for="mfile">업로드</label> 
+		<input type="file" id="mfile" name="mfile" class="upload-hidden">
+		
+		</p>
+		
+	</div>
 	<p><span class="title">프로젝트 카테고리 : </span><select class="category" id="categoryNo" name="categoryNo" required>
 
 					<option value="" selected>선택</option>
@@ -139,6 +201,13 @@
 	<p><span class="title">프로젝트 시작 날짜(현재 날짜에서 3일이후부터 선택 가능합니다.) : </span><input type="date" id="projectStartDate" name="projectStartDate" class="pupdate"></p>
 	<p><span class="title">프로젝트 종료 날짜(시작 날짜에서 10~60일 이후로 선택 가능) : </span><input type="date" id="projectEndDate" name="projectEndDate" class="pupdate" disabled></p> <!-- 제약조건 완성할것 -->
 	</div>
+	<div class="col-md-4">
+		<img id="projectMainImage">
+	</div>
+
+</div>
+</div>
+
 </div>
 <div id="info2" style="display: none;">
 	<h2 id="pretitle">선물 구성</h2>
@@ -363,14 +432,18 @@ function readURL(input) {
 	
     if (input.files && input.files[0]) {
         var reader = new FileReader();
- 
+ 		
+        $('.upload-name').val(input.files[0].name);
         reader.onload = function (e) {
             $('#projectMainImage').attr('src', e.target.result);
+            
+           
         }
  
         reader.readAsDataURL(input.files[0]);
+       
     }
-    
+   
     $('#projectMainImage').show();
 }
  

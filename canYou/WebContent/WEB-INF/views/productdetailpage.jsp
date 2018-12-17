@@ -35,15 +35,7 @@
 <input type="text" name="donateMoney" id="donateMoney">
 
 <input type="button" class="donateBtn btns" value="후원" >
-<c:choose>
-	<c:when
-		test="${pageContext.request.userPrincipal.name eq member.memberId }">
-		<tr>
-			<td colspan="14"><input type="submit" id="wBtn" class="btns" lvalue="수정">
-			</td>
-		</tr>
-	</c:when>
-</c:choose>
+
 <script>
 	$(function() {
 		$('.donateBtn').each(function(index, item) {

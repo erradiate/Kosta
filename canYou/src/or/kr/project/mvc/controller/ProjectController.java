@@ -249,12 +249,19 @@ public class ProjectController {
 	 }
 	 
 	
-	@RequestMapping("/update")
-	public String updateView(Model m, HttpServletRequest req) {
-		 HttpSession s=req.getSession();
-		 String str=(String)s.getAttribute("projnum");
-		 	
-		 ProjectVO vo=dao.modifyview(str);
+	@PostMapping("/update")
+	public String updateView(Model m, HttpServletRequest req, int projectNo) {
+		ProjectVO vo3=new ProjectVO();
+		
+		SecurityContext impl=SecurityContextHolder.getContext();	// 세션에서 spring security 정보를 가져옴
+		String implstr=impl.getAuthentication().getName();	// security 정보에서 세션에 담겨있는 로그인 정보 중 ID 가져옴
+		MemberVO vo2=dao.memname(implstr);	// ID를 토대로 회원정보 가져옴 (회원 번호, 회원 이름)
+		vo3.setMemberNo(vo2.getMemberNo());	// 프로젝트 테이블에 넣을 회원 번호를 넣음
+		vo3.setProjectNo(projectNo);
+		
+		System.out.println(projectNo);
+		 
+		 ProjectVO vo=dao.modifyview(vo3);
 		 m.addAttribute("project", vo);
 		 	
 		return "ProjectModify";
