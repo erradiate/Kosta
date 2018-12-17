@@ -3,23 +3,31 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <style type="text/css">
-#t1 {
-	text-align: center;
+#bgy {
 	margin: 0 auto;
-	border-spacing: 40px;
-	/* border-collapse: separate; */
 }
 
-.t2 {
-	border: 3px double black;
-	padding: 0px;
-	width: 280px;
-	height: 260px;
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: auto;
+  height: auto;
+  margin-left: 30px;
+  margin-top: 20px;
 }
 
-img{
-	margin: 0px 0px 0px 0px;
-	width: 100%;
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.7);
+}
+
+.container {
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+.imgmar{
+	margin: 10px 10px 10px 10px;
+	width: 280px; 
 	height: 240px;
 }
 
@@ -29,7 +37,7 @@ img{
 	<div id="AllList">
 		<c:set var="i" value="0" />
 		<c:set var="j" value="3" />
-		<table id="t1">
+		<table id="bgy">
 			<thead>
 			</thead>
 
@@ -38,12 +46,12 @@ img{
 					<c:if test="${i%j == 0 }">
 						<tr>
 					</c:if>
-					<td class="t2">
-						<div>
+					<td>
+						<div class="card">
 						<c:choose>
 							<c:when test="${e.projectStatus==1 || e.projectStatus==2}">
 								<a href="story?projectNo=${e.projectNo }">
-									<img src="resources/images/${e.projectMainImage }">
+									<img class="imgmar" src="resources/images/${e.projectMainImage }">
 								</a>
 							</c:when>
 							<c:when test="${e.projectStatus==3}">
@@ -63,11 +71,13 @@ img{
 								</div>
 							</c:when>
 						</c:choose>
-						</div>
+						<div class="container">
 						<p id="">프로젝트 명 : ${e.projectName}</p>
 						<hr>
 						<p id="">모인 금액 : ${e.projectCurCost}</p>
 						<p id="">남은 날짜 : ${dateList[status.index]}</p>
+						</div>
+						</div>
 					</td>
 					<c:if test="${i%j == j-1 }">
 					</c:if>
