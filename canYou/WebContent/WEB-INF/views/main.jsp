@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<script src="resources/js/myplugin.js"></script>
 
 <style>
 .subject{
@@ -35,7 +36,7 @@ div.scrollmenu a:hover {
 
 </style>    
 
-<div><img src="resources/images/3.jpg"
+<div><img src="resources/images/1.jpg" id="g"
 		style="margin: 40px 30px 30px 280px; width: 580px; height: 250px;">
 </div>
 			
@@ -104,7 +105,15 @@ div.scrollmenu a:hover {
 		</thead>
 </table>
 
-<div style="float: left; width: 50%"><img src="resources/images/1.jpg" 
+<div style="float: left; width: 50%"><img src="resources/images/11.jpg" 
 		style="margin: 80px 30px 30px 60px; width: 460px; height: 120px;"></div>
-<div style="float: right; width: 50%"><img src="resources/images/2.jpg" class="rightimg"
+<div style="float: right; width: 50%"><img src="resources/images/22.jpg" class="rightimg"
 		style="margin: 80px 30px 30px 60px; width: 460px; height: 120px;"></div>
+		
+<script>
+
+$(document).ready(function(){
+	$('#g').myPluginFn();
+})
+
+</script>
