@@ -258,8 +258,6 @@ public class ProjectController {
 		MemberVO vo2=dao.memname(implstr);	// ID를 토대로 회원정보 가져옴 (회원 번호, 회원 이름)
 		vo3.setMemberNo(vo2.getMemberNo());	// 프로젝트 테이블에 넣을 회원 번호를 넣음
 		vo3.setProjectNo(projectNo);
-		
-		System.out.println(projectNo);
 		 
 		 ProjectVO vo=dao.modifyview(vo3);
 		 m.addAttribute("project", vo);
