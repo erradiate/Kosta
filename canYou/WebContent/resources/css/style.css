@@ -60,6 +60,10 @@ body div#header1 #hgroup h2{
 	margin-right: 20px;	
 }
 
+#navigation ul li ul{
+	font-weight:lighter;
+}
+
 #footer4{
 	background: #000;
 	padding: 10px;
