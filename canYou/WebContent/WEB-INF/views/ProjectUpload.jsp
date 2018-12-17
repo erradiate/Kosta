@@ -103,7 +103,6 @@
 		
 		border-bottom: 1px solid #ddd;
 	}
-	
 </style>
 <div id="pform">
 <h1 id="prouptitle">* 프로젝트 업로드 *</h1>
@@ -123,9 +122,9 @@
 	<p><span class="title">진행자 이름 : </span>${memberName }</p>
 	<p><span class="title">프로젝트 이름 : </span><input type="text" name="projectName" class="pupinput" required></p>
 
-	<div class="custom-file mb-3"><span class="title">프로젝트 대표 이미지 : </span><input type="file" class="custom-file-input" id="mfile" name="mfile" >
-			<label class="custom-file-label" for="mfile">사진 첨부</label>
-			<img id="projectMainImage" style="margin: 60px 10px 10px 10px; width: 260px; height: 280px;"></div>
+	<span class="title">프로젝트 대표 이미지 : </span><input type="file" id="mfile" name="mfile">
+			<img id="projectMainImage" style="margin: 60px 10px 10px 10px; width: 260px; height: 280px;">
+	<div>
 	<p><span class="title">프로젝트 카테고리 : </span><select class="category" id="categoryNo" name="categoryNo" required>
 
 					<option value="" selected>선택</option>
@@ -139,6 +138,7 @@
 	</p>
 	<p><span class="title">프로젝트 시작 날짜(현재 날짜에서 3일이후부터 선택 가능합니다.) : </span><input type="date" id="projectStartDate" name="projectStartDate" class="pupdate"></p>
 	<p><span class="title">프로젝트 종료 날짜(시작 날짜에서 10~60일 이후로 선택 가능) : </span><input type="date" id="projectEndDate" name="projectEndDate" class="pupdate" disabled></p> <!-- 제약조건 완성할것 -->
+	</div>
 </div>
 <div id="info2" style="display: none;">
 	<h2 id="pretitle">선물 구성</h2>
@@ -357,19 +357,25 @@ $('#productCost').keypress(function(event){
 </script>
 
 <script>
-$(function() {
-	$('#projectMainImage').hide(0,function(){});
-	$('#mfile').on('change', function() {
-		let mfile = $(this).val();
-		 let pass = mfile.substr(12);
-		 if(mfile != null){
-			 $('#projectMainImage').attr('src', 'resources/images/' + pass).show(0,function(){});
-			 
-		 } else{
-			 $('#projectMainImage').attr('src', 'resources/images/' + pass).hide(0,function(){});
-			 
-		 }
-	});
+$('#projectMainImage').hide();
+
+function readURL(input) {
+	
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+ 
+        reader.onload = function (e) {
+            $('#projectMainImage').attr('src', e.target.result);
+        }
+ 
+        reader.readAsDataURL(input.files[0]);
+    }
+    
+    $('#projectMainImage').show();
+}
+ 
+$("#mfile").change(function(){
+    readURL(this);
 });
 </script>
 
