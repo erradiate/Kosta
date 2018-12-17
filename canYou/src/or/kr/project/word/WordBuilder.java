@@ -1,17 +1,23 @@
 package or.kr.project.word;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.math.BigInteger;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.poi.hwpf.converter.AbstractWordConverter;
 import org.apache.poi.hwpf.usermodel.Paragraph;
+import org.apache.poi.util.Units;
 import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
@@ -30,9 +36,23 @@ import or.kr.project.dto.ProjectVO;
 
 public class WordBuilder{
 	int row;
+	public static String profileImg;
+	public static String projectImg;
+	
 	// 주석 부분 vo 해야함
-	public void wordCD(MemberVO vo, HttpServletRequest req, HttpServletResponse resp) throws Exception {
+	public void wordCD(MemberVO vo, HttpServletRequest req, 
+			HttpServletResponse resp, HttpSession session) throws Exception {
+		// 문서를 만들기전 초기화 작업.
+		row = 0;
 		List<ProductVO> list = vo.getProject().getProduct();
+		
+		// 이미지 삽입 작업을 위한 밑 준비
+		profileImg = vo.getMemberImage();
+		projectImg = vo.getProject().getProjectMainImage();
+		
+		System.out.println("profileImg : " + profileImg);
+		System.out.println("projectImg : " + projectImg);
+		System.out.println(session.getServletContext().getRealPath("/resources/images"));
 		
 		// 빈 문서 만들기
 		XWPFDocument document = new XWPFDocument();
@@ -87,7 +107,17 @@ public class WordBuilder{
 		
 		// Table 세번째 행
 		XWPFTableRow thirdRow = table.getRow(row++); //2
-		thirdRow.getCell(0).setText("프로필 이미지");
+		
+		// 이미지 넣기
+		paragraph = thirdRow.getCell(0).getParagraphs().get(0);
+		paragraphRunOne = paragraph.createRun();
+		FileInputStream fis = new FileInputStream(
+				session.getServletContext().getRealPath("/resources/images")+"\\"+profileImg);
+		paragraphRunOne.addPicture(fis, 
+				XWPFDocument.PICTURE_TYPE_JPEG, profileImg,
+				Units.toEMU(150), Units.toEMU(200));
+		fis.close();
+		
 		thirdRow.getCell(1).setText("진행자 이름");
 		thirdRow.getCell(2).setText(vo.getMemberName());
 		
@@ -127,7 +157,17 @@ public class WordBuilder{
 		paragraphRunOne.setText("프로젝트 정보");
 		
 		XWPFTableRow ninethRow = table.getRow(row++); //8
-		ninethRow.getCell(0).setText("프로젝트 대표 이미지");
+		
+		//이미지 넣기
+		paragraph = ninethRow.getCell(0).getParagraphs().get(0);
+		paragraphRunOne = paragraph.createRun();
+		fis = new FileInputStream(
+				session.getServletContext().getRealPath("/resources/images")+"\\"+projectImg);
+		paragraphRunOne.addPicture(fis, 
+				XWPFDocument.PICTURE_TYPE_JPEG, projectImg,
+				Units.toEMU(150), Units.toEMU(200));
+		fis.close();
+		
 		ninethRow.getCell(1).setText("프로젝트 등급");
 		ninethRow.getCell(2).setText(vo.getProject().getProjectStep());
 		

@@ -200,10 +200,10 @@
 	</select>
 
 	<!-- 수정 폼 view -->
-	<select id="modifyview" parameterType="String"
+	<select id="modifyview" parameterType="projvo"
 		resultType="projvo">
 		select projectName, projectMainImage, projectStory from
-		project where projectNo=#{projectNo}
+		project where projectNo=#{projectNo} and memberNo=#{memberNo}
 	</select>
 
 	<!-- 수정 -->

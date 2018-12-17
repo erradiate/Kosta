@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,12 +28,10 @@ public class WordController {
 	}
 	
 	@RequestMapping(value="/download")
-	public String downloadWord(int projectNo,HttpServletRequest req, HttpServletResponse resp) throws Exception {
-		System.out.println("프로젝트 번호: "+projectNo);
+	public String downloadWord(int projectNo,HttpServletRequest req, 
+			HttpServletResponse resp, HttpSession session) throws Exception {
 		MemberVO vo = dao.getMember_Project(projectNo);
-		System.out.println(vo.getProject().getProduct().size());
-		System.out.println(vo.getProject().getProduct().get(0).getProductName());
-		wb.wordCD(vo,req, resp);
+		wb.wordCD(vo,req, resp, session);
 		// resp가 commit 될때 까지 대기하는 코드
 		while(true) {
 			if(resp.isCommitted()) {
