@@ -64,7 +64,7 @@ div.scrollmenu a:hover {
 				<c:forEach var="nlist" items="${nlist}">
 				<a href="story?projectNo=${nlist.projectNo}">
 					<img src="resources/images/${nlist.projectMainImage}" class="proimg"></a>
-				</c:forEach>
+				</c:forEach> 
 			</div>
 		</tr>
 

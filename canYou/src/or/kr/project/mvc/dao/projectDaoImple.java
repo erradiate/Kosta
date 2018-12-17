@@ -217,7 +217,7 @@ public class projectDaoImple implements projectDao {
 		return ss.selectList("project.subcaname", categoryName);
 	}
 
-	// 인기 프로젝트 보기
+	// 인기 프로젝트 보기 
 	public List<ProjectVO> popularList() {
 		return ss.selectList("project.popularList");
 	}

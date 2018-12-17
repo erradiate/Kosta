@@ -267,7 +267,7 @@
 		where r between 1 and 8
 	</select>
 	
-	<!-- 새로운 프로젝트 리스트 -->
+	<!-- 새로운 프로젝트 리스트 --> 
 	<select id="newList" resultType="projvo">
 		select projectMainImage,projectNo, r
 		from(

@@ -52,7 +52,7 @@ public class ProjectController {
 	@Autowired
 	private projectDaoImple dao;
 	
-	//메인페이지 + 인기프로젝트 보여줌
+	//메인페이지 + 인기프로젝트 보여줌 
 	@RequestMapping(value="/")
 	public String index(HttpServletRequest request, Model model) {
 		List<ProjectVO> plist = dao.popularList();
