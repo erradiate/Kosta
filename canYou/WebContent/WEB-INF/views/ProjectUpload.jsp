@@ -291,7 +291,7 @@ $(document).ready(function(){
 	})
 	
 	$("#preadd").click(function(){
-		var tr = "<tr><td id=\"pname\">"+$("#productName").val()+"</td><td id=\"pcnt\">"+$("#productCnt").val()+"</td><td id=\"pinfo\">"+$("#productInfo").val()+"</td><td id=\"pcost\">"+$("#productCost").val()+"¿ø</td></tr>";
+		var tr = "<tr><td id=\"pname\">"+$("#productName").val()+"</td><td id=\"pcnt\">"+$("#productCnt").val()+"</td><td id=\"pinfo\">"+$("#productInfo").val()+"</td><td><span id=\"pcost\">"+$("#productCost").val()+"</span>¿ø</td></tr>";
 		$("tbody").append(tr);
 	});
 	
