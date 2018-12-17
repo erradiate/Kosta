@@ -18,7 +18,7 @@ div.scrollmenu {
   background-color: white;
   overflow: auto;
   white-space: nowrap;
-  width: 47%;
+  width: 1200px;
 }
 
 div.scrollmenu a {
