@@ -79,7 +79,7 @@ public class ProjectController {
 			return "login";
 		}
 		else{		// 로그인 상태에서 로그인 페이지로 이동하려고 할 때 index 페이지로 이동
-			return "index";
+			return "main";
 		}
 	}
 	
@@ -516,9 +516,11 @@ public class ProjectController {
 		MemberVO vo2=dao.memname(implstr);	// ID를 토대로 회원정보 가져옴 (회원 번호, 회원 이름)
 		int memno = vo2.getMemberNo();
 		
-		
 		vo.setMemberNo(memno);
-		vo.setDonateMoney(vo.getDonateMoney()+dao.prodcost(vo.getProductNo()));
+		
+		if(vo.getProductNo()!=0) {
+			vo.setDonateMoney(vo.getDonateMoney()+dao.prodcost(vo.getProductNo()));
+		}
 		
 		dao.donate(vo); //projectDonate 행 추가
 		
