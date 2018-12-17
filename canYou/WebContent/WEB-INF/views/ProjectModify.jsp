@@ -44,7 +44,7 @@
 
 					<tfoot>
 						<tr>
-							<td><input type="submit" id="wBtn" value="수정"></td>
+							<td><input type="submit" id="wBtn" class="btns" value="수정"></td>
 						</tr>
 					</tfoot>
 				</table>

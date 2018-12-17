@@ -31,6 +31,7 @@
   padding-bottom: 3px;
 }
 </style>
+
 <div id="mydonateList">
 	<h1 style="font-size: 20px">내 후원현황</h1>
 	<br>
@@ -44,7 +45,7 @@
 	
 	<div style="float: left; width: 50%;">
 		<input type="text" size="50px" />
-		<input type="submit" value="검색"></input>
+		<input type="submit" value="검색" class="btns"></input>
 	</div>
 	<br>
 	<c:set var="i" value="0" />
@@ -70,7 +71,7 @@
 						<p id="">후원 금액 : ${e.DONATEMONEY}</p>
 						<p id="">
 							<input id="donateNo" type="hidden" value="${e.DONATENO}">
-							<input type="button" class="deleteBtn" value="기부 취소"> <input
+							<input type="button" class="deleteBtn classname" value="기부 취소"> <input
 								type="hidden" class="productNo" value="${e.PRODUCTNO}">
 						</p>
 					</div>

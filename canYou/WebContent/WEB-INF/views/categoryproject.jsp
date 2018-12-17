@@ -38,7 +38,7 @@
 			<c:url var="logoutAction" value="/j_spring_security_logout"></c:url>
 	${principal} 
 	<form action="${logoutAction}" method="post">
-				<input type="submit" value="Logout" />
+				<input type="submit" value="Logout" class="btns" />
 			</form>
 
 		</c:when>

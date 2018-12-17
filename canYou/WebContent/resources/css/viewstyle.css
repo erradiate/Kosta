@@ -16,3 +16,121 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+/*¹öÆ°*/
+.btns {
+	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #f9f9f9), color-stop(1, #e9e9e9) );
+	background:-moz-linear-gradient( center top, #f9f9f9 5%, #e9e9e9 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f9f9f9', endColorstr='#e9e9e9');
+	background-color:#f9f9f9;
+	-webkit-border-top-left-radius:8px;
+	-moz-border-radius-topleft:8px;
+	border-top-left-radius:8px;
+	-webkit-border-top-right-radius:8px;
+	-moz-border-radius-topright:8px;
+	border-top-right-radius:8px;
+	-webkit-border-bottom-right-radius:8px;
+	-moz-border-radius-bottomright:8px;
+	border-bottom-right-radius:8px;
+	-webkit-border-bottom-left-radius:8px;
+	-moz-border-radius-bottomleft:8px;
+	border-bottom-left-radius:8px;
+	text-indent:0px;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	color:#666666;
+	font-family:Arial;
+	font-size:17px;
+	font-weight:bold;
+	font-style:normal;
+	height:33px;
+	line-height:33px;
+	width:100px; 
+	text-decoration:none;
+	text-align:center;
+	text-shadow:1px 1px 0px #ffffff;
+}
+.btns:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #e9e9e9), color-stop(1, #f9f9f9) );
+	background:-moz-linear-gradient( center top, #e9e9e9 5%, #f9f9f9 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#e9e9e9', endColorstr='#f9f9f9');
+	background-color:#e9e9e9;
+}.btns:active {
+	position:relative;
+	top:1px;
+}
+
+
+/* ÅÇ */
+
+#underlinemenu{
+margin: 0;
+padding: 0;
+}
+
+#underlinemenu ul{
+margin: 0;
+margin-bottom: 1em;
+padding-left: 0;
+float: left;
+font-weight: bold;
+width: 100%;
+border: 1px solid #DFDFDF;
+border-width: 1px 0;
+}
+
+* html #underlinemenu ul{ 
+margin-bottom: 0;
+}
+
+#underlinemenu ul li{
+display: inline;
+}
+
+
+#underlinemenu ul li a{
+float: left;
+color: gray;
+font-weight: bold;
+padding: 10px 8px 10px 8px;
+text-decoration: none;
+/* background: white url(media/menudivide.gif) top right repeat-y; */
+}
+
+#underlinemenu ul li a:hover{
+color: black;
+background-color: #F3F3F3;
+border-bottom: 4px solid black;
+padding-bottom: 10px;
+}
+
+.hoverHolder{
+	color: black;
+	font-size:14pt;
+background-color: #e9e9e9;
+border-bottom: 4px solid black;
+padding-bottom: 10px;
+
+}
+
+.divStory{
+	border: 1px solid #DFDFDF;
+	width: 90%;
+	height: 90%;
+	margin: 50px auto;
+}
+
+.prodview{
+	border: 1px dotted gold;
+	padding: 2%
+}
+
+
+
+
+
+
+

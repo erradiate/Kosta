@@ -186,7 +186,7 @@
 <div id="info3" style="display: none;">	
 	<span id="prostory">프로젝트 스토리 <img src="resources/images/down.png" width=30px height=30px> </span><br><textarea rows="20" cols="20" name="projectStory" id="cont"></textarea>
 </div>
-<input type="submit" id="add" class="btn btn-default" value="신청">
+<input type="submit" id="add" class="btns" value="신청">
 </form>
 </div>
 

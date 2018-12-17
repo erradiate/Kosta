@@ -32,8 +32,23 @@
 }
 
 </style>
-<div id="myProjectList">
+<div id="mydonateList">
 	<h1 style="font-size: 20px">내가 만든 프로젝트</h1>
+	<br>
+	<div style="float: left; width: 50%;">
+	<select id="exam"  style="width:320px">
+	<option value="1">검토중</option>
+	<option value="2">진행중</option>
+	<option value="3">후원마감</option>
+	<option value="3">검토반려</option>
+	</select>
+	</div>
+	
+	<div style="float: left; width: 50%;">
+		<input type="text" size="50px" />
+		<input type="submit" value="검색" class="btns"></input>
+	</div>
+	<br>
 	<br>
 	<c:set var="i" value="0" />
 	<c:set var="j" value="3" />

@@ -12,5 +12,5 @@
 	<p><label>계좌 : </label><input type="text" name="memberAccount"></p>
 	<!--<p><label>프로필 이미지 : </label><input name="mfile" type="file"></p>-->
 	
-	<p><input type="submit" value="수정하기"></p>
+	<p><input type="submit" class="btns" value="수정하기"></p>
 </form>

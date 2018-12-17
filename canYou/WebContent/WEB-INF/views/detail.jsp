@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+
+
 <style>
 #tv {
     border: 1px solid black;
@@ -21,8 +24,6 @@ td{
 	font-size: 20px;
 	line-height: 2em;
 }
-
-
 </style>
 <script>
 $(document).ready(function(){
@@ -35,6 +36,8 @@ $(document).ready(function(){
 	});
 }); 
 </script>
+
+
 
 <div>
 		<fieldset>
@@ -103,7 +106,14 @@ $(document).ready(function(){
 						</tr>
 				</tbody>
 			</table>
-
+				<div>
+			<input type="button" id="wordBtn" value="워드로 보기" class="classname">			
+			</div>
+			
+			<br>
+            
+ 		
+<%-- 
 			<table>
 				<tr>
 					<td><input type="button" id="wordBtn" value="워드로 보기"></td>
@@ -116,7 +126,7 @@ $(document).ready(function(){
 						href="community?projectNo=${list.projectNo}">커뮤니티</a></td>
 					<td style="padding-left: 30px"><a href="">환불 및 교환</a></td>
 				</tr>
-			</table>
+			</table> --%>
 			</form>
 			</fieldset>	
 		</div>
@@ -126,5 +136,8 @@ $(document).ready(function(){
 			location.href="download?projectNo="+$('#projectNo').val();
 		});
 	});
+	
+	
 </script>
+
 

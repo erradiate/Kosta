@@ -10,7 +10,7 @@
 	</tr>
 	<tr align="center">
 		<td colspan="3">
-			<input type="text" size="100px"><input type="button" value="검색하기" style="margin-left: 30px;">
+			<input type="text" size="100px"><input type="button" class="btns" value="검색하기" style="margin-left: 30px;">
 		</td>
 	</tr>
 	<tr align="center">
