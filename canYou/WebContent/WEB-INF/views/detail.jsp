@@ -107,7 +107,7 @@ $(document).ready(function(){
 				</tbody>
 			</table>
 				<div>
-			<input type="button" id="wordBtn" value="워드로 보기" class="classname">			
+			<input type="button" id="wordBtn" value="워드로 보기" class="btns">			
 			</div>
 			
 			<br>
