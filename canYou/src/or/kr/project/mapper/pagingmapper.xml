@@ -25,12 +25,11 @@
 	</select>
 
 	<!-- 모든 프로젝트 총 갯수 -->
-	<select id="listTotal" resultType="int">
-		select count(*) cnt from
-		project
-	</select>
-
-
+	<select id="listTotal" resultType="int" >
+		select count(*) cnt from project
+  	</select>
+  	
+  	
 	<!-- 카테고리별 프로젝트 보기 -->
 	<!-- 프로젝트 카테고리별 보기 + 페이징 -->
 	<select id="paginglist" resultType="projvo"

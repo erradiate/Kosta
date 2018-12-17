@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="search">
+
+   <select id="aplcount" resultType="int" parameterType="searchvo">
+  		select count(*) cnt from project p, member m
+  		<if test="searchType != null">
+  			<where>
+  				<choose>
+  				  <when test="searchType==1">
+  				  		p.memberNo=m.memberNo and memberName Like '%'|| #{searchValue} ||'%'
+  				  </when>
+  				  <when test="searchType==2">
+  				  		p.memberNo=m.memberNo and projectName Like '%'|| #{searchValue} ||'%'
+  				  </when>
+  				  <otherwise></otherwise>
+  				</choose>
+  			</where>
+  		</if>
+  	</select>
+  	
+  	
+  	  	<select id="aplsearch" resultType="projvo" parameterType="searchvo" >
+      select * from (
+  		select rownum r_num, a.projectNo, a.projectName, a.projectMainImage, 
+		a.projectCurCost, a.projectEndDate,
+		a.projectStartDate, a.projectStatus from 
+  		(
+  			select * from project p, member m
+  			<if test="searchValue != null">
+  			
+  			<where>
+  				<choose>
+  				  <when test="searchType==1">
+  				  		p.memberNo=m.memberNo and memberName Like '%'|| #{searchValue} ||'%'  
+  				  </when>
+  				  <when test="searchType==2">
+  
+  				  		p.memberNo=m.memberNo and projectName Like '%'|| #{searchValue} ||'%' 
+  				  </when>
+  				  <otherwise></otherwise>
+  				</choose>
+  			</where>
+  		 </if>
+  			 order by p.projectNo
+  		) a
+  		) WHERE  r_num between #{begin} and #{end}
+  		 
+  	</select>
+  	</mapper>
+  	

@@ -231,4 +231,13 @@ public class projectDaoImple implements projectDao {
 	public List<ProjectVO> deadlineList() {
 		return ss.selectList("project.deadlineList");
 	}
+	
+	// 모든 프로젝트 서치
+		public List<ProjectVO> getListSearch(SearchVO svo){
+			return ss.selectList("search.aplsearch", svo);
+		}
+		
+		public int getTotalCount(SearchVO svo){
+			return ss.selectOne("search.aplcount",svo);
+		}
 }
