@@ -52,8 +52,18 @@ public class ProjectController {
 	@Autowired
 	private projectDaoImple dao;
 	
+	//메인페이지 + 인기프로젝트 보여줌
 	@RequestMapping(value="/")
 	public String index(HttpServletRequest request, Model model) {
+		List<ProjectVO> plist = dao.popularList();
+		model.addAttribute("plist", plist);
+			
+		List<ProjectVO> nlist = dao.newList();
+		model.addAttribute("nlist", nlist);
+			
+		List<ProjectVO> dlist = dao.deadlineList();
+		model.addAttribute("dlist", dlist);
+			
 		return "main";
 	}
 	

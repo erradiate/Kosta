@@ -200,10 +200,10 @@
 	</select>
 
 	<!-- 수정 폼 view -->
-	<select id="modifyview" parameterType="projvo"
+	<select id="modifyview" parameterType="String"
 		resultType="projvo">
 		select projectName, projectMainImage, projectStory from
-		project where projectNo=#{projectNo} and memberNo=#{memberNo}
+		project where projectNo=#{projectNo}
 	</select>
 
 	<!-- 수정 -->
@@ -255,4 +255,38 @@
 		= productCnt+1
 		where productNo=#{productNo}
 	</update>
+	
+	<!-- 인기 프로젝트 리스트 (후원자 수) -->
+	<select id="popularList" resultType="projvo">
+		select projectMainImage,projectNo, r
+		from (
+		    select projectNo,projectMainImage,projectFundCnt, ROW_NUMBER() OVER(ORDER BY projectFundCnt desc) as r
+		    from project
+		    where projectFundCnt is not null
+		)
+		where r between 1 and 8
+	</select>
+	
+	<!-- 새로운 프로젝트 리스트 -->
+	<select id="newList" resultType="projvo">
+		select projectMainImage,projectNo, r
+		from(
+		    select projectNo,projectMainImage,PROJECTSTARTDATE, ROW_NUMBER() OVER(ORDER BY PROJECTSTARTDATE ASC) as r
+		    from project
+		    where PROJECTSTARTDATE is not null
+		)
+		where r between 1 and 8
+	</select>
+
+	<!-- 마감임박 프로젝트 -->
+	<select id="deadlineList" resultType="projvo">
+		select projectMainImage,projectNo, r
+		from(
+		    select projectNo,projectMainImage,PROJECTENDDATE, ROW_NUMBER() OVER(ORDER BY PROJECTENDDATE ASC) as r
+		    from project
+		    where PROJECTENDDATE is not null
+		)
+		where r between 1 and 8
+	</select>
+
 </mapper>

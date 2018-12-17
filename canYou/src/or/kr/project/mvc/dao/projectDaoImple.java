@@ -211,11 +211,24 @@ public class projectDaoImple implements projectDao {
 
 		return list;
 	}
-	
-	//1214 추가 끝
 
+	// 1214 추가 끝
 	public List<SubCategoryVO> subcaname(String categoryName) {
 		return ss.selectList("project.subcaname", categoryName);
 	}
 
+	// 인기 프로젝트 보기
+	public List<ProjectVO> popularList() {
+		return ss.selectList("project.popularList");
+	}
+
+	// 새로운 프로젝트 보기
+	public List<ProjectVO> newList() {
+		return ss.selectList("project.newList");
+	}
+
+	// 마감임박 프로젝트 보기
+	public List<ProjectVO> deadlineList() {
+		return ss.selectList("project.deadlineList");
+	}
 }
