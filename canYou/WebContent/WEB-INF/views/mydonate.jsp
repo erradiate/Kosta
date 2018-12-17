@@ -71,7 +71,7 @@
 						<p id="">후원 금액 : ${e.DONATEMONEY}</p>
 						<p id="">
 							<input id="donateNo" type="hidden" value="${e.DONATENO}">
-							<input type="button" class="deleteBtn classname" value="기부 취소"> <input
+							<input type="button" class="deleteBtn btns" value="기부 취소"> <input
 								type="hidden" class="productNo" value="${e.PRODUCTNO}">
 						</p>
 					</div>
