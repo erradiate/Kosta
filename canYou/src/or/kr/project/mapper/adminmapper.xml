@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="admin">
+	<select id="wprosel" resultType="hashmap">
+		select projectNo, categoryName, projectName, to_char(udate, 'yyyy-mm-dd') udate,
+		 to_char(projectStartDate, 'yyyy-mm-dd') projectStartDate, to_char(projectEndDate, 'yyyy-mm-dd') projectEndDate, 
+		 projectStatus from project p, category c where p.categoryNo=c.categoryNo and projectStatus=1 order by udate
+	</select>
+	
+	<update id="ok" parameterType="projvo">
+		update project set projectStatus=2, projectStep=#{projectStep} where projectNo=#{projectNo}
+	</update>
+</mapper>
