@@ -519,8 +519,13 @@ public class ProjectController {
 		vo.setMemberNo(memno);
 		
 		if(vo.getProductNo()!=0) {
-			vo.setDonateMoney(vo.getDonateMoney()+dao.prodcost(vo.getProductNo()));
+			if(vo.getDonateMoney()!=0) {
+				vo.setDonateMoney(vo.getDonateMoney()+dao.prodcost(vo.getProductNo()));
+			}else {
+				vo.setDonateMoney(dao.prodcost(vo.getProductNo()));
+			}
 		}
+		
 		
 		dao.donate(vo); //projectDonate Çà Ãß°¡
 		

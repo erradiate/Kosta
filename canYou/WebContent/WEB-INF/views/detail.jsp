@@ -29,8 +29,12 @@ td{
 $(document).ready(function(){
 	$('.prodview #donadd').each(function(){
 		$(this).click(function(e){
-			//console.log($(this).prev().html());
+			var donateBtn = '<input type="button" value="상품 구매" class="btns"/>';
+			
+			console.log($(this).prev().html());
+			//console.log(donateBtn.);
 			$('#selprod').html($(this).prev().html());
+			$('#buyBtn').html(donateBtn);
 			$('#selprod').css('border', '1px pink solid');
 		});
 	});

@@ -29,6 +29,7 @@
 </div>
 <div class="divStory"><fieldset><legend style="font-size: 20px; font-weight: bold;">현재 선택중인 선물</legend>
 <div id="selprod"></div>
+<div id="buyBtn"></div>
 </fieldset>
 </div>
 추가 후원 :
@@ -53,6 +54,16 @@
 					}
 					
 				}
+			});
+		});
+		
+
+		$('#buyBtn').each(function(index, item) {
+			$(this).click(function() {
+				var projectNo = $('#projectNo').val();
+				var productNo = $('#selprod #productNo').val();
+				
+				location.href ='donate?projectNo='+projectNo+'&donateMoney=0'+'&productNo='+productNo;
 			});
 		});
 	});
