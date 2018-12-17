@@ -656,4 +656,10 @@ public class ProjectController {
 		
 		return "main";
 	}
+	
+	//사업자 등록번호 조회 폼
+	@RequestMapping(value="/licensee")
+	public String licensee() {
+		return "licensee";
+	}
 }
