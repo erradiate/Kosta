@@ -149,26 +149,21 @@
 	<!-- 마이페이지 후원 목록 리스트 -->
 	<select id="mydonate" parameterType="searchvo"
 		resultType="HashMap">
-		select
-		d.donateNo, p.projectName, to_char(d.donateDay, 'yyyy.MM.dd')
-		donateDay, d.donateMoney , d.productNo, p.projectMainImage,
-		d.projectNo
-		from
-        (
-		select rownum as r_num, a.*
-		from
-		(select * from projectdonate order by
-		projectNo
-		) a
-		) A,
-		project p, projectdonate d 
-        where
-        d.donateNo=A.donateNo and
-         d.projectNo=p.projectNo and
-		d.memberNo=#{memberNo} and r_num between #{begin} and #{end}
+		 select * from (
+  		select rownum r_num, a.projectNo, a.donateNo, a.projectName, a.donateDay,
+        a.donateMoney , a.productNo, a.projectMainImage from 
+  		(
+  			select 
+            p.projectNo, d.donateNo, p.projectName, to_char(d.donateDay, 'yyyy.MM.dd')
+            donateDay, d.donateMoney , d.productNo, p.projectMainImage
+                from project p, projectdonate d
+  			where p.projectNo=d.projectNo and d.memberNo=#{memberNo}
+  			 order by p.projectNo
+  		) a
+  		) WHERE r_num between #{begin} and #{end}
 	</select>
 	<!-- 마이페이지 후원 리스트 총 갯수 -->
 	<select id="mydonateTotal" parameterType="int" resultType="int">
-		select count(*) cnt from projectdonate where memberNo=#{memberNo}
+		select count(*) cnt from projectdonate d, project p where p.projectNo=d.projectNo and d.memberNo=#{memberNo} 
 	</select>
 </mapper>

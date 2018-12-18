@@ -33,7 +33,7 @@
 
 </style>
 <div id="mydonateList">
-	<h1 style="font-size: 20px">내가 만든 프로젝트</h1>
+	<h1 style="font-size: 20px">내가 만든 프로젝트 검색  결과</h1>
 	<br>
 	<div style="float: left; width: 50%;">
 	<select id="exam"  style="width:320px">
@@ -125,7 +125,7 @@
                            </c:when>
 								<c:otherwise>
 									<a
-										href="myProject?page=
+										href="myprojectearch?page=
          ${(pageInfo.currentBlock-1)*pageInfo.pagesPerBlock }">
 										◀</a>
 								</c:otherwise>
@@ -137,7 +137,7 @@
 									<c:forEach begin="1" end="${pageInfo.pagesPerBlock}"
 										varStatus="num">
                         [<a
-											href="myProject?page=${(pageInfo.currentBlock - 1) * pageInfo.pagesPerBlock + num.count }">
+											href="myprojectearch?page=${(pageInfo.currentBlock - 1) * pageInfo.pagesPerBlock + num.count }">
 											${(pageInfo.currentBlock- 1) * pageInfo.pagesPerBlock + num.count }</a>]
                        </c:forEach>
 								</c:when>
@@ -146,7 +146,7 @@
 										begin="${(pageInfo.currentBlock-1)*pageInfo.pagesPerBlock + 1}"
 										end="${pageInfo.totalPages}" varStatus="num">
                         [<a
-											href="myProject?page=${(pageInfo.currentBlock - 1) * pageInfo.pagesPerBlock + num.count }">
+											href="myprojectearch?page=${(pageInfo.currentBlock - 1) * pageInfo.pagesPerBlock + num.count }">
 											${(pageInfo.currentBlock - 1) * pageInfo.pagesPerBlock + num.count }</a>]
                     </c:forEach>
 								</c:otherwise>
@@ -160,7 +160,7 @@
                 </c:when>
 								<c:otherwise>
 									<a
-										href="myProject?page=${pageInfo.currentBlock * pageInfo.pagesPerBlock + 1 }">
+										href="myprojectearch?page=${pageInfo.currentBlock * pageInfo.pagesPerBlock + 1 }">
 										▶</a>
 								</c:otherwise>
 							</c:choose>
@@ -173,7 +173,7 @@
                            </c:when>
 								<c:otherwise>
 									<a
-										href="myProject?searchType=${searchType}&searchValue=${searchValue}&page=
+										href="myprojectearch?searchType=${searchType}&searchValue=${searchValue}&page=
          ${(pageInfo.currentBlock-1)*pageInfo.pagesPerBlock }">
 										◀</a>
 								</c:otherwise>
@@ -185,7 +185,7 @@
 									<c:forEach begin="1" end="${pageInfo.pagesPerBlock}"
 										varStatus="num">
                         [<a
-											href="myProject?searchType=${searchType}&searchValue=${searchValue}&page=
+											href="myprojectearch?searchType=${searchType}&searchValue=${searchValue}&page=
                         ${(pageInfo.currentBlock - 1) * pageInfo.pagesPerBlock + num.count }">
 											${(pageInfo.currentBlock- 1) * pageInfo.pagesPerBlock + num.count }</a>]
                        </c:forEach>
@@ -195,7 +195,7 @@
 										begin="${(pageInfo.currentBlock-1)*pageInfo.pagesPerBlock + 1}"
 										end="${pageInfo.totalPages}" varStatus="num">
                         [<a
-											href="myProject?searchType=${searchType}&searchValue=${searchValue}&page=${(pageInfo.currentBlock - 1) * pageInfo.pagesPerBlock + num.count }">
+											href="myprojectearch?searchType=${searchType}&searchValue=${searchValue}&page=${(pageInfo.currentBlock - 1) * pageInfo.pagesPerBlock + num.count }">
 											${(pageInfo.currentBlock - 1) * pageInfo.pagesPerBlock + num.count }</a>]
                     </c:forEach>
 								</c:otherwise>
@@ -209,7 +209,7 @@
                						 </c:when>
 								<c:otherwise>
 									<a
-										href="myProject?searchType=${searchType}&searchValue=${searchValue}&page=${pageInfo.currentBlock * pageInfo.pagesPerBlock + 1 }">
+										href="myprojectearch?searchType=${searchType}&searchValue=${searchValue}&page=${pageInfo.currentBlock * pageInfo.pagesPerBlock + 1 }">
 										▶</a>
 								</c:otherwise>
 							</c:choose>
