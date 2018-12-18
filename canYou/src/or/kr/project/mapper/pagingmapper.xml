@@ -79,7 +79,7 @@
 			</otherwise>
 		</choose>
 
-		and c.categoryNo=p.categoryNo
+		and c.categoryNo=p.categoryNo and projectStatus!=1 and projectStatus!=4
 		)
 		where r_num between #{begin} and #{end}
 	</select>
@@ -89,7 +89,7 @@
 		select
 		count(*) cnt
 		from project
-		where categoryNo=#{categoryNo}
+		where categoryNo=#{categoryNo} and projectStatus!=1 and projectStatus!=4
 	</select>
 	
 	<!-- 1214 수정한 것 -->
