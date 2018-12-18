@@ -317,4 +317,12 @@
 	<delete id="prodel" parameterType="int">
 		delete from project where projectNo=#{projectNo} and projectStatus=4
 	</delete>
+	<!--  캐쉬충전소 리스트 --> 
+  <select id="cashlist" parameterType="mvo" resultType="mvo">
+  select memberCash, memberName from member where memberNo=#{memberNo}
+  </select> 
+ <!--  캐쉬충전소 충전  --> 
+  <update id="cashcharge" parameterType="mvo">
+  update member set memberCash = memberCash + #{memberCash} where memberNo=#{memberNo}
+  </update> 	
 </mapper>

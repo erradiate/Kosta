@@ -133,3 +133,11 @@ padding-bottom: 10px;
 	border: 1px dotted gold;
 	padding: 2%
 }
+
+
+.cash{
+	border: 2px solid #DFDFDF;
+	width: 90%;
+	height: 90%;
+	margin: 50px auto;
+}

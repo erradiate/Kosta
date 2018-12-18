@@ -80,11 +80,11 @@
 		from product where projectNo=#{projectNo}
 	</select>
 
-	<!-- 개인정보 수정 -->
-	<update id="editinfo" parameterType="mvo">
+	<!-- 개인정보 수정 1218 -->
+	<update id="editinfo" parameterType="HashMap">
 		update member
 		<trim prefix="SET" suffixOverrides=",">
-			<if test="memberPwd != null">memberPwd=#{memberPwd},</if>
+			<if test="targetPwd!='' and memberPwd!=''">memberPwd=#{memberPwd},</if>
 			<if test="memberName != null">memberName=#{memberName},</if>
 			<if test="memberAddr != null">memberAddr=#{memberAddr},</if>
 			<if test="memberPhone != null">memberPhone=#{memberPhone},</if>
@@ -94,6 +94,7 @@
 			<if test="memberImage != null">memberImage=#{memberImage},</if>
 		</trim>
 		where memberNo=#{memberNo}
+		<if test="targetPwd!='' and memberPwd!=''">and memberPwd=#{targetPwd}</if>
 	</update>
 
 	<!-- 상품 가격 가져오기 -->
@@ -297,4 +298,31 @@
 		)
 	</insert>
 
+	<!-- 회원정보 수정을 위해 회원정보를 가져옴 -->
+	<select id="viewmember" parameterType="String" resultType="mvo">
+		select memberName, memberAddr, memberPhone, memberEmail, memberAge, memberAccount
+		from member where memberId=#{memberId}
+	</select>
+	
+	<!-- 재검토 요청 1218 -->
+	<update id="request" parameterType="int">
+		update project set projectStatus=1 where projectNo=#{projectNo} and projectStatus=4
+	</update>
+	
+	<!-- 검토 거부당한 프로젝트 삭제 1218 -->
+	<delete id="proddel" parameterType="int">
+		delete from product where projectNo=#{projectNo}
+	</delete>
+	
+	<delete id="prodel" parameterType="int">
+		delete from project where projectNo=#{projectNo} and projectStatus=4
+	</delete>
+	<!--  캐쉬충전소 리스트 --> 
+  <select id="cashlist" parameterType="mvo" resultType="mvo">
+  select memberCash, memberName from member where memberNo=#{memberNo}
+  </select> 
+ <!--  캐쉬충전소 충전  --> 
+  <update id="cashcharge" parameterType="mvo">
+  update member set memberCash = memberCash + #{memberCash} where memberNo=#{memberNo}
+  </update> 	
 </mapper>
