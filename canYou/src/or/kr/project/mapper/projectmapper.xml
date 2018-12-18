@@ -59,7 +59,7 @@
 		TO_DATE(#{projectEndDate},'yyyy-mm-dd'),
 		0, #{projectMainImage},
 		#{projectStory},
-		'Z', 2, 0)
+		'Z', 1, 0)
 		<selectKey keyProperty="projectNo" resultType="int"
 			order="AFTER">
 			SELECT project_seq.CURRVAL FROM dual
@@ -196,7 +196,7 @@
 		to_char(projectEndDate,'yyyy-MM-dd') projectEndDate,projectFundCnt,
 		projectMainImage,projectStory,projectStep,projectStatus
 		,categoryNo,
-		projectCurCost from project where projectNo=#{projectNo}
+		projectCurCost from project where projectNo=#{projectNo} and projectStatus!=1 and projectStatus!=4
 	</select>
 
 	<!-- 수정 폼 view -->

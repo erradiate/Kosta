@@ -108,6 +108,7 @@ $(document).ready(function(){
 			<div align="right">
 				<input type="button" id="wordBtn" class="btns" value="워드로 보기">
 				<input type="submit" id="wBtn" class="btns" value="승인">	
+				<input type="submit" id="wBtn" class="btns" value="승인거부">	
 			</div>
 			
 			<br>

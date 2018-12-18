@@ -62,6 +62,14 @@
 				<td>
 				<div class="card">
 						<c:choose>
+							<c:when test="${e.projectStatus==1}">
+								<div class="endcontainer">
+								<a href="story?projectNo=${e.projectNo }">
+									<img class="imgmar endpro" src="resources/images/${e.projectMainImage }">
+								</a>
+								<div class="centered">검토중</div>
+								</div>
+							</c:when>
 							<c:when test="${e.projectStatus==2}">
 								<a href="story?projectNo=${e.projectNo }">
 									<img class="imgmar" src="resources/images/${e.projectMainImage }">
@@ -73,6 +81,14 @@
 										<img class="imgmar endpro" src="resources/images/${e.projectMainImage }">
 								</a>
 								<div class="centered">진행<br>마감</div>
+								</div>
+							</c:when>
+							<c:when test="${e.projectStatus==4}">
+								<div class="endcontainer">
+								<a href="story?projectNo=${e.projectNo }">
+									<img class="imgmar endpro" src="resources/images/${e.projectMainImage }">
+								</a>
+								<div class="centered">검토<br>거부</div>
 								</div>
 							</c:when>
 						</c:choose>

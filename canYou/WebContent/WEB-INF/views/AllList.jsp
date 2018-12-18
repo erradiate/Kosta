@@ -25,11 +25,7 @@
   padding-bottom: 3px;
 }
 
-.imgmar{
-	margin: 10px 10px 10px 10px;
-	width: 280px; 
-	height: 240px;
-}
+
 
 </style>
 
@@ -57,25 +53,25 @@
 							<c:when test="${e.projectStatus==3}">
 								<div class="endcontainer">
 								<a href="story?projectNo=${e.projectNo }">
-										<img class="endpro" src="resources/images/${e.projectMainImage }">
+										<img class="imgmar endpro" src="resources/images/${e.projectMainImage }">
 								</a>
-								<div class="centered">진행마감</div>
+								<div class="centered">진행<br>마감</div>
 								</div>
 							</c:when>
 							<c:when test="${e.projectStatus==4 }">
 								<div class="endcontainer">
 									<a href="story?projectNo=${e.projectNo }">
-										<img class="endpro" src="resources/images/${e.projectMainImage }">
+										<img class="imgmar endpro" src="resources/images/${e.projectMainImage }">
 									</a>
-									<div class="centered">심사거부</div>
+									<div class="centered">심사<br>거부</div>
 								</div>
 							</c:when>
 						</c:choose>
 						<div class="container">
-						<p id="">프로젝트 명 : ${e.projectName}</p>
+						<p>프로젝트 명 : ${e.projectName}</p>
 						<hr>
-						<p id="">모인 금액 : ${e.projectCurCost}</p>
-						<p id="">남은 날짜 : ${dateList[status.index]}</p>
+						<p>모인 금액 : ${e.projectCurCost}</p>
+						<p>남은 날짜 : ${dateList[status.index]}</p>
 						</div>
 						</div>
 					</td>
