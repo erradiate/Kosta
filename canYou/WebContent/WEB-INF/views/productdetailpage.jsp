@@ -37,8 +37,14 @@
 
 <input type="button" class="donateBtn btns" value="후원" >
 
+<!-- 결제가 제대로 되었는지 확인하는 값 -->
+<input type="hidden" id="success" value="${success}">
 <script>
 	$(function() {
+		if($('#success').val()==='fail'){
+			alert('잔액이 부족합니다.');
+		}
+		
 		$('.donateBtn').each(function(index, item) {
 			$(this).click(function() {
 				var result = confirm('후원하시겠습니까?');

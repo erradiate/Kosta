@@ -68,7 +68,7 @@ public class DetailController {
 	}
 	
 	@RequestMapping(value="/productDetail")
-	public String getProductDetail(Model m, HttpServletRequest req, String projectNo) {
+	public String getProductDetail(Model m, HttpServletRequest req, String projectNo, String success) {
 		// project 관련한 정보 빼오기
 		ProjectVO list = dao.projectlist(projectNo);
 		String c = dao.caselone(list.getCategoryNo());
@@ -83,6 +83,7 @@ public class DetailController {
 		// project와 연결된 product 가져오기
 		List<ProductVO> list2=dao.prodsel(projectNo);
 		m.addAttribute("prodlist", list2);
+		m.addAttribute("success", success);
 		
 		return "productdetailpage";
 	}

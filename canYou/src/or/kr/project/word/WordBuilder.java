@@ -225,7 +225,7 @@ public class WordBuilder{
 				fis = new FileInputStream(
 						session.getServletContext().getRealPath("/resources/images")+"\\"+image.get(cnt));
 				paragraphRunOne.addPicture(fis, 
-						XWPFDocument.PICTURE_TYPE_JPEG, image.get(cnt), Units.toEMU(200), Units.toEMU(150));
+						XWPFDocument.PICTURE_TYPE_JPEG, image.get(cnt++), Units.toEMU(200), Units.toEMU(150));
 				paragraphRunOne.addBreak();
 			} else {
 				paragraphRunOne.setText(str);
@@ -261,6 +261,7 @@ public class WordBuilder{
 		// 요청한 브라우저와의 아웃풋 스트림 연결
 		OutputStream outStream = resp.getOutputStream();
 		document.write(outStream);
+		System.out.println("닫힘");
 		outStream.close();
 		
 	}

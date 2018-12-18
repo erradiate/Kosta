@@ -15,3 +15,7 @@
 <div class="divStory">
 <p style="margin:3%">${list.projectStory}</p>
 </div>
+
+<script>
+
+</script>
