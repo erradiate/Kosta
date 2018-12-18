@@ -8,9 +8,12 @@ import java.math.BigInteger;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Nullable;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -44,15 +47,17 @@ public class WordBuilder{
 			HttpServletResponse resp, HttpSession session) throws Exception {
 		// 문서를 만들기전 초기화 작업.
 		row = 0;
+		
 		List<ProductVO> list = vo.getProject().getProduct();
 		
 		// 이미지 삽입 작업을 위한 밑 준비
 		profileImg = vo.getMemberImage();
 		projectImg = vo.getProject().getProjectMainImage();
 		
-		System.out.println("profileImg : " + profileImg);
-		System.out.println("projectImg : " + projectImg);
-		System.out.println(session.getServletContext().getRealPath("/resources/images"));
+		// jsp로 되어있는 내용을 워드에 작성하기 위해 바꿈
+		HashMap<String, Object> map = jsp_To_Word(vo.getProject().getProjectStory());
+		String[] projectStory = (String[])map.get("story"); 
+		ArrayList<String> image = (ArrayList<String>)map.get("image");
 		
 		// 빈 문서 만들기
 		XWPFDocument document = new XWPFDocument();
@@ -115,7 +120,7 @@ public class WordBuilder{
 				session.getServletContext().getRealPath("/resources/images")+"\\"+profileImg);
 		paragraphRunOne.addPicture(fis, 
 				XWPFDocument.PICTURE_TYPE_JPEG, profileImg,
-				Units.toEMU(150), Units.toEMU(200));
+				Units.toEMU(150), Units.toEMU(170));
 		fis.close();
 		
 		thirdRow.getCell(1).setText("진행자 이름");
@@ -165,7 +170,7 @@ public class WordBuilder{
 				session.getServletContext().getRealPath("/resources/images")+"\\"+projectImg);
 		paragraphRunOne.addPicture(fis, 
 				XWPFDocument.PICTURE_TYPE_JPEG, projectImg,
-				Units.toEMU(150), Units.toEMU(200));
+				Units.toEMU(150), Units.toEMU(170));
 		fis.close();
 		
 		ninethRow.getCell(1).setText("프로젝트 등급");
@@ -207,7 +212,26 @@ public class WordBuilder{
 		paragraphRunOne.setText("프로젝트 상세정보 및 스토리");
 		
 		XWPFTableRow fifteenRow = table.getRow(row++); //14
-		fifteenRow.getCell(0).setText("프로젝트 스토리 뭐시기뭐시기" /*pvo.getProjectStory()*/);
+		
+		paragraph = fifteenRow.getCell(0).getParagraphs().get(0);
+		paragraph.setAlignment(ParagraphAlignment.LEFT);
+		
+		paragraphRunOne = paragraph.createRun();
+		paragraphRunOne.setFontSize(10);
+		// img 배열을 같이 돌리기 위한 변수
+		int cnt=0;
+		for(String str : projectStory) {
+			if(str.equals("!ime")) {
+				fis = new FileInputStream(
+						session.getServletContext().getRealPath("/resources/images")+"\\"+image.get(cnt));
+				paragraphRunOne.addPicture(fis, 
+						XWPFDocument.PICTURE_TYPE_JPEG, image.get(cnt), Units.toEMU(200), Units.toEMU(150));
+				paragraphRunOne.addBreak();
+			} else {
+				paragraphRunOne.setText(str);
+				paragraphRunOne.addBreak();
+			}
+		}		
 				
 		// 상품 상세 설명
 		XWPFTableRow sixteenRow = table.getRow(row++); //15
@@ -229,8 +253,6 @@ public class WordBuilder{
 			create_Product_Row(table, paragraph, paragraphRunOne, productVO);
 		}
 		
-		System.out.println("create_table 생성!");
-		
 		// 파일 전송을 위한 마임타입과 헤더 설정
 		resp.setContentType("Application/Msword");
 		resp.setHeader("Content-Disposition",
@@ -239,8 +261,8 @@ public class WordBuilder{
 		// 요청한 브라우저와의 아웃풋 스트림 연결
 		OutputStream outStream = resp.getOutputStream();
 		document.write(outStream);
-		System.out.println("create_table 전송!");
 		outStream.close();
+		
 	}
 	//세로 부분의 셀을 합치는 함수
 		private static void mergeCellVertically(XWPFTable table, int col, int fromRow, int toRow){
@@ -349,6 +371,34 @@ public class WordBuilder{
 			paragraphRunOne.setText(Integer.toString(productVO.getProductCost())); // 2열 완료
 			
 			mergeCellHorizontally(table, row++, 1, 2);
+		}
+		
+		private HashMap<String, Object> jsp_To_Word(String contents) {
+			// 이미지를 저장하기 위한 list
+			HashMap<String , Object> map = new HashMap<String, Object>();
+			ArrayList<String> image = new ArrayList<>();
+			
+			String[] stx = contents.split("\r\n\r\n");
+			// 시작점, 끝점의 p 태그 삭제
+			for(int i=0;i<stx.length;i++) {
+				if(i==stx.length-1) {
+					stx[i] = stx[i].substring(3, stx[i].length()-6);
+				} else {
+					stx[i] = stx[i].substring(3,stx[i].length()-4);
+				}
+				System.out.println("stx["+i+"] : "+ stx[i]);
+			}
+			
+			for(int i=0;i<stx.length;i++) {
+				//이미지 태그 (이미지) 가지고 있을 경우
+				if(stx[i].contains("<img")) {
+					image.add(stx[i].substring(stx[i].indexOf("resources/images/")+17, stx[i].indexOf("\"", stx[i].indexOf("resources/images/")+17)));
+					stx[i]="!ime";
+				} else
+					continue;
+			}
+			map.put("story", stx); map.put("image", image);
+			return map;
 		}
 }
 

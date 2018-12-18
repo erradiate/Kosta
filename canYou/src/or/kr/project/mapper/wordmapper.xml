@@ -20,6 +20,7 @@
 			<result property="projectStartDate" column="projectStartDate"/>
 			<result property="projectEndDate" column="projectEndDate"/>
 			<result property="projectMainImage" column="projectMainImage"/>
+			<result property="projectStory" column="projectStory"/>
 			<collection property="product" javaType="java.util.List"
 				resultMap="product_result" ofType="prodvo"/>
 		</association>
@@ -35,7 +36,7 @@
 			
 	<select id="wordInfo" parameterType="int" resultMap="mem_and_proj">
 		select m.memberNo, m.memberName, m.memberPhone, m.memberEmail, m.memberGender, m.memberAge, m.memberImage,
-		p.projectNo, p.projectStep, p.projectName, p.projectStartDate, p.projectEndDate, p.projectMainImage,
+		p.projectNo, p.projectStep, p.projectName, p.projectStartDate, p.projectEndDate, p.projectMainImage, p.projectStory,
 		d.productNo, d.productName, d.productCnt, d.productInfo, d.productCost
 		from project p, member m, product d
 		where m.memberno = p.memberno and p.projectNo=#{projectNo} and d.projectNo = p.projectNo
