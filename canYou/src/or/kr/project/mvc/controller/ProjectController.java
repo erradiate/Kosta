@@ -678,5 +678,13 @@ public class ProjectController {
 	public String sign() {
 		return "sign";
 	}
-
+	
+	//나이별 후원 카테고리 그래프 보기
+	@RequestMapping(value = "/graphpage")
+	public String graphPage(Model m) {
+		Map<Integer,Integer> map = dao.ageGraph();
+		m.addAttribute("map", map);
+		
+		return "graphpage";
+	}
 }

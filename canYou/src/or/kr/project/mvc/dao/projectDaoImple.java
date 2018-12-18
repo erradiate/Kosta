@@ -266,4 +266,11 @@ public class projectDaoImple implements projectDao {
 	public void addMember(MemberVO vo) {
 		ss.insert("project.addMember",vo);
 	}
+	
+	//나이별 후원 카테고리 그래프 보기
+	public Map<Integer,Integer> ageGraph() {
+		Map<Integer,Integer> map = (Map<Integer, Integer>) ss.selectList("graph.ageGraph");
+		
+		return map;
+	}
 }
