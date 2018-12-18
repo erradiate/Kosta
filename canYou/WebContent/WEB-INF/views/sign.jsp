@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 
-<script src="../../js/member/member.js?ver=1"></script>
-<link href="../../css/member/member.css?ver=1" type="text/css" rel="stylesheet">
-
 <style>
 .main{ margin: 0 auto;
     width: 40%;
@@ -129,6 +126,8 @@ input[type=radio]{
                     	<div>
                             <label for="id"></label> <input type="text" id="id"
                                 name="memberId" placeholder="ID" required> 
+                            <input type="button" id="idchk" value="중복 검사"><br>
+                            <div id="divInputId"></div>
                             <span id="MsgId" class="none"></span>
                         </div>
                         <div>
@@ -276,7 +275,6 @@ input[type=radio]{
             MsgId.style.display="block";
             MsgId.className='error'
             MsgId.innerHTML="이메일 형식을 확인하세요"
-            email.focus()
             return false;
         } else{
             MsgId.className='vaild'
@@ -293,7 +291,6 @@ function ck_pwd(){
             MsgPw.style.display="block";
             MsgPw.className='error'
             MsgPw.innerHTML="숫자포함 최소 6자리 이상"
-            pwd.focus()
             return false;
         } else{
             MsgPw.className='vaild'
@@ -311,7 +308,6 @@ function ck_pwd2(){
             MsgPwck.style.display="block";
             MsgPwck.className='error'
             MsgPwck.innerHTML="비밀번호가 일치하지 않습니다."
-            pwd_ck.focus()
             return false;
         } else{
             MsgPwck.className='vaild'
@@ -328,7 +324,6 @@ function ck_name(){
             MsgName.style.display="block";
             MsgName.className='error'
             MsgName.innerHTML="2자 이상 입력하세요."
-            name.focus()
             return false;
         } else{
             MsgName.className='vaild'
@@ -336,7 +331,7 @@ function ck_name(){
         }   
 }
 
-
+/*
 function ck_gender(){
     var wrap_gender = document.getElementById("wrap_gender")
     var man = document.getElementById("man")
@@ -353,6 +348,40 @@ function ck_gender(){
         document.getElementById("wrap_woman").className='gender_act';
         document.getElementById("wrap_man").className='gender';
     }
-
 }
+*/
+</script>
+
+<script>
+$(function() {
+	var idck = 0;
+	
+    //idck 버튼을 클릭했을 때 
+    $("#idchk").click(function() {
+    	//var memberId =  $("#id").val(); 
+        $.ajax({
+           
+            type : "POST",
+            data : $("#id").val(),
+            dataType : "json",
+            url : "idcheck",
+            success : function(data) {
+                if (data.count > 0) {  
+                	console.log(data);
+                    $('#divInputId').html('<p style="color:red">사용불가능</p>');
+               
+                } else {
+                	console.log(data);
+                    $('#divInputId').html('<p style="color:blue">사용가능</p>');
+                    //아이디가 중복하지 않으면  idck = 1 
+                    idck = 1;
+                }
+            },
+            error : function(error) {
+                alert(error);
+            }
+        });
+    });
+});
+
 </script>

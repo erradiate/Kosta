@@ -30,9 +30,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -710,44 +712,52 @@ public class ProjectController {
 
 		return "graphpage";
 	}
+	
 	// 캐쉬충전 폼으로
-			@RequestMapping(value = "/cash")
-			public ModelAndView cashcharge( MemberVO vo) {
-				// 세션에서 로그인 된 ID를 가져오는 작업
-				SecurityContext impl = SecurityContextHolder.getContext();
-				String implstr = impl.getAuthentication().getName();
-				// 끝-------------------
-				MemberVO vo2 = dao.memname(implstr); // 가져온 ID를 토대로 회원 번호, 이름을 가져온다
-				vo.setMemberNo(vo2.getMemberNo());
-				
-				
-				List<MemberVO> list= dao.chargeList(vo);
-				ModelAndView mav = new ModelAndView();
-				mav.setViewName("cashcharge");
-				mav.addObject("list", list);
-				return mav;
-				
-			}
-			
-			//캐쉬 충전
-			
-			@RequestMapping(value = "/cashcharge")
-			public String cashcharge(Model m, MemberVO vo) {
-				// 세션에서 로그인 된 ID를 가져오는 작업
-				SecurityContext impl = SecurityContextHolder.getContext();
-				String implstr = impl.getAuthentication().getName();
-				// 끝-------------------
-				MemberVO vo2 = dao.memname(implstr); // 가져온 ID를 토대로 회원 번호, 이름을 가져온다
-				vo.setMemberNo(vo2.getMemberNo());
-				System.out.println("돈"+vo.getMemberCash());
-				System.out.println("멤버번호"+vo.getMemberNo());
-				dao.charge(vo);
-				System.out.println("돈"+vo.getMemberCash());
-				System.out.println("멤버번호"+vo.getMemberNo());
-				
-				return "redirect:/cash";
-				
-			}
-			
+	@RequestMapping(value = "/cash")
+	public ModelAndView cashcharge(MemberVO vo) {
+		// 세션에서 로그인 된 ID를 가져오는 작업
+		SecurityContext impl = SecurityContextHolder.getContext();
+		String implstr = impl.getAuthentication().getName();
+		// 끝-------------------
+		MemberVO vo2 = dao.memname(implstr); // 가져온 ID를 토대로 회원 번호, 이름을 가져온다
+		vo.setMemberNo(vo2.getMemberNo());
+
+		List<MemberVO> list = dao.chargeList(vo);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("cashcharge");
+		mav.addObject("list", list);
+		return mav;
+
 	}
+
+	// 캐쉬 충전
+	@RequestMapping(value = "/cashcharge")
+	public String cashcharge(Model m, MemberVO vo) {
+		// 세션에서 로그인 된 ID를 가져오는 작업
+		SecurityContext impl = SecurityContextHolder.getContext();
+		String implstr = impl.getAuthentication().getName();
+		// 끝-------------------
+		MemberVO vo2 = dao.memname(implstr); // 가져온 ID를 토대로 회원 번호, 이름을 가져온다
+		vo.setMemberNo(vo2.getMemberNo());
+		System.out.println("돈" + vo.getMemberCash());
+		System.out.println("멤버번호" + vo.getMemberNo());
+		dao.charge(vo);
+		System.out.println("돈" + vo.getMemberCash());
+		System.out.println("멤버번호" + vo.getMemberNo());
+
+		return "redirect:/cash";
+
+	}
+	
+	//아이디 중복 검사
+	@RequestMapping(value = "/idcheck")
+	@ResponseBody
+	public void memberIdCheck(@RequestBody String memberId) {
+		System.out.println("memberId : "+ memberId.substring(0, memberId.length()-1));
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		int count = dao.memberIdCheck(memberId);
+		map.put("count", count);
+	}
+}
 

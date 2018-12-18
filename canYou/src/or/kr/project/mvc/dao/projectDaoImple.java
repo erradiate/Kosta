@@ -289,12 +289,19 @@ public class projectDaoImple implements projectDao {
 		ss.delete("project.proddel", i);	// 프로젝트에 관련된 상품부터 삭제
 		ss.delete("project.prodel", i);		// 프로젝트 삭제
 	}
+	
 	// 캐쉬 충전소 - 캐쉬 충전
-		public void charge(MemberVO vo) {
-			ss.update("project.cashcharge", vo);
-		}
-		// 캐쉬 충전소 리스트
-		public List<MemberVO> chargeList(MemberVO vo) {
-			return ss.selectList("project.cashlist", vo);
-		}
+	public void charge(MemberVO vo) {
+		ss.update("project.cashcharge", vo);
 	}
+	
+	// 캐쉬 충전소 리스트
+	public List<MemberVO> chargeList(MemberVO vo) {
+		return ss.selectList("project.cashlist", vo);
+	}
+	
+	//아이디 중복 검사
+	public int memberIdCheck(String memberId) {
+		return ss.selectOne("project.memberIdCheck",memberId);
+	}
+}
