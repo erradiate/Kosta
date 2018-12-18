@@ -120,12 +120,46 @@ $(document).ready(function(){
 				<c:when
 					test="${pageContext.request.userPrincipal.name eq member.memberId && list.projectStatus==4}">
 					<input type="button" id="request" class="btns" value="재검토 요청">
+					<script>
+						$('#request').click(function(){
+							var form=document.createElement("form");
+							form.setAttribute("method", "post");
+							form.setAttribute("action", "request");
+							
+							var hiddenField=document.createElement("input");
+							hiddenField.setAttribute("type", "hidden");
+							hiddenField.setAttribute("name", "projectNo");
+							hiddenField.setAttribute("value", ${list.projectNo});
+							form.appendChild(hiddenField);
+							
+							document.body.appendChild(form);
+							
+							form.submit();
+						})
+					</script>
 				</c:when>
 				</c:choose>
 				<c:choose>
 				<c:when
 					test="${pageContext.request.userPrincipal.name eq member.memberId && list.projectStatus==4}">
 					<input type="button" id="prodel" class="btns" value="삭제">
+					<script>
+					$('#prodel').click(function(){
+						var form=document.createElement("form");
+						form.setAttribute("method", "post");
+						form.setAttribute("action", "prodel");
+						
+						var hiddenField=document.createElement("input");
+						hiddenField.setAttribute("type", "hidden");
+						hiddenField.setAttribute("name", "projectNo");
+						hiddenField.setAttribute("value", ${list.projectNo});
+						form.appendChild(hiddenField);
+						
+						document.body.appendChild(form);
+						
+						form.submit();
+					})
+					</script>
 				</c:when>
 				</c:choose>
 			</div>
@@ -153,38 +187,6 @@ $(document).ready(function(){
 		$('#wordBtn').click(function(){
 			location.href="download?projectNo="+$('#projectNo').val();
 		});
-		
-		$('#request').click(function(){
-			var form=document.createElement("form");
-			form.setAttribute("method", "post");
-			form.setAttribute("action", "request");
-			
-			var hiddenField=document.createElement("input");
-			hiddenField.setAttribute("type", "hidden");
-			hiddenField.setAttribute("name", "projectNo");
-			hiddenField.setAttribute("value", ${list.projectNo});
-			form.appendChild(hiddenField);
-			
-			document.body.appendChild(form);
-			
-			form.submit();
-		})
-		
-		$('#prodel').click(function(){
-			var form=document.createElement("form");
-			form.setAttribute("method", "post");
-			form.setAttribute("action", "prodel");
-			
-			var hiddenField=document.createElement("input");
-			hiddenField.setAttribute("type", "hidden");
-			hiddenField.setAttribute("name", "projectNo");
-			hiddenField.setAttribute("value", ${list.projectNo});
-			form.appendChild(hiddenField);
-			
-			document.body.appendChild(form);
-			
-			form.submit();
-		})
 	});
 </script>
 
