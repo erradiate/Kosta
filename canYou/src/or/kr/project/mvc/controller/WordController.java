@@ -36,7 +36,6 @@ public class WordController {
 		try {
 			return "redirect:list?num="+projectNo;
 		} catch (IllegalStateException e) {
-			// TODO: handle exception
 			//return "redirect:mypage?num="+projectNo;
 			resp.sendRedirect("mypage");
 		}

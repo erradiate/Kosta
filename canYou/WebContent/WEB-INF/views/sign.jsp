@@ -330,26 +330,6 @@ function ck_name(){
             MsgName.innerHTML="ok"
         }   
 }
-
-/*
-function ck_gender(){
-    var wrap_gender = document.getElementById("wrap_gender")
-    var man = document.getElementById("man")
-    var woman = document.getElementById("woman")
-    var MsgGender = document.getElementById("MsgGender")
-
-    
-    if(man.checked){
-        document.getElementById("wrap_man").className='gender_act';
-        document.getElementById("wrap_woman").className='gender';
-    }
-    
-    if(woman.checked){
-        document.getElementById("wrap_woman").className='gender_act';
-        document.getElementById("wrap_man").className='gender';
-    }
-}
-*/
 </script>
 
 <script>
@@ -360,13 +340,12 @@ $(function() {
     $("#idchk").click(function() {
     	//var memberId =  $("#id").val(); 
         $.ajax({
-           
             type : "POST",
             data : $("#id").val(),
-            dataType : "json",
+            dataType : "text",
             url : "idcheck",
             success : function(data) {
-                if (data.count > 0) {  
+                if (data === '1') {  
                 	console.log(data);
                     $('#divInputId').html('<p style="color:red">사용불가능</p>');
                

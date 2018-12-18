@@ -753,11 +753,11 @@ public class ProjectController {
 	//아이디 중복 검사
 	@RequestMapping(value = "/idcheck")
 	@ResponseBody
-	public void memberIdCheck(@RequestBody String memberId) {
-		System.out.println("memberId : "+ memberId.substring(0, memberId.length()-1));
-		Map<String, Integer> map = new HashMap<String, Integer>();
+	public int memberIdCheck(@RequestBody String memberId) {
+		memberId = memberId.substring(0, memberId.length()-1);
 		int count = dao.memberIdCheck(memberId);
-		map.put("count", count);
+		System.out.println(count);
+		return count;
 	}
 }
 
