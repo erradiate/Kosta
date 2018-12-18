@@ -167,9 +167,9 @@ public class projectDaoImple implements projectDao {
 		return ss.selectOne("paging.myPlistTotal", vo);
 	}
 
-	// 마이페이지-개인정보 수정
-	public void editMyInfo(MemberVO vo) {
-		ss.update("project.editinfo", vo);
+	// 마이페이지-개인정보 수정 1218 수정
+	public int editMyInfo(HashMap<String, String> vo) {
+		return ss.update("project.editinfo", vo);
 	}
 
 	// 카테고리별 프로젝트의 수 구하기
@@ -272,5 +272,21 @@ public class projectDaoImple implements projectDao {
 		Map<Integer,Integer> map = (Map<Integer, Integer>) ss.selectList("graph.ageGraph");
 		
 		return map;
+	}
+	
+	// 회원정보 가져오기 1218
+	public MemberVO viewmember(String s) {
+		return ss.selectOne("project.viewmember", s);
+	}
+	
+	// 재검토 요청 1218
+	public void request(int i) {
+		ss.update("project.request", i);
+	}
+	
+	// 검토거부당한 프로젝트 삭제 1218
+	public void prodel(int i) {
+		ss.delete("project.proddel", i);	// 프로젝트에 관련된 상품부터 삭제
+		ss.delete("project.prodel", i);		// 프로젝트 삭제
 	}
 }

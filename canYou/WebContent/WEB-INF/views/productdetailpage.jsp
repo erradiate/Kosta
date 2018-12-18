@@ -72,5 +72,9 @@
 				location.href ='donate?projectNo='+projectNo+'&donateMoney=0'+'&productNo='+productNo;
 			});
 		});
+		
+		if(${list.projectStatus}!=2){
+			$('.dona').attr('disabled', true);
+		}
 	});
 </script>

@@ -102,26 +102,48 @@ public class ProjectController {
 		return "mypage";
 	}
 
-	// 개인정보 수정 페이지로 이동
+	// 개인정보 수정 페이지로 이동 1218
 	@RequestMapping(value = "/editinfo")
 	public String editInfo(Model m) {
+		SecurityContext impl=SecurityContextHolder.getContext();
+		String implstr=impl.getAuthentication().getName(); 
+		MemberVO vo2=dao.viewmember(implstr);	// 가져온 ID를 토대로 회원 정보를 가져옴
+			
+		m.addAttribute("list", vo2);
 		return "editinfo";
 	}
 
 	// 개인정보 수정 하기
-	@RequestMapping(value = "/success")
-	public String editSuccess(Model m, MemberVO vo) {
-		// 세션에서 로그인 된 ID를 가져오는 작업
-		SecurityContext impl = SecurityContextHolder.getContext();
-		String implstr = impl.getAuthentication().getName();
-		// 끝-------------------
-		MemberVO vo2 = dao.memname(implstr); // 가져온 ID를 토대로 회원 번호, 이름을 가져온다
-		vo.setMemberNo(vo2.getMemberNo());
+		@RequestMapping(value = "/success")
+		public String editSuccess(Model m, MemberVO vo, String targetPwd) {
+			// 세션에서 로그인 된 ID를 가져오는 작업
+			SecurityContext impl = SecurityContextHolder.getContext();
+			String implstr = impl.getAuthentication().getName();
+			// 끝-------------------
+			MemberVO vo2 = dao.memname(implstr); // 가져온 ID를 토대로 회원 번호, 이름을 가져온다
+			vo.setMemberNo(vo2.getMemberNo());
+			
+			HashMap<String, String> h = new HashMap<>();
+			h.put("memberNo", String.valueOf(vo.getMemberNo()));
+			h.put("memberName", vo.getMemberName());
+			h.put("targetPwd", targetPwd);
+			h.put("memberPwd", vo.getMemberPwd());
+			h.put("memberAddr", vo.getMemberAddr());
+			h.put("memberPhone", vo.getMemberPhone());
+			h.put("memberEmail", vo.getMemberEmail());
+			h.put("memberAge", String.valueOf(vo.getMemberAge()));
+			h.put("memberAccount", vo.getMemberAccount());
+			
+			System.out.println(h.get("targetPwd").equals(""));
 
-		dao.editMyInfo(vo);
-
-		return "success";
-	}
+			int result=dao.editMyInfo(h);
+			
+			if (result!=0){
+				return "success";
+			}else {
+				return "redirect:editinfo";
+			}
+		}
 
 	@RequestMapping(value = "/proupform") // 프로젝트 업로드 폼 페이지
 	public ModelAndView proupform(HttpServletRequest request) {
