@@ -42,7 +42,7 @@
 			<option value="">선택하기</option>
 			<option value="0"<c:if test="${cno == 0 }"> selected </c:if> >모두보기</option>
 			<option value="2"<c:if test="${cno == 2 }"> selected </c:if> >펀딩진행중</option>
-			<option value="1"<c:if test="${cno == 3 }"> selected </c:if> >결제완료</option>
+			<option value="3"<c:if test="${cno == 3 }"> selected </c:if> >결제완료</option>
 		</select>
 	</div>
 	<div align="right">
@@ -67,14 +67,34 @@
 				</c:if>
 				<td class="t2">
 					<div class="card">
-						<a href="story?projectNo=${e.PROJECTNO}"> <img id="projectMainImage"
-							src="resources/images/${e.PROJECTMAINIMAGE}" class="imgmar">
-						</a>
+						<c:choose>
+							<c:when test="${e.PROJECTSTATUS==3}">
+								<div class="endcontainer">
+								<a href="story?projectNo=${e.PROJECTNO }">
+									<img class="imgmar endpro" src="resources/images/${e.PROJECTMAINIMAGE }">
+								</a>
+								<div class="centered">결제<br>완료</div>
+								</div>
+							</c:when>
+							<c:when test="${e.PROJECTSTATUS==2}">
+								<a href="story?projectNo=${e.PROJECTNO  }">
+									<img class="imgmar" src="resources/images/${e.PROJECTMAINIMAGE }">
+								</a>
+							</c:when>
+							</c:choose>
 						<div class="container">
-							<p id="">후월날짜: ${e.DONATEDAY}</p>
+							<p id="">후원날짜: ${e.DONATEDAY}</p>
 							<p id="">프로젝트 : ${e.PROJECTNAME}</p>
 							<p id="">후원 금액 : ${e.DONATEMONEY}</p>
-							<p id="">
+							<p id=""> 
+							<c:choose>
+							<c:when test="${e.PROJECTSTATUS==3}">
+								결제완료
+							</c:when>
+							<c:when test="${e.PROJECTSTATUS==2}">
+								진행중
+							</c:when>
+							</c:choose>
 								<input id="donateNo" type="hidden" value="${e.DONATENO}">
 								<input type="button" class="deleteBtn btns" value="기부 취소">
 								<input type="hidden" class="productNo" value="${e.PRODUCTNO}">
@@ -217,7 +237,7 @@
 		$('#status').on('change', function() {
 			let Pstatus = $(this).val();
 			 
-			 if(Pstatus == 1){
+			 if(Pstatus == 3){
 				  location.href="mydonate?projectStatus="+$('#status').val();
 			 }else if(Pstatus == 2){
 				 location.href="mydonate?projectStatus="+$('#status').val();

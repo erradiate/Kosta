@@ -161,6 +161,7 @@
                 from project p, projectdonate d
   			where p.projectNo=d.projectNo and d.memberNo=#{memberNo} 
   			<if test="projectStatus != 0">and projectStatus=#{projectStatus}</if>
+  			<if test="projectStatus == 0">and (ProjectStatus=2 or projectStatus=3)</if>
   			 order by p.projectNo
   		) a
   		) WHERE r_num between #{begin} and #{end}
