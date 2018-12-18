@@ -43,6 +43,7 @@
 		(
 		select *
 		from project
+		where projectStatus!=1 and projectStatus!=4
 		order by projectStartDate
 		) p, category c
 
@@ -89,7 +90,7 @@
 		select
 		count(*) cnt
 		from project
-		where categoryNo=#{categoryNo}
+		where categoryNo=#{categoryNo} and projectStatus!=1 and projectStatus!=4
 	</select>
 	
 	<!-- 1214 수정한 것 -->
