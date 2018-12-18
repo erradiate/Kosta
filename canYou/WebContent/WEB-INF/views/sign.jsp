@@ -138,7 +138,7 @@ input[type=radio]{
                         </div>  
                          <div>   
                             <label for="pwd_ck"></label> <input type="password" id="pwd_ck"
-                            name="memberPwd" placeholder="비밀번호 확인" onblur="ck_pwd2()" required>
+                             placeholder="비밀번호 확인" onblur="ck_pwd2()" required>
                              <span id="MsgPwck" class="none">유효성체크</span>
                         </div>   
                         <div>    
