@@ -43,10 +43,14 @@
 	<option value="3">검토반려</option>
 	</select>
 	</div>
-	
-	<div style="float: left; width: 50%;">
-		<input type="text" size="50px" />
-		<input type="submit" value="검색" class="btns"></input>
+	<div align="right">
+		<form method="POST" action="myprojectearch">
+			<input type="hidden" name="page" value="1"> 
+				<input name="searchValue"
+				id="searchIndex" size="80px" pattern=".{2,}"
+				title="최소한 2자 이상의 글자가 있어야 합니다."> <input type="submit"
+				value="검색하기" class="btns">
+		</form>
 	</div>
 	<br>
 	<br>

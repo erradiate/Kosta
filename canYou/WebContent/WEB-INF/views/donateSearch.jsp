@@ -35,7 +35,7 @@
 </style>
 
 <div id="mydonateList">
-	<h1 style="font-size: 20px">내 후원현황</h1>
+	<h1 style="font-size: 20px">내 후원현황 검색결과</h1>
 	<br>
 	<div style="float: left; width: 50%;">
 		<select id="exam" style="width: 300px">
@@ -98,7 +98,7 @@
                            </c:when>
 								<c:otherwise>
 									<a
-										href="mydonate?page=
+										href="donatesearch?page=
          ${(pageInfo.currentBlock-1)*pageInfo.pagesPerBlock }">
 										◀</a>
 								</c:otherwise>
@@ -110,7 +110,7 @@
 									<c:forEach begin="1" end="${pageInfo.pagesPerBlock}"
 										varStatus="num">
                         [<a
-											href="mydonate?page=${(pageInfo.currentBlock - 1) * pageInfo.pagesPerBlock + num.count }">
+											href="donatesearch?page=${(pageInfo.currentBlock - 1) * pageInfo.pagesPerBlock + num.count }">
 											${(pageInfo.currentBlock- 1) * pageInfo.pagesPerBlock + num.count }</a>]
                        </c:forEach>
 								</c:when>
@@ -119,7 +119,7 @@
 										begin="${(pageInfo.currentBlock-1)*pageInfo.pagesPerBlock + 1}"
 										end="${pageInfo.totalPages}" varStatus="num">
                         [<a
-											href="mydonate?page=${(pageInfo.currentBlock - 1) * pageInfo.pagesPerBlock + num.count }">
+											href="donatesearch?page=${(pageInfo.currentBlock - 1) * pageInfo.pagesPerBlock + num.count }">
 											${(pageInfo.currentBlock - 1) * pageInfo.pagesPerBlock + num.count }</a>]
                     </c:forEach>
 								</c:otherwise>
@@ -133,7 +133,7 @@
                 </c:when>
 								<c:otherwise>
 									<a
-										href="mydonate?page=${pageInfo.currentBlock * pageInfo.pagesPerBlock + 1 }">
+										href="donatesearch?page=${pageInfo.currentBlock * pageInfo.pagesPerBlock + 1 }">
 										▶</a>
 								</c:otherwise>
 							</c:choose>
@@ -146,7 +146,7 @@
                            </c:when>
 								<c:otherwise>
 									<a
-										href="mydonate?searchType=${searchType}&searchValue=${searchValue}&page=
+										href="donatesearch?searchType=${searchType}&searchValue=${searchValue}&page=
          ${(pageInfo.currentBlock-1)*pageInfo.pagesPerBlock }">
 										◀</a>
 								</c:otherwise>
@@ -158,7 +158,7 @@
 									<c:forEach begin="1" end="${pageInfo.pagesPerBlock}"
 										varStatus="num">
                         [<a
-											href="mydonate?searchType=${searchType}&searchValue=${searchValue}&page=
+											href="donatesearch?searchType=${searchType}&searchValue=${searchValue}&page=
                         ${(pageInfo.currentBlock - 1) * pageInfo.pagesPerBlock + num.count }">
 											${(pageInfo.currentBlock- 1) * pageInfo.pagesPerBlock + num.count }</a>]
                        </c:forEach>
@@ -168,7 +168,7 @@
 										begin="${(pageInfo.currentBlock-1)*pageInfo.pagesPerBlock + 1}"
 										end="${pageInfo.totalPages}" varStatus="num">
                         [<a
-											href="mydonate?searchType=${searchType}&searchValue=${searchValue}&page=${(pageInfo.currentBlock - 1) * pageInfo.pagesPerBlock + num.count }">
+											href="donatesearch?searchType=${searchType}&searchValue=${searchValue}&page=${(pageInfo.currentBlock - 1) * pageInfo.pagesPerBlock + num.count }">
 											${(pageInfo.currentBlock - 1) * pageInfo.pagesPerBlock + num.count }</a>]
                     </c:forEach>
 								</c:otherwise>
@@ -182,7 +182,7 @@
                						 </c:when>
 								<c:otherwise>
 									<a
-										href="mydonate?searchType=${searchType}&searchValue=${searchValue}&page=${pageInfo.currentBlock * pageInfo.pagesPerBlock + 1 }">
+										href="donatesearch?searchType=${searchType}&searchValue=${searchValue}&page=${pageInfo.currentBlock * pageInfo.pagesPerBlock + 1 }">
 										▶</a>
 								</c:otherwise>
 							</c:choose>

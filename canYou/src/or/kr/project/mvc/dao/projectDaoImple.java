@@ -140,8 +140,8 @@ public class projectDaoImple implements projectDao {
 	// 댓글 리스트 보여줌
 
 	public List<ReplyVO> replyList(String i) {
-		return  ss.selectList("project.replyList", i);
-		
+		return ss.selectList("project.replyList", i);
+
 	}
 
 	// 모든 프로젝트 둘러보기 -페이징 처리
@@ -190,14 +190,13 @@ public class projectDaoImple implements projectDao {
 
 		return list;
 	}
-	
-	//1214 추가
+
+	// 1214 추가
 	// 카테고리별 프로젝트의 수 구하기 (+서브 카테고리 12/14 김다솜 추가)
 	public int getCategoryCount2(SubCategoryVO vo) {
 		return ss.selectOne("paging.listCategory2", vo);
 	}
-	
-	
+
 	// 카테고리별 프로젝트 보기 + 서브 카테고리
 	public List<ProjectVO> lookCategoryProject2(Map<String, String> categoryList) {
 		System.out.println("-----------------------------");
@@ -217,7 +216,7 @@ public class projectDaoImple implements projectDao {
 		return ss.selectList("project.subcaname", categoryName);
 	}
 
-	// 인기 프로젝트 보기 
+	// 인기 프로젝트 보기
 	public List<ProjectVO> popularList() {
 		return ss.selectList("project.popularList");
 	}
@@ -231,13 +230,35 @@ public class projectDaoImple implements projectDao {
 	public List<ProjectVO> deadlineList() {
 		return ss.selectList("project.deadlineList");
 	}
-	
+
 	// 모든 프로젝트 서치
-		public List<ProjectVO> getListSearch(SearchVO svo){
-			return ss.selectList("search.aplsearch", svo);
-		}
-		
-		public int getTotalCount(SearchVO svo){
-			return ss.selectOne("search.aplcount",svo);
-		}
+	public List<ProjectVO> getListSearch(SearchVO svo) {
+		return ss.selectList("search.aplsearch", svo);
+	}
+
+	// 모든 프로젝스 서치 총 개수
+	public int getTotalCount(SearchVO svo) {
+		return ss.selectOne("search.aplcount", svo);
+	}
+
+	// 내 후원현황 서치
+	public List<HashMap> donateListSearch(SearchVO svo) {
+		List<HashMap> list = ss.selectList("search.mdlsearch", svo);
+		return list;
+	}
+
+	// 내 후원현황 서치 총 개수
+	public int donateTotalCount(SearchVO vo) {
+		return ss.selectOne("search.mdlcount", vo);
+	}
+
+	// 내가 만든 프로젝트 서치
+	public List<ProjectVO> myprojectListSearch(SearchVO svo) {
+		return ss.selectList("search.mypsearch", svo);
+	}
+
+	// 내가 만든 프로젝트 서치 총 개수
+	public int mypsearchTotalCount(SearchVO vo) {
+		return ss.selectOne("search.mypcount", vo);
+	}
 }

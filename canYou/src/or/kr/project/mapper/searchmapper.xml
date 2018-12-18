@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="search">
-
+<!-- 모든 프로젝트 검색 총 개수 -->
    <select id="aplcount" resultType="int" parameterType="searchvo">
   		select count(*) cnt from project p, member m
   		<if test="searchType != null">
@@ -21,7 +21,7 @@
   		</if>
   	</select>
   	
-  	
+<!--   	모든 프로젝트 검색  -->
   	  	<select id="aplsearch" resultType="projvo" parameterType="searchvo" >
       select * from (
   		select rownum r_num, a.projectNo, a.projectName, a.projectMainImage, 
@@ -46,8 +46,50 @@
   		 </if>
   			 order by p.projectNo
   		) a
-  		) WHERE  r_num between #{begin} and #{end}
+  		) WHERE r_num between #{begin} and #{end}
   		 
   	</select>
+  	
+  	<!-- 내 후원현황 프로젝트 검색 총 개수 -->
+   <select id="mdlcount" resultType="int" parameterType="searchvo">
+  		select count(*) cnt from projectdonate d, project p where p.projectNo=d.projectNo and d.memberNo=#{memberNo} and p.projectName Like '%'|| #{searchValue} ||'%'
+  	</select>
+  	
+<!--   	내 후원현황  프로젝트 검색  -->
+  	  	<select id="mdlsearch" resultType="HashMap" parameterType="searchvo" >
+     select * from (
+  		select rownum r_num, a.projectNo, a.donateNo, a.projectName, a.donateDay,
+        a.donateMoney , a.productNo, a.projectMainImage from 
+  		(
+  			select 
+            p.projectNo, d.donateNo, p.projectName, to_char(d.donateDay, 'yyyy.MM.dd')
+            donateDay, d.donateMoney , d.productNo, p.projectMainImage
+                from project p, projectdonate d
+  			where p.projectNo=d.projectNo and d.memberNo=#{memberNo} and projectName Like '%'|| #{searchValue} ||'%' 
+  			 order by p.projectNo
+  		) a
+  		) WHERE r_num between #{begin} and #{end} 
+  	</select>
+  	
+  	
+  	<!-- 마이페이지 내가 만든 프로젝트 검색 -->
+	<select id="mypsearch" parameterType="searchvo"
+		resultType="projvo">
+		 select projectNo, memberNo, projectName, projectCost,
+		to_char(projectStartDate,'yyyy-MM-dd') projectStartDate,
+		to_char(projectEndDate,'yyyy-MM-dd') projectEndDate, projectFundCnt,
+		projectMainImage,projectStory,
+		projectStep, projectStatus, categoryNo,
+		projectCurCost from (
+  		select rownum r_num, a.* from 
+  		(select * from project where memberNo=#{memberNo} and projectName Like '%'|| #{searchValue} ||'%'  
+  		order by projectNo
+  		) a
+  		) WHERE r_num between #{begin} and #{end}
+	</select>
+	<!-- 내가 만든 프로젝트 검색 총 갯수 -->
+	<select id="mypcount" parameterType="searchvo" resultType="int">
+		select count(*) cnt from project where memberNo=#{memberNo} and projectName Like '%'|| #{searchValue} ||'%'
+	</select>
   	</mapper>
   	
