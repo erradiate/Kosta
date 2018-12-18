@@ -86,4 +86,12 @@ public class AdminController {
 		
 		return "redirect:admin.daegi";
 	}
+	
+	@RequestMapping(value="/admin.denied")
+	public String prodenied(int projectNo) {
+		
+		dao.denied(projectNo);
+		
+		return "redirect:admin.daegi";
+	}
 }

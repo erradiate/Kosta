@@ -17,7 +17,7 @@
 		select rownum as
 		r_num, a.*
 		from
-		(select * from project order by projectNo
+		(select * from project where projectStatus!=1 and projectStatus!=4 order by projectNo
 		) a
 		)
 		where r_num

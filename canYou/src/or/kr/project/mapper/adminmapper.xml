@@ -12,4 +12,8 @@
 	<update id="ok" parameterType="projvo">
 		update project set projectStatus=2, projectStep=#{projectStep} where projectNo=#{projectNo}
 	</update>
+	
+	<update id="denied" parameterType="int">
+		update project set projectStatus=4 where projectNo=#{projectNo}
+	</update>
 </mapper>

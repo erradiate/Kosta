@@ -108,7 +108,7 @@ $(document).ready(function(){
 			<div align="right">
 				<input type="button" id="wordBtn" class="btns" value="¿öµå·Î º¸±â">
 				<input type="submit" id="wBtn" class="btns" value="½ÂÀÎ">	
-				<input type="submit" id="wBtn" class="btns" value="½ÂÀÎ°ÅºÎ">	
+				<input type="button" id="denied" class="btns" value="½ÂÀÎ°ÅºÎ">	
 			</div>
 			
 			<br>
@@ -134,9 +134,23 @@ $(document).ready(function(){
 		$('#wordBtn').click(function(){
 			location.href="download?projectNo="+$('#projectNo').val();
 		});
+		
+		$('#denied').click(function(){
+			var form=document.createElement("form");
+			form.setAttribute("method", "post");
+			form.setAttribute("action", "admin.denied");
+			
+			var hiddenField=document.createElement("input");
+			hiddenField.setAttribute("type", "hidden");
+			hiddenField.setAttribute("name", "projectNo");
+			hiddenField.setAttribute("value", ${list.projectNo});
+			form.appendChild(hiddenField);
+			
+			document.body.appendChild(form);
+			
+			form.submit();
+		})
 	});
-	
-	
 </script>
 
 

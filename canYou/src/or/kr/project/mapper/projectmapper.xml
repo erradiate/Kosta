@@ -196,14 +196,14 @@
 		to_char(projectEndDate,'yyyy-MM-dd') projectEndDate,projectFundCnt,
 		projectMainImage,projectStory,projectStep,projectStatus
 		,categoryNo,
-		projectCurCost from project where projectNo=#{projectNo} and projectStatus!=1 and projectStatus!=4
+		projectCurCost from project where projectNo=#{projectNo}
 	</select>
 
-	<!-- 수정 폼 view -->
-	<select id="modifyview" parameterType="String"
+	<!-- 1218 수정 폼 view -->
+	<select id="modifyview" parameterType="projvo"
 		resultType="projvo">
 		select projectName, projectMainImage, projectStory from
-		project where projectNo=#{projectNo}
+		project where projectNo=#{projectNo} and memberno=#{memberNo}
 	</select>
 
 	<!-- 수정 -->

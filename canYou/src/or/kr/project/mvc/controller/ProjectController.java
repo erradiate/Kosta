@@ -262,6 +262,8 @@ public class ProjectController {
 	public String updateView(Model m, HttpServletRequest req, int projectNo) {
 		ProjectVO vo3=new ProjectVO();
 		
+		System.out.println("프로젝트 번호 : " + projectNo);
+		
 		SecurityContext impl=SecurityContextHolder.getContext();	// 세션에서 spring security 정보를 가져옴
 		String implstr=impl.getAuthentication().getName();	// security 정보에서 세션에 담겨있는 로그인 정보 중 ID 가져옴
 		MemberVO vo2=dao.memname(implstr);	// ID를 토대로 회원정보 가져옴 (회원 번호, 회원 이름)

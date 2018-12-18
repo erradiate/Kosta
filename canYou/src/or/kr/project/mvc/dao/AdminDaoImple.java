@@ -22,4 +22,7 @@ public class AdminDaoImple {
 		ss.update("admin.ok", vo);
 	}
 
+	public void denied(int projectNo) {
+		ss.update("admin.denied", projectNo);
+	}
 }
