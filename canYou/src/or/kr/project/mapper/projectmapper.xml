@@ -289,4 +289,12 @@
 		where r between 1 and 8
 	</select>
 
+	<!-- 회원가입 -->
+	<insert id="addMember" parameterType="mvo">
+		insert into member values(
+			member_seq.nextVal,#{memberId},#{memberPwd},#{memberName},#{memberAddr},#{memberPhone},#{memberEmail},
+			#{memberGender},#{memberAge},#{memberAccount},#{memberImage},2,0,1
+		)
+	</insert>
+
 </mapper>

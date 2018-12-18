@@ -59,7 +59,7 @@
 		TO_DATE(#{projectEndDate},'yyyy-mm-dd'),
 		0, #{projectMainImage},
 		#{projectStory},
-		'Z', 2, 0)
+		'Z', 1, 0)
 		<selectKey keyProperty="projectNo" resultType="int"
 			order="AFTER">
 			SELECT project_seq.CURRVAL FROM dual
@@ -199,11 +199,11 @@
 		projectCurCost from project where projectNo=#{projectNo}
 	</select>
 
-	<!-- 수정 폼 view -->
-	<select id="modifyview" parameterType="String"
+	<!-- 1218 수정 폼 view -->
+	<select id="modifyview" parameterType="projvo"
 		resultType="projvo">
 		select projectName, projectMainImage, projectStory from
-		project where projectNo=#{projectNo}
+		project where projectNo=#{projectNo} and memberno=#{memberNo}
 	</select>
 
 	<!-- 수정 -->
@@ -288,5 +288,13 @@
 		)
 		where r between 1 and 8
 	</select>
+
+	<!-- 회원가입 -->
+	<insert id="addMember" parameterType="mvo">
+		insert into member values(
+			member_seq.nextVal,#{memberId},#{memberPwd},#{memberName},#{memberAddr},#{memberPhone},#{memberEmail},
+			#{memberGender},#{memberAge},#{memberAccount},#{memberImage},2,0,1
+		)
+	</insert>
 
 </mapper>

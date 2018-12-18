@@ -10,6 +10,7 @@
 	}
 </style>
 
+
 <div id="loginWrap">
 	<h3>Login with UserID and Password</h3>
 	<c:url var="loginUrl" value="/j_spring_security_check"></c:url>
@@ -27,6 +28,7 @@
 				<td colspan="2"><input name="submit" class="btns" type="submit" value="login"/></td>
 			</tr>
 		</table>
-		회원이 아니신가요? 회원가입
+		회원이 아니신가요? <a href="sign">회원가입</a>
 	</form>
 </div>
+

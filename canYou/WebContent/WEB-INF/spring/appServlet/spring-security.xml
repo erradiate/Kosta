@@ -16,6 +16,7 @@
 
 <http authentication-manager-ref="jdbc-auth"
 access-decision-manager-ref="accessDecisionManager">
+
 	<intercept-url pattern="/proupform" access="1,2"/>
 	<intercept-url pattern="/mylist" access="1,2"/>
 	<intercept-url pattern="/donate" access="1,2"/>
@@ -34,8 +35,8 @@ access-decision-manager-ref="accessDecisionManager">
 	authentication-failure-url="/denied"
 		username-parameter="username"
 		password-parameter="password"
-		default-target-url="/index"/>
-	<logout invalidate-session="true" logout-success-url="/index"
+		default-target-url="/"/>
+	<logout invalidate-session="true" logout-success-url="/"
 		logout-url="/j_spring_security_logout" />
 	<access-denied-handler error-page="/denied"/>
 	<session-management invalid-session-url="/login">

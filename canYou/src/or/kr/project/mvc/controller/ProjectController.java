@@ -664,4 +664,19 @@ public class ProjectController {
 	public String licensee() {
 		return "licensee";
 	}
+
+	// 회원가입 성공
+	@RequestMapping(value = "/addMember")
+	public String addMember(MemberVO vo) {
+		dao.addMember(vo);
+
+		return "main";
+	}
+
+	// 회원가입 폼으로
+	@RequestMapping(value = "/sign")
+	public String sign() {
+		return "sign";
+	}
+
 }

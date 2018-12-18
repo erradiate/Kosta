@@ -261,4 +261,9 @@ public class projectDaoImple implements projectDao {
 	public int mypsearchTotalCount(SearchVO vo) {
 		return ss.selectOne("search.mypcount", vo);
 	}
+	
+	//회원가입
+	public void addMember(MemberVO vo) {
+		ss.insert("project.addMember",vo);
+	}
 }
