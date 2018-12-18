@@ -38,10 +38,11 @@
 	<h1 style="font-size: 20px">내 후원현황</h1>
 	<br>
 	<div style="float: left; width: 50%;">
-		<select id="exam" style="width: 300px">
-			<option value="1">모두보기</option>
-			<option value="2">펀딩진행중</option>
-			<option value="3">결제완료</option>
+		<select id="status" style="width: 300px">
+			<option value="">선택하기</option>
+			<option value="0"<c:if test="${cno == 0 }"> selected </c:if> >모두보기</option>
+			<option value="2"<c:if test="${cno == 2 }"> selected </c:if> >펀딩진행중</option>
+			<option value="1"<c:if test="${cno == 3 }"> selected </c:if> >결제완료</option>
 		</select>
 	</div>
 	<div align="right">
@@ -110,7 +111,7 @@
 									<c:forEach begin="1" end="${pageInfo.pagesPerBlock}"
 										varStatus="num">
                         [<a
-											href="mydonate?page=${(pageInfo.currentBlock - 1) * pageInfo.pagesPerBlock + num.count }">
+											href="mydonate?page=${(pageInfo.currentBlock - 1) * pageInfo.pagesPerBlock + num.count }&projectStatus=${cno}">
 											${(pageInfo.currentBlock- 1) * pageInfo.pagesPerBlock + num.count }</a>]
                        </c:forEach>
 								</c:when>
@@ -119,7 +120,7 @@
 										begin="${(pageInfo.currentBlock-1)*pageInfo.pagesPerBlock + 1}"
 										end="${pageInfo.totalPages}" varStatus="num">
                         [<a
-											href="mydonate?page=${(pageInfo.currentBlock - 1) * pageInfo.pagesPerBlock + num.count }">
+											href="mydonate?page=${(pageInfo.currentBlock - 1) * pageInfo.pagesPerBlock + num.count }&projectStatus=${cno}">
 											${(pageInfo.currentBlock - 1) * pageInfo.pagesPerBlock + num.count }</a>]
                     </c:forEach>
 								</c:otherwise>
@@ -133,7 +134,7 @@
                 </c:when>
 								<c:otherwise>
 									<a
-										href="mydonate?page=${pageInfo.currentBlock * pageInfo.pagesPerBlock + 1 }">
+										href="mydonate?page=${pageInfo.currentBlock * pageInfo.pagesPerBlock + 1 }&projectStatus=${cno}">
 										▶</a>
 								</c:otherwise>
 							</c:choose>
@@ -147,7 +148,7 @@
 								<c:otherwise>
 									<a
 										href="mydonate?searchType=${searchType}&searchValue=${searchValue}&page=
-         ${(pageInfo.currentBlock-1)*pageInfo.pagesPerBlock }">
+         ${(pageInfo.currentBlock-1)*pageInfo.pagesPerBlock }&projectStatus=${cno}">
 										◀</a>
 								</c:otherwise>
 							</c:choose>
@@ -159,7 +160,7 @@
 										varStatus="num">
                         [<a
 											href="mydonate?searchType=${searchType}&searchValue=${searchValue}&page=
-                        ${(pageInfo.currentBlock - 1) * pageInfo.pagesPerBlock + num.count }">
+                        ${(pageInfo.currentBlock - 1) * pageInfo.pagesPerBlock + num.count }&projectStatus=${cno}">
 											${(pageInfo.currentBlock- 1) * pageInfo.pagesPerBlock + num.count }</a>]
                        </c:forEach>
 								</c:when>
@@ -168,7 +169,7 @@
 										begin="${(pageInfo.currentBlock-1)*pageInfo.pagesPerBlock + 1}"
 										end="${pageInfo.totalPages}" varStatus="num">
                         [<a
-											href="mydonate?searchType=${searchType}&searchValue=${searchValue}&page=${(pageInfo.currentBlock - 1) * pageInfo.pagesPerBlock + num.count }">
+											href="mydonate?searchType=${searchType}&searchValue=${searchValue}&page=${(pageInfo.currentBlock - 1) * pageInfo.pagesPerBlock + num.count }&projectStatus=${cno}">
 											${(pageInfo.currentBlock - 1) * pageInfo.pagesPerBlock + num.count }</a>]
                     </c:forEach>
 								</c:otherwise>
@@ -182,7 +183,7 @@
                						 </c:when>
 								<c:otherwise>
 									<a
-										href="mydonate?searchType=${searchType}&searchValue=${searchValue}&page=${pageInfo.currentBlock * pageInfo.pagesPerBlock + 1 }">
+										href="mydonate?searchType=${searchType}&searchValue=${searchValue}&page=${pageInfo.currentBlock * pageInfo.pagesPerBlock + 1 }&projectStatus=${cno}">
 										▶</a>
 								</c:otherwise>
 							</c:choose>
@@ -210,5 +211,19 @@
 								}
 							});
 				});
+	});
+	
+	$(function() {
+		$('#status').on('change', function() {
+			let Pstatus = $(this).val();
+			 
+			 if(Pstatus == 1){
+				  location.href="mydonate?projectStatus="+$('#status').val();
+			 }else if(Pstatus == 2){
+				 location.href="mydonate?projectStatus="+$('#status').val();
+			 }else if(Pstatus == 0){
+				 location.href="mydonate";
+			 }
+		});
 	});
 </script>

@@ -94,8 +94,8 @@ public class projectDaoImple implements projectDao {
 	}
 
 	// 투자한 프로젝트 총 개수
-	public int myDonateCount(int i) {
-		return ss.selectOne("paging.mydonateTotal", i);
+	public int myDonateCount(SearchVO vo) {
+		return ss.selectOne("paging.mydonateTotal", vo);
 
 	}
 
@@ -163,8 +163,8 @@ public class projectDaoImple implements projectDao {
 	}
 
 	// 마이페이지 - 내가만든 프로젝트 리스트 총개 수
-	public int myPTotalCount(int i) {
-		return ss.selectOne("paging.myPlistTotal", i);
+	public int myPTotalCount(SearchVO vo) {
+		return ss.selectOne("paging.myPlistTotal", vo);
 	}
 
 	// 마이페이지-개인정보 수정

@@ -43,7 +43,6 @@
 		(
 		select *
 		from project
-		where projectStatus!=1 and projectStatus!=4
 		order by projectStartDate
 		) p, category c
 
@@ -90,7 +89,7 @@
 		select
 		count(*) cnt
 		from project
-		where categoryNo=#{categoryNo} and projectStatus!=1 and projectStatus!=4
+		where categoryNo=#{categoryNo}
 	</select>
 	
 	<!-- 1214 수정한 것 -->
@@ -134,7 +133,9 @@
 		(
 		select rownum as r_num, a.*
 		from
-		(select * from project where memberNo=#{memberNo} order by
+		(select * from project where memberNo=#{memberNo} 
+		<if test="projectStatus != 0">and projectStatus=#{projectStatus} </if>
+		order by
 		projectNo
 		) a
 		)
@@ -142,9 +143,9 @@
 		where r_num between #{begin} and #{end}
 	</select>
 	<!-- 내가 만든 프로젝트 리스트 총 갯수 -->
-	<select id="myPlistTotal" parameterType="int" resultType="int">
+	<select id="myPlistTotal" parameterType="searchvo" resultType="int">
 		select
-		count(*) cnt from project where memberNo=#{memberNo}
+		count(*) cnt from project where memberNo=#{memberNo}<if test="projectStatus != 0">and projectStatus=#{projectStatus}</if>
 	</select>
 
 	<!-- 마이페이지 후원 목록 리스트 -->
@@ -152,19 +153,20 @@
 		resultType="HashMap">
 		 select * from (
   		select rownum r_num, a.projectNo, a.donateNo, a.projectName, a.donateDay,
-        a.donateMoney , a.productNo, a.projectMainImage from 
+        a.donateMoney , a.productNo, a.projectMainImage, a.projectStatus from 
   		(
   			select 
             p.projectNo, d.donateNo, p.projectName, to_char(d.donateDay, 'yyyy.MM.dd')
-            donateDay, d.donateMoney , d.productNo, p.projectMainImage
+            donateDay, d.donateMoney , d.productNo, p.projectMainImage, p.projectStatus
                 from project p, projectdonate d
-  			where p.projectNo=d.projectNo and d.memberNo=#{memberNo}
+  			where p.projectNo=d.projectNo and d.memberNo=#{memberNo} 
+  			<if test="projectStatus != 0">and projectStatus=#{projectStatus}</if>
   			 order by p.projectNo
   		) a
   		) WHERE r_num between #{begin} and #{end}
 	</select>
 	<!-- 마이페이지 후원 리스트 총 갯수 -->
-	<select id="mydonateTotal" parameterType="int" resultType="int">
-		select count(*) cnt from projectdonate d, project p where p.projectNo=d.projectNo and d.memberNo=#{memberNo} 
+	<select id="mydonateTotal" parameterType="searchvo" resultType="int">
+		select count(*) cnt from projectdonate d, project p where p.projectNo=d.projectNo and d.memberNo=#{memberNo} <if test="projectStatus != 0">and p.projectStatus=#{projectStatus}</if> 
 	</select>
 </mapper>

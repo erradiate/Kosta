@@ -3,7 +3,16 @@ package or.kr.project.dto;
 public class SearchVO {
 	private String searchType,searchValue,begin,end;
 	private int memberNo;
+	private int projectStatus;
 	
+
+	public int getProjectStatus() {
+		return projectStatus;
+	}
+
+	public void setProjectStatus(int projectStatus) {
+		this.projectStatus = projectStatus;
+	}
 
 	public int getMemberNo() {
 		return memberNo;

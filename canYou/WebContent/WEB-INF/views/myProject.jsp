@@ -33,14 +33,17 @@
 
 </style>
 <div id="mydonateList">
-	<h1 style="font-size: 20px">내가 만든 프로젝트</h1>
+	<h1 style="font-size: 20px">내가 만든 프로젝트 </h1>
+	
 	<br>
 	<div style="float: left; width: 50%;">
-	<select id="exam"  style="width:320px">
-	<option value="1">검토중</option>
-	<option value="2">진행중</option>
-	<option value="3">후원마감</option>
-	<option value="3">검토반려</option>
+	<select id="status" style="width:320px">
+	<option value="">선택하기</option>
+	<option value="0" <c:if test="${cno == 0 }"> selected </c:if> >모두보기</option>
+	<option value="1" <c:if test="${cno == 1 }"> selected </c:if> >검토중</option>
+	<option value="2" <c:if test="${cno == 2 }"> selected </c:if> >진행중</option>
+	<option value="3" <c:if test="${cno == 3 }"> selected </c:if>>후원마감</option>
+	<option value="4" <c:if test="${cno == 4 }"> selected </c:if>>검토반려</option>
 	</select>
 	</div>
 	<div align="right">
@@ -142,7 +145,7 @@
 								<c:otherwise>
 									<a
 										href="myProject?page=
-         ${(pageInfo.currentBlock-1)*pageInfo.pagesPerBlock }">
+         ${(pageInfo.currentBlock-1)*pageInfo.pagesPerBlock }&projectStatus=${cno}">
 										◀</a>
 								</c:otherwise>
 							</c:choose>
@@ -153,7 +156,7 @@
 									<c:forEach begin="1" end="${pageInfo.pagesPerBlock}"
 										varStatus="num">
                         [<a
-											href="myProject?page=${(pageInfo.currentBlock - 1) * pageInfo.pagesPerBlock + num.count }">
+											href="myProject?page=${(pageInfo.currentBlock - 1) * pageInfo.pagesPerBlock + num.count }&projectStatus=${cno}">
 											${(pageInfo.currentBlock- 1) * pageInfo.pagesPerBlock + num.count }</a>]
                        </c:forEach>
 								</c:when>
@@ -162,7 +165,7 @@
 										begin="${(pageInfo.currentBlock-1)*pageInfo.pagesPerBlock + 1}"
 										end="${pageInfo.totalPages}" varStatus="num">
                         [<a
-											href="myProject?page=${(pageInfo.currentBlock - 1) * pageInfo.pagesPerBlock + num.count }">
+											href="myProject?page=${(pageInfo.currentBlock - 1) * pageInfo.pagesPerBlock + num.count }&projectStatus=${cno}">
 											${(pageInfo.currentBlock - 1) * pageInfo.pagesPerBlock + num.count }</a>]
                     </c:forEach>
 								</c:otherwise>
@@ -176,7 +179,7 @@
                 </c:when>
 								<c:otherwise>
 									<a
-										href="myProject?page=${pageInfo.currentBlock * pageInfo.pagesPerBlock + 1 }">
+										href="myProject?page=${pageInfo.currentBlock * pageInfo.pagesPerBlock + 1 }&projectStatus=${cno}">
 										▶</a>
 								</c:otherwise>
 							</c:choose>
@@ -202,7 +205,7 @@
 										varStatus="num">
                         [<a
 											href="myProject?searchType=${searchType}&searchValue=${searchValue}&page=
-                        ${(pageInfo.currentBlock - 1) * pageInfo.pagesPerBlock + num.count }">
+                        ${(pageInfo.currentBlock - 1) * pageInfo.pagesPerBlock + num.count }&projectStatus=${cno}">
 											${(pageInfo.currentBlock- 1) * pageInfo.pagesPerBlock + num.count }</a>]
                        </c:forEach>
 								</c:when>
@@ -211,7 +214,7 @@
 										begin="${(pageInfo.currentBlock-1)*pageInfo.pagesPerBlock + 1}"
 										end="${pageInfo.totalPages}" varStatus="num">
                         [<a
-											href="myProject?searchType=${searchType}&searchValue=${searchValue}&page=${(pageInfo.currentBlock - 1) * pageInfo.pagesPerBlock + num.count }">
+											href="myProject?searchType=${searchType}&searchValue=${searchValue}&page=${(pageInfo.currentBlock - 1) * pageInfo.pagesPerBlock + num.count }&projectStatus=${cno}">
 											${(pageInfo.currentBlock - 1) * pageInfo.pagesPerBlock + num.count }</a>]
                     </c:forEach>
 								</c:otherwise>
@@ -225,7 +228,7 @@
                						 </c:when>
 								<c:otherwise>
 									<a
-										href="myProject?searchType=${searchType}&searchValue=${searchValue}&page=${pageInfo.currentBlock * pageInfo.pagesPerBlock + 1 }">
+										href="myProject?searchType=${searchType}&searchValue=${searchValue}&page=${pageInfo.currentBlock * pageInfo.pagesPerBlock + 1 }&projectStatus=${cno}">
 										▶</a>
 								</c:otherwise>
 							</c:choose>
@@ -236,4 +239,31 @@
 		</tfoot>
 	</table>
 </div>
+<script>
+/* $(function(){
+	$("#status").change(function(){
+		var projectNo = $('#e.projectStatus').val();
+		alert("띠용");
 
+	});
+});
+ */
+
+$(function() {
+	$('#status').on('change', function() {
+		let Pstatus = $(this).val();
+		 
+		 if(Pstatus == 1){
+			  location.href="myProject?projectStatus="+$('#status').val();
+		 }else if(Pstatus == 2){
+			 location.href="myProject?projectStatus="+$('#status').val();
+		 }else if(Pstatus == 3){
+			 location.href="myProject?projectStatus="+$('#status').val();
+		 }else if(Pstatus == 4){
+			 location.href="myProject?projectStatus="+$('#status').val();
+		 }else if(Pstatus == 0){
+			 location.href="myProject";
+		 }
+	});
+});
+</script>
