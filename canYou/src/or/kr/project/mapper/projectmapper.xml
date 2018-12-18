@@ -263,7 +263,7 @@
 		from (
 		    select projectNo,projectMainImage,projectFundCnt, ROW_NUMBER() OVER(ORDER BY projectFundCnt desc) as r
 		    from project
-		    where projectFundCnt is not null
+		    where projectFundCnt is not null and ProjectStatus=2
 		)
 		where r between 1 and 8
 	</select>
@@ -271,10 +271,10 @@
 	<!-- 새로운 프로젝트 리스트 --> 
 	<select id="newList" resultType="projvo">
 		select projectMainImage,projectNo, r
-		from(
-		    select projectNo,projectMainImage,PROJECTENDDATE, ROW_NUMBER() OVER(ORDER BY PROJECTENDDATE ASC) as r
-		    from project
-		    where PROJECTENDDATE is not null
+		from (
+    		select projectNo,projectMainImage,projectFundCnt, ROW_NUMBER() OVER(ORDER BY projectStartDate desc) as r
+    		from project
+    		where projectStartDate is not null and ProjectStatus=2
 		)
 		where r between 1 and 8
 	</select>
@@ -283,9 +283,9 @@
 	<select id="deadlineList" resultType="projvo">
 		select projectMainImage,projectNo, r
 		from(
-		    select projectNo,projectMainImage,PROJECTSTARTDATE, ROW_NUMBER() OVER(ORDER BY PROJECTSTARTDATE asc) as r
-		    from project
-		    where PROJECTSTARTDATE is not null
+    		select projectNo,projectMainImage,PROJECTSTARTDATE, ROW_NUMBER() OVER(ORDER BY projectEndDate asc) as r
+    		from project
+    		where projectEndDate is not null and ProjectStatus=2
 		)
 		where r between 1 and 8
 	</select>
