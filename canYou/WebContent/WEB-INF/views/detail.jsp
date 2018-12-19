@@ -40,7 +40,6 @@ $(document).ready(function(){
 </script>
 
 
-
 <div>
 		<fieldset>
 			<legend>Project</legend>
