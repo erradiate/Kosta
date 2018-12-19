@@ -109,7 +109,7 @@
 		<p><span class="title">프로젝트 대표 이미지 : </span>
 		<input class="upload-name" value="파일선택" disabled="disabled">
 		<label for="mfile">업로드</label> 
-		<input type="file" id="mfile" name="mfile" class="upload-hidden"></p>
+		<input type="file" id="mfile" name="multipartFile" class="upload-hidden"></p>
 		<p><img id="projectMainImage"></p>
 		
 		</div>

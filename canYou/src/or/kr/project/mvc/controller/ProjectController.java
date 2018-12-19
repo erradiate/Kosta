@@ -288,9 +288,13 @@ public class ProjectController {
 		MemberVO vo2 = dao.memname(implstr); // ID를 토대로 회원정보 가져옴 (회원 번호, 회원 이름)
 		vo3.setMemberNo(vo2.getMemberNo()); // 프로젝트 테이블에 넣을 회원 번호를 넣음
 		vo3.setProjectNo(projectNo);
+		
+		HttpSession s=req.getSession();
+		s.setAttribute("projnum", projectNo);		// 프로젝트 세션을 추가
 
 		ProjectVO vo = dao.modifyview(vo3);
 		m.addAttribute("project", vo);
+		
 
 		return "ProjectModify";
 	}
@@ -314,14 +318,14 @@ public class ProjectController {
 			e.printStackTrace();
 		}
 
-		int projnum = Integer.parseInt((String) s.getAttribute("projnum")); // 세션에 저장되어있는 프로젝트 번호를 넣어줌
+		int projnum = Integer.parseInt(String.valueOf(s.getAttribute("projnum"))); // 세션에 저장되어있는 프로젝트 번호를 넣어줌
 		vo.setProjectNo(projnum);
 		s.removeAttribute("projnum");
 
 		// 프로젝트 모두수정 - 메소드 호출
 		dao.modify(vo);
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("redirect:list?num=" + projnum);
+		mav.setViewName("redirect:story?projectNo=" + projnum);
 		return mav;
 	}
 
