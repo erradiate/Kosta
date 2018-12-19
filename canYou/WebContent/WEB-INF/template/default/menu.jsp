@@ -24,6 +24,10 @@
 	display: block;
 }
 
+.listy{
+	margin: 0px 20px 0px 1470px;
+}
+
 </style>
 
 <div class="menubar">
@@ -51,15 +55,15 @@
 		<li><a href="ProjectUpload">프로젝트 업로드</a></li>
 		<c:choose>
 			<c:when test="${pageContext.request.userPrincipal.name==null }">
-				<li style="margin: 0px 20px 0px 1440px;"><a href="login">로그인
+				<li class="listy"><a href="login">로그인
 				</a></li>
 			</c:when>
 			<c:otherwise>
-				<li style="margin: 0px 20px 0px 1440px;"><a
-					href="j_spring_security_logout">로그아웃 </a></li>
+				<li class="listy">
+				<a href="j_spring_security_logout">로그아웃 </a></li>
 			</c:otherwise>
 		</c:choose>
-		<li style="margin: 0px 0px 0px 0px;"><a href="mypage">마이 페이지</a></li>
+		<li><a href="mypage">마이 페이지</a></li>
 
 	</ul>
 </div>

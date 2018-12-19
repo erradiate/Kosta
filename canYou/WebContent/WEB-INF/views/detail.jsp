@@ -50,7 +50,7 @@ $(document).ready(function(){
 				<div class="left-box">
 				<img id="projectMainImage"
 						src="resources/images/${list.projectMainImage }"
-						style="margin: 20px 30px 30px 40px; width: 420px; height: 420px;"></div>
+						style="margin: 20px 30px 30px 300px; width: 420px; height: 420px;"></div>
 			<table style="margin: 50px 30px 120px 60px;">
 				<thead></thead>
 				<tbody>
