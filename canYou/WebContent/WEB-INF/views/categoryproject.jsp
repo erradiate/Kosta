@@ -47,7 +47,7 @@
 				<input type="submit" value="Logout" class="btns" />
 			</form>
 
-		</c:when>
+		</c:when> 
 	</c:choose>
 	
 	<div id="categoryproject">

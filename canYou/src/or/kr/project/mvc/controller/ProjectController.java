@@ -413,7 +413,7 @@ public class ProjectController {
 		List<String> dateList = new ArrayList<String>(); // 남은 날짜 리스트
 		
 		String categoryName = dao.categoryName(Integer.parseInt(categoryNo)); //카테고리명 출력을 위해...
-		m.addAttribute("categoryName", categoryName);
+		m.addAttribute("categoryName", categoryName); 
 
 		// 무슨 카테고리인지 전달
 		Map<String, String> categoryList = new HashMap<>();

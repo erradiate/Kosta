@@ -329,7 +329,7 @@
   	where memberNo=#{memberNo}
   </update> 	
   
-	<!-- 아이디 중복체크 -->
+	<!-- 아이디 중복체크 --> 
 	<select id="memberIdCheck" parameterType="HashMap" resultType="Integer">
 		select count (*) 
 		from member

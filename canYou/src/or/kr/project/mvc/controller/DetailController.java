@@ -27,7 +27,7 @@ public class DetailController {
 	// 스토리와 관련된 부분이 detail.jsp와 같이 나오는 메소드
 	@GetMapping("/story")
 	public String listView(Model m, String projectNo, HttpServletRequest req) {
-		// project 관련한 정보 빼오기
+		// project 관련한 정보 빼오기 
 		ProjectVO list = dao.projectlist(projectNo);
 		String c=dao.caselone(list.getCategoryNo());
 		String sc=dao.subcaselone(list.getSubCategoryNo());

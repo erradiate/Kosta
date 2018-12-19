@@ -125,7 +125,7 @@ public class projectDaoImple implements projectDao {
 		ss.delete("project.cancle", vo); // 후원 취소
 	}
 
-	public ProjectVO projectlist(String num) {
+	public ProjectVO projectlist(String num) { 
 		return ss.selectOne("project.list", num);
 	}
 
