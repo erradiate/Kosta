@@ -28,19 +28,10 @@ public class WordController {
 	}
 	
 	@RequestMapping(value="/download")
-	public String downloadWord(int projectNo,HttpServletRequest req, 
+	public void downloadWord(int projectNo,HttpServletRequest req, 
 			HttpServletResponse resp, HttpSession session) throws Exception {
 		MemberVO vo = dao.getMember_Project(projectNo);
 		wb.wordCD(vo,req, resp, session);
-		// resp가 commit 될때 까지 대기하는 코드IllegalStateException
-		try {
-			return "redirect:list?num="+projectNo;
-		} catch (IllegalStateException e) {
-			//return "redirect:mypage?num="+projectNo;
-			resp.sendRedirect("mypage");
-		}
-		return null;
-		//return "redirect:list?num="+projectNo;
 	}
 }
 

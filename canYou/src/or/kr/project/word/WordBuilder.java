@@ -261,7 +261,6 @@ public class WordBuilder{
 		// 요청한 브라우저와의 아웃풋 스트림 연결
 		OutputStream outStream = resp.getOutputStream();
 		document.write(outStream);
-		System.out.println("닫힘");
 		outStream.close();
 		
 	}
@@ -382,8 +381,12 @@ public class WordBuilder{
 			String[] stx = contents.split("\r\n\r\n");
 			// 시작점, 끝점의 p 태그 삭제
 			for(int i=0;i<stx.length;i++) {
+				if(stx[i]=="") {
+					System.out.println("빔");
+					continue;
+				}
 				if(i==stx.length-1) {
-					stx[i] = stx[i].substring(3, stx[i].length()-6);
+					stx[i] = stx[i].substring(3,stx[i].length()-6);
 				} else {
 					stx[i] = stx[i].substring(3,stx[i].length()-4);
 				}
