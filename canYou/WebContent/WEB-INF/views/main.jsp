@@ -35,13 +35,15 @@ div.scrollmenu a {
 div.scrollmenu a:hover {
 	background-color: #777;
 }
+
 </style>
 
 <div>
 	<img src="resources/images/1.jpg" id="g"
-		style="margin: 40px 30px 30px 280px; width: 580px; height: 250px;">
+		style="margin: 0px 30px 30px 0px; width: 100%; height: 550px;">
 </div>
-
+<nav style="margin: 0 auto; padding:0% 5% 0% 5%;
+width: 80%;">
 <table>
 	<thead>
 		<tr>
@@ -81,14 +83,15 @@ div.scrollmenu a:hover {
 		</tr>
 	</thead>
 </table>
+</nav>
 
 <div style="float: left; width: 50%">
 	<img src="resources/images/11.jpg"
-		style="margin: 80px 30px 30px 60px; width: 460px; height: 120px;">
+		style="margin: 80px 30px 30px 180px; width: 600px; height: 160px;">
 </div>
 <div style="float: right; width: 50%">
 	<img src="resources/images/22.jpg" class="rightimg"
-		style="margin: 80px 30px 30px 60px; width: 460px; height: 120px;">
+		style="margin: 80px 30px 30px 180px; width: 600px; height: 160px;">
 </div>
 
 <script>

@@ -8,7 +8,7 @@ html, body, div,h1,h2,h3,h4,h5,h6,p {
 }
 
 body{
-	width: 1200px;
+	width: 100%;
 	margin: 0 auto;
 	font-family: Arial, sans-serif;
 	color: #080808;
@@ -21,7 +21,7 @@ p{
 }
 
 body div#header1 {
-	background: #f5f7ee;
+	background: #ffffff;
 	padding: 20px;
 	height: 80px;
 	clear: both;
@@ -40,8 +40,8 @@ body div#header1 #hgroup h2{
 }
 
 #navigation{
-	height: 40px;
-	padding: 10px;
+	height: 50px;
+	padding: 15px;
 	background: #1d1b1b;
 	color:#FFFFFF;
 	font-weight: bold;

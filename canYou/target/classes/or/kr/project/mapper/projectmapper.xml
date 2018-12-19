@@ -263,7 +263,7 @@
 		from (
 		    select projectNo,projectMainImage,projectFundCnt, ROW_NUMBER() OVER(ORDER BY projectFundCnt desc) as r
 		    from project
-		    where projectFundCnt is not null and ProjectStatus=2
+		    where projectFundCnt is not null and ProjectStatus=2 and sysdate>=projectStartDate
 		)
 		where r between 1 and 8
 	</select>
@@ -274,7 +274,7 @@
 		from (
     		select projectNo,projectMainImage,projectFundCnt, ROW_NUMBER() OVER(ORDER BY projectStartDate desc) as r
     		from project
-    		where projectStartDate is not null and ProjectStatus=2
+    		where projectStartDate is not null and ProjectStatus=2 and sysdate>=projectStartDate
 		)
 		where r between 1 and 8
 	</select>
@@ -285,7 +285,7 @@
 		from(
     		select projectNo,projectMainImage,PROJECTSTARTDATE, ROW_NUMBER() OVER(ORDER BY projectEndDate asc) as r
     		from project
-    		where projectEndDate is not null and ProjectStatus=2
+    		where projectEndDate is not null and ProjectStatus=2 and sysdate>=projectStartDate
 		)
 		where r between 1 and 8
 	</select>
@@ -335,5 +335,10 @@
 		from member
 		where memberId=#{memberId}
 	</select>
- 
+
+	<!-- 후원 취소시 프로젝트 후원금 차감 1219 추가 -->
+	<update id="pmoneyminus" parameterType="dvo">
+		update project set projectCurCost=projectCurCost-#{donateMoney}
+		where projectNo=(select projectNo from projectDonate where donateNo=#{donateNo})
+	</update>
 </mapper>
