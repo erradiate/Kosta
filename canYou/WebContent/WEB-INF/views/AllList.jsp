@@ -25,12 +25,17 @@
   padding-bottom: 3px;
 }
 
-
+#castyle{
+	font-size: 50px;
+	font-weight: bold;
+	text-align: center;
+}
 
 </style>
 
 
 	<div id="AllList">
+	<p id="castyle">[ 모든 프로젝트 ]</p>
 		<c:set var="i" value="0" />
 		<c:set var="j" value="3" />
 		<table id="bgy">

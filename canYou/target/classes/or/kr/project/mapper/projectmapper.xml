@@ -341,4 +341,11 @@
 		update project set projectCurCost=projectCurCost-#{donateMoney}
 		where projectNo=(select projectNo from projectDonate where donateNo=#{donateNo})
 	</update>
+	
+	<!-- 카테고리명 나오게 하기 -->
+	<select id="categoryName" parameterType="Integer" resultType="String">
+		select categoryName
+		from category
+		where categoryNo=#{categoryNo}
+	</select>
 </mapper>

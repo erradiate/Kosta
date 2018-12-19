@@ -31,6 +31,7 @@ public class DetailController {
 		ProjectVO list = dao.projectlist(projectNo);
 		String c=dao.caselone(list.getCategoryNo());
 		String sc=dao.subcaselone(list.getSubCategoryNo());
+		//String categoryName = dao.categoryName(categoryNo);
 		m.addAttribute("list",list);
 		m.addAttribute("c", c);
 		m.addAttribute("sc", sc);

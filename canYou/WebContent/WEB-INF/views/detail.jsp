@@ -24,6 +24,13 @@ td{
 	font-size: 20px;
 	line-height: 2em;
 }
+
+#castyle{
+	font-size: 50px;
+	font-weight: bold;
+	text-align: center;
+}
+
 </style>
 <script>
 $(document).ready(function(){
@@ -42,9 +49,15 @@ $(document).ready(function(){
 
 <div>
 		<fieldset>
-			<legend>Project</legend>
 			<form action="update" method="POST" >	
 			<input type="hidden" id="projectNo" name="projectNo" value="${list.projectNo}">
+			<p id="castyle">[ ${c} ]</p>
+			<c:choose>
+					<c:when test="${sc!=null}">
+							-${sc}
+                     </c:when>
+            </c:choose>
+            
 				<h1 style="margin:30px 100px 30px 260px; font-size: 40px; color: black;">프로젝트 이름 : ${list.projectName}</h1>
 				<div class="left-box">
 				<img id="projectMainImage"
@@ -59,17 +72,6 @@ $(document).ready(function(){
 						<tr>
 							<td class="tdclass">${member.memberName}</td>
 						</tr>
-						<!--
-						<tr>
-							<td>카테고리 이름 : <b>[${c}]</b>
-							<c:choose>
-								<c:when test="${sc!=null}">
-									-${sc}
-                            	</c:when>
-                            </c:choose>
-							</td>
-						</tr>
-						  -->
 						<tr>
 							<td>목표금액</td>
 						</tr>

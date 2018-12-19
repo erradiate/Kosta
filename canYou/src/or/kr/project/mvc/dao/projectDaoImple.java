@@ -306,4 +306,9 @@ public class projectDaoImple implements projectDao {
 	public int memberIdCheck(String memberId) {
 		return ss.selectOne("project.memberIdCheck",memberId);
 	}
+	
+	//카테고리 명 출력
+	public String categoryName(int categoryNo) {
+		return ss.selectOne("project.categoryName",categoryNo);
+	}
 }

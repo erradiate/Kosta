@@ -31,6 +31,12 @@
 	height: 240px;
 }
 
+#castyle{
+	font-size: 50px;
+	font-weight: bold;
+	text-align: center;
+}
+
 </style>
 
 	<c:choose>
@@ -45,6 +51,7 @@
 	</c:choose>
 	
 	<div id="categoryproject">
+		<p id="castyle">[ ${categoryName} ]</p>
 		<input type="hidden" id="categoryNo" value="${categoryNo}">
 		
 			<c:set var="i" value="0" />

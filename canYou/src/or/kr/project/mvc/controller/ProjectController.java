@@ -411,6 +411,9 @@ public class ProjectController {
 		svo.setEnd(String.valueOf(pageInfo.getEndRow()));
 
 		List<String> dateList = new ArrayList<String>(); // 남은 날짜 리스트
+		
+		String categoryName = dao.categoryName(Integer.parseInt(categoryNo)); //카테고리명 출력을 위해...
+		m.addAttribute("categoryName", categoryName);
 
 		// 무슨 카테고리인지 전달
 		Map<String, String> categoryList = new HashMap<>();
@@ -688,7 +691,7 @@ public class ProjectController {
 		return "main";
 	}
 
-//사업자 등록번호 조회 폼
+	//사업자 등록번호 조회 폼
 	@RequestMapping(value = "/licensee")
 	public String licensee() {
 		return "licensee";
