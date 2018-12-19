@@ -25,7 +25,7 @@
 }
 
 .listy{
-	margin: 0px 20px 0px 1470px;
+	margin: 0px 20px 0px 1380px;
 }
 
 </style>
