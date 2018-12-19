@@ -10,10 +10,10 @@
   			<where>
   				<choose>
   				  <when test="searchType==1">
-  				  		p.memberNo=m.memberNo and memberName Like '%'|| #{searchValue} ||'%'
+  				  		p.memberNo=m.memberNo and memberName Like '%'|| #{searchValue} ||'%' and projectStatus!=1 and projectStatus!=4 and sysdate>=projectStartDate
   				  </when>
   				  <when test="searchType==2">
-  				  		p.memberNo=m.memberNo and projectName Like '%'|| #{searchValue} ||'%'
+  				  		p.memberNo=m.memberNo and projectName Like '%'|| #{searchValue} ||'%' and projectStatus!=1 and projectStatus!=4 and sysdate>=projectStartDate
   				  </when>
   				  <otherwise></otherwise>
   				</choose>
@@ -34,11 +34,11 @@
   			<where>
   				<choose>
   				  <when test="searchType==1">
-  				  		p.memberNo=m.memberNo and memberName Like '%'|| #{searchValue} ||'%'  
+  				  		p.memberNo=m.memberNo and memberName Like '%'|| #{searchValue} ||'%' and projectStatus!=1 and projectStatus!=4 and sysdate>=projectStartDate
   				  </when>
   				  <when test="searchType==2">
   
-  				  		p.memberNo=m.memberNo and projectName Like '%'|| #{searchValue} ||'%' 
+  				  		p.memberNo=m.memberNo and projectName Like '%'|| #{searchValue} ||'%' and projectStatus!=1 and projectStatus!=4 and sysdate>=projectStartDate
   				  </when>
   				  <otherwise></otherwise>
   				</choose>
