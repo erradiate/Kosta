@@ -51,11 +51,11 @@
 		<li><a href="ProjectUpload">프로젝트 업로드</a></li>
 		<c:choose>
 			<c:when test="${pageContext.request.userPrincipal.name==null }">
-				<li style="margin: 0px 20px 0px 1450px;"><a href="login">로그인
+				<li style="margin: 0px 20px 0px 1440px;"><a href="login">로그인
 				</a></li>
 			</c:when>
 			<c:otherwise>
-				<li style="margin: 0px 20px 0px 1450px;"><a
+				<li style="margin: 0px 20px 0px 1440px;"><a
 					href="j_spring_security_logout">로그아웃 </a></li>
 			</c:otherwise>
 		</c:choose>
