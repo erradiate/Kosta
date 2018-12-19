@@ -198,7 +198,7 @@
 				     <option value="" selected>선택</option>
 				  </select>
 	</p>
-	<p><span class="title">프로젝트 시작 날짜(현재 날짜에서 3일이후부터 선택 가능합니다.) : </span><input type="date" id="projectStartDate" name="projectStartDate" class="pupdate"></p>
+	<p><span class="title">프로젝트 시작 날짜(현재 날짜에서 3일이후부터 선택 가능합니다.) : </span><input type="date" id="projectStartDate" name="projectStartDate" class="pupdate" required></p>
 	<p><span class="title">프로젝트 종료 날짜(시작 날짜에서 10~60일 이후로 선택 가능) : </span><input type="date" id="projectEndDate" name="projectEndDate" class="pupdate" disabled></p> <!-- 제약조건 완성할것 -->
 	</div>
 	<div class="col-md-4">
@@ -291,8 +291,12 @@ $(document).ready(function(){
 	})
 	
 	$("#preadd").click(function(){
-		var tr = "<tr><td id=\"pname\">"+$("#productName").val()+"</td><td id=\"pcnt\">"+$("#productCnt").val()+"</td><td id=\"pinfo\">"+$("#productInfo").val()+"</td><td><span id=\"pcost\">"+$("#productCost").val()+"</span>원</td></tr>";
-		$("tbody").append(tr);
+		if ($("#productName").val()=='' || $("#productCnt").val()=='' || $("#productInfo").val()=='' || $("#productCost").val()==''){
+			alert("빈 항목이 있습니다. 입력해주세요");
+		}else{
+			var tr = "<tr><td id=\"pname\">"+$("#productName").val()+"</td><td id=\"pcnt\">"+$("#productCnt").val()+"</td><td id=\"pinfo\">"+$("#productInfo").val()+"</td><td><span id=\"pcost\">"+$("#productCost").val()+"</span>원</td></tr>";
+			$("tbody").append(tr);
+		}
 	});
 	
 	$("#add").click(function(){
@@ -406,22 +410,24 @@ $(document).ready(function(){
 </script>
 
 <script type="text/javascript">
-$('#projectCost').keypress(function(event){ 
-	if (event.which && (event.which <= 47 || event.which >= 58) && event.which != 8){
-		event.preventDefault(); 
-	}
-});
-
-$('#productCnt').keypress(function(event){ 
-	if (event.which && (event.which <= 47 || event.which >= 58) && event.which != 8){ 
-		event.preventDefault(); 
-	}
-});
-
-$('#productCost').keypress(function(event){ 
-	if (event.which && (event.which <= 47 || event.which >= 58) && event.which != 8){ 
-		event.preventDefault(); 
-	}
+$(document).ready(function(){
+	$('#projectCost').keypress(function(event){ 
+		if (event.which && (event.which <= 47 || event.which >= 58) && event.which != 8){
+			event.preventDefault(); 
+		}
+	});
+	
+	$('#productCnt').keypress(function(event){ 
+		if (event.which && (event.which <= 47 || event.which >= 58) && event.which != 8){ 
+			event.preventDefault(); 
+		}
+	});
+	
+	$('#productCost').keypress(function(event){ 
+		if (event.which && (event.which <= 47 || event.which >= 58) && event.which != 8){ 
+			event.preventDefault(); 
+		}
+	});
 });
 </script>
 

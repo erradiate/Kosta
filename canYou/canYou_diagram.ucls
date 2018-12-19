@@ -1,158 +1,341 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class-diagram version="1.2.2" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
-  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+<class-diagram version="1.2.2" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
+  realizations="true" associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
   <class id="1" language="java" name="or.kr.project.dto.ProjectVO" project="canYou" 
     file="/canYou/src/or/kr/project/dto/ProjectVO.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="837" width="184" x="16" y="-284"/>    
+    <position height="981" width="191" x="3646" y="1827"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="2" language="java" name="or.kr.project.dto.MemberVO" project="canYou" 
+  <class id="2" language="java" name="or.kr.project.dto.SubCategoryVO" project="canYou" 
+    file="/canYou/src/or/kr/project/dto/SubCategoryVO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="243" width="189" x="3079" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="or.kr.project.dto.MemberVO" project="canYou" 
     file="/canYou/src/or/kr/project/dto/MemberVO.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="783" width="179" x="240" y="-284"/>    
+    <position height="819" width="179" x="3646" y="788"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="3" language="java" name="or.kr.project.dto.SearchVO" project="canYou" 
+  <class id="4" language="java" name="or.kr.project.dto.SearchVO" project="canYou" 
     file="/canYou/src/or/kr/project/dto/SearchVO.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="297" width="162" x="459" y="-284"/>    
+    <position height="405" width="162" x="184" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="4" language="java" name="or.kr.project.dto.ProductVO" project="canYou" 
+  <class id="5" language="java" name="or.kr.project.dto.ProductVO" project="canYou" 
     file="/canYou/src/or/kr/project/dto/ProductVO.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="405" width="164" x="661" y="-284"/>    
+    <position height="405" width="164" x="3646" y="2848"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="or.kr.project.dto.ProjectDonateVO" project="canYou" 
+  <class id="6" language="java" name="or.kr.project.dto.ProjectDonateVO" project="canYou" 
     file="/canYou/src/or/kr/project/dto/ProjectDonateVO.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="423" width="149" x="865" y="-284"/>    
+    <position height="423" width="149" x="2890" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="6" language="java" name="or.kr.project.dto.CategoryVO" project="canYou" 
+  <class id="7" language="java" name="or.kr.project.dto.CategoryVO" project="canYou" 
     file="/canYou/src/or/kr/project/dto/CategoryVO.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="189" width="171" x="1054" y="-284"/>    
+    <position height="189" width="171" x="2472" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="7" language="java" name="or.kr.project.dto.PageVO" project="canYou" 
+  <class id="8" language="java" name="or.kr.project.dto.PageVO" project="canYou" 
     file="/canYou/src/or/kr/project/dto/PageVO.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="567" width="155" x="1265" y="-284"/>    
+    <position height="567" width="155" x="386" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="8" language="java" name="or.kr.project.dto.HashtagVO" project="canYou" 
+  <class id="9" language="java" name="or.kr.project.dto.HashtagVO" project="canYou" 
     file="/canYou/src/or/kr/project/dto/HashtagVO.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="189" width="167" x="1460" y="-284"/>    
+    <position height="189" width="167" x="2683" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="9" language="java" name="or.kr.project.dto.ReplyVO" project="canYou" 
+  <class id="10" language="java" name="or.kr.project.dto.ReplyVO" project="canYou" 
     file="/canYou/src/or/kr/project/dto/ReplyVO.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="351" width="164" x="1667" y="-284"/>    
+    <position height="387" width="182" x="3646" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="10" language="java" name="or.kr.project.mvc.controller.ProjectController" project="canYou" 
+  <class id="11" language="java" name="or.kr.project.mvc.controller.DetailController" project="canYou" 
+    file="/canYou/src/or/kr/project/mvc/controller/DetailController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="329" x="2103" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="or.kr.project.mvc.controller.Project_2Controller" project="canYou" 
+    file="/canYou/src/or/kr/project/mvc/controller/Project_2Controller.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="135" x="1258" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="or.kr.project.mvc.controller.CategoryController" project="canYou" 
+    file="/canYou/src/or/kr/project/mvc/controller/CategoryController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="363" x="855" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="or.kr.project.mvc.controller.AdminController" project="canYou" 
+    file="/canYou/src/or/kr/project/mvc/controller/AdminController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="298" x="3308" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="or.kr.project.mvc.controller.ProjectController" project="canYou" 
     file="/canYou/src/or/kr/project/mvc/controller/ProjectController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="699" y="665"/>    
+    <position height="711" width="467" x="1596" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="11" language="java" name="or.kr.project.mvc.controller.WordController" project="canYou" 
+  <class id="16" language="java" name="or.kr.project.mvc.controller.GraphController" project="canYou" 
+    file="/canYou/src/or/kr/project/mvc/controller/GraphController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="123" x="1433" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="or.kr.project.mvc.controller.SearchController" project="canYou" 
+    file="/canYou/src/or/kr/project/mvc/controller/SearchController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="234" x="581" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="or.kr.project.mvc.controller.WordController" project="canYou" 
     file="/canYou/src/or/kr/project/mvc/controller/WordController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1130" y="407"/>    
+    <position height="99" width="404" x="4107" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="12" language="java" name="or.kr.project.mvc.dao.projectDaoImple" project="canYou" 
-    file="/canYou/src/or/kr/project/mvc/dao/projectDaoImple.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1353" y="759"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <interface id="13" language="java" name="or.kr.project.mvc.dao.projectDao" project="canYou" 
-    file="/canYou/src/or/kr/project/mvc/dao/projectDao.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1079" y="567"/>    
+  <interface id="19" language="java" name="or.kr.project.mvc.dao.WordDao" project="canYou" 
+    file="/canYou/src/or/kr/project/mvc/dao/WordDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="199" x="3868" y="788"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="14" language="java" name="or.kr.project.word.WordBuilder" project="canYou" 
-    file="/canYou/src/or/kr/project/word/WordBuilder.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1042" y="249"/>    
+  <class id="20" language="java" name="or.kr.project.mvc.dao.projectDaoImple" project="canYou" 
+    file="/canYou/src/or/kr/project/mvc/dao/projectDaoImple.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="999" width="308" x="1433" y="788"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <realization id="15">    
-    <end type="SOURCE" refId="12"/>    
-    <end type="TARGET" refId="13"/>  
+  <class id="21" language="java" name="or.kr.project.mvc.dao.AdminDaoImple" project="canYou" 
+    file="/canYou/src/or/kr/project/mvc/dao/AdminDaoImple.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="222" x="3308" y="788"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="22" language="java" name="or.kr.project.mvc.dao.WordDaoImple" project="canYou" 
+    file="/canYou/src/or/kr/project/mvc/dao/WordDaoImple.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="199" x="3868" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="23" language="java" name="or.kr.project.mvc.dao.projectDao" project="canYou" 
+    file="/canYou/src/or/kr/project/mvc/dao/projectDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="63" width="103" x="1433" y="1827"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="24" language="java" name="or.kr.project.mvc.dao.AdminDao" project="canYou" 
+    file="/canYou/src/or/kr/project/mvc/dao/AdminDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="63" width="103" x="41" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="25" language="java" name="or.kr.project.word.WordBuilder" project="canYou" 
+    file="/canYou/src/or/kr/project/word/WordBuilder.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="413" x="4107" y="788"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="26">    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="27" name="wb"/>      
+      <multiplicity id="28" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="29">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="30" name="project"/>      
+      <multiplicity id="31" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="32">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="33" name="dao"/>      
+      <multiplicity id="34" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="35">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="36" name="product"/>      
+      <multiplicity id="37" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="38">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="39" name="dao"/>      
+      <multiplicity id="40" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="41">    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="19"/>  
   </realization>  
-  <association id="16">    
-    <end type="SOURCE" refId="11" navigable="false">      
-      <attribute id="17" name="dao"/>      
-      <multiplicity id="18" minimum="0" maximum="1"/>    
+  <association id="42">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="43" name="dao2"/>      
+      <multiplicity id="44" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="13" navigable="true"/>    
+    <end type="TARGET" refId="20" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="19">    
-    <end type="SOURCE" refId="11" navigable="false">      
-      <attribute id="20" name="wb"/>      
-      <multiplicity id="21" minimum="0" maximum="1"/>    
+  <association id="45">    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="46" name="dao"/>      
+      <multiplicity id="47" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="14" navigable="true"/>    
+    <end type="TARGET" refId="20" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="22">    
+  <association id="48">    
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="49" name="dao"/>      
+      <multiplicity id="50" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="51">    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="52" name="dao"/>      
+      <multiplicity id="53" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="54">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="55" name="dao"/>      
+      <multiplicity id="56" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="21" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="57">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="23"/>  
+  </realization>  
+  <association id="58">    
     <end type="SOURCE" refId="10" navigable="false">      
-      <attribute id="23" name="dao"/>      
-      <multiplicity id="24" minimum="0" maximum="1"/>    
+      <attribute id="59" name="mvo_Result"/>      
+      <multiplicity id="60" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="12" navigable="true"/>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="61">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="62" name="dao"/>      
+      <multiplicity id="63" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="64">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="65" name="dao"/>      
+      <multiplicity id="66" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
