@@ -25,6 +25,7 @@ import org.springframework.security.authentication.AuthenticationTrustResolver;
 import org.springframework.security.authentication.AuthenticationTrustResolverImpl;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -56,7 +57,18 @@ public class ProjectController {
 
 	// 메인페이지 + 인기프로젝트 보여줌
 	@RequestMapping(value = "/")
-	public String index(HttpServletRequest request, Model model) {
+	public String index(HttpServletRequest request, Model model,Principal principal) {
+		
+		if(principal!=null) {
+			HttpSession session = request.getSession();
+			
+			String memberId = principal.getName();
+			MemberVO vo = dao.userInfo(memberId);
+			
+			session.setAttribute("memberImage", vo.getMemberImage());
+			session.setAttribute("memberCash", vo.getMemberCash());
+		}
+		
 		List<ProjectVO> plist = dao.popularList();
 		model.addAttribute("plist", plist);
 
@@ -836,4 +848,5 @@ public class ProjectController {
 		//dao.comdelete(vo);
 		return "redirect:/community?projectNo=" + vo.getProjectNo();
 	}
+
 }

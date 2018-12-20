@@ -316,4 +316,9 @@ public class projectDaoImple implements projectDao {
 	public String subCategoryName(int SubCategoryNo) {
 		return ss.selectOne("project.subCategoryName",SubCategoryNo);
 	}
+	
+	//헤더에 사용자의 정보 출력 (이미지, 캐시)
+	public MemberVO userInfo(String memberId) {
+		return ss.selectOne("project.userInfo",memberId);
+	}
 }

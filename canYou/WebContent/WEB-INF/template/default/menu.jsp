@@ -5,6 +5,7 @@
 <style>
 .menubar li {
 	background: #000000;
+	font-size: 25px;
 }
 
 .menubar li ul {
@@ -17,7 +18,7 @@
 	position: absolute;
 	width: 150px;
 	z-index: 200;
-	height: 220px;
+	height: 340px;
 }
 
 .menubar li:hover ul {
@@ -25,7 +26,18 @@
 }
 
 .listy{
-	margin: 0px 20px 0px 1380px;
+	position: absolute;
+	left : 1800px;
+}
+
+#listy2{
+	position: absolute;
+	left : 1700px;
+}
+
+#cashStyle{
+	position: absolute; left : 1630px; font-size: 16px; font-weight: bold;
+	margin-top: 10px;
 }
 
 </style>
@@ -53,17 +65,26 @@
 				<li><a href="graph">통계 별 보기</a></li>
 			</ul></li>
 		<li><a href="ProjectUpload">프로젝트 업로드</a></li>
+		
+		<c:choose>
+			<c:when test="${pageContext.request.userPrincipal.name!=null }">
+				<li id="cashStyle">
+					${sessionScope.memberCash} 캐시
+				</li>
+				<li style="position: absolute; left : 1740px;">
+				<a href="mypage">
+					<img src="resources/images/${sessionScope.memberImage}" style="width: 40px;height: 35px;"></a></li>
+				<!-- <li class="listy2"><a href="mypage">${pageContext.request.userPrincipal.name} 님</a></li> -->
+			</c:when>
+		</c:choose>
+		
 		<c:choose>
 			<c:when test="${pageContext.request.userPrincipal.name==null }">
-				<li class="listy"><a href="login">로그인
-				</a></li>
+				<li class="listy"><a href="login">로그인</a></li>
 			</c:when>
 			<c:otherwise>
-				<li class="listy">
-				<a href="j_spring_security_logout">로그아웃 </a></li>
+				<li class="listy"><a href="j_spring_security_logout">로그아웃 </a></li>
 			</c:otherwise>
 		</c:choose>
-		<li><a href="mypage">마이 페이지</a></li>
-
 	</ul>
 </div>
