@@ -80,7 +80,7 @@
 				$('#buyBtn').html(donateBtn);
 				//$('#selprod').css('border', '1px solid black');
 				
-				var allCost = Number($('#selprod .productCost').val());
+				var allCost = Number($('#selprod .productCost').val())+Number($('#donateMoney').val());
 				//var allCost = $(this).next().val();
 				console.log($('#selprod .productCost').val());
 					
@@ -90,10 +90,19 @@
 
 		$('.donateBtn').each(function(index, item) { //추가 후원 선택
 			$(this).click(function() {
-				var projectNo = $('#projectNo').val();
-				var productNo = $('#selprod #productNo').val();
-				var allCost = Number($('#donateMoney').val())+Number($('#selprod .productCost').val());
-				console.log(allCost);
+				var donateBtn = '<input type="button" value="총 구매하기" class="btns dona"/>';
+				$('#buyBtn').html(donateBtn);
+				console.log($('#selprod .productCost').val());
+				
+				//var projectNo = $('#projectNo').val();
+				//var productNo = $('#selprod #productNo').val();
+				if($('#selprod .productCost').val()!=undefined){
+					var allCost = Number($('#selprod .productCost').val())+Number($('#donateMoney').val());
+					console.log(allCost);
+				}else{
+					var allCost = Number($('#donateMoney').val());
+				}
+				
 				$('#allDonate').html('<p style="font-size: 25px; font-weight: bold;">'+allCost+'</p>');
 			});
 		});
@@ -106,10 +115,13 @@
 					var projectNo = $('#projectNo').val();
 					var donateMoney = $('#donateMoney').val();
 					var productNo = $('#selprod #productNo').val();
+					console.log(donateMoney);
 				
 					if(productNo===undefined){ //추가 후원만 했을 경우
 						location.href ='donate?projectNo='+projectNo+'&donateMoney='+donateMoney+'&productNo=0';
-					} else{ //상품구매, 추가 후원 둘 다 했을 경우
+					} else if(donateMoney===''){ //상품 구매만 했을 경우
+						location.href ='donate?projectNo='+projectNo+'&donateMoney=0'+'&productNo='+productNo;
+					}else{ //상품구매, 추가 후원 둘 다 했을 경우
 						location.href ='donate?projectNo='+projectNo+'&donateMoney='+donateMoney+'&productNo='+productNo;	
 					} 
 				}

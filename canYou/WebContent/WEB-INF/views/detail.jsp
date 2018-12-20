@@ -21,7 +21,8 @@ td{
 }
 .tdclass{
 	color: black;
-	font-size: 20px;
+	font-size: 25px;
+	font-weight:bold;
 	line-height: 2em;
 }
 
@@ -35,6 +36,12 @@ td{
 	font-size: 33px;
 	font-weight: bold;
 	text-align: center;
+}
+
+.tdclass2{
+	color: black;
+	font-size: 18px;
+	line-height: 1.5em;
 }
 
 </style>
@@ -54,18 +61,18 @@ td{
 				<div class="left-box">
 				<img id="projectMainImage"
 						src="resources/images/${list.projectMainImage }"
-						style="margin: 20px 30px 30px 300px; width: 420px; height: 420px;"></div>
+						style="margin: 20px 30px 30px 280px; width: 520px; height: 500px;"></div>
 			<table style="margin: 50px 30px 120px 60px;">
 				<thead></thead>
 				<tbody>
 						<tr>
-							<td>프로젝트 주최자 </td>
+							<td class="tdclass2">프로젝트 주최자 </td>
 						</tr>
 						<tr>
 							<td class="tdclass">${member.memberName}</td>
 						</tr>
 						<tr>
-							<td>목표금액</td>
+							<td class="tdclass2">목표금액</td>
 						</tr>
 						<tr>
 							<td class="tdclass">${list.projectCost}원</td>
@@ -76,25 +83,25 @@ td{
 						</tr>
 						  -->
 						<tr>
-							<td>프로젝트 마감날짜</td>
+							<td class="tdclass2">프로젝트 마감날짜</td>
 						</tr>
 						<tr>
 							<td class="tdclass">${list.projectEndDate}</td>
 						</tr>
 						<tr>
-							<td>모인 후원 금액</td>
+							<td class="tdclass2">모인 후원 금액</td>
 						</tr>
 						<tr>
 							<td class="tdclass">${list.projectCurCost}원</td>
 						</tr>
 						<tr>
-							<td>후원자 수</td>
+							<td class="tdclass2">후원자 수</td>
 						</tr>
 						<tr>
 							<td class="tdclass">${list.projectFundCnt}명</td>
 						</tr>
 						<tr>
-							<td>프로젝트 등급</td>
+							<td class="tdclass2">프로젝트 등급</td>
 						</tr>	
 						<tr>
 							<td class="tdclass">${list.projectStep}</td>

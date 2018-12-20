@@ -107,45 +107,45 @@ public class ProjectController {
 	// 개인정보 수정 페이지로 이동 1218
 	@RequestMapping(value = "/editinfo")
 	public String editInfo(Model m) {
-		SecurityContext impl=SecurityContextHolder.getContext();
-		String implstr=impl.getAuthentication().getName(); 
-		MemberVO vo2=dao.viewmember(implstr);	// 가져온 ID를 토대로 회원 정보를 가져옴
-			
+		SecurityContext impl = SecurityContextHolder.getContext();
+		String implstr = impl.getAuthentication().getName();
+		MemberVO vo2 = dao.viewmember(implstr); // 가져온 ID를 토대로 회원 정보를 가져옴
+
 		m.addAttribute("list", vo2);
 		return "editinfo";
 	}
 
 	// 개인정보 수정 하기
-		@RequestMapping(value = "/success")
-		public String editSuccess(Model m, MemberVO vo, String targetPwd) {
-			// 세션에서 로그인 된 ID를 가져오는 작업
-			SecurityContext impl = SecurityContextHolder.getContext();
-			String implstr = impl.getAuthentication().getName();
-			// 끝-------------------
-			MemberVO vo2 = dao.memname(implstr); // 가져온 ID를 토대로 회원 번호, 이름을 가져온다
-			vo.setMemberNo(vo2.getMemberNo());
-			
-			HashMap<String, String> h = new HashMap<>();
-			h.put("memberNo", String.valueOf(vo.getMemberNo()));
-			h.put("memberName", vo.getMemberName());
-			h.put("targetPwd", targetPwd);
-			h.put("memberPwd", vo.getMemberPwd());
-			h.put("memberAddr", vo.getMemberAddr());
-			h.put("memberPhone", vo.getMemberPhone());
-			h.put("memberEmail", vo.getMemberEmail());
-			h.put("memberAge", String.valueOf(vo.getMemberAge()));
-			h.put("memberAccount", vo.getMemberAccount());
-			
-			System.out.println(h.get("targetPwd").equals(""));
+	@RequestMapping(value = "/success")
+	public String editSuccess(Model m, MemberVO vo, String targetPwd) {
+		// 세션에서 로그인 된 ID를 가져오는 작업
+		SecurityContext impl = SecurityContextHolder.getContext();
+		String implstr = impl.getAuthentication().getName();
+		// 끝-------------------
+		MemberVO vo2 = dao.memname(implstr); // 가져온 ID를 토대로 회원 번호, 이름을 가져온다
+		vo.setMemberNo(vo2.getMemberNo());
 
-			int result=dao.editMyInfo(h);
-			
-			if (result!=0){
-				return "success";
-			}else {
-				return "redirect:editinfo";
-			}
+		HashMap<String, String> h = new HashMap<>();
+		h.put("memberNo", String.valueOf(vo.getMemberNo()));
+		h.put("memberName", vo.getMemberName());
+		h.put("targetPwd", targetPwd);
+		h.put("memberPwd", vo.getMemberPwd());
+		h.put("memberAddr", vo.getMemberAddr());
+		h.put("memberPhone", vo.getMemberPhone());
+		h.put("memberEmail", vo.getMemberEmail());
+		h.put("memberAge", String.valueOf(vo.getMemberAge()));
+		h.put("memberAccount", vo.getMemberAccount());
+
+		System.out.println(h.get("targetPwd").equals(""));
+
+		int result = dao.editMyInfo(h);
+
+		if (result != 0) {
+			return "success";
+		} else {
+			return "redirect:editinfo";
 		}
+	}
 
 	@RequestMapping(value = "/proupform") // 프로젝트 업로드 폼 페이지
 	public ModelAndView proupform(HttpServletRequest request) {
@@ -288,13 +288,12 @@ public class ProjectController {
 		MemberVO vo2 = dao.memname(implstr); // ID를 토대로 회원정보 가져옴 (회원 번호, 회원 이름)
 		vo3.setMemberNo(vo2.getMemberNo()); // 프로젝트 테이블에 넣을 회원 번호를 넣음
 		vo3.setProjectNo(projectNo);
-		
-		HttpSession s=req.getSession();
-		s.setAttribute("projnum", projectNo);		// 프로젝트 세션을 추가
+
+		HttpSession s = req.getSession();
+		s.setAttribute("projnum", projectNo); // 프로젝트 세션을 추가
 
 		ProjectVO vo = dao.modifyview(vo3);
 		m.addAttribute("project", vo);
-		
 
 		return "ProjectModify";
 	}
@@ -411,9 +410,9 @@ public class ProjectController {
 		svo.setEnd(String.valueOf(pageInfo.getEndRow()));
 
 		List<String> dateList = new ArrayList<String>(); // 남은 날짜 리스트
-		
-		String categoryName = dao.categoryName(Integer.parseInt(categoryNo)); //카테고리명 출력을 위해...
-		m.addAttribute("categoryName", categoryName); 
+
+		String categoryName = dao.categoryName(Integer.parseInt(categoryNo)); // 카테고리명 출력을 위해...
+		m.addAttribute("categoryName", categoryName);
 
 		// 무슨 카테고리인지 전달
 		Map<String, String> categoryList = new HashMap<>();
@@ -538,27 +537,27 @@ public class ProjectController {
 
 	// 후원할때 들어오는 메소드
 	@RequestMapping(value = "/donate")
-	public String donateProject(ProjectDonateVO vo,Model model) {
+	public String donateProject(ProjectDonateVO vo, Model model) {
 		SecurityContext impl = SecurityContextHolder.getContext(); // 세션에서 spring security 정보를 가져옴
 		String implstr = impl.getAuthentication().getName(); // security 정보에서 세션에 담겨있는 로그인 정보 중 ID 가져옴
 		MemberVO vo2 = dao.memname(implstr); // ID를 토대로 회원정보 가져옴 (회원 번호, 회원 이름)
 		int memno = vo2.getMemberNo();
 
 		vo.setMemberNo(memno);
-		
+
 		if (vo.getProductNo() != 0) {
 			if (vo.getDonateMoney() != 0) {
 				vo.setDonateMoney(vo.getDonateMoney() + dao.prodcost(vo.getProductNo()));
 			} else {
 				vo.setDonateMoney(dao.prodcost(vo.getProductNo()));
 			}
-			
-			//총 금액 계산
-			//model.addAttribute("allCost", vo.getDonateMoney());
+
+			// 총 금액 계산
+			// model.addAttribute("allCost", vo.getDonateMoney());
 		}
 
 		// 사용자의 선결제 금액이 프로젝트의 금액보다 낮을 때 이후 작업을 수행 하지 않고 페이지로 보냄
-		if(vo2.getMemberCash()-vo.getDonateMoney()<0) {
+		if (vo2.getMemberCash() - vo.getDonateMoney() < 0) {
 			return "redirect:/productDetail?projectNo=" + vo.getProjectNo() + "&success=fail";
 		}
 
@@ -694,7 +693,7 @@ public class ProjectController {
 		return "main";
 	}
 
-	//사업자 등록번호 조회 폼
+	// 사업자 등록번호 조회 폼
 	@RequestMapping(value = "/licensee")
 	public String licensee() {
 		return "licensee";
@@ -722,7 +721,7 @@ public class ProjectController {
 
 		return "graphpage";
 	}
-	
+
 	// 캐쉬충전 폼으로
 	@RequestMapping(value = "/cash")
 	public ModelAndView cashcharge(MemberVO vo) {
@@ -759,15 +758,44 @@ public class ProjectController {
 		return "redirect:/cash";
 
 	}
-	
-	//아이디 중복 검사
+
+	// 아이디 중복 검사
 	@RequestMapping(value = "/idcheck")
 	@ResponseBody
 	public int memberIdCheck(@RequestBody String memberId) {
-		memberId = memberId.substring(0, memberId.length()-1);
+		memberId = memberId.substring(0, memberId.length() - 1);
 		int count = dao.memberIdCheck(memberId);
 		System.out.println(count);
 		return count;
 	}
-}
 
+	// 댓글 수정
+	@RequestMapping(value = "/commentmodify")
+	public String comModify(ReplyVO vo) {
+		SecurityContext impl = SecurityContextHolder.getContext(); // 세션에서 spring security 정보를 가져옴
+		String implstr = impl.getAuthentication().getName(); // security 정보에서 세션에 담겨있는 로그인 정보 중 ID 가져옴
+		MemberVO vo2 = dao.memname(implstr); // ID를 토대로 회원정보 가져옴 (회원 번호, 회원 이름)
+		int memno = vo2.getMemberNo();
+		vo.setMemberNo(memno);
+		System.out.println("댓글 번호:" + vo.getReplyNo());
+		System.out.println("멤버번호" + vo.getMemberNo());
+		System.out.println("프로젝트 번호 : " + vo.getProjectNo());
+		//dao.comupdate(vo);
+		return "redirect:/community?projectNo=" + vo.getProjectNo();
+	}
+
+	// 댓글 삭제
+	@RequestMapping(value = "/commentdelete")
+	public String comDelete(ReplyVO vo) {
+		SecurityContext impl = SecurityContextHolder.getContext(); // 세션에서 spring security 정보를 가져옴
+		String implstr = impl.getAuthentication().getName(); // security 정보에서 세션에 담겨있는 로그인 정보 중 ID 가져옴
+		MemberVO vo2 = dao.memname(implstr); // ID를 토대로 회원정보 가져옴 (회원 번호, 회원 이름)
+		int memno = vo2.getMemberNo();
+		vo.setMemberNo(memno);
+		System.out.println("삭제댓글 번호:" + vo.getReplyNo());
+		System.out.println("삭제멤버번호" + vo.getMemberNo());
+		System.out.println("삭제프로젝트 번호 : " + vo.getProjectNo());
+		//dao.comdelete(vo);
+		return "redirect:/community?projectNo=" + vo.getProjectNo();
+	}
+}
