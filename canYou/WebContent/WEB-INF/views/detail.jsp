@@ -165,20 +165,7 @@ td{
 			</div>
 			
 			<br>
-<%-- 
-			<table>
-				<tr>
-					<td><input type="button" id="wordBtn" value="워드로 보기"></td>
-				</tr>
-				<tr>
-					<td><a href="story?projectNo=${list.projectNo}">프로젝트 스토리</a></td>
-					<td style="padding-left: 30px"><a
-						href="productDetail?projectNo=${list.projectNo}">상품 상세</a></td>
-					<td style="padding-left: 30px"><a
-						href="community?projectNo=${list.projectNo}">커뮤니티</a></td>
-					<td style="padding-left: 30px"><a href="">환불 및 교환</a></td>
-				</tr>
-			</table> --%>
+
 			</form>
 			</fieldset>	
 		</div>

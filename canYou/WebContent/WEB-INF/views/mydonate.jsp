@@ -96,7 +96,7 @@
 							</c:when>
 							</c:choose>
 								<input id="donateNo" type="hidden" value="${e.DONATENO}">
-								<input type="button" class="deleteBtn btns" value="기부 취소">
+								<input type="button" class="deleteBtn" value="기부 취소">
 								<input type="hidden" class="productNo" value="${e.PRODUCTNO}">
 							</p>
 						</div>
@@ -221,13 +221,19 @@
 					$(this).click(
 							function() {
 								var result = confirm('후원을 취소 하시겠습니까?');
-								console.log($(this).next().val());
 
 								if (result) {
+									if($(this).next().val()===''){
+										location.href = 'cancle?donateNo='
+											+ $(this).prev().val()
+											+ '&productNo='
+											+ '0';
+									} else{
 									location.href = 'cancle?donateNo='
 											+ $(this).prev().val()
 											+ '&productNo='
 											+ $(this).next().val();
+									}
 								}
 							});
 				});

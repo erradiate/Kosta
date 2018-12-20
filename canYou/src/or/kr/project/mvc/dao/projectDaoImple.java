@@ -109,7 +109,7 @@ public class projectDaoImple implements projectDao {
 
 		m.put("donateMoney", total);
 		m.put("memberNo", vo.getMemberNo());
-
+		System.out.println("productno : " + vo.getProductNo());
 		ss.update("project.pmoneyminus", vo);	// 프로젝트의 돈을 뺌
 		ss.update("project.returnMoney", m); // 반환해서 회원의 돈으로 추가시켜줌
 		ss.update("project.prodout", vo); // 상품 돌려 줌
