@@ -167,7 +167,7 @@
 	<li class="nav-item"><a id="i3" class="nav-link" href="#">프로젝트 스토리 텔링</a></li>
 </ul>
 </nav>
-<form action="proup" method="post" enctype="multipart/form-data">
+<form id="my-form" action="proup" method="post" enctype="multipart/form-data">
 <input type="hidden" id="proname" name="proname">
 <input type="hidden" id="procnt" name="procnt">
 <input type="hidden" id="proinfo" name="proinfo">
@@ -177,7 +177,7 @@
 <div class="row">
 	<div class="col-md-8">
 	<p><span class="title">진행자 이름 : </span>${memberName }</p>
-	<p><span class="title">프로젝트 이름 : </span><input type="text" name="projectName" class="pupinput" required></p>
+	<p><span class="title">프로젝트 이름 : </span><input type="text" id="projectName" name="projectName" class="pupinput" required></p>
 	<div class="filebox preview-image">
 		<p><span class="title">프로젝트 대표 이미지 : </span>
 		<input class="upload-name" value="파일선택" disabled="disabled">
@@ -255,6 +255,7 @@
 <div id="info3" style="display: none;">	
 	<span id="prostory">프로젝트 스토리 <img src="resources/images/down.png" width=30px height=30px> </span><br><textarea rows="20" cols="20" name="projectStory" id="cont"></textarea>
 </div>
+<input type="button" id="tadd" class="btns" value="임시저장">
 <input type="submit" id="add" class="btns" value="신청">
 </form>
 </div>
@@ -262,6 +263,7 @@
 <script>
 $(document).ready(function(){
 	var d = new Date();
+	var checkUnload = true;
 	
 	var smin=new Date();
 	smin.setDate(d.getDate()+3);
@@ -274,7 +276,9 @@ $(document).ready(function(){
 		sday="0"+sday;
 	}
 	
-	
+	$(window).on("beforeunload", function(){	// 페이지를 벗어날 시 경고창이 뜸
+		if(checkUnload) return "작성중인 프로젝트가 있습니다. 이 페이지를 벗어나시겠습니까?";
+	});
 	
 	$('#projectStartDate').attr("min", smin.getFullYear()+"-"+smon+"-"+sday);
 	
@@ -300,6 +304,8 @@ $(document).ready(function(){
 	});
 	
 	$("#add").click(function(){
+		checkUnload = false;
+		
 		$("tbody tr #pname").each(function(i, v){
 			data[i]=$(this).text();
 		});
@@ -385,7 +391,7 @@ $(document).ready(function(){
             $("#info2").slideUp();
             $("#info3").slideUp();
         }
-	})
+	});
 	
 	$('#i2').click(function () {
 		if($("#info2").is(":visible")){
@@ -395,7 +401,7 @@ $(document).ready(function(){
             $("#info1").slideUp();
             $("#info3").slideUp();
         }
-	})
+	});
 	
 	$('#i3').click(function () {
 		if($("#info3").is(":visible")){
@@ -405,12 +411,71 @@ $(document).ready(function(){
             $("#info2").slideUp();
             $("#info1").slideUp();
         }
-	})
-});
-</script>
+	});
+	
+	$('#tadd').click(function(){
+		$("tbody tr #pname").each(function(i, v){
+			data[i]=$(this).text();
+		});
+		$("tbody tr #pcnt").each(function(i, v){
+			data2[i]=$(this).text();
+		});
+		$("tbody tr #pinfo").each(function(i, v){
+			data3[i]=$(this).text();
+		});
+		$("tbody tr #pcost").each(function(i, v){
+			data4[i]=$(this).text();
+		});
+		$("#proname").val(data);
+		$("#procnt").val(data2);
+		$("#proinfo").val(data3);
+		$("#procost").val(data4);
+		
+		//var form = $('form')[0];
+        var formData = new FormData();
+        var value=CKEDITOR.instances['cont'].getData();
+        
+        
+        // ajax는 기본 인코딩이 UTF-8이므로 미리 인코딩을 해줌 (현재 euc-kr)
+        value=encodeURI(value);
+        
+        if($('#categoryNo').val()!=''){ formData.append('categoryNo', $('#categoryNo').val()) };
+        if($('#subCategoryNo').val()!=''){ formData.append('subCategoryNo', $('#subCategoryNo').val()) };
+        if($('#projectName').val()!=''){ formData.append('projectName', encodeURI($('#projectName').val())) };
+        if($('#projectCost').val()!=''){ formData.append('projectCost', $('#projectCost').val()) };
+        if($('#projectStartDate').val()!=''){ formData.append('projectStartDate', $('#projectStartDate').val()) };
+        if($('#projectEndDate').val()!=''){ formData.append('projectEndDate', $('#projectEndDate').val()) };
+        formData.append('mfile', $('#mfile')[0].files[0]);
+        if(value!='') { formData.append('projectStory', value); }
 
-<script type="text/javascript">
-$(document).ready(function(){
+        if($('#proname').val()!=''){ 
+        	formData.append('proname', encodeURI($('#proname').val()));
+        	formData.append('procnt', $('#procnt').val());
+        	formData.append('proinfo', encodeURI($('#proinfo').val()));
+        	formData.append('procost', $('#procost').val());
+        }
+        
+        console.log(formData.has('projectName'));
+		
+		$.ajax({
+			url: 'tadd',
+			type:'POST',
+			data: formData,
+			contentType: false,
+			processData: false,
+			success: function(jqXHR){
+				alert('임시저장이 완료되었습니다.');
+				
+			},
+			error:function(request,status,error){
+		        console.log("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+		    },
+		})
+		
+		alert('임시저장 페이지');
+	});
+	
+	/* 숫자만 입력해야하는 폼 설정 */
 	$('#projectCost').keypress(function(event){ 
 		if (event.which && (event.which <= 47 || event.which >= 58) && event.which != 8){
 			event.preventDefault(); 
@@ -428,9 +493,11 @@ $(document).ready(function(){
 			event.preventDefault(); 
 		}
 	});
+	/***********************************************************************************/
 });
 </script>
 
+<!-- 이미지 업로드 시 로컬 주소에서 이미지 주소를 따와서 페이지에서 보여줌 -->
 <script>
 $('#projectMainImage').hide();
 
