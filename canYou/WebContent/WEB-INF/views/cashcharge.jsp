@@ -5,10 +5,9 @@
 	<h1>캐쉬 충전소</h1>
 </div>
 <div class="cash" align="center">
-	<form action="cashcharge" method="POST">
-		<c:forEach var="e" items="${list}" varStatus="status">
+	<form action="cashcharge" method="POST">>
 			<p>
-				<input type="text" name="memberName" value="${e.memberName }"
+				<input type="text" name="memberName" value="${list.memberName }"
 					readonly="readonly"><label>님</label>
 			</p>
 			<p>
@@ -21,6 +20,5 @@
 			<p>
 				<input type="submit" class="btns" value="충전하기">
 			</p>
-		</c:forEach>
 	</form>
 </div>

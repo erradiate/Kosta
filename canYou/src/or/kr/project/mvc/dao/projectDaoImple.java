@@ -110,7 +110,7 @@ public class projectDaoImple implements projectDao {
 		m.put("donateMoney", total);
 		m.put("memberNo", vo.getMemberNo());
 		System.out.println("productno : " + vo.getProductNo());
-		ss.update("project.pmoneyminus", vo);	// 프로젝트의 돈을 뺌
+		ss.update("project.pmoneyminus", vo); // 프로젝트의 돈을 뺌
 		ss.update("project.returnMoney", m); // 반환해서 회원의 돈으로 추가시켜줌
 		ss.update("project.prodout", vo); // 상품 돌려 줌
 	}
@@ -125,7 +125,7 @@ public class projectDaoImple implements projectDao {
 		ss.delete("project.cancle", vo); // 후원 취소
 	}
 
-	public ProjectVO projectlist(String num) { 
+	public ProjectVO projectlist(String num) {
 		return ss.selectOne("project.list", num);
 	}
 
@@ -263,62 +263,72 @@ public class projectDaoImple implements projectDao {
 	public int mypsearchTotalCount(SearchVO vo) {
 		return ss.selectOne("search.mypcount", vo);
 	}
-	
-	//회원가입
+
+	// 회원가입
 	public void addMember(MemberVO vo) {
-		ss.insert("project.addMember",vo);
+		ss.insert("project.addMember", vo);
 	}
-	
-	//나이별 후원 카테고리 그래프 보기
-	public Map<Integer,Integer> ageGraph() {
-		Map<Integer,Integer> map = (Map<Integer, Integer>) ss.selectList("graph.ageGraph");
-		
+
+	// 나이별 후원 카테고리 그래프 보기
+	public Map<Integer, Integer> ageGraph() {
+		Map<Integer, Integer> map = (Map<Integer, Integer>) ss.selectList("graph.ageGraph");
+
 		return map;
 	}
-	
+
 	// 회원정보 가져오기 1218
 	public MemberVO viewmember(String s) {
 		return ss.selectOne("project.viewmember", s);
 	}
-	
+
 	// 재검토 요청 1218
 	public void request(int i) {
 		ss.update("project.request", i);
 	}
-	
+
 	// 검토거부당한 프로젝트 삭제 1218
 	public void prodel(int i) {
-		ss.delete("project.proddel", i);	// 프로젝트에 관련된 상품부터 삭제
-		ss.delete("project.prodel", i);		// 프로젝트 삭제
+		ss.delete("project.proddel", i); // 프로젝트에 관련된 상품부터 삭제
+		ss.delete("project.prodel", i); // 프로젝트 삭제
 	}
-	
+
 	// 캐쉬 충전소 - 캐쉬 충전
 	public void charge(MemberVO vo) {
 		ss.update("project.cashcharge", vo);
 	}
-	
+
 	// 캐쉬 충전소 리스트
 	public List<MemberVO> chargeList(MemberVO vo) {
 		return ss.selectList("project.cashlist", vo);
 	}
-	
-	//아이디 중복 검사
+
+	// 아이디 중복 검사
 	public int memberIdCheck(String memberId) {
-		return ss.selectOne("project.memberIdCheck",memberId);
+		return ss.selectOne("project.memberIdCheck", memberId);
 	}
-	
-	//카테고리 명 출력
+
+	// 카테고리 명 출력
 	public String categoryName(int categoryNo) {
-		return ss.selectOne("project.categoryName",categoryNo);
+		return ss.selectOne("project.categoryName", categoryNo);
 	}
-	
-	//서브카테고리 명 출력
+
+	// 서브카테고리 명 출력
 	public String subCategoryName(int SubCategoryNo) {
-		return ss.selectOne("project.subCategoryName",SubCategoryNo);
+		return ss.selectOne("project.subCategoryName", SubCategoryNo);
 	}
-	
-	//헤더에 사용자의 정보 출력 (이미지, 캐시)
+
+	// 헤더에 사용자의 정보 출력 (이미지, 캐시)
 	public MemberVO userInfo(String memberId) {
-		return ss.selectOne("project.userInfo",memberId);
+		return ss.selectOne("project.userInfo", memberId);
+	}
+
+	// 댓글 수정
+	public void comupdate(HashMap<String, String> vo) {
+		ss.update("project.commodify", vo);
+	}
+
+	// 댓글 삭제
+	public void comdelete(ReplyVO vo) {
+		ss.delete("project.comdelete", vo);
 	}
 }

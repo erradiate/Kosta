@@ -23,8 +23,8 @@
 	<!-- 서브 카테고리 번호를 통해 이름을 가져옴 -->
 	<select id="subcaselone" parameterType="int" resultType="String">
 		select
-		subCategoryName 
-		from subCategory 
+		subCategoryName
+		from subCategory
 		where subCategoryNo=#{subCategoryNo}
 	</select>
 
@@ -40,7 +40,8 @@
 	<!-- 회원 아이디로 회원 번호, 이름, 회원의 현재 금액을 가져옴 -->
 	<select id="memname" parameterType="String" resultType="mvo">
 		select
-		memberNo, memberName, memberCash from member where memberId=#{memberId}
+		memberNo, memberName, memberCash from member where
+		memberId=#{memberId}
 	</select>
 
 	<!-- 회원 번호로 회원 이름을 가져옴 -->
@@ -229,26 +230,33 @@
 
 
 	<resultMap type="replyvo" id="rvo_Result">
-		<id property="replyNo" column="replyNo"/>
-		<result column="replyContent" property="replyContent" javaType="String" />
-		<result column="replyDate" property="replyDate" javaType="String" />
-		<result column="projectNo" property="projectNo" javaType="int"/>
-		<association property="mvo_Result" column="memberNo" javaType="mvo">
-			<id property="memberNo" column="memberNo"/>
+		<id property="replyNo" column="replyNo" />
+		<result column="replyContent" property="replyContent"
+			javaType="String" />
+		<result column="replyDate" property="replyDate"
+			javaType="String" />
+		<result column="projectNo" property="projectNo" javaType="int" />
+		<association property="mvo_Result" column="memberNo"
+			javaType="mvo">
+			<id property="memberNo" column="memberNo" />
 			<result column="memberName" property="memberName" />
-			 <result column="memberImage" property="memberImage" />
+			<result column="memberImage" property="memberImage" />
 		</association>
 	</resultMap>
 
 	<!-- 댓글 리스트 -->
-	<select id="replyList" parameterType="String" resultMap="rvo_Result">
+	<select id="replyList" parameterType="String"
+		resultMap="rvo_Result">
 		select
-		r.replyContent,to_char(r.replyDate,'yyyy-MM-dd') replyDate,
-		m.memberName, r.projectNo, m.memberImage 
-		from reply r,member m 
-		where 
-		m.memberNo=r.memberNo and r.projectNo=#{projectNo} 
-		order by replyDate
+		r.replyContent,to_char(r.replyDate,'yyyy-MM-dd')
+		replyDate,r.replyNo,
+		m.memberName, r.projectNo, m.memberImage
+		from reply r,member
+		m
+		where
+		m.memberNo=r.memberNo and r.projectNo=#{projectNo}
+		order by
+		replyDate
 	</select>
 
 	<!-- 후원취소했을 때, 선물 반환 -->
@@ -258,110 +266,153 @@
 		= productCnt+1
 		where productNo=#{productNo}
 	</update>
-	
+
 	<!-- 인기 프로젝트 리스트 (후원자 수) -->
 	<select id="popularList" resultType="projvo">
-		select projectMainImage,projectNo, r
+		select
+		projectMainImage,projectNo, r
 		from (
-		    select projectNo,projectMainImage,projectFundCnt, ROW_NUMBER() OVER(ORDER BY projectFundCnt desc) as r
-		    from project
-		    where projectFundCnt is not null and ProjectStatus=2 and sysdate>=projectStartDate
+		select
+		projectNo,projectMainImage,projectFundCnt, ROW_NUMBER() OVER(ORDER BY
+		projectFundCnt desc) as r
+		from project
+		where projectFundCnt is not null
+		and ProjectStatus=2 and
+		sysdate>=projectStartDate
 		)
-		where r between 1 and 8
+		where r between 1 and
+		8
 	</select>
-	
-	<!-- 새로운 프로젝트 리스트 --> 
+
+	<!-- 새로운 프로젝트 리스트 -->
 	<select id="newList" resultType="projvo">
-		select projectMainImage,projectNo, r
+		select
+		projectMainImage,projectNo, r
 		from (
-    		select projectNo,projectMainImage,projectFundCnt, ROW_NUMBER() OVER(ORDER BY projectStartDate desc) as r
-    		from project
-    		where projectStartDate is not null and ProjectStatus=2 and sysdate>=projectStartDate
+		select
+		projectNo,projectMainImage,projectFundCnt, ROW_NUMBER() OVER(ORDER BY
+		projectStartDate desc) as r
+		from project
+		where projectStartDate is not
+		null and ProjectStatus=2 and
+		sysdate>=projectStartDate
 		)
-		where r between 1 and 8
+		where r between
+		1 and 8
 	</select>
 
 	<!-- 마감임박 프로젝트 -->
 	<select id="deadlineList" resultType="projvo">
-		select projectMainImage,projectNo, r
+		select
+		projectMainImage,projectNo, r
 		from(
-    		select projectNo,projectMainImage,PROJECTSTARTDATE, ROW_NUMBER() OVER(ORDER BY projectEndDate asc) as r
-    		from project
-    		where projectEndDate is not null and ProjectStatus=2 and sysdate>=projectStartDate
+		select
+		projectNo,projectMainImage,PROJECTSTARTDATE, ROW_NUMBER() OVER(ORDER
+		BY projectEndDate asc) as r
+		from project
+		where projectEndDate is not
+		null and ProjectStatus=2 and
+		sysdate>=projectStartDate
 		)
-		where r between 1 and 8
+		where r between
+		1 and 8
 	</select>
 
 	<!-- 회원가입 -->
 	<insert id="addMember" parameterType="mvo">
 		insert into member values(
-			member_seq.nextVal,#{memberId},#{memberPwd},#{memberName},#{memberAddr},#{memberPhone},#{memberEmail},
-			#{memberGender},#{memberAge},#{memberAccount},#{memberImage},2,0,1
+		member_seq.nextVal,#{memberId},#{memberPwd},#{memberName},#{memberAddr},#{memberPhone},#{memberEmail},
+		#{memberGender},#{memberAge},#{memberAccount},#{memberImage},2,0,1
 		)
 	</insert>
 
 	<!-- 회원정보 수정을 위해 회원정보를 가져옴 -->
 	<select id="viewmember" parameterType="String" resultType="mvo">
-		select memberName, memberAddr, memberPhone, memberEmail, memberAge, memberAccount
+		select memberName, memberAddr, memberPhone, memberEmail, memberAge,
+		memberAccount
 		from member where memberId=#{memberId}
 	</select>
-	
+
 	<!-- 재검토 요청 1218 -->
 	<update id="request" parameterType="int">
-		update project set projectStatus=1 where projectNo=#{projectNo} and projectStatus=4
+		update project set
+		projectStatus=1 where projectNo=#{projectNo} and projectStatus=4
 	</update>
-	
+
 	<!-- 검토 거부당한 프로젝트 삭제 1218 -->
 	<delete id="proddel" parameterType="int">
-		delete from product where projectNo=#{projectNo}
+		delete from product where
+		projectNo=#{projectNo}
 	</delete>
-	
+
 	<delete id="prodel" parameterType="int">
-		delete from project where projectNo=#{projectNo} and projectStatus=4
+		delete from project where
+		projectNo=#{projectNo} and projectStatus=4
 	</delete>
-	<!--  캐쉬충전소 리스트 --> 
-  <select id="cashlist" parameterType="mvo" resultType="mvo">
-  	select memberCash, memberName from member 
-  	where memberNo=#{memberNo}
-  </select> 
-  
- <!--  캐쉬충전소 충전  --> 
-  <update id="cashcharge" parameterType="mvo">
-  	update member set memberCash = memberCash + #{memberCash} 
-  	where memberNo=#{memberNo}
-  </update> 	
-  
-	<!-- 아이디 중복체크 --> 
-	<select id="memberIdCheck" parameterType="HashMap" resultType="Integer">
-		select count (*) 
+	<!-- 캐쉬충전소 리스트 -->
+	<select id="cashlist" parameterType="mvo" resultType="mvo">
+		select
+		memberCash, memberName from member
+		where memberNo=#{memberNo}
+	</select>
+
+	<!-- 캐쉬충전소 충전 -->
+	<update id="cashcharge" parameterType="mvo">
+		update member set
+		memberCash = memberCash + #{memberCash}
+		where memberNo=#{memberNo}
+	</update>
+
+	<!-- 아이디 중복체크 -->
+	<select id="memberIdCheck" parameterType="HashMap"
+		resultType="Integer">
+		select count (*)
 		from member
 		where memberId=#{memberId}
 	</select>
 
 	<!-- 후원 취소시 프로젝트 후원금 차감 1219 추가 -->
 	<update id="pmoneyminus" parameterType="dvo">
-		update project set projectCurCost=projectCurCost-#{donateMoney}
-		where projectNo=(select projectNo from projectDonate where donateNo=#{donateNo})
+		update project set
+		projectCurCost=projectCurCost-#{donateMoney}
+		where projectNo=(select
+		projectNo from projectDonate where donateNo=#{donateNo})
 	</update>
-	
+
 	<!-- 카테고리명 나오게 하기 -->
-	<select id="categoryName" parameterType="Integer" resultType="String">
+	<select id="categoryName" parameterType="Integer"
+		resultType="String">
 		select categoryName
 		from category
-		where categoryNo=#{categoryNo}
+		where
+		categoryNo=#{categoryNo}
 	</select>
-	
+
 	<!-- 서브 카테고리명 나오게 하기 -->
-	<select id="subCategoryName" parameterType="Integer" resultType="String">
+	<select id="subCategoryName" parameterType="Integer"
+		resultType="String">
 		select SubCategoryName
 		from SubCategory
-		where SubCategoryNo=#{SubCategoryNo}
+		where
+		SubCategoryNo=#{SubCategoryNo}
 	</select>
-	
+
 	<!-- 헤더에 사용자 이미지/캐시 나오게 하기 -->
 	<select id="userInfo" parameterType="String" resultType="mvo">
-		select memberImage, memberCash
+		select
+		memberImage, memberCash
 		from member
 		where memberId=#{memberId}
 	</select>
+	<!-- 댓글 수정 -->
+	<update id="commodify" parameterType="Hashmap">
+		update reply set
+		replyContent=#{replyContent} where memberNo=#{memberNo} and
+		replyNo=#{replyNo}
+	</update>
+	<!-- 댓글 삭제 -->
+	<delete id="comdelete" parameterType="int">
+		delete from reply where
+		memberNo=#{memberNo} and replyNo=#{replyNo}
+	</delete>
 </mapper>
