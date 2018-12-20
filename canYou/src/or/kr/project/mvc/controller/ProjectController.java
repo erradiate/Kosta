@@ -573,6 +573,44 @@ public class ProjectController {
 		return "redirect:/story?projectNo=" + vo.getProjectNo() + "&success=success";
 	}
 
+	// 후원할때 들어오는 메소드2 (마이페이지로 이동)
+		@RequestMapping(value = "/donate2")
+		public String donateProject2(ProjectDonateVO vo, Model model) {
+			SecurityContext impl = SecurityContextHolder.getContext(); // 세션에서 spring security 정보를 가져옴
+			String implstr = impl.getAuthentication().getName(); // security 정보에서 세션에 담겨있는 로그인 정보 중 ID 가져옴
+			MemberVO vo2 = dao.memname(implstr); // ID를 토대로 회원정보 가져옴 (회원 번호, 회원 이름)
+			int memno = vo2.getMemberNo();
+
+			vo.setMemberNo(memno);
+
+			if (vo.getProductNo() != 0) {
+				if (vo.getDonateMoney() != 0) {
+					vo.setDonateMoney(vo.getDonateMoney() + dao.prodcost(vo.getProductNo()));
+				} else {
+					vo.setDonateMoney(dao.prodcost(vo.getProductNo()));
+				}
+
+				// 총 금액 계산
+				// model.addAttribute("allCost", vo.getDonateMoney());
+			}
+
+			// 사용자의 선결제 금액이 프로젝트의 금액보다 낮을 때 이후 작업을 수행 하지 않고 페이지로 보냄
+			if (vo2.getMemberCash() - vo.getDonateMoney() < 0) {
+				return "redirect:/productDetail?projectNo=" + vo.getProjectNo() + "&success=fail";
+			}
+
+			dao.donate(vo); // projectDonate 행 추가
+
+			// 돈 차감
+			Map<String, Integer> m = new HashMap<>();
+			m.put("donateMoney", vo.getDonateMoney());
+			m.put("memberNo", memno);
+
+			dao.donateMoney(m);
+
+			return "mypage";
+		}
+	
 	// 후원 취소
 	@RequestMapping(value = "/cancle")
 	public String cancle(int donateNo/* 이후에 프로젝트 선택해서 할 경우를 대비해서 */, int productNo) {

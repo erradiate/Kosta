@@ -116,13 +116,27 @@
 					var donateMoney = $('#donateMoney').val();
 					var productNo = $('#selprod #productNo').val();
 					console.log(donateMoney);
+					
+					var con = confirm('후원이 성공적으로 완료됐습니다. 마이페이지로 이동하시겠습니까?');
 				
 					if(productNo===undefined){ //추가 후원만 했을 경우
-						location.href ='donate?projectNo='+projectNo+'&donateMoney='+donateMoney+'&productNo=0';
+						if(con){
+							location.href ='donate2?projectNo='+projectNo+'&donateMoney='+donateMoney+'&productNo=0';
+						}else{
+							location.href ='donate?projectNo='+projectNo+'&donateMoney='+donateMoney+'&productNo=0';
+						}
 					} else if(donateMoney===''){ //상품 구매만 했을 경우
-						location.href ='donate?projectNo='+projectNo+'&donateMoney=0'+'&productNo='+productNo;
+						if(con){
+							location.href ='donate2?projectNo='+projectNo+'&donateMoney=0'+'&productNo='+productNo;
+						}else{
+							location.href ='donate?projectNo='+projectNo+'&donateMoney=0'+'&productNo='+productNo;
+						}	
 					}else{ //상품구매, 추가 후원 둘 다 했을 경우
-						location.href ='donate?projectNo='+projectNo+'&donateMoney='+donateMoney+'&productNo='+productNo;	
+						if(con){
+							location.href ='donate2?projectNo='+projectNo+'&donateMoney='+donateMoney+'&productNo='+productNo;
+						}else{
+							location.href ='donate?projectNo='+projectNo+'&donateMoney='+donateMoney+'&productNo='+productNo;
+						}			
 					} 
 				}
 			});
