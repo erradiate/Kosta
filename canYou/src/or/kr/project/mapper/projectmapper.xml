@@ -23,7 +23,9 @@
 	<!-- 서브 카테고리 번호를 통해 이름을 가져옴 -->
 	<select id="subcaselone" parameterType="int" resultType="String">
 		select
-		subCategoryName from subCategory where subCategoryNo=#{subCategoryNo}
+		subCategoryName 
+		from subCategory 
+		where subCategoryNo=#{subCategoryNo}
 	</select>
 
 	<!-- 둘러보기 -->
@@ -347,5 +349,12 @@
 		select categoryName
 		from category
 		where categoryNo=#{categoryNo}
+	</select>
+	
+	<!-- 서브 카테고리명 나오게 하기 -->
+	<select id="subCategoryName" parameterType="Integer" resultType="String">
+		select SubCategoryName
+		from SubCategory
+		where SubCategoryNo=#{SubCategoryNo}
 	</select>
 </mapper>

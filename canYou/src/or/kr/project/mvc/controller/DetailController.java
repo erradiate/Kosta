@@ -31,10 +31,11 @@ public class DetailController {
 		ProjectVO list = dao.projectlist(projectNo);
 		String c=dao.caselone(list.getCategoryNo());
 		String sc=dao.subcaselone(list.getSubCategoryNo());
-		//String categoryName = dao.categoryName(categoryNo);
+		
 		m.addAttribute("list",list);
 		m.addAttribute("c", c);
 		m.addAttribute("sc", sc);
+		
 		// project와 연결된 member 정보 가져오기
 		MemberVO mem=dao.memname2(list.getMemberNo());
 		m.addAttribute("member", mem);
@@ -77,6 +78,7 @@ public class DetailController {
 		m.addAttribute("list", list);
 		m.addAttribute("c", c);
 		m.addAttribute("sc", sc);
+		
 		// project와 연결된 member 정보 가져오기
 		MemberVO mem = dao.memname2(list.getMemberNo());
 		m.addAttribute("member", mem);

@@ -48,6 +48,14 @@ public class CategoryController {
 		vo.setCategoryNo(Integer.parseInt(categoryNo));
 		vo.setSubcategoryNo(Integer.parseInt(subcategoryNo));
 		
+		//카테고리 명 보여줌
+		String categoryName = dao.categoryName(Integer.parseInt(categoryNo));
+		m.addAttribute("categoryName", categoryName);
+		
+		//서브카테고리 명 보여줌
+		String subCategoryName = dao.subCategoryName(Integer.parseInt(subcategoryNo));
+		m.addAttribute("subCategoryName", subCategoryName);
+		
 		// pageVO의 획득
 		int totalRows = dao.getCategoryCount2(vo);
 		PageVO pageInfo = makePageVO(page, totalRows);

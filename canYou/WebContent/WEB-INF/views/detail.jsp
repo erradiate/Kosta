@@ -31,32 +31,24 @@ td{
 	text-align: center;
 }
 
-</style>
-<script>
-$(document).ready(function(){
-	$('.prodview #donadd').each(function(){
-		$(this).click(function(e){
-			var donateBtn = '<input type="button" value="후원" class="btns dona"/>';
-			
-			$('#selprod').html($(this).prev().html());
-			$('#buyBtn').html(donateBtn);
-			$('#selprod').css('border', '1px pink solid');
-		});
-	});
-}); 
-</script>
+#castyle2{
+	font-size: 33px;
+	font-weight: bold;
+	text-align: center;
+}
 
+</style>
  
 <div>
 		<fieldset>
 			<form action="update" method="POST" >	
 			<input type="hidden" id="projectNo" name="projectNo" value="${list.projectNo}">
 			<p id="castyle">[ ${c} ]</p>
-			<c:choose>
-					<c:when test="${sc!=null}">
-							-${sc}
-                     </c:when>
-            </c:choose>
+				<c:choose>
+						<c:when test="${sc!=null}">
+								<p id="castyle2">${sc}</p>
+	                     </c:when>
+	            </c:choose>
             
 				<h1 style="margin:30px 100px 30px 260px; font-size: 40px; color: black;">프로젝트 이름 : ${list.projectName}</h1>
 				<div class="left-box">

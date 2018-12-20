@@ -311,4 +311,9 @@ public class projectDaoImple implements projectDao {
 	public String categoryName(int categoryNo) {
 		return ss.selectOne("project.categoryName",categoryNo);
 	}
+	
+	//서브카테고리 명 출력
+	public String subCategoryName(int SubCategoryNo) {
+		return ss.selectOne("project.subCategoryName",SubCategoryNo);
+	}
 }

@@ -37,6 +37,12 @@
 	text-align: center;
 }
 
+#castyle2{
+	font-size: 33px;
+	font-weight: bold;
+	text-align: center;
+}
+
 </style>
 
 	<c:choose>
@@ -52,6 +58,11 @@
 	
 	<div id="categoryproject">
 		<p id="castyle">[ ${categoryName} ]</p>
+		<c:choose>
+					<c:when test="${subCategoryName!=null}">
+							<p id="castyle2"> ${subCategoryName} </p>
+	                    </c:when>
+	    </c:choose>
 		<input type="hidden" id="categoryNo" value="${categoryNo}">
 		
 			<c:set var="i" value="0" />

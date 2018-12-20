@@ -538,7 +538,7 @@ public class ProjectController {
 
 	// 후원할때 들어오는 메소드
 	@RequestMapping(value = "/donate")
-	public String donateProject(ProjectDonateVO vo) {
+	public String donateProject(ProjectDonateVO vo,Model model) {
 		SecurityContext impl = SecurityContextHolder.getContext(); // 세션에서 spring security 정보를 가져옴
 		String implstr = impl.getAuthentication().getName(); // security 정보에서 세션에 담겨있는 로그인 정보 중 ID 가져옴
 		MemberVO vo2 = dao.memname(implstr); // ID를 토대로 회원정보 가져옴 (회원 번호, 회원 이름)
@@ -552,8 +552,11 @@ public class ProjectController {
 			} else {
 				vo.setDonateMoney(dao.prodcost(vo.getProductNo()));
 			}
+			
+			//총 금액 계산
+			//model.addAttribute("allCost", vo.getDonateMoney());
 		}
-		
+
 		// 사용자의 선결제 금액이 프로젝트의 금액보다 낮을 때 이후 작업을 수행 하지 않고 페이지로 보냄
 		if(vo2.getMemberCash()-vo.getDonateMoney()<0) {
 			return "redirect:/productDetail?projectNo=" + vo.getProjectNo() + "&success=fail";
