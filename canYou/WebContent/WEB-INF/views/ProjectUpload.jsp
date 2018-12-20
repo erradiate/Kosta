@@ -157,6 +157,10 @@
     background-color: #337ab7;
     border-color: #2e6da4;
 }
+
+.modal-body p:hover{
+	cursor:pointer;
+}
 </style>
 <div id="pform">
 <h1 id="prouptitle">* 프로젝트 업로드 *</h1>
@@ -165,8 +169,43 @@
 	<li class="nav-item"><a id="i1" class="nav-link" href="#">프로젝트 개요</a></li>
 	<li class="nav-item"><a id="i2" class="nav-link" href="#">프로젝트 펀딩 및 선물구성</a></li>
 	<li class="nav-item"><a id="i3" class="nav-link" href="#">프로젝트 스토리 텔링</a></li>
+	<c:choose>
+		<c:when test="${cnt>0}">
+			<li class="nav-item"><a id="i4" class="nav-link" href="#" data-toggle="modal" data-target="#myModal">임시저장(${cnt })</a></li>
+		</c:when>
+	</c:choose>
 </ul>
 </nav>
+<c:choose>
+		<c:when test="${cnt>0}">
+			<div class="modal" id="myModal">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			
+			      <!-- Modal Header -->
+			      <div class="modal-header">
+			        <h4 class="modal-title">임시저장된 프로젝트</h4>
+			        <button type="button" class="close" data-dismiss="modal">&times;</button>
+			      </div>
+			
+			      <!-- Modal body -->
+			      <div class="modal-body">
+			        <c:forEach var="v" items="${tlist}">
+						<p data-dismiss="modal"><input type="hidden" id="tpronum" value="${v.projectNo}"/>${v.projectName} ... </p>
+    				</c:forEach>
+			      </div>
+			
+			      <!-- Modal footer -->
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+			      </div>
+			
+			    </div>
+			  </div>
+			</div>
+	</c:when>
+</c:choose>
+
 <form id="my-form" action="proup" method="post" enctype="multipart/form-data">
 <input type="hidden" id="proname" name="proname">
 <input type="hidden" id="procnt" name="procnt">
@@ -181,6 +220,7 @@
 	<div class="filebox preview-image">
 		<p><span class="title">프로젝트 대표 이미지 : </span>
 		<input class="upload-name" value="파일선택" disabled="disabled">
+		<input type="hidden" class="upload-name" name="upload_name">
 		<label for="mfile">업로드</label> 
 		<input type="file" id="mfile" name="mfile" class="upload-hidden">
 		
@@ -324,64 +364,69 @@ $(document).ready(function(){
 		$("#procost").val(data4);
 	});
 	
+	function subcategoryajax(){
+		$.ajax({
+			url: 'subcasel',
+			async:false,
+			type:'POST',
+			data:{
+				categoryNo: $('#categoryNo').val()
+			},
+			dataType:'text',
+			success: function(jqXHR){
+				var obj = JSON.parse(jqXHR);
+				$('#subCategoryNo').empty();
+				$('#subCategoryNo').append("<option value='-1'>선택</option>");
+				$.each(obj,function(index,item){
+                   var option=$("<option value="+item.subcategoryNo+">"+item.subcategoryName+"</option>")
+                   $('#subCategoryNo').append(option);
+                });
+				
+			}
+		})
+	}
 
 	$('#categoryNo').click(function(){
 		if($(this).val()!=''){
-			$.ajax({
-				url: 'subcasel',
-				async:true,
-				type:'POST',
-				data:{
-					categoryNo: $('#categoryNo').val()
-				},
-				dataType:'text',
-				success: function(jqXHR){
-					var obj = JSON.parse(jqXHR);
-					$('#subCategoryNo').empty();
-					$('#subCategoryNo').append("<option value='-1'>선택</option>");
-					$.each(obj,function(index,item){
-	                   var option=$("<option value="+item.subcategoryNo+">"+item.subcategoryName+"</option>")
-	                   $('#subCategoryNo').append(option);
-	                });
-					
-				}
-			})
+			subcategoryajax();
 		}else{
 			$('#subCategoryNo').empty();
 			$('#subCategoryNo').append("<option value=''>선택</option>");
 		}
 	});
 	
-	$('#projectStartDate').change(function(){	// 시작날짜를 지정시
-			var min = new Date($(this).val());	// 종료 날짜 최소일(~10일)
-			var max = new Date($(this).val());	// 종료 날짜 최대일(~60일)
-			min.setDate(min.getDate()+10);
-			max.setDate(max.getDate()+60);
-			
-			var mon=min.getMonth()+1;
-			var mon2=max.getMonth()+1;
-			
-			var day=min.getDate();
-			var day2=max.getDate();
-			
-			if(mon<10){
-				mon="0"+mon;
-			}
-			if(mon2<10){
-				mon2="0"+mon2;
-			}
-			
-			if(day<10){
-				day="0"+day;
-			}
-			if(day2<10){
-				day2="0"+day2;	
-			}
-			$('#projectEndDate').attr("min", min.getFullYear()+"-"+mon+"-"+day);
-			$('#projectEndDate').attr("max", max.getFullYear()+"-"+mon2+"-"+day2);
-			$('#projectEndDate').val(min.getFullYear()+"-"+mon+"-"+day);
-			$('#projectEndDate').removeAttr("disabled");
-	});
+	$('#projectStartDate').on('change', {}, date_change);
+	
+	function date_change(){	// 시작날짜를 지정시
+		var min = new Date($('#projectStartDate').val());	// 종료 날짜 최소일(~10일)
+		var max = new Date($('#projectStartDate').val());	// 종료 날짜 최대일(~60일)
+		min.setDate(min.getDate()+10);
+		max.setDate(max.getDate()+60);
+		
+		var mon=min.getMonth()+1;
+		var mon2=max.getMonth()+1;
+		
+		var day=min.getDate();
+		var day2=max.getDate();
+		
+		if(mon<10){
+			mon="0"+mon;
+		}
+		if(mon2<10){
+			mon2="0"+mon2;
+		}
+		
+		if(day<10){
+			day="0"+day;
+		}
+		if(day2<10){
+			day2="0"+day2;	
+		}
+		$('#projectEndDate').attr("min", min.getFullYear()+"-"+mon+"-"+day);
+		$('#projectEndDate').attr("max", max.getFullYear()+"-"+mon2+"-"+day2);
+		$('#projectEndDate').val(min.getFullYear()+"-"+mon+"-"+day);
+		$('#projectEndDate').removeAttr("disabled");
+	};
 	
 	$('#i1').click(function () {
 		if($("#info1").is(":visible")){
@@ -471,8 +516,79 @@ $(document).ready(function(){
 		        console.log("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
 		    },
 		})
-		
-		alert('임시저장 페이지');
+	});
+	
+	$('.modal-body p').click(function(){		// 임시저장된 프로젝트 제목을 눌렀을 때
+		$.ajax({
+			url: 'seltpro',
+			type:'POST',
+			data: {
+				projectNo:$(this).children('#tpronum').val(),
+			},
+			dataType:'text',
+			success: function(jqXHR){
+				var obj = JSON.parse(jqXHR);
+				console.log(obj)
+				
+				$('#projectName').val(obj.project.projectName);
+				$('#projectCost').val(obj.project.projectCost);
+				CKEDITOR.instances.cont.setData(obj.project.projectStory);
+				
+				if(obj.project.projectMainImage!='null.jpg'){
+					$('.upload-name').val(obj.project.projectMainImage);
+					$('#projectMainImage').attr('src', 'resources/images/'+obj.project.projectMainImage);
+					$('#projectMainImage').show();
+				}
+				
+				if(obj.project.categoryNo!=0){
+					$('#categoryNo option').attr('selected', false);
+					$('#categoryNo option').each(function(){
+						if($(this).val()==obj.project.categoryNo){
+							$(this).attr('selected', true);
+							return false; // break문과 동일
+						}
+					})
+					
+					subcategoryajax();
+					
+					console.log("카테고리 번호 : " + obj.project.subCategoryNo);
+					
+					$('#subCategoryNo > option').each(function(){
+						console.log($(this).val());
+						
+						if($(this).val()==obj.project.subCategoryNo){
+							$(this).attr('selected', true);
+							return false; // break문과 동일
+						}
+					})
+					
+				}else{
+					$('#categoryNo option').attr('selected', false);
+					$('#categoryNo option').each(function(){
+						if($(this).val()==''){
+							
+							$(this).attr('selected', true);
+							return false; // break문과 동일
+						}
+					})
+					
+					$('#subCategoryNo').empty();
+					$('#subCategoryNo').append("<option value='-1'>선택</option>");
+				}
+				if(obj.project.projectStartDate!=null){
+					$('#projectStartDate').val(obj.project.projectStartDate);
+					date_change();
+					$('#projectEndDate').val(obj.project.projectEndDate);
+				}
+				
+				$("tbody").empty();
+				$.each(obj.product, function(key, val){		// 상품을 불러와서 출력
+					var tr = "<tr><td id=\"pname\">"+val.productName+"</td><td id=\"pcnt\">"+val.productCnt+"</td><td id=\"pinfo\">"+val.productInfo+"</td><td><span id=\"pcost\">"+val.productCost+"</span>원</td></tr>";
+					
+					$("tbody").append(tr);
+				})
+			}
+		})
 	});
 	
 	/* 숫자만 입력해야하는 폼 설정 */

@@ -184,9 +184,9 @@ public class ProjectController {
 		return new ResponseEntity<>(l, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/proup") // 프로젝트 업로드
+	@RequestMapping(value = "/proup") // 프로젝트 업로드 1220 수정
 	public ModelAndView proup(@ModelAttribute("projvo") ProjectVO vo, MultipartFile mfile, String proname,
-			String procnt, String proinfo, String procost, HttpServletRequest request) {
+			String procnt, String proinfo, String procost, String upload_name,HttpServletRequest request) {
 		ProductVO prodvo = new ProductVO();
 		String[] pname = proname.split(",");
 		String[] pcnt = procnt.split(",");
@@ -197,30 +197,31 @@ public class ProjectController {
 		String r_path = request.getRealPath("/");
 		String oriFn;
 
-		if (mfile == null) {
-			oriFn = "null.jpg";
-		} else {
-			oriFn = mfile.getOriginalFilename();
-		}
+		oriFn = mfile.getOriginalFilename();
+
 		StringBuffer path = new StringBuffer();
 		path.append(r_path).append(img_path).append("\\");
 		path.append(oriFn);
 
-		if (mfile != null) {
+		if (!oriFn.equals("")) {
 			File f = new File(path.toString());
 			try {
 				mfile.transferTo(f);
 			} catch (IllegalStateException | IOException e) {
 				e.printStackTrace();
 			}
+		}else {
+			if(upload_name!=null) {
+				oriFn=upload_name;
+			}
 		}
-
+		
 		/* 로그인 정보를 가져오는 구문 */
 		SecurityContext impl = SecurityContextHolder.getContext(); // 세션에서 spring security 정보를 가져옴
 		String implstr = impl.getAuthentication().getName(); // security 정보에서 세션에 담겨있는 로그인 정보 중 ID 가져옴
 		MemberVO vo2 = dao.memname(implstr); // ID를 토대로 회원정보 가져옴 (회원 번호, 회원 이름)
 		vo.setMemberNo(vo2.getMemberNo()); // 프로젝트 테이블에 넣을 회원 번호를 넣음
-
+		
 		vo.setProjectMainImage(oriFn);
 		dao.proin(vo); // 프로젝트 업로드
 
@@ -716,9 +717,9 @@ public class ProjectController {
 		return "projectlook";
 	}
 
-	// 프로젝트 업로드 폼
+	// 프로젝트 업로드 폼 1220수정
 	@RequestMapping(value = "/ProjectUpload")
-	public ModelAndView ProjectUpload() {
+	public String ProjectUpload(Model m) {
 		List<CategoryVO> category = dao.casel(); // 프로젝트 업로드에 필요한 카테고리 목록을 가져옴
 
 		// 세션에서 로그인 된 ID를 가져오는 작업
@@ -727,12 +728,10 @@ public class ProjectController {
 		// 끝-------------------
 		MemberVO vo = dao.memname(implstr); // 가져온 ID를 토대로 회원 번호, 이름을 가져온다
 		String name = vo.getMemberName(); // 이름을 name 변수에 저장
-
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("ProjectUpload");
-		mav.addObject("category", category); // 카테고리 목록 붙임
-		mav.addObject("memberName", name); // name을 object로 붙여서 같이 전송
-		return mav;
+			
+		m.addAttribute("category", category); // 카테고리 목록 붙임
+		m.addAttribute("memberName", name);  // name을 object로 붙여서 같이 전송
+		return "ProjectUpload";
 	}
 
 	// 로그아웃 12/14

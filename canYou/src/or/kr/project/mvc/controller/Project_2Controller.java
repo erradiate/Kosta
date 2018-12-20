@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -112,5 +113,21 @@ public class Project_2Controller {
 		}
 		
 		return new ResponseEntity<String>("ok", HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="/seltpro")
+	public ResponseEntity<HashMap<String, Object>> seltpro(int projectNo){
+		ProjectVO vo=new ProjectVO();
+		
+		
+		
+		vo=dao2.seltpro(projectNo);
+		List<ProductVO> vo2=dao2.seltprod(projectNo);
+		
+		HashMap<String, Object> h=new HashMap<>();
+		h.put("project", vo);
+		h.put("product", vo2);
+		
+		return new ResponseEntity<HashMap<String, Object>>(h, HttpStatus.OK);
 	}
 }
