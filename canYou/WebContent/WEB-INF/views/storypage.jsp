@@ -22,7 +22,7 @@
 <div class="divStory">
 <p style="margin:3%">${list.projectStory}</p>
 </div>
-
+<%@ include file="recommend.jsp"%>
 <script>
 
 </script>

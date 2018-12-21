@@ -343,7 +343,7 @@ $(document).ready(function(){
 	})
 	
 	$("#preadd").click(function(){
-		if ($("#productName").val()=='' || $("#productCnt").val()=='' || $("#	productInfo").val()=='' || $("#productCost").val()==''){
+		if ($("#productName").val()=='' || $("#productCnt").val()=='' || $("#productInfo").val()=='' || $("#productCost").val()==''){
 			alert("빈 항목이 있습니다. 입력해주세요");
 		}else{
 			var tr = "<tr><td id=\"pname\">"+$("#productName").val()+"</td><td id=\"pcnt\">"+$("#productCnt").val()+"</td><td id=\"pinfo\">"+$("#productInfo").val()+"</td><td><span id=\"pcost\">"+$("#productCost").val()+"</span>원</td></tr>";

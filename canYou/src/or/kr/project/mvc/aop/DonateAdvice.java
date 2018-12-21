@@ -13,7 +13,7 @@ import or.kr.project.mvc.dao.LogDao;
 @Component
 @Aspect
 public class DonateAdvice {
-	@Autowired
+	/*@Autowired
 	LogDao dao;
 	
 	@After("execution(* kr.or.project.mvc.controller.ProjectController.)")
@@ -26,11 +26,11 @@ public class DonateAdvice {
 		vo.setSubCategoryNo(1);
 		vo.setDonateMoney(10000);
 		dao.insLog(vo);
-		/*Object[] obj = jp.getArgs();
+		Object[] obj = jp.getArgs();
 		if(obj[0] instanceof ProjectDonateVO) {
 			ProjectDonateVO pvo = (ProjectDonateVO)obj[0];
 			
-		}*/
+		}
 			
-	}
+	}*/
 }

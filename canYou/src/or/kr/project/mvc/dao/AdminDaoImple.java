@@ -9,14 +9,23 @@ import org.springframework.stereotype.Repository;
 
 import or.kr.project.dto.DeniedVO;
 import or.kr.project.dto.ProjectVO;
+import or.kr.project.dto.SearchVO;
 
 @Repository
 public class AdminDaoImple {
 	@Autowired
 	private SqlSessionTemplate ss;
-	
-	public List<HashMap<String, String>> wprosel(){
-		return ss.selectList("admin.wprosel");
+
+	// 검토중인 프로젝트 현황
+	public List<HashMap> wprosel(SearchVO vo) {
+		List<HashMap> list = ss.selectList("admin.wprosel", vo);
+		return list;
+	}
+
+	// 검토중인 프로젝트 총 개수
+	public int wproselCount(SearchVO vo) {
+		return ss.selectOne("admin.wproselTotal", vo);
+
 	}
 
 	public void ok(ProjectVO vo) {

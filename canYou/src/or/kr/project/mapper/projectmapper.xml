@@ -44,10 +44,11 @@
 		memberId=#{memberId}
 	</select>
 
-	<!-- 회원 번호로 회원 이름을 가져옴 --> 
+	<!-- 회원 번호로 회원 이름을 가져옴 -->
 	<select id="memname2" parameterType="int" resultType="mvo">
-		select memberId, memberName,memberNo 
-		from member 
+		select
+		memberId, memberName,memberNo
+		from member
 		where memberNo=#{memberNo}
 	</select>
 
@@ -252,11 +253,13 @@
 		r.replyContent,to_char(r.replyDate,'yyyy-MM-dd')
 		replyDate,r.replyNo,
 		m.memberName, r.projectNo, m.memberImage
-		from reply r,member
+		from reply
+		r,member
 		m
 		where
 		m.memberNo=r.memberNo and r.projectNo=#{projectNo}
-		order by
+		order
+		by
 		replyDate
 	</select>
 
@@ -403,26 +406,39 @@
 		select
 		memberImage, memberCash, memberGrant
 		from member
-		where memberId=#{memberId}
+		where
+		memberId=#{memberId}
 	</select>
-	
+
 	<!-- 댓글 수정 -->
 	<update id="commodify" parameterType="Hashmap">
-		update reply set
-		replyContent=#{replyContent} where memberNo=#{memberNo} and
+		update reply set replyContent=#{replyContent} where memberNo=#{memberNo} and
 		replyNo=#{replyNo}
 	</update>
-	
+	<!-- 댓글 수정 팝업 -->
+	<select id="commodi" parameterType="Hashmap"
+		resultType="replyvo">
+		select replyNo, replyContent, to_char(replyDate,'yyyy-MM-dd') replyDate,
+		projectNo, memberNo from reply where memberNo=#{memberNo} and
+		replyNo=#{replyNo}
+	</select>
 	<!-- 댓글 삭제 -->
 	<delete id="comdelete" parameterType="int">
-		delete from reply where
-		memberNo=#{memberNo} and replyNo=#{replyNo}
+		delete from reply where memberNo=#{memberNo} and replyNo=#{replyNo}
 	</delete>
-	
+	<!-- 상세보기 관심별 리스트 -->
+	<select id="listByCategory" parameterType="String"
+		resultType="projvo">
+		select projectName,projectMainImage, projectNo from project where
+		categoryNo=#{categoryNo}
+	</select>
 	<!-- 내 프로젝트를 후원한 사람 명단 보기 -->
-	<select id="projectDonateList" parameterType="int" resultType="mvo">
-		select projectNo,memberId,memberName,memberAddr,memberPhone,memberEmail,memberGender,memberAge,memberAccount,memberImage
+	<select id="projectDonateList" parameterType="int"
+		resultType="mvo">
+		select
+		projectNo,memberId,memberName,memberAddr,memberPhone,memberEmail,memberGender,memberAge,memberAccount,memberImage
 		from member m,projectDonate d
-		where d.projectNo=#{projectNo} and m.memberNo=d.memberNo
+		where d.projectNo=#{projectNo} and
+		m.memberNo=d.memberNo
 	</select>
 </mapper>

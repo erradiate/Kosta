@@ -35,8 +35,10 @@ public class DetailController {
 		ProjectVO list = dao.projectlist(projectNo);
 		String c=dao.caselone(list.getCategoryNo());
 		String sc=dao.subcaselone(list.getSubCategoryNo());
-		
+		//카테고리별 LIST
+		List<ProjectVO> listByCategory = dao.projectlistByCategory(String.valueOf(list.getCategoryNo()));
 		m.addAttribute("list",list);
+		m.addAttribute("listByCategory",listByCategory);
 		m.addAttribute("c", c);
 		m.addAttribute("sc", sc);
 		
@@ -54,7 +56,9 @@ public class DetailController {
 		ProjectVO list = dao.projectlist(projectNo);
 		String c = dao.caselone(list.getCategoryNo());
 		String sc = dao.subcaselone(list.getSubCategoryNo());
+		List<ProjectVO> listByCategory = dao.projectlistByCategory(String.valueOf(list.getCategoryNo()));
 		m.addAttribute("list", list);
+		m.addAttribute("listByCategory",listByCategory);
 		m.addAttribute("c", c);
 		m.addAttribute("sc", sc);
 		// project와 연결된 member 정보 가져오기
@@ -79,7 +83,9 @@ public class DetailController {
 		ProjectVO list = dao.projectlist(projectNo);
 		String c = dao.caselone(list.getCategoryNo());
 		String sc = dao.subcaselone(list.getSubCategoryNo());
+		List<ProjectVO> listByCategory = dao.projectlistByCategory(String.valueOf(list.getCategoryNo()));
 		m.addAttribute("list", list);
+		m.addAttribute("listByCategory",listByCategory);
 		m.addAttribute("c", c);
 		m.addAttribute("sc", sc);
 		

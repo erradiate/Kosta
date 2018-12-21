@@ -4,7 +4,16 @@ public class SearchVO {
 	private String searchType,searchValue,begin,end;
 	private int memberNo;
 	private int projectStatus;
+	private int day;
 	
+
+	public int getDay() {
+		return day;
+	}
+
+	public void setDay(int day) {
+		this.day = day;
+	}
 
 	public int getProjectStatus() {
 		return projectStatus;

@@ -322,18 +322,31 @@ public class projectDaoImple implements projectDao {
 		return ss.selectOne("project.userInfo", memberId);
 	}
 
+	// 자기 프로젝트에 후원한 사람 명단 보기
+	public List<MemberVO> projectDonateList(int projectNo) {
+		return ss.selectList("project.projectDonateList", projectNo);
+	}
+
 	// 댓글 수정
-	public void comupdate(HashMap<String, String> vo) {
-		ss.update("project.commodify", vo);
+	public int comupdate(HashMap<String, String> vo) {
+		int ret = ss.update("project.commodify", vo);
+		return ret;
+	}
+
+	// 댓글 수정 팝업
+	public ReplyVO compopup(HashMap<String, String> vo) {
+		return ss.selectOne("project.commodi", vo);
 	}
 
 	// 댓글 삭제
 	public void comdelete(ReplyVO vo) {
 		ss.delete("project.comdelete", vo);
 	}
-	
-	//자기 프로젝트에 후원한 사람 명단 보기
-	public List<MemberVO> projectDonateList(int projectNo){
-		return ss.selectList("project.projectDonateList",projectNo);
-	} 
+
+	// 상세보기 - 관심별 리스트보기
+	public List<ProjectVO> projectlistByCategory(String category) {
+		System.out.println("category : " + category);
+		return ss.selectList("project.listByCategory", category);
+	}
+
 }

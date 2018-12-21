@@ -128,7 +128,7 @@ public class ProjectController {
 
 		m.addAttribute("list", vo2);
 		return "editinfo";
-	} 
+	}
 
 	// 개인정보 수정 하기
 	@RequestMapping(value = "/success")
@@ -554,13 +554,13 @@ public class ProjectController {
 	// 후원할때 들어오는 메소드
 	@RequestMapping(value = "/donate")
 	@ResponseBody
-	public String donateProject(ProjectDonateVO vo, Model model,HttpServletRequest request) {
+	public String donateProject(ProjectDonateVO vo, Model model, HttpServletRequest request) {
 		SecurityContext impl = SecurityContextHolder.getContext(); // 세션에서 spring security 정보를 가져옴
 		HttpSession session = request.getSession();
 		String implstr = impl.getAuthentication().getName(); // security 정보에서 세션에 담겨있는 로그인 정보 중 ID 가져옴
 		MemberVO vo2 = dao.memname(implstr); // ID를 토대로 회원정보 가져옴 (회원 번호, 회원 이름)
 		int memno = vo2.getMemberNo();
-		
+
 		vo.setMemberNo(memno);
 
 		if (vo.getProductNo() != 0) {
@@ -584,7 +584,7 @@ public class ProjectController {
 		m.put("memberNo", memno);
 
 		dao.donateMoney(m);
-		
+
 		session.setAttribute("memberCash", vo2.getMemberCash());
 
 		return "1";
@@ -785,29 +785,30 @@ public class ProjectController {
 	}
 
 	// 댓글 수정
-	@RequestMapping(value = "/commentmodify")
-	public String comModify(ReplyVO vo, String projectNo, String replyNo) {
+	@ResponseBody
+	@RequestMapping(value = "/commentmodify", produces = "application/json")
+	public int comModify(@RequestBody Map<String, Object> param) {
 		SecurityContext impl = SecurityContextHolder.getContext(); // 세션에서 spring security 정보를 가져옴
 		String implstr = impl.getAuthentication().getName(); // security 정보에서 세션에 담겨있는 로그인 정보 중 ID 가져옴
 		MemberVO vo2 = dao.memname(implstr); // ID를 토대로 회원정보 가져옴 (회원 번호, 회원 이름)
 		int memno = vo2.getMemberNo();
+		System.out.println(param.get("replyNo"));
+
 		HashMap<String, String> map = new HashMap<>();
 		map.put("memberNo", String.valueOf(memno));
-		map.put("projectNo", String.valueOf(vo.getProjectNo()));
-		map.put("replyNo", String.valueOf(vo.getReplyNo()));
-		map.put("replyContent", vo.getReplyContent());
-		System.out.println("수정멤버번호:" + memno);
-		System.out.println("수정프로젝트 번호:" + vo.getProjectNo());
-		System.out.println("수정댓글 번호:" + vo.getReplyNo());
-		System.out.println("수정코멘트번호:" + vo.getReplyContent());
+		map.put("projectNo", String.valueOf(param.get("projectNo")));
+		map.put("replyNo", String.valueOf(param.get("replyNo")));
+		map.put("replyContent", String.valueOf(param.get("replyContent")));
 
 		System.out.println(map.get("memberNo"));
 		System.out.println(map.get("projectNo"));
 		System.out.println(map.get("replyNo"));
 		System.out.println(map.get("replyContent"));
 
-		dao.comupdate(map);
-		return "redirect:/community?projectNo=" + vo.getProjectNo();
+		int ret = dao.comupdate(map);
+		/* return "redirect:/community?projectNo=" + projectNo; */
+		System.out.println(ret);
+		return ret;
 	}
 
 	// 댓글 삭제
@@ -836,14 +837,15 @@ public class ProjectController {
 		String implstr = impl.getAuthentication().getName(); // security 정보에서 세션에 담겨있는 로그인 정보 중 ID 가져옴
 		MemberVO vo2 = dao.memname(implstr); // ID를 토대로 회원정보 가져옴 (회원 번호, 회원 이름)
 		int memno = vo2.getMemberNo();
-		ReplyVO vo = new ReplyVO();
-		vo.setMemberNo(memno);
-		vo.setReplyNo(replyNo);
-		vo.setProjectNo(projectNo);
-		System.out.println("멤버번호 : " + vo.getMemberNo());
-		System.out.println("댓글번호 : " + vo.getReplyNo());
-		System.out.println("프로젝트 번호 : " + vo.getProjectNo());
-		m.addAttribute("list", vo);
+
+		HashMap<String, String> map = new HashMap<>();
+		map.put("projectNo", String.valueOf(projectNo));
+		map.put("replyNo", String.valueOf(replyNo));
+		map.put("memberNo", String.valueOf(memno));
+
+		ReplyVO list = dao.compopup(map);
+		m.addAttribute("list", list);
+
 		return "commodify";
 	}
 }

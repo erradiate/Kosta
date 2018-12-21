@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ include file="detail.jsp"%>
 
 
 <style>
@@ -18,7 +17,7 @@
 
 .modelbtn {
 	text-align: right;
-	border-bottom: 2px dashed gray;
+	border-bottom: 1px ridge #DFDFDF;
 	padding-bottom: 4px;
 }
 
@@ -27,6 +26,7 @@
 	height: 150px;
 	border: 1px solid #DFDFDF;
 	margin: auto;
+	margin-bottom: 10px;
 }
 </style>
 <!-- Nav tabs communitypage = 커뮤니티 -->
@@ -37,11 +37,6 @@
 		<li><a href="productDetail?projectNo=${list.projectNo}">상품 상세</a></li>
 		<li><a class="hoverHolder"
 			href="community?projectNo=${list.projectNo}">커뮤니티</a></li>
-		  <c:choose>
-                	<c:when test="${pageContext.request.userPrincipal.name!=null }">
-                		<li><a href="projectDonateList?projectNo=${list.projectNo}&memberNo=${member.memberNo}">후원자 보기</a></li>
-                	</c:when>
-                </c:choose> 
 		<li><a href="">환불 및 교환</a></li>
 	</ul>
 </div>
@@ -53,13 +48,15 @@
 			<tr>
 				<td><c:choose>
 						<c:when test="${pageContext.request.userPrincipal.name==null}">
-							<textarea rows="7" cols="80" name="replyContent" disabled>로그인 해주세요</textarea>
+							<textarea rows="7" cols="80" name="replyContent" style="text-align: center;" disabled>로그인 해주세요</textarea>
+						<td><input type="button" style="width: 150px; height: 170px;" value="로그인" class="comlogin btns"></td>
 						</c:when>
 						<c:when test="${pageContext.request.userPrincipal.name!=null}">
 							<textarea rows="7" cols="80" name="replyContent"></textarea>
+							<td><input type="submit" style="width: 150px; height: 170px;" value="등록" class="btns"></td>
 						</c:when>
 					</c:choose></td>
-				<td><input type="submit" value="작성" class="btns"></td>
+				
 			</tr>
 		</table>
 	</div>
@@ -82,16 +79,17 @@
 				<td><div class="cont">${s.replyContent}</div></td>
 			</tr>
 			<tr>
-				<td class="modelbtn"><input type="button" class="mobtn"
+				<td class="modelbtn"><input type="button" class="mobtn btns"
 					value="수정"> 
 					<input type="hidden" class="replyNo" value="${s.replyNo}"> 
 					<input type="hidden" id="projectNo"value="${s.projectNo}"> 
-					<input type="button" class="delbtn"
+					<input type="button" class="delbtn btns"
 					value="삭제"></td>
 			</tr>
 		</c:forEach>
 	</table>
 </form>
+<%@ include file="recommend.jsp"%>
 <script>
 	$(function() {
 		$('.delbtn').each(
@@ -114,8 +112,26 @@
 	});
 	$(function() {
 		$('.mobtn').click(function() {
-			location.href = "communityModify?replyNo="+ $(this).next().val()+ "&projectNo="
-			+ $('#projectNo').val();
+			/* location.href = "communityModify?replyNo="+ $(this).next().val()+ "&projectNo="
+			+ $('#projectNo').val(); */
+			window.name = "parentForm";
+            window.open("communityModify?replyNo="+ $(this).next().val()+ "&projectNo="+ $('#projectNo').val()/* ,
+                        "updateForm", "width=570, height=600, resizable = no, scrollbars = no" */);
+
 		});
+	});
+	$(function() {
+		$('.comlogin').each(
+				function(index, item) {
+					$(this).click(
+
+							function() {
+								console.log();
+								var result = confirm('로그인 하시겠습니까?');
+								if (result) {
+									location.href = "login"
+								}
+							});
+				});
 	});
 </script>

@@ -127,7 +127,7 @@
 		</fieldset>
 	</div>
 </div>
-
+<%@ include file="recommend.jsp"%>
 <!-- 결제가 제대로 되었는지 확인하는 값 -->
 <input type="hidden" id="success" value="${success}">
 <script>
