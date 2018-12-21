@@ -49,7 +49,7 @@ public class Project_2Controller {
 	}
 	
 	@RequestMapping(value="/tadd")	// 임시 저장하는 명령어
-	public ResponseEntity<String> tadd(@ModelAttribute("projvo") ProjectVO vo, MultipartFile mfile, String proname,
+	public ResponseEntity<HashMap<String, Object>> tadd(@ModelAttribute("projvo") ProjectVO vo, MultipartFile mfile, String proname,
 			String procnt, String proinfo, String procost, HttpServletRequest request) throws UnsupportedEncodingException {
 		
 		String img_path = "resources\\images";
@@ -112,14 +112,19 @@ public class Project_2Controller {
 			}
 		}
 		
-		return new ResponseEntity<String>("ok", HttpStatus.OK);
+		int cnt=dao2.tprocnt(vo2.getMemberNo());
+		List<ProjectVO> vo3=dao2.tprosel(vo2.getMemberNo());
+		
+		HashMap<String, Object> h=new HashMap<>();
+		h.put("cnt", cnt);
+		h.put("project", vo3);
+		
+		return new ResponseEntity<HashMap<String, Object>>(h, HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="/seltpro")
+	@RequestMapping(value="/seltpro")	// 선택한 임시 저장 프로젝트 불러오기
 	public ResponseEntity<HashMap<String, Object>> seltpro(int projectNo){
 		ProjectVO vo=new ProjectVO();
-		
-		
 		
 		vo=dao2.seltpro(projectNo);
 		List<ProductVO> vo2=dao2.seltprod(projectNo);
@@ -127,6 +132,24 @@ public class Project_2Controller {
 		HashMap<String, Object> h=new HashMap<>();
 		h.put("project", vo);
 		h.put("product", vo2);
+		
+		return new ResponseEntity<HashMap<String, Object>>(h, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="/deltpro")
+	public ResponseEntity<HashMap<String, Object>> deltpro(int projectNo){
+		dao2.deltpro(projectNo);
+		
+		SecurityContext impl = SecurityContextHolder.getContext();
+		String implstr = impl.getAuthentication().getName();
+		MemberVO vo2 = dao.memname(implstr); // 세션에서 가져온 ID를 토대로 회원 번호, 이름을 가져온다
+		
+		int cnt=dao2.tprocnt(vo2.getMemberNo());
+		List<ProjectVO> vo3=dao2.tprosel(vo2.getMemberNo());
+		
+		HashMap<String, Object> h=new HashMap<>();
+		h.put("cnt", cnt);
+		h.put("project", vo3);
 		
 		return new ResponseEntity<HashMap<String, Object>>(h, HttpStatus.OK);
 	}

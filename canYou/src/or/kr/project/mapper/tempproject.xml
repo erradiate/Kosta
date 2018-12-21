@@ -69,4 +69,14 @@
 		select tproductName productName, tproductCnt productCnt, tproductInfo productInfo, tproductCost productCost
 		from tproduct where tprojectNo=#{projectNo}
 	</select>
+	
+	<!-- 선택한 임시 저장 프로젝트의 상품 삭제 -->
+	<delete id="tproddel" parameterType="int">
+		delete from tproduct where tprojectNo=#{projectNo}
+	</delete>
+	
+	<!-- 선택한 임시 저장 프로젝트 삭제 -->
+	<delete id="tprodel" parameterType="int">
+		delete from tproject where tprojectNo=#{projectNo}
+	</delete>
 </mapper>

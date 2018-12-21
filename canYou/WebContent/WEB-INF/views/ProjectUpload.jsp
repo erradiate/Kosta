@@ -158,7 +158,20 @@
     border-color: #2e6da4;
 }
 
+.modal-body {
+	font-weight:bold;
+}
+
 .modal-body p:hover{
+	cursor:pointer;
+	color: #FBE9E7;
+}
+
+.delicon{
+	width:20px;
+}
+
+.delicon p:hover{
 	cursor:pointer;
 }
 </style>
@@ -169,42 +182,37 @@
 	<li class="nav-item"><a id="i1" class="nav-link" href="#">프로젝트 개요</a></li>
 	<li class="nav-item"><a id="i2" class="nav-link" href="#">프로젝트 펀딩 및 선물구성</a></li>
 	<li class="nav-item"><a id="i3" class="nav-link" href="#">프로젝트 스토리 텔링</a></li>
-	<c:choose>
-		<c:when test="${cnt>0}">
-			<li class="nav-item"><a id="i4" class="nav-link" href="#" data-toggle="modal" data-target="#myModal">임시저장(${cnt })</a></li>
-		</c:when>
-	</c:choose>
+	<li class="nav-item"><a id="i4" class="nav-link" href="#" data-toggle="modal" data-target="#myModal">임시저장(${cnt })</a></li>
 </ul>
 </nav>
-<c:choose>
-		<c:when test="${cnt>0}">
-			<div class="modal" id="myModal">
-			  <div class="modal-dialog">
-			    <div class="modal-content">
-			
-			      <!-- Modal Header -->
-			      <div class="modal-header">
-			        <h4 class="modal-title">임시저장된 프로젝트</h4>
-			        <button type="button" class="close" data-dismiss="modal">&times;</button>
-			      </div>
-			
-			      <!-- Modal body -->
-			      <div class="modal-body">
-			        <c:forEach var="v" items="${tlist}">
-						<p data-dismiss="modal"><input type="hidden" id="tpronum" value="${v.projectNo}"/>${v.projectName} ... </p>
-    				</c:forEach>
-			      </div>
-			
-			      <!-- Modal footer -->
-			      <div class="modal-footer">
-			        <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-			      </div>
-			
-			    </div>
-			  </div>
-			</div>
-	</c:when>
-</c:choose>
+
+<!-- 임시 프로젝트 모달창 -->
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">임시저장된 프로젝트</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <c:forEach var="v" items="${tlist}">
+			<p data-dismiss="modal"><span class="temp"><input type="hidden" id="tpronum" value="${v.projectNo}"/>${v.projectName} ... </span><img class="delicon" src="resources/images/delicon.png" align="right"></p>
+ 		</c:forEach>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- ------------------------------------------------------------------------------------- -->
 
 <form id="my-form" action="proup" method="post" enctype="multipart/form-data">
 <input type="hidden" id="proname" name="proname">
@@ -214,7 +222,7 @@
 <div id="info1">
 <div class="container-fluid">
 <div class="row">
-	<div class="col-md-8">
+	<div class="col-8">
 	<p><span class="title">진행자 이름 : </span>${memberName }</p>
 	<p><span class="title">프로젝트 이름 : </span><input type="text" id="projectName" name="projectName" class="pupinput" required></p>
 	<div class="filebox preview-image">
@@ -241,7 +249,7 @@
 	<p><span class="title">프로젝트 시작 날짜(현재 날짜에서 3일이후부터 선택 가능합니다.) : </span><input type="date" id="projectStartDate" name="projectStartDate" class="pupdate" required></p>
 	<p><span class="title">프로젝트 종료 날짜(시작 날짜에서 10~60일 이후로 선택 가능) : </span><input type="date" id="projectEndDate" name="projectEndDate" class="pupdate" disabled></p> <!-- 제약조건 완성할것 -->
 	</div>
-	<div class="col-md-4">
+	<div class="col-4">
 		<img id="projectMainImage">
 	</div>
 
@@ -255,7 +263,7 @@
 
 	<div class="container-fluid">
 	<div class="row">
-		<div class="col-md-6">
+		<div class="col-6">
 			<div id="addpre">
 				<span class="title" style="font-size:20px;">선물 추가하기</span>
 				<p><span class="title">선물 구성 : </span></p>
@@ -271,7 +279,7 @@
 			</div>	
 		</div>
 	
-		<div  class="col-md-6">
+		<div  class="col-6">
 			<div id="preinfo">	
 				<table id="pretable">
 					<thead>
@@ -335,7 +343,7 @@ $(document).ready(function(){
 	})
 	
 	$("#preadd").click(function(){
-		if ($("#productName").val()=='' || $("#productCnt").val()=='' || $("#productInfo").val()=='' || $("#productCost").val()==''){
+		if ($("#productName").val()=='' || $("#productCnt").val()=='' || $("#	productInfo").val()=='' || $("#productCost").val()==''){
 			alert("빈 항목이 있습니다. 입력해주세요");
 		}else{
 			var tr = "<tr><td id=\"pname\">"+$("#productName").val()+"</td><td id=\"pcnt\">"+$("#productCnt").val()+"</td><td id=\"pinfo\">"+$("#productInfo").val()+"</td><td><span id=\"pcost\">"+$("#productCost").val()+"</span>원</td></tr>";
@@ -499,8 +507,6 @@ $(document).ready(function(){
         	formData.append('proinfo', encodeURI($('#proinfo').val()));
         	formData.append('procost', $('#procost').val());
         }
-        
-        console.log(formData.has('projectName'));
 		
 		$.ajax({
 			url: 'tadd',
@@ -510,7 +516,13 @@ $(document).ready(function(){
 			processData: false,
 			success: function(jqXHR){
 				alert('임시저장이 완료되었습니다.');
-				
+				// 임시저장 완료 후 재로드
+				$('#i4').text("임시저장("+jqXHR.cnt+")");
+				$('.modal-body').empty();
+				$.each(jqXHR.project,function(index,item){
+	            	var source="<p data-dismiss=\"modal\"><span class=\"temp\"><input type=\"hidden\" id=\"tpronum\" value=\""+item.projectNo+"\"/>"+item.projectName+" ... </span><img class=\"delicon\" src=\"resources/images/delicon.png\" align=\"right\"></p>";
+	            	$('.modal-body').append(source);
+	            });
 			},
 			error:function(request,status,error){
 		        console.log("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
@@ -518,78 +530,7 @@ $(document).ready(function(){
 		})
 	});
 	
-	$('.modal-body p').click(function(){		// 임시저장된 프로젝트 제목을 눌렀을 때
-		$.ajax({
-			url: 'seltpro',
-			type:'POST',
-			data: {
-				projectNo:$(this).children('#tpronum').val(),
-			},
-			dataType:'text',
-			success: function(jqXHR){
-				var obj = JSON.parse(jqXHR);
-				console.log(obj)
-				
-				$('#projectName').val(obj.project.projectName);
-				$('#projectCost').val(obj.project.projectCost);
-				CKEDITOR.instances.cont.setData(obj.project.projectStory);
-				
-				if(obj.project.projectMainImage!='null.jpg'){
-					$('.upload-name').val(obj.project.projectMainImage);
-					$('#projectMainImage').attr('src', 'resources/images/'+obj.project.projectMainImage);
-					$('#projectMainImage').show();
-				}
-				
-				if(obj.project.categoryNo!=0){
-					$('#categoryNo option').attr('selected', false);
-					$('#categoryNo option').each(function(){
-						if($(this).val()==obj.project.categoryNo){
-							$(this).attr('selected', true);
-							return false; // break문과 동일
-						}
-					})
-					
-					subcategoryajax();
-					
-					console.log("카테고리 번호 : " + obj.project.subCategoryNo);
-					
-					$('#subCategoryNo > option').each(function(){
-						console.log($(this).val());
-						
-						if($(this).val()==obj.project.subCategoryNo){
-							$(this).attr('selected', true);
-							return false; // break문과 동일
-						}
-					})
-					
-				}else{
-					$('#categoryNo option').attr('selected', false);
-					$('#categoryNo option').each(function(){
-						if($(this).val()==''){
-							
-							$(this).attr('selected', true);
-							return false; // break문과 동일
-						}
-					})
-					
-					$('#subCategoryNo').empty();
-					$('#subCategoryNo').append("<option value='-1'>선택</option>");
-				}
-				if(obj.project.projectStartDate!=null){
-					$('#projectStartDate').val(obj.project.projectStartDate);
-					date_change();
-					$('#projectEndDate').val(obj.project.projectEndDate);
-				}
-				
-				$("tbody").empty();
-				$.each(obj.product, function(key, val){		// 상품을 불러와서 출력
-					var tr = "<tr><td id=\"pname\">"+val.productName+"</td><td id=\"pcnt\">"+val.productCnt+"</td><td id=\"pinfo\">"+val.productInfo+"</td><td><span id=\"pcost\">"+val.productCost+"</span>원</td></tr>";
-					
-					$("tbody").append(tr);
-				})
-			}
-		})
-	});
+
 	
 	/* 숫자만 입력해야하는 폼 설정 */
 	$('#projectCost').keypress(function(event){ 
@@ -610,6 +551,105 @@ $(document).ready(function(){
 		}
 	});
 	/***********************************************************************************/
+});
+
+$(document).on("click", ".temp", function(){		// 임시저장된 프로젝트 제목을 눌렀을 때
+	$.ajax({
+		url: 'seltpro',
+		type:'POST',
+		data: {
+			projectNo:$(this).children('#tpronum').val()
+		},
+		dataType:'text',
+		success: function(jqXHR){
+			var obj = JSON.parse(jqXHR);
+			console.log(obj)
+			
+			$('#projectName').val(obj.project.projectName);
+			$('#projectCost').val(obj.project.projectCost);
+			CKEDITOR.instances.cont.setData(obj.project.projectStory);
+			
+			if(obj.project.projectMainImage!='null.jpg'){
+				$('.upload-name').val(obj.project.projectMainImage);
+				$('#projectMainImage').attr('src', 'resources/images/'+obj.project.projectMainImage);
+				$('#projectMainImage').show();
+			}
+			
+			if(obj.project.categoryNo!=0){
+				$('#categoryNo option').attr('selected', false);
+				$('#categoryNo option').each(function(){
+					if($(this).val()==obj.project.categoryNo){
+						$(this).attr('selected', true);
+						return false; // break문과 동일
+					}
+				})
+				
+				subcategoryajax();
+				
+				console.log("카테고리 번호 : " + obj.project.subCategoryNo);
+				
+				$('#subCategoryNo > option').each(function(){
+					console.log($(this).val());
+					
+					if($(this).val()==obj.project.subCategoryNo){
+						$(this).attr('selected', true);
+						return false; // break문과 동일
+					}
+				})
+				
+			}else{
+				$('#categoryNo option').attr('selected', false);
+				$('#categoryNo option').each(function(){
+					if($(this).val()==''){
+						
+						$(this).attr('selected', true);
+						return false; // break문과 동일
+					}
+				})
+				
+				$('#subCategoryNo').empty();
+				$('#subCategoryNo').append("<option value='-1'>선택</option>");
+			}
+			if(obj.project.projectStartDate!=null){
+				$('#projectStartDate').val(obj.project.projectStartDate);
+				date_change();
+				$('#projectEndDate').val(obj.project.projectEndDate);
+			}
+			
+			$("tbody").empty();
+			$.each(obj.product, function(key, val){		// 상품을 불러와서 출력
+				var tr = "<tr><td id=\"pname\">"+val.productName+"</td><td id=\"pcnt\">"+val.productCnt+"</td><td id=\"pinfo\">"+val.productInfo+"</td><td><span id=\"pcost\">"+val.productCost+"</span>원</td></tr>";
+				
+				$("tbody").append(tr);
+			})
+		}
+	})
+});
+
+$(document).on("click", ".delicon", function(){
+	var result = confirm('해당 프로젝트를 지우시겠습니까?'); 
+	
+	if(result) {
+		$.ajax({
+			url: 'deltpro',
+			type:'POST',
+			data: {
+				projectNo:$(this).prev().children('#tpronum').val()
+			},
+			dataType:'text',
+			success: function(jqXHR){
+				alert('삭제에 성공하였습니다.')
+				// 삭제 완료 후 재로드
+				var obj = JSON.parse(jqXHR);
+				$('#i4').text("임시저장("+obj.cnt+")");
+				$('.modal-body').empty();
+				$.each(obj.project,function(index,item){
+					var source="<p data-dismiss=\"modal\"><span class=\"temp\"><input type=\"hidden\" id=\"tpronum\" value=\""+item.projectNo+"\"/>"+item.projectName+" ... </span><img class=\"delicon\" src=\"resources/images/delicon.png\" align=\"right\"></p>";
+	            	$('.modal-body').append(source);
+	            });
+			}
+		})
+	}
 });
 </script>
 

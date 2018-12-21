@@ -37,4 +37,9 @@ public class project2DaoImple {
 	public List<ProductVO> seltprod(int i) {				// 선택한 임시 프로젝트 가져오기
 		return ss.selectList("tempproject.tprodsel", i);
 	}
+	
+	public void deltpro(int i) {	// 선택한 임시 프로젝트 삭제
+		ss.delete("tempproject.tproddel", i);	// 선택한 임시 프로젝트의 상품부터 삭제
+		ss.delete("tempproject.tprodel", i);
+	}
 }
