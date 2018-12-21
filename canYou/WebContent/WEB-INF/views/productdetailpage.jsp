@@ -115,29 +115,31 @@
 					var projectNo = $('#projectNo').val();
 					var donateMoney = $('#donateMoney').val();
 					var productNo = $('#selprod #productNo').val();
-					console.log(donateMoney);
 					
-					var con = confirm('후원이 성공적으로 완료됐습니다. 마이페이지로 이동하시겠습니까?');
-				
-					if(productNo===undefined){ //추가 후원만 했을 경우
-						if(con){
-							location.href ='donate2?projectNo='+projectNo+'&donateMoney='+donateMoney+'&productNo=0';
-						}else{
-							location.href ='donate?projectNo='+projectNo+'&donateMoney='+donateMoney+'&productNo=0';
+					if(productNo===undefined){
+						var vo = {projectNo:projectNo, donateMoney:donateMoney, productNo:0};
+					} else{
+						var vo = {projectNo:projectNo, donateMoney:donateMoney, productNo:productNo};
+					}
+					$.ajax({
+						type : "POST",
+						data : vo,
+						dataType : "json",
+						url : "donate",
+						success : function(data){
+							if(data=='1'){
+								var con = confirm('후원이 성공적으로 완료됐습니다. 마이페이지로 이동하시겠습니까?');
+								if(con){
+									location.href='mypage';
+								}
+							} else{
+								alert('잔액이 부족합니다.');
+							}
+						},
+						error : function(){
+							location.href="login";
 						}
-					} else if(donateMoney===''){ //상품 구매만 했을 경우
-						if(con){
-							location.href ='donate2?projectNo='+projectNo+'&donateMoney=0'+'&productNo='+productNo;
-						}else{
-							location.href ='donate?projectNo='+projectNo+'&donateMoney=0'+'&productNo='+productNo;
-						}	
-					}else{ //상품구매, 추가 후원 둘 다 했을 경우
-						if(con){
-							location.href ='donate2?projectNo='+projectNo+'&donateMoney='+donateMoney+'&productNo='+productNo;
-						}else{
-							location.href ='donate?projectNo='+projectNo+'&donateMoney='+donateMoney+'&productNo='+productNo;
-						}			
-					} 
+					});	
 				}
 			});
 		});
