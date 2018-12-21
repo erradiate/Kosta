@@ -17,6 +17,61 @@
 	font-size: 25px;
 	font-weight: bold;
 }
+.popup {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* The actual popup */
+.popup .popuptext {
+  visibility: hidden;
+  width: 160px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -80px;
+}
+
+/* Popup arrow */
+.popup .popuptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+/* Toggle this class - hide and show the popup */
+.popup .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+  from {opacity: 0;} 
+  to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:1 ;}
+}
 </style>
 
 <!-- Nav tabs productdetailpage.jsp = 상품상세-->
@@ -46,8 +101,12 @@
 				
 			</div>
 		</c:forEach>
-		추가 후원 : <input type="text" name="donateMoney" id="donateMoney">
-		<input type="button" class="donateBtn btns" value="후원 선택">
+			<div class="popup">
+			추가 후원 : <input type="text" name="donateMoney" id="donateMoney">
+			<span class="popuptext" id="zero">금액을 입력해 주세요!</span>
+			<span class="popuptext" id="illegal">1000원 단위로 입력 해주세요</span>
+			</div> <input type="button" class="donateBtn" value="후원 선택">
+		
 	</div>
 </div>
 
@@ -68,21 +127,14 @@
 <input type="hidden" id="success" value="${success}">
 <script>
 	$(function() {
-		if($('#success').val()==='fail'){
-			alert('잔액이 부족합니다.');
-		}
-		
 		$('.prodview #donadd').each(function(){
 			$(this).click(function(e){
 				var donateBtn = '<input type="button" value="총 구매하기" class="btns dona"/>';
 				
 				$('#selprod').html($(this).prev().html());
 				$('#buyBtn').html(donateBtn);
-				//$('#selprod').css('border', '1px solid black');
 				
 				var allCost = Number($('#selprod .productCost').val())+Number($('#donateMoney').val());
-				//var allCost = $(this).next().val();
-				console.log($('#selprod .productCost').val());
 					
 				$('#allDonate').html('<p style="font-size: 25px; font-weight: bold;">'+allCost+'</p>');
 			});
@@ -90,12 +142,18 @@
 
 		$('.donateBtn').each(function(index, item) { //추가 후원 선택
 			$(this).click(function() {
+				// 돈을 아예 입력 안한 경우
+				if($('#donateMoney').val()===''){
+					var popup = document.getElementById('zero');
+					popup.classList.toggle("show");
+				} else if($('#donateMoney').val()%1000 != 0){
+					var popup = document.getElementById('illegal');
+					popup.classList.toggle("show");
+				} else{
 				var donateBtn = '<input type="button" value="총 구매하기" class="btns dona"/>';
 				$('#buyBtn').html(donateBtn);
 				console.log($('#selprod .productCost').val());
 				
-				//var projectNo = $('#projectNo').val();
-				//var productNo = $('#selprod #productNo').val();
 				if($('#selprod .productCost').val()!=undefined){
 					var allCost = Number($('#selprod .productCost').val())+Number($('#donateMoney').val());
 					console.log(allCost);
@@ -103,7 +161,9 @@
 					var allCost = Number($('#donateMoney').val());
 				}
 				
-				$('#allDonate').html('<p style="font-size: 25px; font-weight: bold;">'+allCost+'</p>');
+				$('#allDonate').html('<p id="allCost" style="font-size: 25px; font-weight: bold;">'+allCost+'</p>');
+				
+				}
 			});
 		});
 		
@@ -113,7 +173,7 @@
 
 				if (result) {
 					var projectNo = $('#projectNo').val();
-					var donateMoney = $('#donateMoney').val();
+					var donateMoney = $('#allDonate').children().text();
 					var productNo = $('#selprod #productNo').val();
 					
 					if(productNo===undefined){
