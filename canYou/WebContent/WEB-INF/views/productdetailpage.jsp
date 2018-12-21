@@ -3,7 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="detail.jsp" %>
 <style>
-.left-box {
+.left-box2 {
    float: left;
    width: 50%;
 }
@@ -30,7 +30,7 @@
             </div> 
 <!-- Nav tabs -->
 <div class="divStory">
-	<div class="left-box">
+	<div class="left-box2">
 		<c:forEach var="e2" items="${prodlist}">
 			<div class="prodview">
 				<div>

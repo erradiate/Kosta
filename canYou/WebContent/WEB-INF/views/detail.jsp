@@ -2,17 +2,14 @@
     pageEncoding="EUC-KR"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <style>
-#tv {
-	border: 1px solid black;
-}
-
 .left-box {
 	float: left;
-	width: 60%;
+	width: 700px;
 	display: inline-block;
     position: relative;
+    margin-right: 400px;
 }
-.left-box:after {
+/* .left-box:after {
     position: absolute;
     display: block;
     content: "";
@@ -25,11 +22,7 @@
       inset 0 0 20px #fff,
       inset 0 0 20px #fff,
       inset 0 0 20px #fff;
-}
-.right-box {
-	float: right;
-	width: 40%;
-}
+} */
 
 td {
 	color: black;
@@ -46,10 +39,7 @@ td {
 	font-weight: bold;
 	text-align: center;
 }
-#center-box{
-	width: 70%;
-	margin: 0 auto;
-}
+
 #castyle{
 	font-size: 50px;
 	font-weight: bold;
@@ -60,6 +50,17 @@ td {
 	font-size: 33px;
 	font-weight: bold;
 	text-align: center;
+}
+
+.left-box img{
+	width: 100%;
+	height: 600px;
+}
+
+#proInfo{
+	margin: 0 auto;
+	margin-top: 100px;
+	margin-bottom: 100px;
 }
 </style>
  
@@ -74,37 +75,27 @@ td {
 	                     </c:when>
 	            </c:choose>
             
-				<div align="center" style="font-size: 80px; color: black;">
+			<div align="center" style="font-size: 80px; color: black;">
 				<strong>${list.projectName}</strong>
 			</div>
-			<nav id="center-box">
-			<div class="left-box">
-				<img id="projectMainImage"
-					src="resources/images/${list.projectMainImage }"
-					style="width: 750px; height: 600px;">
-					<!-- style="margin: 20px 30px 30px 300px; width: 750px; height: 600px;" -->
-			</div>
-			<nav class="right-box">
-			<table ><!-- style="margin: 50px 30px 120px 60px;" -->
-				<thead></thead>
-				<tbody >
-					<tr>
-						<td>프로젝트 주최자</td>
-					</tr>
-					<tr>
+			
+			<table id="proInfo">
+				<tr>
+					<td rowspan="12"><div class="left-box">
+						<img id="projectMainImage"
+						src="resources/images/${list.projectMainImage }">
+					</div></td>
+					<td>프로젝트 주최자</td>
+				</tr>
+				<tr>
 						<td class="tdclass">${member.memberName}</td>
-					</tr>
+				</tr>
 					<tr>
 						<td>목표금액</td>
 					</tr>
 					<tr>
 						<td class="tdclass">${list.projectCost}원</td>
 					</tr>
-					<!--
-						<tr>
-							<td>프로젝트 시작날짜 : ${list.projectStartDate}</td>
-						</tr>
-						  -->
 					<tr>
 						<td>프로젝트 마감날짜</td>
 					</tr>
@@ -129,10 +120,8 @@ td {
 					<tr>
 						<td class="tdclass">${list.projectStep}</td>
 					</tr>
-				</tbody>
 			</table>
-			</nav>
-			</nav>
+			
 			<div align="right">
 				<input type="button" id="wordBtn" value="워드로 보기" class="btns">
 				<c:choose>
