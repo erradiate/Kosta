@@ -59,12 +59,15 @@ public class ProjectController {
 	@RequestMapping(value = "/")
 	public String index(HttpServletRequest request, Model model, Principal principal) {
 
+		// 헤더에 나오는 정보를 유지하기 위해
 		if (principal != null) {
 			HttpSession session = request.getSession();
 
 			String memberId = principal.getName();
 			MemberVO vo = dao.userInfo(memberId);
 
+			session.setAttribute("memberGrant", vo.getMemberGrant());
+			System.out.println("memberGrant : " + vo.getMemberGrant());
 			session.setAttribute("memberImage", vo.getMemberImage());
 			session.setAttribute("memberCash", vo.getMemberCash());
 		}
@@ -551,8 +554,9 @@ public class ProjectController {
 	// 후원할때 들어오는 메소드
 	@RequestMapping(value = "/donate")
 	@ResponseBody
-	public String donateProject(ProjectDonateVO vo, Model model) {
+	public String donateProject(ProjectDonateVO vo, Model model,HttpServletRequest request) {
 		SecurityContext impl = SecurityContextHolder.getContext(); // 세션에서 spring security 정보를 가져옴
+		HttpSession session = request.getSession();
 		String implstr = impl.getAuthentication().getName(); // security 정보에서 세션에 담겨있는 로그인 정보 중 ID 가져옴
 		MemberVO vo2 = dao.memname(implstr); // ID를 토대로 회원정보 가져옴 (회원 번호, 회원 이름)
 		int memno = vo2.getMemberNo();
@@ -583,6 +587,8 @@ public class ProjectController {
 		m.put("memberNo", memno);
 
 		dao.donateMoney(m);
+		
+		//session.setAttribute("memberCash", vo2.getMemberCash());
 
 		return "1";
 	}

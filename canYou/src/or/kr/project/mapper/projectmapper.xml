@@ -400,16 +400,18 @@
 	<!-- 헤더에 사용자 이미지/캐시 나오게 하기 -->
 	<select id="userInfo" parameterType="String" resultType="mvo">
 		select
-		memberImage, memberCash
+		memberImage, memberCash, memberGrant
 		from member
 		where memberId=#{memberId}
 	</select>
+	
 	<!-- 댓글 수정 -->
 	<update id="commodify" parameterType="Hashmap">
 		update reply set
 		replyContent=#{replyContent} where memberNo=#{memberNo} and
 		replyNo=#{replyNo}
 	</update>
+	
 	<!-- 댓글 삭제 -->
 	<delete id="comdelete" parameterType="int">
 		delete from reply where

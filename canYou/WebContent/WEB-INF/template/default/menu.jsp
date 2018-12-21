@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 
 <style>
 .menubar li {
@@ -40,6 +41,10 @@
 	margin-top: 10px;
 }
 
+.imgStyle{
+	width: 40px;height: 35px;
+}
+
 </style>
 
 <div class="menubar">
@@ -60,21 +65,39 @@
 				<li><a href="categoryproject?categoryNo=8">테크놀로지</a></li>
 				<li><a href="categoryproject?categoryNo=9">기타</a></li>
 
-
 				<li><a href="">기간 별 보기</a></li>
 				<li><a href="graph">통계 별 보기</a></li>
 			</ul></li>
-		<li><a href="ProjectUpload">프로젝트 업로드</a></li>
+		<li><a href="ProjectUpload">프로젝트 업로드</a>
+		<%
+	
+			Object sid = session.getAttribute("memberGrant");
 		
+			if(sid != null){
+				System.out.println("sidLen:"+sid.toString().length());
+				request.setAttribute("sidv", sid.toString());
+			}
+		%>
+		
+		</li>
 		<c:choose>
 			<c:when test="${pageContext.request.userPrincipal.name!=null }">
-				<li id="cashStyle">
-					${sessionScope.memberCash} 캐시
-				</li>
-				<li style="position: absolute; left : 1740px;">
-				<a href="mypage">
-					<img src="resources/images/${sessionScope.memberImage}" style="width: 40px;height: 35px;"></a></li>
-				<!-- <li class="listy2"><a href="mypage">${pageContext.request.userPrincipal.name} 님</a></li> -->
+					<c:choose>
+						<c:when test="${sidv=='1'}">
+							<li style="position: absolute; left : 1740px;">
+								<a href="admin.daegi">
+								<img src="resources/images/${sessionScope.memberImage}" class="imgStyle"></a></li>
+						</c:when>
+						
+						<c:otherwise>
+							<li id="cashStyle">${sessionScope.memberCash} 캐시</li>
+								<li style="position: absolute; left : 1740px;">
+								<a href="mypage">
+								<img src="resources/images/${sessionScope.memberImage}" class="imgStyle"></a></li>
+						</c:otherwise>
+					</c:choose>
+					
+				
 			</c:when>
 		</c:choose>
 		
