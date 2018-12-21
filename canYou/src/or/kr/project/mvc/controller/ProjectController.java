@@ -128,7 +128,7 @@ public class ProjectController {
 
 		m.addAttribute("list", vo2);
 		return "editinfo";
-	}
+	} 
 
 	// 개인정보 수정 하기
 	@RequestMapping(value = "/success")

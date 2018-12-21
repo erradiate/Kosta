@@ -39,7 +39,7 @@ tr .thStyle{
                 <li><a href="">환불 및 교환</a></li>
             </ul> 
             </div> 
-<!-- Nav tabs -->
+<!-- Nav tabs --> 
 <!-- 스토리 부분 -->
 <div class="divStory">
 	<table id="proInfo">

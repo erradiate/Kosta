@@ -127,6 +127,6 @@ public class DetailController {
 			}
 		}
 			
-		return "storypage";
+		return "storypage"; 
 	}
 }

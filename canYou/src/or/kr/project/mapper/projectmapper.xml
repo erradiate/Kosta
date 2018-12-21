@@ -44,7 +44,7 @@
 		memberId=#{memberId}
 	</select>
 
-	<!-- 회원 번호로 회원 이름을 가져옴 -->
+	<!-- 회원 번호로 회원 이름을 가져옴 --> 
 	<select id="memname2" parameterType="int" resultType="mvo">
 		select memberId, memberName,memberNo 
 		from member 
