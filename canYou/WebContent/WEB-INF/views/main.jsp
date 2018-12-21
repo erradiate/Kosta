@@ -55,11 +55,33 @@ ul {
   margin-top: -15px;
 }
 
+.slide{
+	height:550px;
+}
 </style>
 
 <div>
-	<img src="resources/images/1.jpg" id="g"
-		style="margin: 0px 30px 30px 0px; width: 100%; height: 550px;">
+<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img class="d-block w-100 slide" src="resources/images/1.jpg" alt="첫번째 슬라이드">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100 slide" src="resources/images/2.jpg" alt="두번째 슬라이드">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100 slide" src="resources/images/3.jpg" alt="세번째 슬라이드">
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">이전</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">다음</span>
+  </a>
+</div>
 </div>
 <nav style="margin: 0 auto; padding:0% 5% 0% 5%;
 width: 80%;">
@@ -204,7 +226,6 @@ width: 80%;">
 <script>
 
 $(document).ready(function(){
-	$('#g').myPluginFn();
 	var i = $(".panel li .on").index()+1;
 	var j = $("#panel2 li .on").index()+1;
 	var k = $("#panel3 li .on").index()+1;
