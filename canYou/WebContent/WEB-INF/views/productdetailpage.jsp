@@ -161,7 +161,7 @@
 					var allCost = Number($('#donateMoney').val());
 				}
 				
-				$('#allDonate').html('<p id="allCost" style="font-size: 25px; font-weight: bold;">'+allCost+'</p>');
+				$('#allDonate').html('<p style="font-size: 25px; font-weight: bold;">'+allCost+'</p>');
 				
 				}
 			});
