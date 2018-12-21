@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import or.kr.project.dto.DeniedVO;
 import or.kr.project.dto.MemberVO;
 import or.kr.project.dto.ProductVO;
 import or.kr.project.dto.ProjectVO;
@@ -88,9 +89,9 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/admin.denied")
-	public String prodenied(int projectNo) {
+	public String prodenied(DeniedVO vo) {
 		
-		dao.denied(projectNo);
+		dao.denied(vo);
 		
 		return "redirect:admin.daegi";
 	}

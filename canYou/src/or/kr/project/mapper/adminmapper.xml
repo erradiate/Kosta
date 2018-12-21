@@ -16,4 +16,10 @@
 	<update id="denied" parameterType="int">
 		update project set projectStatus=4 where projectNo=#{projectNo}
 	</update>
+	
+	<insert id="deniedr" parameterType="devo">
+		insert into denied values(
+			denied_seq.nextVal, #{projectNo}, #{reason}, 0
+		)
+	</insert>
 </mapper>

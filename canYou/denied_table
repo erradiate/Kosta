@@ -1,0 +1,11 @@
+create table denied values(
+	deniedNo number primary key,
+	projectNo number,
+	reason CLOB,
+	firstview number,
+	constraint projectNo_fk foreign key(projectNo) references project(projectNo)
+);
+
+create sequence denied_seq
+increment by 1
+start with 1;

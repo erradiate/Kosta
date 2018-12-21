@@ -108,7 +108,7 @@ $(document).ready(function(){
 			<div align="right">
 				<input type="button" id="wordBtn" class="btns" value="워드로 보기">
 				<input type="submit" id="wBtn" class="btns" value="승인">	
-				<input type="button" id="denied" class="btns" value="승인거부">	
+				<input type="button" class="btns" data-toggle="modal" data-target="#myModal" value="승인거부">	
 			</div>
 			
 			<br>
@@ -129,6 +129,32 @@ $(document).ready(function(){
 			</form>
 			</fieldset>	
 		</div>
+		
+<!-- The Modal -->
+<div class="modal" id="myModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">거부 사유</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <textarea id="reason" name="reason" class="form-control" rows="5"></textarea>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+      	<button type="button" id=denied class="btn btn-danger" data-dismiss="modal">승인 거부</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
+      </div>
+
+    </div>
+  </div>
+</div>
 <script>
 	$(function() {
 		$('#wordBtn').click(function(){
@@ -136,20 +162,30 @@ $(document).ready(function(){
 		});
 		
 		$('#denied').click(function(){
-			var form=document.createElement("form");
-			form.setAttribute("method", "post");
-			form.setAttribute("action", "admin.denied");
+			var result = confirm('해당 프로젝트의 승인을 거부합니다.');
 			
-			var hiddenField=document.createElement("input");
-			hiddenField.setAttribute("type", "hidden");
-			hiddenField.setAttribute("name", "projectNo");
-			hiddenField.setAttribute("value", ${list.projectNo});
-			form.appendChild(hiddenField);
-			
-			document.body.appendChild(form);
-			
-			form.submit();
-		})
+			if(result){
+				var form=document.createElement("form");
+				form.setAttribute("method", "post");
+				form.setAttribute("action", "admin.denied");
+				
+				var hiddenField=document.createElement("input");
+				hiddenField.setAttribute("type", "hidden");
+				hiddenField.setAttribute("name", "projectNo");
+				hiddenField.setAttribute("value", ${list.projectNo});
+				form.appendChild(hiddenField);
+				
+				var hiddenField2=document.createElement("input");
+				hiddenField2.setAttribute("type", "hidden");
+				hiddenField2.setAttribute("name", "reason");
+				hiddenField2.setAttribute("value", $('#reason').val());
+				form.appendChild(hiddenField2);
+				
+				document.body.appendChild(form);
+				
+				form.submit();
+			}
+		});
 	});
 </script>
 
