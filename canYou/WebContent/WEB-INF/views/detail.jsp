@@ -177,6 +177,15 @@ td {
 					</c:when>
 				</c:choose>
 			</div>
+			<c:choose>
+					<c:when
+						test="${pageContext.request.userPrincipal.name eq member.memberId && list.projectStatus==4}">
+							<div id="showreason" align="center">
+								<h2>거절 사유</h2>
+								${reason }
+							</div>
+			</c:when>
+			</c:choose>
 
 			<br>
 			

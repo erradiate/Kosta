@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import or.kr.project.dto.DeniedVO;
 import or.kr.project.dto.ProductVO;
 import or.kr.project.dto.ProjectVO;
 
@@ -41,5 +42,17 @@ public class project2DaoImple {
 	public void deltpro(int i) {	// 선택한 임시 프로젝트 삭제
 		ss.delete("tempproject.tproddel", i);	// 선택한 임시 프로젝트의 상품부터 삭제
 		ss.delete("tempproject.tprodel", i);
+	}
+	
+	public List<DeniedVO> selde(int i){
+		return ss.selectList("project2.selde", i);
+	}
+	
+	public int upde(String s) {
+		return ss.update("project2.upde", s);
+	}
+
+	public String showreason(String projectNo) {
+		return ss.selectOne("project2.showreason", projectNo);
 	}
 }

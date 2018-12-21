@@ -281,13 +281,16 @@ public class projectDaoImple implements projectDao {
 		return ss.selectOne("project.viewmember", s);
 	}
 
-	// 재검토 요청 1218
+
+	// 재검토 요청 1221
 	public void request(int i) {
 		ss.update("project.request", i);
+		ss.delete("project2.delreason", i);
 	}
 
-	// 검토거부당한 프로젝트 삭제 1218
+	// 검토거부당한 프로젝트 삭제 1221
 	public void prodel(int i) {
+		ss.delete("project2.delreason", i); // 프로젝트 거절 사유 삭제
 		ss.delete("project.proddel", i); // 프로젝트에 관련된 상품부터 삭제
 		ss.delete("project.prodel", i); // 프로젝트 삭제
 	}

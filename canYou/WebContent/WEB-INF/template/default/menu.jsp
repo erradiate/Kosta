@@ -74,12 +74,12 @@
 			Object sid = session.getAttribute("memberGrant");
 		
 			if(sid != null){
-				System.out.println("sidLen:"+sid.toString().length());
 				request.setAttribute("sidv", sid.toString());
 			}
 		%>
 		
 		</li>
+		
 		<c:choose>
 			<c:when test="${pageContext.request.userPrincipal.name!=null }">
 					<c:choose>
@@ -90,8 +90,26 @@
 						</c:when>
 						
 						<c:otherwise>
+							<c:choose>
+									<c:when test="${dealarm==1 }">
+										<li style="position: absolute; left : 1550px;">
+										<div class="dropdown">
+											<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">
+												(${dealarm })
+    										</button>
+											<div class="dropdown-menu">
+												 <c:forEach var="v" items="${delist}">
+													<a class="dropdown-item" href="story?projectNo=${v.projectNo }">거절 프로젝트!</a>
+ 												</c:forEach>
+    										</div>
+										</div>
+										</li>
+									</c:when>
+								</c:choose>
+						
 							<li id="cashStyle">${sessionScope.memberCash} 캐시</li>
 								<li style="position: absolute; left : 1740px;">
+								
 								<a href="mypage">
 								<img src="resources/images/${sessionScope.memberImage}" class="imgStyle"></a></li>
 						</c:otherwise>
@@ -111,3 +129,5 @@
 		</c:choose>
 	</ul>
 </div>
+
+
