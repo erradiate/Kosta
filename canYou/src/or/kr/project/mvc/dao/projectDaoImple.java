@@ -331,4 +331,9 @@ public class projectDaoImple implements projectDao {
 	public void comdelete(ReplyVO vo) {
 		ss.delete("project.comdelete", vo);
 	}
+	
+	//자기 프로젝트에 후원한 사람 명단 보기
+	public List<MemberVO> projectDonateList(int projectNo){
+		return ss.selectList("project.projectDonateList",projectNo);
+	}
 }

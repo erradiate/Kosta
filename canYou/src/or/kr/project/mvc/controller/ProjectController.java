@@ -569,9 +569,6 @@ public class ProjectController {
 			} else {
 				vo.setDonateMoney(dao.prodcost(vo.getProductNo()));
 			}
-
-			// 총 금액 계산
-			// model.addAttribute("allCost", vo.getDonateMoney());
 		}
 
 		// 사용자의 선결제 금액이 프로젝트의 금액보다 낮을 때 이후 작업을 수행 하지 않고 페이지로 보냄
@@ -588,7 +585,7 @@ public class ProjectController {
 
 		dao.donateMoney(m);
 		
-		//session.setAttribute("memberCash", vo2.getMemberCash());
+		session.setAttribute("memberCash", vo2.getMemberCash());
 
 		return "1";
 	}
