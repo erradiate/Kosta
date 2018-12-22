@@ -30,9 +30,15 @@ tr .thStyle{
          	<ul>
                 <li><a href="story?projectNo=${list.projectNo}" class="current">프로젝트 스토리</a></li>
                 <li><a href="productDetail?projectNo=${list.projectNo}">상품 상세</a></li>
-                <li><a href="community?projectNo=${list.projectNo}" >커뮤니티</a></li>
+                <li><a href="community?projectNo=${list.projectNo}" >커뮤니티
+                	<input type="hidden" id="projectNo" value="${list.projectNo}">
+                	<input type="hidden" id="memberId" value="${member.memberId}">
+                	<input type="hidden" id="userPrincipalName" value="${pageContext.request.userPrincipal.name}">
+                </a>
+              
+                </li>
                  <c:choose>
-                	<c:when test="${pageContext.request.userPrincipal.name!=null }">
+					<c:when test="${pageContext.request.userPrincipal.name!=null }">
                 		<li><a href="projectDonateList?projectNo=${list.projectNo}&memberNo=${member.memberNo}">후원자 보기</a></li>
                 	</c:when>
                 </c:choose>
@@ -66,9 +72,24 @@ tr .thStyle{
 				<th class="thStyle">${list.memberGender}</th>
 				<th class="thStyle">${list.memberAge}</th>
 				<th class="thStyle">${list.memberAccount}</th>
-				<th class="thStyle"><img id="projectMainImage" src="resources/images/${list.memberImage}" style="width: 50px; height: 50px;"></th>
+				<th class="thStyle"><img class="projectMainImage" src="resources/images/${list.memberImage}" style="width: 50px; height: 50px;"></th>
 			</tr>
 		</c:forEach>
 	</table>
 </div>
 
+<script>
+$(document).ready(function(){
+	var memberId = $('#memberId').val();
+	var userPrincipalName = $('#userPrincipalName').val();
+	
+	//console.log(memberId);
+	//console.log(userPrincipalName);
+	
+	if(memberId!=userPrincipalName){
+		alert("프로젝트 진행자만 볼 수 있습니다.");
+		location.href="story?projectNo="+$('#projectNo').val();
+	}
+});
+
+</script>

@@ -1,3 +1,4 @@
+
 package or.kr.project.mvc.controller;
 
 import java.util.HashMap;
@@ -35,30 +36,26 @@ public class DetailController {
 		ProjectVO list = dao.projectlist(projectNo);
 		String c=dao.caselone(list.getCategoryNo());
 		String sc=dao.subcaselone(list.getSubCategoryNo());
-		//카테고리별 LIST
-		List<ProjectVO> listByCategory = dao.projectlistByCategory(String.valueOf(list.getCategoryNo()));
+		
 		m.addAttribute("list",list);
-		m.addAttribute("listByCategory",listByCategory);
 		m.addAttribute("c", c);
 		m.addAttribute("sc", sc);
 		
 		// project와 연결된 member 정보 가져오기
 		MemberVO mem=dao.memname2(list.getMemberNo());
 		m.addAttribute("member", mem);
-		
 		return "storypage";
 	}
 	
 	@RequestMapping(value="/community")
 	public String getReply(Model m, HttpServletRequest req, String projectNo) {
+
 		// project 관련한 정보 빼오기
 		System.out.println("num : " + projectNo);
 		ProjectVO list = dao.projectlist(projectNo);
 		String c = dao.caselone(list.getCategoryNo());
 		String sc = dao.subcaselone(list.getSubCategoryNo());
-		List<ProjectVO> listByCategory = dao.projectlistByCategory(String.valueOf(list.getCategoryNo()));
 		m.addAttribute("list", list);
-		m.addAttribute("listByCategory",listByCategory);
 		m.addAttribute("c", c);
 		m.addAttribute("sc", sc);
 		// project와 연결된 member 정보 가져오기
@@ -83,9 +80,7 @@ public class DetailController {
 		ProjectVO list = dao.projectlist(projectNo);
 		String c = dao.caselone(list.getCategoryNo());
 		String sc = dao.subcaselone(list.getSubCategoryNo());
-		List<ProjectVO> listByCategory = dao.projectlistByCategory(String.valueOf(list.getCategoryNo()));
 		m.addAttribute("list", list);
-		m.addAttribute("listByCategory",listByCategory);
 		m.addAttribute("c", c);
 		m.addAttribute("sc", sc);
 		
@@ -103,7 +98,7 @@ public class DetailController {
 	
 	//내 프로젝트를 후원한 사람 명단 보기
 	@RequestMapping(value="/projectDonateList")
-	public String projectDonateList(String projectNo,String memberNo,Model m) {
+	public String projectDonateList(String projectNo,String memberNo,Model m,HttpServletRequest request) {
 		AuthenticationTrustResolver trustResolver = new AuthenticationTrustResolverImpl();
 		SecurityContext impl = SecurityContextHolder.getContext(); // 세션에서 spring security 정보를 가져옴
 		String implstr = impl.getAuthentication().getName(); // security 정보에서 세션에 담겨있는 로그인 정보 중 ID 가져옴
@@ -127,12 +122,11 @@ public class DetailController {
 			if(vo.getMemberNo() == Integer.parseInt(memberNo)) { //현재 들어온 회원과 프로젝트 진행하는 사람이 동일하면
 				//후원한 멤버 정보 빼오기
 				List<MemberVO> mList = dao.projectDonateList(Integer.parseInt(projectNo));
-				m.addAttribute("mList", mList);	
+				m.addAttribute("mList", mList);		
 				
-				return "mysponsor";
 			}
+			return "mysponsor";
 		}
-			
-		return "storypage"; 
+		return "storypage";
 	}
 }
