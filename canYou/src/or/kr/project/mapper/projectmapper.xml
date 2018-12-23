@@ -40,7 +40,8 @@
 	<!-- 회원 아이디로 회원 번호, 이름, 회원의 현재 금액을 가져옴 -->
 	<select id="memname" parameterType="String" resultType="mvo">
 		select
-		memberNo, memberName, memberCash from member where
+		memberNo, memberName, memberCash, memberGender, memberAge
+		from member where
 		memberId=#{memberId}
 	</select>
 
