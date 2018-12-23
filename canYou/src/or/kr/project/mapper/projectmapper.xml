@@ -412,30 +412,46 @@
 
 	<!-- 댓글 수정 -->
 	<update id="commodify" parameterType="Hashmap">
-		update reply set replyContent=#{replyContent} where memberNo=#{memberNo} and
+		update reply set
+		replyContent=#{replyContent} where memberNo=#{memberNo} and
 		replyNo=#{replyNo}
 	</update>
 	<!-- 댓글 수정 팝업 -->
 	<select id="commodi" parameterType="Hashmap"
 		resultType="replyvo">
-		select replyNo, replyContent, to_char(replyDate,'yyyy-MM-dd') replyDate,
-		projectNo, memberNo from reply where memberNo=#{memberNo} and
+		select replyNo, replyContent,
+		to_char(replyDate,'yyyy-MM-dd') replyDate,
+		projectNo, memberNo from
+		reply where memberNo=#{memberNo} and
 		replyNo=#{replyNo}
 	</select>
 	<!-- 댓글 삭제 -->
 	<delete id="comdelete" parameterType="int">
-		delete from reply where memberNo=#{memberNo} and replyNo=#{replyNo}
+		delete from reply where
+		memberNo=#{memberNo} and replyNo=#{replyNo}
 	</delete>
 	<!-- 상세보기 관심별 리스트 -->
 	<select id="listByCategory" parameterType="String"
 		resultType="projvo">
-		select projectName,projectMainImage, projectNo from project where
+		select projectName,projectMainImage, projectNo from project
+		where
 		categoryNo=#{categoryNo}
 	</select>
-	
+
 	<!-- 내 프로젝트를 후원한 사람 명단 보기 -->
-	<select id="projectDonateList" parameterType="int" resultType="mvo">
-		select projectNo,m.memberNo,memberId,memberName,memberAddr,memberPhone,memberEmail,memberGender,memberAge,memberAccount,memberImage
+	<select resultType="mvo" id="projectDonateList"
+		parameterType="int">
+		select
+		projectNo,m.memberNo,memberId,memberName,memberAddr,memberPhone,memberEmail,memberGender,memberAge,memberAccount,memberImage from
+		member m,projectDonate d where d.projectNo=#{projectNo} and
+		m.memberNo=d.memberNo
+	</select>
+
+
+	<!-- 엑셀 다운로드 -->
+	<select id="DonateListexcel" parameterType="Hashmap" resultType="mvo">
+		select
+		projectNo,memberId,m.memberName,memberAddr,memberPhone,memberEmail,memberGender,memberAge,memberAccount,memberImage
 		from member m,projectDonate d
 		where d.projectNo=#{projectNo} and m.memberNo=d.memberNo
 	</select>

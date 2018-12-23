@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+<beans:beans
+	xmlns="http://www.springframework.org/schema/mvc"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
@@ -9,53 +10,65 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
 
- <!-- DispatcherServlet Context: defines this servlet's request-processing 
-  infrastructure -->
- <context:component-scan base-package="or.kr.project" />
- <!-- Enables the Spring MVC @Controller programming model -->
- <annotation-driven />
+	<!-- DispatcherServlet Context: defines this servlet's request-processing 
+		infrastructure -->
+	<context:component-scan
+		base-package="or.kr.project" />
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<annotation-driven />
 
- <!-- Handles HTTP GET requests for /resources/** by efficiently serving 
-  up static resources in the ${webappRoot}/resources directory -->
- <resources mapping="/resources/**" location="/resources/" />
-<aop:aspectj-autoproxy />
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
+		up static resources in the ${webappRoot}/resources directory -->
+	<resources mapping="/resources/**" location="/resources/" />
+	<aop:aspectj-autoproxy />
 
- <beans:bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
-  <beans:property name="jndiName" value="java:comp/env/jdbc/myora" />
- </beans:bean>
+	<beans:bean id="dataSource"
+		class="org.springframework.jndi.JndiObjectFactoryBean">
+		<beans:property name="jndiName"
+			value="java:comp/env/jdbc/myora" />
+	</beans:bean>
 
- <!-- MyBatis설정 -->
- <beans:bean id="factoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
-  <beans:property name="dataSource" ref="dataSource" />
-  <beans:property name="configLocation" value="classpath:or/kr/project/config/config.xml" />
-  <beans:property name="mapperLocations" value="classpath*:or/kr/project/mapper/*.xml" />
- </beans:bean>
- <beans:bean id="ss" class="org.mybatis.spring.SqlSessionTemplate">
-  <beans:constructor-arg ref="factoryBean" />
- </beans:bean> 
-    
+	<!-- MyBatis설정 -->
+	<beans:bean id="factoryBean"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
+		<beans:property name="dataSource" ref="dataSource" />
+		<beans:property name="configLocation"
+			value="classpath:or/kr/project/config/config.xml" />
+		<beans:property name="mapperLocations"
+			value="classpath*:or/kr/project/mapper/*.xml" />
+	</beans:bean>
+	<beans:bean id="ss"
+		class="org.mybatis.spring.SqlSessionTemplate">
+		<beans:constructor-arg ref="factoryBean" />
+	</beans:bean>
 
- <!-- Resolves views selected for rendering by @Controllers to .jsp resources 
-  in the /WEB-INF/views directory -->
- <beans:bean
-  class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-  <beans:property name="prefix" value="/WEB-INF/views/" />
-  <beans:property name="suffix" value=".jsp" />
- </beans:bean>
-<!-- ModelAndView로부터 얻어온 value,viewName을 Dispatcher에게 전달할 목적 -->
-   <beans:bean id="multipartResolver"
-   class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-   </beans:bean>
-   
-   <!-- View의 이름을 명시적으로 사용하지 않고 url 값으로 받아서
-	RequestDispatcher로 요청을 처리한다.
-	order : handler 매핑의 우선순위
- -->
-    <beans:bean id="tilesViewResolver"
-	class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
+		in the /WEB-INF/views directory -->
+	<beans:bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+		<beans:property name="order" value="2"/>
+	</beans:bean>
+	<!-- ModelAndView로부터 얻어온 value,viewName을 Dispatcher에게 전달할 목적 -->
+	<beans:bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	</beans:bean>
+	<!-- 엑셀 다운로드  -->
+	<beans:bean id="viewResolver1" class="org.springframework.web.servlet.view.ResourceBundleViewResolver">
+	<beans:property name="order" value="0"/>
+	<beans:property name="basename" value="views"/>
+</beans:bean>
+	
+
+	<!-- View의 이름을 명시적으로 사용하지 않고 url 값으로 받아서 RequestDispatcher로 요청을 처리한다. order 
+		: handler 매핑의 우선순위 -->
+	<beans:bean id="tilesViewResolver"
+		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 		<beans:property name="viewClass"
 			value="org.springframework.web.servlet.view.tiles3.TilesView" />
-		<beans:property name="order" value="0" />
+		<beans:property name="order" value="1" />
 	</beans:bean>
 	<beans:bean id="tilesConfigurer"
 		class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
@@ -65,6 +78,5 @@
 			</beans:list>
 		</beans:property>
 	</beans:bean>
-
 
 </beans:beans>

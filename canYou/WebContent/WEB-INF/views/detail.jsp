@@ -193,11 +193,11 @@ td {
 	</fieldset>
 </div>
 <script>
-	$(function() {
-		$('#wordBtn').click(function(){
-			location.href="download?projectNo="+$('#projectNo').val();
-		});
+$(function() {
+	$('#wordBtn').click(function(){
+		location.href="download?projectNo="+$('#projectNo').val();
 	});
+});
 </script>
 
 

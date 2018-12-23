@@ -281,7 +281,6 @@ public class projectDaoImple implements projectDao {
 		return ss.selectOne("project.viewmember", s);
 	}
 
-
 	// 재검토 요청 1221
 	public void request(int i) {
 		ss.update("project.request", i);
@@ -328,6 +327,11 @@ public class projectDaoImple implements projectDao {
 	// 자기 프로젝트에 후원한 사람 명단 보기
 	public List<MemberVO> projectDonateList(int projectNo) {
 		return ss.selectList("project.projectDonateList", projectNo);
+	}
+
+	// 자기 프로젝트에 후원한 사람 명단 보기(엑셀다운로드)
+	public List<MemberVO> DonateListexcel(HashMap<String, String> vo) {
+		return ss.selectList("project.DonateListexcel", vo);
 	}
 
 	// 댓글 수정

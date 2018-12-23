@@ -75,6 +75,9 @@ tr .thStyle{
 				<th class="thStyle"><img class="projectMainImage" src="resources/images/${list.memberImage}" style="width: 50px; height: 50px;"></th>
 			</tr>
 		</c:forEach>
+		<tr>
+    <th> <a href="downloadExcel?projectNo=${list.projectNo}&memberNo=${member.memberNo}">Excel_send</a>
+    </tr>
 	</table>
 </div>
 
@@ -91,5 +94,6 @@ $(document).ready(function(){
 		location.href="story?projectNo="+$('#projectNo').val();
 	}
 });
+
 
 </script>
