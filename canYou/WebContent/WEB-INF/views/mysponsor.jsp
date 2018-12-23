@@ -67,7 +67,7 @@ tr .thStyle{
 				<th class="thStyle">${list.memberId}</th>
 				<th class="thStyle">${list.memberName}</th>
 				<th class="thStyle">${list.memberAddr}</th>
-				<th class="thStyle">${list.memberPhone} ¹øÈ£</th>
+				<th class="thStyle">${list.memberPhone}</th>
 				<th class="thStyle">${list.memberEmail}</th>
 				<th class="thStyle">${list.memberGender}</th>
 				<th class="thStyle">${list.memberAge}</th>
