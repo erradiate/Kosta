@@ -61,7 +61,7 @@ public class WordBuilder{
 		
 		// 빈 문서 만들기
 		XWPFDocument document = new XWPFDocument();
-		
+
 		// Table 생성 문서 내에서의 position은 0
 		XWPFTable table = document.createTable(16,3);
 		
@@ -170,7 +170,7 @@ public class WordBuilder{
 				session.getServletContext().getRealPath("/resources/images")+"\\"+projectImg);
 		paragraphRunOne.addPicture(fis, 
 				XWPFDocument.PICTURE_TYPE_JPEG, projectImg,
-				Units.toEMU(150), Units.toEMU(170));
+				Units.toEMU(170), Units.toEMU(150));
 		fis.close();
 		
 		ninethRow.getCell(1).setText("프로젝트 등급");
@@ -256,7 +256,7 @@ public class WordBuilder{
 		// 파일 전송을 위한 마임타입과 헤더 설정
 		resp.setContentType("Application/Msword");
 		resp.setHeader("Content-Disposition",
-				"attachment; filename="+vo.getProject().getProjectName()+".docx");
+				"attachment; filename="+"ProjectPlan.docx");
 		
 		// 요청한 브라우저와의 아웃풋 스트림 연결
 		OutputStream outStream = resp.getOutputStream();
