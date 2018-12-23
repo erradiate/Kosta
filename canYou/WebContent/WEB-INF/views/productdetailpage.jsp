@@ -183,6 +183,8 @@
 					var donateMoney = $('#allDonate').children().text();
 					var productNo = $('#selprod #productNo').val();
 					
+					console.log(donateMoney);
+					
 					if(productNo===undefined){
 						var vo = {projectNo:projectNo, donateMoney:donateMoney, productNo:0};
 					} else{
@@ -206,7 +208,7 @@
 						error : function(){
 							location.href="login";
 						}
-					});	
+					});
 				}
 			});
 		});
