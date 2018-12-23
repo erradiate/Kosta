@@ -49,11 +49,15 @@ import or.kr.project.dto.ReplyVO;
 import or.kr.project.dto.SearchVO;
 import or.kr.project.dto.SubCategoryVO;
 import or.kr.project.mvc.dao.projectDaoImple;
+import or.kr.project.mvc.service.Service_Transaction;
 
 @Controller
 public class ProjectController {
 	@Autowired
 	private projectDaoImple dao;
+	
+	@Autowired
+	private Service_Transaction service;
 
 	// 메인페이지 + 인기프로젝트 보여줌
 	@RequestMapping(value = "/")
@@ -563,27 +567,17 @@ public class ProjectController {
 
 		vo.setMemberNo(memno);
 
-		/*if (vo.getProductNo() != 0) {
-			if (vo.getDonateMoney() != 0) {
-				vo.setDonateMoney(vo.getDonateMoney() + dao.prodcost(vo.getProductNo()));
-			} else {
-				vo.setDonateMoney(dao.prodcost(vo.getProductNo()));
-			}
-		}*/
-
 		// 사용자의 선결제 금액이 프로젝트의 금액보다 낮을 때 이후 작업을 수행 하지 않고 페이지로 보냄
 		if (vo2.getMemberCash() - vo.getDonateMoney() < 0) {
 			return "0";
 		}
 
-		dao.donate(vo); // projectDonate 행 추가
-
 		// 돈 차감
 		Map<String, Integer> m = new HashMap<>();
 		m.put("donateMoney", vo.getDonateMoney());
 		m.put("memberNo", memno);
-
-		dao.donateMoney(m);
+		
+		service.donate(vo, m);
 
 		session.setAttribute("memberCash", vo2.getMemberCash());
 
@@ -604,12 +598,7 @@ public class ProjectController {
 		vo.setProductNo(productNo);
 		System.out.println("확인확인" + vo.getDonateNo());
 
-		// 사용자의 돈을 반환 + 선물 갯수 돌려줌
-		dao.returnMoney(vo);
-		// 후원자 수 감소
-		dao.returnFundCnt(vo);
-		// 돈 돌려 준 후에 행 삭제
-		dao.donateCancle(vo);
+		service.cancle(vo);
 
 		return "redirect:/mydonate"; // 다시 리스트 화면으로
 	}
