@@ -7,12 +7,12 @@
 <div class="cash" align="center">
 	<form action="cashcharge" method="POST">>
 			<p>
-				<input type="text" name="memberName" value="${list.memberName }"
+				<input type="text" name="memberName" value="${list.memberName}"
 					readonly="readonly"><label>님</label>
 			</p>
 			<p>
 				<label>현재 금액 : </label><input type="text" name="currentmemberCash"
-					value="${e.memberCash }" readonly="readonly">
+					value="${list.memberCash }" readonly="readonly">
 			</p>
 			<p>
 				<label>충전 금액 : </label><input type="text" name="memberCash">

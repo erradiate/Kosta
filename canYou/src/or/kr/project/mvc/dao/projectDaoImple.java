@@ -300,8 +300,8 @@ public class projectDaoImple implements projectDao {
 	}
 
 	// 캐쉬 충전소 리스트
-	public List<MemberVO> chargeList(MemberVO vo) {
-		return ss.selectList("project.cashlist", vo);
+	public MemberVO chargeList(int memberNo) {
+		return ss.selectOne("project.cashlist", memberNo);
 	}
 
 	// 아이디 중복 검사

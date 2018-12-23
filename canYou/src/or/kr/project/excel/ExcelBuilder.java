@@ -42,10 +42,15 @@ public class ExcelBuilder extends AbstractExcelView{
 		style.setFont(font);
 		style.setAlignment(CellStyle.ALIGN_CENTER);
 		style.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
+		style.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER); // 세로 가운데 절렬
+		style.setBorderRight(HSSFCellStyle.BORDER_THIN);
+		style.setBorderLeft(HSSFCellStyle.BORDER_THIN);
+		style.setBorderTop(HSSFCellStyle.BORDER_THIN);
+		style.setBorderBottom(HSSFCellStyle.BORDER_THIN);
 		
 		HSSFRow header = sheet.createRow(0);
 		//엑셀의 셀 타이틀
-		String[] str = {"아이디","이름","주소","폰","이메일","성별","나이","계좌","이미지"};
+		String[] str = {"아이디","이름","주소","폰","이메일","성별","나이","계좌"};
 		for(int i=0; i< str.length; i++) {
 			header.createCell(i).setCellValue(str[i]);
 			header.getCell(i).setCellStyle(style);
@@ -62,7 +67,6 @@ public class ExcelBuilder extends AbstractExcelView{
 				aRow.createCell(5).setCellValue(aBook.getMemberGender());
 				aRow.createCell(6).setCellValue(aBook.getMemberAge());
 				aRow.createCell(7).setCellValue(aBook.getMemberAccount());
-				aRow.createCell(8).setCellValue(aBook.getMemberImage());
 			}
 			response.setContentType("Application/Msexcel");
 			response.setHeader("Content-Disposition", "attachment); filename=donate_exce.xls;");

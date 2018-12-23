@@ -39,7 +39,7 @@ tr .thStyle{
                 </li>
                  <c:choose>
 					<c:when test="${pageContext.request.userPrincipal.name!=null }">
-                		<li><a href="projectDonateList?projectNo=${list.projectNo}&memberNo=${member.memberNo}">후원자 보기</a></li>
+                		<li><a href="projectDonateList?projectNo=${list.projectNo}&memberNo=${member.memberNo}" class="hoverHolder">후원자 보기</a></li>
                 	</c:when>
                 </c:choose>
                 <li><a href="">환불 및 교환</a></li>
@@ -76,7 +76,7 @@ tr .thStyle{
 			</tr>
 		</c:forEach>
 		<tr>
-    <th> <a href="downloadExcel?projectNo=${list.projectNo}&memberNo=${member.memberNo}">Excel_send</a>
+    <th> <a href="DonateList?projectNo=${list.projectNo}&memberNo=${member.memberNo}">Excel_Download</a>
     </tr>
 	</table>
 </div>

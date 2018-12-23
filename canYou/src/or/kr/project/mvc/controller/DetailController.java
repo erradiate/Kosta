@@ -132,7 +132,7 @@ public class DetailController {
 			return "storypage";
 			
 		}
-		@RequestMapping(value = "/downloadExcel")
+		@RequestMapping(value = "/DonateList")
 		public ModelAndView downloadExcel(int projectNo, int memberNo) {
 			SecurityContext impl = SecurityContextHolder.getContext(); // 세션에서 spring security 정보를 가져옴
 			String implstr = impl.getAuthentication().getName(); // security 정보에서 세션에 담겨있는 로그인 정보 중 ID 가져옴

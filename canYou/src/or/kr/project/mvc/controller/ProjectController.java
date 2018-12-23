@@ -728,18 +728,19 @@ public class ProjectController {
 
 	// 캐쉬충전 폼으로
 	@RequestMapping(value = "/cash")
-	public ModelAndView cashcharge(MemberVO vo) {
+	public ModelAndView cashcharge() {
 		// 세션에서 로그인 된 ID를 가져오는 작업
 		SecurityContext impl = SecurityContextHolder.getContext();
 		String implstr = impl.getAuthentication().getName();
 		// 끝-------------------
 		MemberVO vo2 = dao.memname(implstr); // 가져온 ID를 토대로 회원 번호, 이름을 가져온다
-		vo.setMemberNo(vo2.getMemberNo());
 
-		List<MemberVO> list = dao.chargeList(vo);
+	
+		MemberVO list = dao.chargeList(vo2.getMemberNo());
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("cashcharge");
 		mav.addObject("list", list);
+		
 		return mav;
 
 	}
