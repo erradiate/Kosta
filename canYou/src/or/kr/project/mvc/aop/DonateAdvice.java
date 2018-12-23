@@ -26,7 +26,7 @@ public class DonateAdvice {
 	@Autowired
 	projectDaoImple pdao;
 
-	@After("execution(* or.kr.project.mvc.controller.ProjectController.donateProject(..))")
+	@After("execution(* or.kr.project.mvc.controller.*.donateProject*(..))")
 	public void logAfter(JoinPoint jp) {
 		LoggerVO vo = new LoggerVO();
 		Object[] obj = jp.getArgs();

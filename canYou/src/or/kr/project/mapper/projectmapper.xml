@@ -114,13 +114,13 @@
 		<choose>
 			<when test="productNo!=0">
 				insert into projectdonate values(
-				donate_seq.nextVal,#{memberNo},#{projectNo},#{productNo},#{donateMoney},'선결제',
+				donate_seq.nextVal,#{memberNo},#{projectNo},#{productNo},#{donateMoney},#{payOption},
 				sysdate
 				)
 			</when>
 			<otherwise>
 				insert into projectdonate values(
-				donate_seq.nextVal,#{memberNo},#{projectNo},null,#{donateMoney},'선결제',
+				donate_seq.nextVal,#{memberNo},#{projectNo},null,#{donateMoney},#{payOption},
 				sysdate
 				)
 			</otherwise>

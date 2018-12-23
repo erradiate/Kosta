@@ -309,6 +309,59 @@
 </div>
 
 <script>
+function subcategoryajax(){
+	$.ajax({
+		url: 'subcasel',
+		async:false,
+		type:'POST',
+		data:{
+			categoryNo: $('#categoryNo').val()
+		},
+		dataType:'text',
+		success: function(jqXHR){
+			var obj = JSON.parse(jqXHR);
+			$('#subCategoryNo').empty();
+			$('#subCategoryNo').append("<option value='-1'>선택</option>");
+			$.each(obj,function(index,item){
+               var option=$("<option value="+item.subcategoryNo+">"+item.subcategoryName+"</option>")
+               $('#subCategoryNo').append(option);
+            });
+			
+		}
+	})
+}
+
+function date_change(){	// 시작날짜를 지정시
+	var min = new Date($('#projectStartDate').val());	// 종료 날짜 최소일(~10일)
+	var max = new Date($('#projectStartDate').val());	// 종료 날짜 최대일(~60일)
+	min.setDate(min.getDate()+10);
+	max.setDate(max.getDate()+60);
+	
+	var mon=min.getMonth()+1;
+	var mon2=max.getMonth()+1;
+	
+	var day=min.getDate();
+	var day2=max.getDate();
+	
+	if(mon<10){
+		mon="0"+mon;
+	}
+	if(mon2<10){
+		mon2="0"+mon2;
+	}
+	
+	if(day<10){
+		day="0"+day;
+	}
+	if(day2<10){
+		day2="0"+day2;	
+	}
+	$('#projectEndDate').attr("min", min.getFullYear()+"-"+mon+"-"+day);
+	$('#projectEndDate').attr("max", max.getFullYear()+"-"+mon2+"-"+day2);
+	$('#projectEndDate').val(min.getFullYear()+"-"+mon+"-"+day);
+	$('#projectEndDate').removeAttr("disabled");
+};
+
 $(document).ready(function(){
 	var d = new Date();
 	var checkUnload = true;
@@ -371,28 +424,6 @@ $(document).ready(function(){
 		$("#proinfo").val(data3);
 		$("#procost").val(data4);
 	});
-	
-	function subcategoryajax(){
-		$.ajax({
-			url: 'subcasel',
-			async:false,
-			type:'POST',
-			data:{
-				categoryNo: $('#categoryNo').val()
-			},
-			dataType:'text',
-			success: function(jqXHR){
-				var obj = JSON.parse(jqXHR);
-				$('#subCategoryNo').empty();
-				$('#subCategoryNo').append("<option value='-1'>선택</option>");
-				$.each(obj,function(index,item){
-                   var option=$("<option value="+item.subcategoryNo+">"+item.subcategoryName+"</option>")
-                   $('#subCategoryNo').append(option);
-                });
-				
-			}
-		})
-	}
 
 	$('#categoryNo').click(function(){
 		if($(this).val()!=''){
@@ -404,37 +435,6 @@ $(document).ready(function(){
 	});
 	
 	$('#projectStartDate').on('change', {}, date_change);
-	
-	function date_change(){	// 시작날짜를 지정시
-		var min = new Date($('#projectStartDate').val());	// 종료 날짜 최소일(~10일)
-		var max = new Date($('#projectStartDate').val());	// 종료 날짜 최대일(~60일)
-		min.setDate(min.getDate()+10);
-		max.setDate(max.getDate()+60);
-		
-		var mon=min.getMonth()+1;
-		var mon2=max.getMonth()+1;
-		
-		var day=min.getDate();
-		var day2=max.getDate();
-		
-		if(mon<10){
-			mon="0"+mon;
-		}
-		if(mon2<10){
-			mon2="0"+mon2;
-		}
-		
-		if(day<10){
-			day="0"+day;
-		}
-		if(day2<10){
-			day2="0"+day2;	
-		}
-		$('#projectEndDate').attr("min", min.getFullYear()+"-"+mon+"-"+day);
-		$('#projectEndDate').attr("max", max.getFullYear()+"-"+mon2+"-"+day2);
-		$('#projectEndDate').val(min.getFullYear()+"-"+mon+"-"+day);
-		$('#projectEndDate').removeAttr("disabled");
-	};
 	
 	$('#i1').click(function () {
 		if($("#info1").is(":visible")){

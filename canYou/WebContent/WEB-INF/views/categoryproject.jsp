@@ -44,18 +44,6 @@
 }
 
 </style>
-
-	<c:choose>
-		<c:when test="${pageContext.request.userPrincipal.name != null}">
-			<c:url var="logoutAction" value="/j_spring_security_logout"></c:url>
-	${principal} 
-	<form action="${logoutAction}" method="post">
-				<input type="submit" value="Logout" class="btns" />
-			</form>
-
-		</c:when> 
-	</c:choose>
-	
 	<div id="categoryproject">
 		<p id="castyle">[ ${categoryName} ]</p>
 		<c:choose>

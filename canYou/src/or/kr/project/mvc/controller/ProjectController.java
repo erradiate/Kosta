@@ -90,7 +90,7 @@ public class ProjectController {
 
 	@RequestMapping(value = "index")
 	public String index2(HttpServletRequest request, Model model) {
-		return "main";
+		return "redirect:/";
 	}
 
 	@RequestMapping(value = "/login")
@@ -99,7 +99,7 @@ public class ProjectController {
 		if (trustResolver.isAnonymous(SecurityContextHolder.getContext().getAuthentication())) { // 익명 상태에서 로그인 페이지 이동시
 			return "login";
 		} else { // 로그인 상태에서 로그인 페이지로 이동하려고 할 때 index 페이지로 이동
-			return "main";
+			return "redirect:/";
 		}
 	}
 
@@ -564,24 +564,36 @@ public class ProjectController {
 		String implstr = impl.getAuthentication().getName(); // security 정보에서 세션에 담겨있는 로그인 정보 중 ID 가져옴
 		MemberVO vo2 = dao.memname(implstr); // ID를 토대로 회원정보 가져옴 (회원 번호, 회원 이름)
 		int memno = vo2.getMemberNo();
-
+		
+		vo.setPayOption("선결제");
 		vo.setMemberNo(memno);
 
+		if (vo.getProductNo() != 0) {
+			if (vo.getDonateMoney() != 0) {
+				vo.setDonateMoney(vo.getDonateMoney() + dao.prodcost(vo.getProductNo()));
+			} else {
+				vo.setDonateMoney(dao.prodcost(vo.getProductNo()));
+			}
+		}
+		
 		// 사용자의 선결제 금액이 프로젝트의 금액보다 낮을 때 이후 작업을 수행 하지 않고 페이지로 보냄
 		if (vo2.getMemberCash() - vo.getDonateMoney() < 0) {
 			return "0";
 		}
 
+		dao.donate(vo); // projectDonate 행 추가
+
 		// 돈 차감
 		Map<String, Integer> m = new HashMap<>();
 		m.put("donateMoney", vo.getDonateMoney());
 		m.put("memberNo", memno);
-		
-		service.donate(vo, m);
+
+		dao.donateMoney(m);
 
 		session.setAttribute("memberCash", vo2.getMemberCash());
-
+		
 		return "1";
+
 	}
 
 	// 후원 취소

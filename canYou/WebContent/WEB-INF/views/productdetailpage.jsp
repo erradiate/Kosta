@@ -104,7 +104,7 @@
 					<p>${e2.productCnt }개남음</p>
 				</div>
 				<input style="width: 150px;" id="donadd" type="button"
-					value="상품 선택" class="btns">
+					value="선물 선택" class="btns">
 				
 			</div>
 		</c:forEach>
@@ -112,7 +112,7 @@
 			추가 후원 : <input type="text" name="donateMoney" id="donateMoney">
 			<span class="popuptext" id="zero">금액을 입력해 주세요!</span>
 			<span class="popuptext" id="illegal">1000원 단위로 입력 해주세요</span>
-			</div> <input type="button" class="donateBtn" value="후원 선택">
+			</div> <input type="button" class="donateBtn btns" value="추가 후원">
 		
 	</div>
 </div>
@@ -125,6 +125,10 @@
 			<div id="selprod"></div>
 			<hr>
 			<p id="p">총 후원 금액 : </p><div id="allDonate"></div>
+			<div id="selpay">
+				<input type="radio" id="payOption" value="1">선결제<br>
+  				<input type="radio" id="payOption" value="2">카드결제<br>
+			</div>
 			<div id="buyBtn"></div>
 		</fieldset>
 	</div>
@@ -136,7 +140,7 @@
 	$(function() {
 		$('.prodview #donadd').each(function(){
 			$(this).click(function(e){
-				var donateBtn = '<input type="button" value="총 구매하기" class="btns dona"/>';
+				var donateBtn = '<input type="button" value="후원하기" class="btns dona"/>';
 				
 				$('#selprod').html($(this).prev().html());
 				$('#buyBtn').html(donateBtn);
@@ -177,38 +181,71 @@
 		$('#buyBtn').each(function(index, item) { //총 상품 구매
 			$(this).click(function() {
 				var result = confirm('후원하시겠습니까?');
-
+				console.log($('#payOption:checked').val());
 				if (result) {
-					var projectNo = $('#projectNo').val();
-					var donateMoney = $('#allDonate').children().text();
-					var productNo = $('#selprod #productNo').val();
-					
-					console.log(donateMoney);
-					
-					if(productNo===undefined){
-						var vo = {projectNo:projectNo, donateMoney:donateMoney, productNo:0};
-					} else{
-						var vo = {projectNo:projectNo, donateMoney:donateMoney, productNo:productNo};
-					}
-					$.ajax({
-						type : "POST",
-						data : vo,
-						dataType : "json",
-						url : "donate",
-						success : function(data){
-							if(data=='1'){
-								var con = confirm('후원이 성공적으로 완료됐습니다. 마이페이지로 이동하시겠습니까?');
-								if(con){
-									location.href='mypage';
-								}
-							} else{
-								alert('잔액이 부족합니다.');
-							}
-						},
-						error : function(){
-							location.href="login";
+					if ($('#payOption:checked').val()==1){
+						var projectNo = $('#projectNo').val();
+						var donateMoney = $('#allDonate').children().text();
+						var productNo = $('#selprod #productNo').val();
+						
+						if(productNo===undefined){
+							var vo = {projectNo:projectNo, donateMoney:donateMoney, productNo:0, pay:payOption};
+						} else{
+							var vo = {projectNo:projectNo, donateMoney:donateMoney, productNo:productNo, pay:payOption};
 						}
-					});
+						$.ajax({
+							type : "POST",
+							data : vo,
+							dataType : "json",
+							url : "donate",
+							success : function(data){
+								if(data=='1'){
+									var con = confirm('후원이 성공적으로 완료됐습니다. 마이페이지로 이동하시겠습니까?');
+									if(con){
+										location.href='mypage';
+									}
+								} else{
+									alert('잔액이 부족합니다.');
+								}
+							},
+							error : function(){
+								location.href="login";
+							}
+						});	
+					}else if ($('#payOption:checked').val()==2){
+						var projectNo = $('#projectNo').val();
+						var donateMoney = $('#allDonate').children().text();
+						var productNo = $('#selprod #productNo').val();
+						
+						var form=document.createElement("form");
+						form.setAttribute("method", "post");
+						form.setAttribute("action", "cardpay");
+						
+						var hiddenField=document.createElement("input");
+						hiddenField.setAttribute("type", "hidden");
+						hiddenField.setAttribute("name", "projectNo");
+						hiddenField.setAttribute("value", projectNo);
+						form.appendChild(hiddenField);
+						
+						var hiddenField2=document.createElement("input");
+						hiddenField2.setAttribute("type", "hidden");
+						hiddenField2.setAttribute("name", "donateMoney");
+						hiddenField2.setAttribute("value", donateMoney);
+						form.appendChild(hiddenField2);
+						
+						if(productNo!=null){
+							var hiddenField3=document.createElement("input");
+							hiddenField3.setAttribute("type", "hidden");
+							hiddenField3.setAttribute("name", "productNo");
+							hiddenField3.setAttribute("value", productNo);
+							form.appendChild(hiddenField3);
+						}
+						document.body.appendChild(form);
+						
+						form.submit();
+					}else{
+						alert('결제 옵션을 선택해주세요')
+					}
 				}
 			});
 		});

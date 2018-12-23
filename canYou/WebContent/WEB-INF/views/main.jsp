@@ -83,8 +83,7 @@ ul {
   </a>
 </div>
 </div>
-<nav style="margin: 0 auto; padding:0% 5% 0% 5%;
-width: 80%;">
+<div align="center">
 <table>
 		<tr>
 			<td colspan="3">
@@ -212,7 +211,7 @@ width: 80%;">
 			</td>
 		</tr>
 </table>
-</nav>
+</div>
 
 <div style="float: left; width: 50%">
 	<img src="resources/images/11.jpg"

@@ -26,6 +26,7 @@ access-decision-manager-ref="accessDecisionManager">
 	<intercept-url pattern="/myProject" access="1,2"/>
 	<intercept-url pattern="/editinfo" access="1,2"/>
 	<intercept-url pattern="/ProjectUpload" access="1,2"/>
+	<intercept-url pattern="/cardpay" access="1,2"/>
 	<intercept-url pattern="/admin" access="1"/>
 	<intercept-url pattern="/admin.*" access="1"/>
 	

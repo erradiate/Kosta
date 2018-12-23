@@ -6,8 +6,11 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,12 +18,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import or.kr.project.dto.MemberVO;
 import or.kr.project.dto.ProductVO;
+import or.kr.project.dto.ProjectDonateVO;
 import or.kr.project.dto.ProjectVO;
 import or.kr.project.dto.SubCategoryVO;
 import or.kr.project.mvc.dao.project2DaoImple;
@@ -152,5 +158,64 @@ public class Project_2Controller {
 		h.put("project", vo3);
 		
 		return new ResponseEntity<HashMap<String, Object>>(h, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="/cardpay")
+	public String cardpay(Model m, ProjectDonateVO vo, HttpServletRequest request) {
+		// 받아온  정보를 토대로 세션에 저장
+		request.getSession().setAttribute("projectNo", vo.getProjectNo());
+		request.getSession().setAttribute("productNo", vo.getProductNo());
+		request.getSession().setAttribute("donateMoney", vo.getDonateMoney());
+		
+		return "cardpay";
+	}
+	
+	// 후원할때 들어오는 메소드
+	@RequestMapping(value = "/donate2")
+	public String donateProject2(ProjectDonateVO vo, Model model, HttpServletRequest request) {
+		SecurityContext impl = SecurityContextHolder.getContext(); // 세션에서 spring security 정보를 가져옴
+		HttpSession session = request.getSession();
+		String implstr = impl.getAuthentication().getName(); // security 정보에서 세션에 담겨있는 로그인 정보 중 ID 가져옴
+		MemberVO vo2 = dao.memname(implstr); // ID를 토대로 회원정보 가져옴 (회원 번호, 회원 이름)
+		int memno = vo2.getMemberNo();
+		
+
+		vo.setPayOption("카드결제");
+		vo.setProjectNo(Integer.parseInt(String.valueOf(session.getAttribute("projectNo"))));
+		vo.setProductNo(Integer.parseInt(String.valueOf(session.getAttribute("productNo"))));
+		vo.setDonateMoney(Integer.parseInt(String.valueOf(session.getAttribute("donateMoney"))));
+		
+		session.removeAttribute("projectNo");
+		session.removeAttribute("productNo");
+		session.removeAttribute("donateNo");
+
+		vo.setMemberNo(memno);
+
+		if (vo.getProductNo() != 0) {
+			if (vo.getDonateMoney() != 0) {
+				vo.setDonateMoney(vo.getDonateMoney() + dao.prodcost(vo.getProductNo()));
+			} else {
+				vo.setDonateMoney(dao.prodcost(vo.getProductNo()));
+			}
+		}
+		
+		// 사용자의 선결제 금액이 프로젝트의 금액보다 낮을 때 이후 작업을 수행 하지 않고 페이지로 보냄
+		if (vo2.getMemberCash() - vo.getDonateMoney() < 0) {
+			return "0";
+		}
+
+		dao.donate(vo); // projectDonate 행 추가
+
+		// 돈 차감
+		Map<String, Integer> m = new HashMap<>();
+		m.put("donateMoney", vo.getDonateMoney());
+		m.put("memberNo", memno);
+
+		dao.donateMoney(m);
+
+		session.setAttribute("memberCash", vo2.getMemberCash());
+		
+		return "paysuccess";
+
 	}
 }
