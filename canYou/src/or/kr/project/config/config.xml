@@ -17,3 +17,5 @@
 		<typeAlias alias="lvo" type="or.kr.project.dto.LoggerVO"/>
 	</typeAliases>
 </configuration>
+
+

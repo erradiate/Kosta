@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="graph">
+	<!-- 나이별 카테고리 후원 수 -->
+	<!--
+	<select id="categorygraph" resultType="hashmap" parameterType="hashmap">
+		select c.categoryName categoryName, count(*) count
+		from logger l,category c
+		where l.categoryNo=c.categoryNo and l.memberAge between #{startAge} and #{endAge}
+		group by c.categoryName
+	</select>
+	  -->
+	  
+	
+</mapper>
