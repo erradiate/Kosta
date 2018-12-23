@@ -45,7 +45,7 @@ public class DonateAdvice {
 			vo.setCategoryNo(pvo2.getCategoryNo());
 			vo.setSubCategoryNo(pvo2.getSubCategoryNo());
 			vo.setDonateMoney(pvo.getDonateMoney());
-		
+			vo.setProjectNo(pvo.getProjectNo());
 			dao.insLog(vo);
 		}
 	}

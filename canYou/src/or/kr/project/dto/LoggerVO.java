@@ -1,8 +1,16 @@
 package or.kr.project.dto;
 
 public class LoggerVO {
-	int logNo, memberAge, categoryNo, subCategoryNo, donateMoney;
+	int logNo, memberAge, categoryNo, subCategoryNo, donateMoney, projectNo;
 	String memberName, memberGender, donateDay;
+	
+	
+	public int getProjectNo() {
+		return projectNo;
+	}
+	public void setProjectNo(int projectNo) {
+		this.projectNo = projectNo;
+	}
 	public int getLogNo() {
 		return logNo;
 	}

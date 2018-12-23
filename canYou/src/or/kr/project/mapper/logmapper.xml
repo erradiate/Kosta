@@ -6,7 +6,7 @@
 
 	<insert id="logins" parameterType="lvo">
 		insert into logger values(log_seq.nextVal, #{memberName}, 
-		#{memberGender}, #{memberAge}, #{categoryNo}, #{subCategoryNo}, sysdate, #{donateMoney})
+		#{memberGender}, #{memberAge}, #{categoryNo}, #{subCategoryNo}, sysdate, #{donateMoney}, #{projectNo})
 	</insert>
 	<!--  로그에 넣기 위한 카테고리 번호와 서브카테고리 번호 빼오는 구문 -->
 	<select id="getLogCategory" parameterType="int" resultType="projvo">
