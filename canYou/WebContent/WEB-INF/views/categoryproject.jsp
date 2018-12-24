@@ -87,8 +87,8 @@
 						<div class="progress" style="height:5px">
     						<div class="progress-bar" style="width:${listv.projectCurCost/listv.projectCost*100}%;height:10px"></div>
   						</div>
-						<p>모인 금액 : ${listv.projectCost}</p>
-						<p>남은 날짜 : ${dateList[status.index]}</p>
+						<p>모인 금액 : ${listv.projectCost}원</p>
+						<p>남은 날짜 : ${dateList[status.index]}일</p>
 						</div>
 					</div>						
 					</td>
