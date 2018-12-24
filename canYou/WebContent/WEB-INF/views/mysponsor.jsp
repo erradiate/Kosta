@@ -38,7 +38,7 @@ tr .thStyle{
               
                 </li>
                  <li>
-                	<a href="graph?projectNo=${list.projectNo}" >그래프보기</a>
+                	<a href="graph?projectNo=${list.projectNo}&categoryNo=${list.categoryNo}" >그래프보기</a>
                 </li>
                  <c:choose>
 					<c:when test="${pageContext.request.userPrincipal.name!=null }">

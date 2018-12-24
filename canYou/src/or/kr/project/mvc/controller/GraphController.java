@@ -1,5 +1,7 @@
 package or.kr.project.mvc.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,12 +38,12 @@ public class GraphController {
 	}
 	*/
 	
-	//나이별 카테고리 후원 수
+	//그래프 나타내는 함수 
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/graph")
-	public String ageGraph(Model m,String projectNo,HttpServletRequest request) {
+	public String ageGraph(Model m,ProjectVO vo,HttpServletRequest request) {
 		// project 관련한 정보 빼오기
-		ProjectVO list = dao2.projectlist(projectNo);
+		ProjectVO list = dao2.projectlist(Integer.toString(vo.getProjectNo()));
 		String c = dao2.caselone(list.getCategoryNo());
 		String sc = dao2.subcaselone(list.getSubCategoryNo());
 		m.addAttribute("list", list);
@@ -52,11 +54,10 @@ public class GraphController {
 		MemberVO mem = dao2.memname2(list.getMemberNo());
 		m.addAttribute("member", mem);
 
-		JSONObject jsonObject = new JSONObject();
-		JSONArray jsonArray = new JSONArray();
-		
+		//나이별 카테고리 후원 수 
+		JSONArray ageArray = new JSONArray();
 		Map<String,Integer> hash = new HashMap<>();
-		hash.put("projectNo", Integer.parseInt(projectNo));
+		hash.put("projectNo", vo.getProjectNo());
 		
 		JSONObject ageObject1 = new JSONObject();
 		hash.put("startAge", 10);
@@ -94,14 +95,36 @@ public class GraphController {
 		int count5 = dao.categorygraph(hash);
 		ageObject5.put("y", count5);
 		
-		jsonArray.add(ageObject1);
-		jsonArray.add(ageObject2);
-		jsonArray.add(ageObject3);
-		jsonArray.add(ageObject4);
-		jsonArray.add(ageObject5);
+		ageArray.add(ageObject1);
+		ageArray.add(ageObject2);
+		ageArray.add(ageObject3);
+		ageArray.add(ageObject4);
+		ageArray.add(ageObject5);
+
+		request.setAttribute("ageArray", ageArray);
 		
-		//jsonObject.put("graph", jsonArray);
-		request.setAttribute("jsonArray", jsonArray);
+		
+		//최근 3개월 통계 보여주는 그래프
+		JSONArray monthArray = new JSONArray();
+		List<Integer> hashList = dao.monthGraph(vo);
+
+		JSONObject monthObject1 = new JSONObject();
+		monthObject1.put("x", "12월");
+		monthObject1.put("y", hashList.get(0));
+		
+		JSONObject monthObject2 = new JSONObject();
+		monthObject2.put("x", "11월");
+		monthObject2.put("y", hashList.get(1));
+		
+		JSONObject monthObject3 = new JSONObject();
+		monthObject3.put("x", "10월");
+		monthObject3.put("y", hashList.get(2));
+		
+		monthArray.add(monthObject1);
+		monthArray.add(monthObject2);
+		monthArray.add(monthObject3);
+		
+		request.setAttribute("monthArray", monthArray);
 		
 		return "graphpage";
 	}

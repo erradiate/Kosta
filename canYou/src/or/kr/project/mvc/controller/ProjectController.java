@@ -62,7 +62,6 @@ public class ProjectController {
 	// 메인페이지 + 인기프로젝트 보여줌
 	@RequestMapping(value = "/")
 	public String index(HttpServletRequest request, Model model, Principal principal) {
-
 		// 헤더에 나오는 정보를 유지하기 위해
 		if (principal != null) {
 			HttpSession session = request.getSession();

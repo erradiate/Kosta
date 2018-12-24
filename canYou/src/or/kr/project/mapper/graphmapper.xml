@@ -9,4 +9,16 @@
 		from logger
 		where memberAge between #{startAge} and #{endAge} and projectNo=#{projectNo}
 	</select>
+	
+	<!-- 최근 3개월간 해당 카테고리 후원 수 -->
+	<select id="monthgraph" parameterType="projvo" resultType="int">
+		select NVL(count(*), 0) count
+		from (
+		    select substr(donateDay,0,5) as d
+		    from logger
+		    where categoryNo=#{categoryNo}
+		) 
+		group by d
+		order by d desc
+	</select>
 </mapper>
