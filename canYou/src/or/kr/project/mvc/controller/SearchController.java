@@ -1,6 +1,10 @@
 package or.kr.project.mvc.controller;
 
 import java.security.Principal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -95,6 +99,40 @@ public class SearchController {
 		mav.addObject("searchType", searchType);
 		mav.addObject("searchValue", searchValue);
 		mav.addObject("list", list);
+		
+		List<String> dateList = new ArrayList<String>();
+
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+		// 남은 날짜 계산해서 list에 넣어 줌
+		for (ProjectVO pvo : list) {
+			String sys = format.format(new Date()); // 현재 날짜
+
+			int idx = pvo.getProjectEndDate().indexOf(" ");
+			String end = pvo.getProjectEndDate().substring(0, idx); // 끝나는 날짜
+
+			Date endDate = null;
+			Date sysdate = null;
+			long diffDays = 0;
+			try {
+				// 날짜 계산을 위해 Date형으로 변환
+				endDate = format.parse(end);
+				sysdate = format.parse(sys);
+
+				// 시간차이를 시간,분,초를 곱한 값으로 나누면 하루 단위가 나옴
+				long diff = endDate.getTime() - sysdate.getTime();
+				diffDays = diff / (24 * 60 * 60 * 1000);
+
+				System.out.println("날짜차이=" + diffDays);
+
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+
+			dateList.add(Integer.toString((int) diffDays)); // 리스트에 날짜 차이를 넣음
+
+		}
+		mav.addObject("dateList", dateList);
 		return mav;
 	}
 	

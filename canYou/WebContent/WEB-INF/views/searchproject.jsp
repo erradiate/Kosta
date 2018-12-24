@@ -75,8 +75,8 @@
 							<div class="progress" style="height:5px">
     							<div class="progress-bar" style="width:${e.projectCurCost/e.projectCost*100}%;height:10px"></div>
   							</div>
-							<p id="">모인 금액 : ${e.projectCurCost}</p>
-							<p id="">남은 날짜 : ${dateList[status.index]}</p>
+							<p id="">모인 금액 : ${e.projectCurCost}원</p>
+							<p id="">남은 날짜 : ${dateList[status.index]}일</p>
 						</div>
 					</div>
 				</td>
