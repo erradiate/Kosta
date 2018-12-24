@@ -26,7 +26,7 @@
       select * from (
   		select rownum r_num, a.projectNo, a.projectName, a.projectMainImage, 
 		a.projectCurCost, a.projectEndDate,
-		a.projectStartDate, a.projectStatus from 
+		a.projectStartDate, a.projectStatus, a.projectCost from 
   		(
   			select * from project p, member m
   			<if test="searchValue != null">

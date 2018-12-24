@@ -84,6 +84,9 @@
 
 						<div class="container">
 						<p>프로젝트 명 : ${listv.projectName}</p>
+						<div class="progress" style="height:5px">
+    						<div class="progress-bar" style="width:${listv.projectCurCost/listv.projectCost*100}%;height:10px"></div>
+  						</div>
 						<p>모인 금액 : ${listv.projectCost}</p>
 						<p>남은 날짜 : ${dateList[status.index]}</p>
 						</div>

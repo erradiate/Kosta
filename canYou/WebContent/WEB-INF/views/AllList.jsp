@@ -74,9 +74,11 @@
 						</c:choose>
 						<div class="container">
 						<p>프로젝트 명 : ${e.projectName}</p>
-						<hr>
-						<p>모인 금액 : ${e.projectCurCost}</p>
-						<p>남은 날짜 : ${dateList[status.index]}</p>
+						<div class="progress" style="height:5px">
+    						<div class="progress-bar" style="width:${e.projectCurCost/e.projectCost*100}%;height:10px"></div>
+  						</div>
+						<p>모인 금액 : ${e.projectCurCost}원</p>
+						<p>남은 날짜 : ${dateList[status.index]}일</p>
 						</div>
 						</div>
 					</td>
