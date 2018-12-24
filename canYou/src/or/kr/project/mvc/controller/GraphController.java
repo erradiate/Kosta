@@ -119,7 +119,7 @@ public class GraphController {
 		JSONObject monthObject3 = new JSONObject();
 		monthObject3.put("x", "10¿ù");
 		monthObject3.put("y", hashList.get(2));
-		
+		 
 		monthArray.add(monthObject1);
 		monthArray.add(monthObject2);
 		monthArray.add(monthObject3);

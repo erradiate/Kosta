@@ -8,7 +8,7 @@
                 <li><a class="hoverHolder" href="story?projectNo=${list.projectNo}" class="current">프로젝트 스토리</a></li>
                 <li><a href="productDetail?projectNo=${list.projectNo}">상품 상세</a></li>
                 <li><a href="community?projectNo=${list.projectNo}" >커뮤니티</a>
-                
+                 
                 </li>
                   <li>
                 	<a href="graph?projectNo=${list.projectNo}&categoryNo=${list.categoryNo}" >그래프보기</a>

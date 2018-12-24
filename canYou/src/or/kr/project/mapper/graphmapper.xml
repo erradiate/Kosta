@@ -20,5 +20,5 @@
 		) 
 		group by d
 		order by d desc
-	</select>
+	</select> 
 </mapper>

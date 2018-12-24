@@ -53,7 +53,7 @@ svg text{
                 	<input type="hidden" id="userPrincipalName" value="${pageContext.request.userPrincipal.name}">
                 </a>
               
-                </li>
+                </li> 
                 <li>
                 	<a href="graph?projectNo=${list.projectNo}&categoryNo=${list.categoryNo}" class="hoverHolder" >그래프보기</a>
                 </li>
