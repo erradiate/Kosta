@@ -3,6 +3,16 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <style type="text/css">
+@font-face {
+   font-family: 'titleFont'; /* 폰트 패밀리 이름 주기*/
+   src: url('resources/css/NANUMSQUAREEB.TTF'); /*폰트 파일 주소*/
+}
+
+#projtitle{
+	font-family:'titleFont' !important;
+	font-size: 20px;
+}
+
 #bgy {
 	margin: 0 auto;
 }
@@ -73,7 +83,7 @@
 							</c:when>
 						</c:choose>
 						<div class="container">
-						<p>프로젝트 명 : ${e.projectName}</p>
+						<p id="projtitle">${e.projectName}</p>
 						<div class="progress" style="height:5px">
     						<div class="progress-bar" style="width:${e.projectCurCost/e.projectCost*100}%;height:10px"></div>
   						</div>
