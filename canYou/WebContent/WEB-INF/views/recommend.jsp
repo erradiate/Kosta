@@ -6,14 +6,13 @@
 	color: black;
 	font-size: 18px;
 	line-height: 4em;
-	font-weight: bold ;
+	font-weight: bold;
 }
 
 .proimg {
 	margin: 5px 35px 10px 0px;
 	width: 400px;
 	height: 250px;
-
 }
 
 ul {
@@ -43,18 +42,29 @@ ul {
 }
 
 .prev {
-	width: 30px;
-	height: 30px;
+	width: 10px;
+	height: 10px;
 	margin-top: -15px;
+	border: 2px solid #ffffff;
+	border-top: 30px solid #ffffff;
+	border-bottom: 30px solid #ffffff;
+	border-right: 25px solid #dcdcdc;
+	background-color: #ffffff;
 }
 
 .next {
-	width: 30px;
-	height: 30px;
+	width: 10px;
+	height: 10px;
 	margin-top: -15px;
+	border: 2px solid #ffffff;
+	border-top: 30px solid #ffffff;
+	border-bottom: 30px solid #ffffff;
+	border-left: 25px solid #dcdcdc;
+	background-color: #ffffff;
 }
-.imge{
-	text-align:center;
+
+.imge {
+	text-align: center;
 }
 </style>
 <table>
@@ -66,7 +76,7 @@ ul {
 
 	<tr>
 		<td>
-			<button class="prev">&lt</button>
+			<button class="prev"></button>
 		</td>
 		<c:set var="i" value="0" />
 		<td>
@@ -77,19 +87,21 @@ ul {
 							<c:set var="j" value="${i+3}" />
 							<c:if test="${i==0}">
 								<li class="on">
-									<div style="white-space: nowrap;display:flex;  justify-content:space-between;">
+									<div
+										style="white-space: nowrap; display: flex; justify-content: space-between;">
 							</c:if>
 							<c:if test="${i!=0}">
 								<li>
-									<div style="white-space: nowrap;display:flex;  justify-content:space-between;">
+									<div
+										style="white-space: nowrap; display: flex; justify-content: space-between;">
 							</c:if>
 						</c:if>
 						<div class="imge">
-						<a href="story?projectNo=${plist.projectNo}"> <img
-							src="resources/images/${plist.projectMainImage}" class="proimg" align="middle" style= "display:block;">
-							<span >${plist.projectName}</span>
+							<a href="story?projectNo=${plist.projectNo}"> <img
+								src="resources/images/${plist.projectMainImage}" class="proimg"
+								align="middle" style="display: block;"> <span>${plist.projectName}</span>
 							</a>
-							</div>
+						</div>
 						<c:if test="${i==j}">
 			</div>
 			</li> </c:if> <c:set var="i" value="${i+1}" /> </c:forEach>
@@ -98,53 +110,56 @@ ul {
 		</td>
 
 		<td>
-			<button class="next">&gt</button>
+			<button class="next"></button>
 		</td>
 	</tr>
 </table>
 
 <script>
+	$(document).ready(
+			function() {
+				$('#g').myPluginFn();
+				var i = $(".panel li .on").index() + 1;
 
-$(document).ready(function(){
-	$('#g').myPluginFn();
-	var i = $(".panel li .on").index()+1;
+				console.log(i);
+				console.log($("#panel1 li").length);
 
-	console.log(i);
-	console.log($("#panel1 li").length);
-	
-	//좌우 버튼 연동 //
-	showSlide();
-	
-	  $(".prev").click(function() {
-		if($(this).parent().next().children('div').children('ul').attr('id')==="panel1"){
-			console.log('맞다');
-			if (i == 0) {
-			      i =  $("#panel1 li").length - 1;
-			    } else {
-			      i = i - 1;
-			    }
-			showSlide();
-		}
-		
-	  });
+				//좌우 버튼 연동 //
+				showSlide();
 
-	  $(".next").click(function() {
-		if($(this).parent().prev().children('div').children('ul').attr('id')==="panel1"){
-	    	if (i == $("#panel1 li").length-1) {
-	      		i = 0;
-	    	} else {
-	      		i = i + 1;
-	    	}
-	    	showSlide();
-		}
-		
-	  });
-	  
-	  function showSlide() {
-		    $("#panel1 li").stop(true, true).fadeOut();
-		    $("#panel1 li").eq(i).stop(true, true).fadeIn();
-	  }
+				$(".prev").click(
+						function() {
+							if ($(this).parent().next().children('div')
+									.children('ul').attr('id') === "panel1") {
+								console.log('맞다');
+								if (i == 0) {
+									i = $("#panel1 li").length - 1;
+								} else {
+									i = i - 1;
+								}
+								showSlide();
+							}
 
-});
+						});
 
+				$(".next").click(
+						function() {
+							if ($(this).parent().prev().children('div')
+									.children('ul').attr('id') === "panel1") {
+								if (i == $("#panel1 li").length - 1) {
+									i = 0;
+								} else {
+									i = i + 1;
+								}
+								showSlide();
+							}
+
+						});
+
+				function showSlide() {
+					$("#panel1 li").stop(true, true).fadeOut();
+					$("#panel1 li").eq(i).stop(true, true).fadeIn();
+				}
+
+			});
 </script>

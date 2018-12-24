@@ -567,14 +567,6 @@ public class ProjectController {
 		vo.setPayOption("선결제");
 		vo.setMemberNo(memno);
 
-		if (vo.getProductNo() != 0) {
-			if (vo.getDonateMoney() != 0) {
-				vo.setDonateMoney(vo.getDonateMoney() + dao.prodcost(vo.getProductNo()));
-			} else {
-				vo.setDonateMoney(dao.prodcost(vo.getProductNo()));
-			}
-		}
-		
 		// 사용자의 선결제 금액이 프로젝트의 금액보다 낮을 때 이후 작업을 수행 하지 않고 페이지로 보냄
 		if (vo2.getMemberCash() - vo.getDonateMoney() < 0) {
 			return "0";

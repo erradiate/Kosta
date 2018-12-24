@@ -201,9 +201,9 @@
 						var productNo = $('#selprod #productNo').val();
 						
 						if(productNo===undefined){
-							var vo = {projectNo:projectNo, donateMoney:donateMoney, productNo:0, pay:payOption};
+							var vo = {projectNo:projectNo, donateMoney:donateMoney, productNo:0};
 						} else{
-							var vo = {projectNo:projectNo, donateMoney:donateMoney, productNo:productNo, pay:payOption};
+							var vo = {projectNo:projectNo, donateMoney:donateMoney, productNo:productNo};
 						}
 						$.ajax({
 							type : "POST",
