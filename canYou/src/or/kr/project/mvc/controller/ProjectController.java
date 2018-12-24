@@ -740,15 +740,17 @@ public class ProjectController {
 
 	// 캐쉬충전 폼으로
 	@RequestMapping(value = "/cash")
-	public ModelAndView cashcharge() {
+	public ModelAndView cashcharge(HttpSession session) {
 		// 세션에서 로그인 된 ID를 가져오는 작업
 		SecurityContext impl = SecurityContextHolder.getContext();
 		String implstr = impl.getAuthentication().getName();
 		// 끝-------------------
 		MemberVO vo2 = dao.memname(implstr); // 가져온 ID를 토대로 회원 번호, 이름을 가져온다
 
-	
+		
 		MemberVO list = dao.chargeList(vo2.getMemberNo());
+		session.setAttribute("memberCash", list.getMemberCash());
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("cashcharge");
 		mav.addObject("list", list);
@@ -766,11 +768,7 @@ public class ProjectController {
 		// 끝-------------------
 		MemberVO vo2 = dao.memname(implstr); // 가져온 ID를 토대로 회원 번호, 이름을 가져온다
 		vo.setMemberNo(vo2.getMemberNo());
-		System.out.println("돈" + vo.getMemberCash());
-		System.out.println("멤버번호" + vo.getMemberNo());
 		dao.charge(vo);
-		System.out.println("돈" + vo.getMemberCash());
-		System.out.println("멤버번호" + vo.getMemberNo());
 
 		return "redirect:/cash";
 

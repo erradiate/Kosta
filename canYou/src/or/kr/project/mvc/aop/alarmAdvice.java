@@ -38,7 +38,7 @@ public class alarmAdvice {
 				 List<DeniedVO> vo2=dao2.selde(vo.getMemberNo());
 				 Model m = (Model)fd[1];
 				 if(vo2.size()!=0) {
-					 m.addAttribute("dealarm", 1);
+					 m.addAttribute("dealarm", vo2.size());
 					 m.addAttribute("delist", vo2);
 				 }else {
 					 m.addAttribute("dealarm", 0);

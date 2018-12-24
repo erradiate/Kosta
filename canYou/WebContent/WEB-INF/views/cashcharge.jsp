@@ -5,7 +5,7 @@
 	<h1>캐쉬 충전소</h1>
 </div>
 <div class="cash" align="center">
-	<form action="cashcharge" method="POST">>
+	<form action="cashcharge" method="POST">
 			<p>
 				<input type="text" name="memberName" value="${list.memberName}"
 					readonly="readonly"><label>님</label>

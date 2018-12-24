@@ -1,6 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<style>
+	.caname{
+		font-size: 30px;
+		font-weight: bold;
+		color: gray;
+	}
+	
+	.caname:hover{
+		cursor: pointer;
+	}
+</style>
 <script>
 $(document).ready(function(){
 	$('.caname').click(function(){

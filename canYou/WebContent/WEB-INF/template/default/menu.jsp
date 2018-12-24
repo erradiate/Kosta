@@ -91,7 +91,7 @@
 						
 						<c:otherwise>
 							<c:choose>
-									<c:when test="${dealarm==1 }">
+									<c:when test="${dealarm>0 }">
 										<li style="position: absolute; left : 1550px;">
 										<div class="dropdown">
 											<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">

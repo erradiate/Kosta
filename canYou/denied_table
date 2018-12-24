@@ -1,4 +1,4 @@
-create table denied values(
+create table denied(
 	deniedNo number primary key,
 	projectNo number,
 	reason CLOB,

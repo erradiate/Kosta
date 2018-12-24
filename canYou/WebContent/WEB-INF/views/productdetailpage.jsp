@@ -106,9 +106,18 @@
 					<p>${e2.productInfo }</p>
 					<p>${e2.productCnt }개남음</p>
 				</div>
-				<input style="width: 150px;" id="donadd" type="button"
-					value="선물 선택" class="btns">
-				
+				<c:choose>
+					<c:when test="${e2.productCnt>0 && list.projectStatus==2 }">
+                		<input style="width: 150px;" id="donadd" type="button"
+							value="선물 선택" class="btns">
+                	</c:when>
+                	<c:when test="${list.projectStatus==1 || list.projectStatus==4  }">
+                	</c:when>
+                	<c:otherwise>
+                		<input style="width: 150px;" id="end" type="button"
+							value="마감" class="btns" disabled>
+                	</c:otherwise>
+                </c:choose>
 			</div>
 		</c:forEach>
 			<div class="popup">
@@ -129,8 +138,8 @@
 			<hr>
 			<p id="p">총 후원 금액 : </p><div id="allDonate"></div>
 			<div id="selpay">
-				<input type="radio" id="payOption" value="1">선결제<br>
-  				<input type="radio" id="payOption" value="2">카드결제<br>
+				<input type="radio" id="payOption" name="payOption" value="1">선결제<br>
+  				<input type="radio" id="payOption" name="payOption" value="2">카드결제<br>
 			</div>
 			<div id="buyBtn"></div>
 		</fieldset>
