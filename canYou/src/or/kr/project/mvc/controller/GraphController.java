@@ -119,7 +119,7 @@ public class GraphController {
 		
 		JSONObject monthObject2 = new JSONObject();
 		monthObject2.put("x", "11¿ù");
-		if(hashList.get(1)==null) {
+		if(hashList.size()==1) {
 			monthObject2.put("y", 0);
 		}else {
 			monthObject2.put("y", hashList.get(1));
@@ -127,7 +127,7 @@ public class GraphController {
 		
 		JSONObject monthObject3 = new JSONObject();
 		monthObject3.put("x", "10¿ù");
-		if(hashList.get(2)==null) {
+		if(hashList.size()==2) {
 			monthObject3.put("y", 0);
 		}else {
 			monthObject3.put("y", hashList.get(2));
