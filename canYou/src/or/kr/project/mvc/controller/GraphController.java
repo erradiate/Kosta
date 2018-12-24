@@ -1,5 +1,6 @@
 package or.kr.project.mvc.controller;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -126,7 +127,45 @@ public class GraphController {
 		
 		request.setAttribute("monthArray", monthArray);
 		
+		List<HashMap<String, Object>> list2 = dao.countPerGender(vo.getProjectNo());
+		// list 가 null일 경우는 후원이 아직 한번도 안된 프로젝트
+				if(list2 != null) {
+					// 후원한 사람이 전부 여성이거나 남성인 경우
+					if(list2.size()==1) {
+						String gender = (String)list2.get(0).get("GENDER");
+						
+						if(gender.equals("남자")) {
+							m.addAttribute("Man",100);
+							m.addAttribute("Girl",0);
+						} else {
+							m.addAttribute("Man",0);
+							m.addAttribute("Girl",100);
+						}
+					}
+					// 여자 남자 둘다 적어도 한번이상 후원 한 경우
+					else if(list2.size()==2) {
+						BigDecimal x = (BigDecimal)list2.get(0).get("COUNT");//여자와 남자의 값을 가져옴
+						BigDecimal y = (BigDecimal)list2.get(1).get("COUNT");
+						int total = x.intValue()+y.intValue();
+						
+						for (HashMap<String, Object> hashMap : list2) {
+							String gender = (String)hashMap.get("GENDER");
+							
+							if(gender.equals("남자")) {
+								System.out.println("남자:"+ ((double)y.intValue()/total)*100);
+								m.addAttribute("Man", ((double)y.intValue()/total)*100);
+							} else {
+								System.out.println("여자:"+(double)(x.intValue()/total)*100);
+								m.addAttribute("Girl", ((double)x.intValue()/total)*100);
+							}
+						}
+					}
+				} else {
+					m.addAttribute("Man", 0);
+					m.addAttribute("Girl", 0);
+				}
 		return "graphpage";
 	}
+	
 	
 }

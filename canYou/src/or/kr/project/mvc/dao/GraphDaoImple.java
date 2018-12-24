@@ -24,4 +24,10 @@ public class GraphDaoImple implements GraphDao{
 	public List<Integer> monthGraph(ProjectVO vo){
 		return ss.selectList("graph.monthgraph",vo.getCategoryNo());
 	}
+	
+	@Override
+	public List<HashMap<String, Object>> countPerGender(int projectNo) {
+		List<HashMap<String,Object>> list = ss.selectList("graph.count_per_gender",projectNo);
+		return list;
+	}
 }

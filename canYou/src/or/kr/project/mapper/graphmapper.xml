@@ -21,4 +21,13 @@
 		group by d
 		order by d desc
 	</select> 
+	
+	<!-- 성별 후원한 회원의 수를 뽑아오는 sql 구문 -->
+	<select id="count_per_gender" parameterType="int" resultType="hashmap">
+		select memberGender as gender, count(memberGender) as count
+		from logger
+		where projectNo=#{projectNo}
+		group by memberGender
+	</select>
+	
 </mapper>
