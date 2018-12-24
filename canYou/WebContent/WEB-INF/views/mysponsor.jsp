@@ -37,6 +37,9 @@ tr .thStyle{
                 </a>
               
                 </li>
+                 <li>
+                	<a href="graph?projectNo=${list.projectNo}" >그래프보기</a>
+                </li>
                  <c:choose>
 					<c:when test="${pageContext.request.userPrincipal.name!=null }">
                 		<li><a href="projectDonateList?projectNo=${list.projectNo}&memberNo=${member.memberNo}" class="hoverHolder">후원자 보기</a></li>
