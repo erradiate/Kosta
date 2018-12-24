@@ -38,18 +38,14 @@ td {
 	font-size: 50px;
 	font-weight: bold;
 	text-align: center;
-}
-
-#castyle{
-	font-size: 50px;
-	font-weight: bold;
-	text-align: center;
+	color: black;
 }
 
 #castyle2{
 	font-size: 33px;
 	font-weight: bold;
 	text-align: center;
+	color: black;
 }
 
 .left-box img{
@@ -68,7 +64,7 @@ td {
 		<fieldset>
 			<form action="update" method="POST" >	
 			<input type="hidden" id="projectNo" name="projectNo" value="${list.projectNo}">
-			<p id="castyle">[ ${c} ]</p>
+			<a href="categoryproject?categoryNo=${list.categoryNo}"><p id="castyle">[ ${c} ]</p></a>
 				<c:choose>
 						<c:when test="${sc!=null}">
 								<p id="castyle2">${sc}</p>
