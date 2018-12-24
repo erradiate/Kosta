@@ -18,7 +18,6 @@
                 		<li><a href="projectDonateList?projectNo=${list.projectNo}&memberNo=${member.memberNo}">후원자 보기</a></li>
                 	</c:when>
                 </c:choose>
-                <li><a href="">환불 및 교환</a></li> 
             </ul> 
             </div> 
 <!-- Nav tabs -->
