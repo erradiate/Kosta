@@ -71,7 +71,9 @@ svg text{
 	<p id="pStyle2">최근 3개월간 이 카테고리 후원 현황</p>
 <svg class="svg" width="650" height="400"></svg> 
 <svg class="svg2" width="650" height="400"></svg> 
-
+<div class="graph"></div>
+<input type="hidden" value="${Man}" id="Man">
+<input type="hidden" value="${Girl}" id="Girl">
 <script> 
 
 var aj = eval('<%=request.getAttribute("ageArray")%>');
@@ -170,6 +172,37 @@ var data = [{x:mj[0].x, y:mj[0].y }, {x:mj[1].x, y:mj[1].y}, {x:mj[2].x, y:mj[2]
 	    .attr("transform", "translate(0," + (height) + ")")
 	    .call(d3.axisBottom(xScale)); //x축은 axisBottom로 축을 그림
 
+</script>
+
+<script>
+   var w = 250, h = 250;
+   d3.select(".graph")
+      .append("svg")
+      .attr("width", w)
+      .attr("height", h)
+      .attr("id", "graphWrap");
+   var graphWrap = d3.select("#graphWrap");
+   console.log($('#Man').val());
+   console.log($('#Girl').val());
+   // 그래프 데이터 // 합쳐서 100이 아니더라도 원이 생성됨
+   var graphData = [$('#Man').val(), $('#Girl').val()];
+   // pie 생성
+   var pie = d3.pie();
+   // 안쪽 반지름, 바깥쪽 반지름 설정 // 200x200 의 원 그래프 생성
+   var arc = d3.arc().innerRadius(0).outerRadius(100);
+   
+   // 원 그리기
+   var oneGraph = graphWrap.selectAll("path").data(pie(graphData));
+   // 데이터 추가
+   oneGraph.enter() // 데이터 수 만큼 반복
+   .append("path")
+   .attr("class", "pie")
+   .attr("d", arc)
+   .attr("transform", "translate("+(w/2)+","+(h/2)+")")
+   .style("fill", function(d, i) {
+      return ["#0048E5", "#EF00A3", "yellow"][i];
+   });
+   //끝
 </script>
 
 </div>
