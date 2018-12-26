@@ -113,6 +113,7 @@ public class GraphController {
 		JSONObject monthObject2 = new JSONObject();
 		JSONObject monthObject3 = new JSONObject();
 		
+		//x축의 날짜 지정
 		Date date = new Date();
 		int cur_month = date.getMonth();
 		monthObject1.put("x", cur_month+1);

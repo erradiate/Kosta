@@ -45,6 +45,7 @@
                 </c:when>
             </c:choose>
 		<li>
+			<!-- 그래프 보기 수정 -->
         	<a href="graph?projectNo=${list.projectNo}&categoryNo=${list.categoryNo}" >그래프보기</a>
         </li>
 	</ul>
