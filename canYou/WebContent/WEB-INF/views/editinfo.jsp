@@ -3,10 +3,11 @@
 <style>
 	#info{
 		border: 1px solid gray;
-		margin: 10px;
+		margin: 10px auto 0 auto;
 		padding-left:10px;
 		padding-right:10px;
 		border-radius: 5px;
+		width: 60%;
 	}
 	
 	.title{
@@ -14,9 +15,23 @@
 		color: gray;
 		font-weight: bold;
 	}
+	
+	h1{
+		font-size: 40px;
+		font-weight: bold;
+		color: gray;
+		margin-top:10px;
+	}
+	
+	input{
+		border: 1px solid #999;
+		border-radius: 5px;
+	}
 </style>
 <div id="container">
-<h2>개인정보 수정</h2>
+<div align="center">
+<h1>개인정보 수정</h1>
+</div>
 <div id="info">
 <form action="success" method="POST">
 	<p><span class="title">이름 : </span><input type="text" name="memberName" value="${list.memberName }"></p>

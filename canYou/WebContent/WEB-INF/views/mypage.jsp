@@ -32,7 +32,7 @@
 	<p><a href="mydonate">내 후원 현황</a></p>
 	<p><a href="myProject">내가 만든 프로젝트</a></p>
 	<p><a href="editinfo">개인정보 수정</a></p>
-	<p><a href="j_spring_security_logout">로그아웃</a></p>
 	<p><a href="cash">캐쉬충전</a></p>
+	<p><a href="j_spring_security_logout">로그아웃</a></p>
 	</fieldset>
 </div>

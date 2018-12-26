@@ -58,6 +58,29 @@ td {
 	margin-top: 100px;
 	margin-bottom: 100px;
 }
+
+#showreason{
+	border: 1px solid gray;
+	width : 40%;
+	margin: 10px auto 10px auto;
+	padding: 5px 0 5px 0;
+
+	border-radius: 5px;
+	
+	background-color:#E6E6E6;
+}
+
+#showreason h2{
+	font-size: 30px;
+	font-weight: bold;
+	color: #DF0101;
+}
+
+#reason{
+	font-weight: bold;
+	font-size: 15px;
+}
+
 </style>
  
 <div>
@@ -178,7 +201,8 @@ td {
 						test="${pageContext.request.userPrincipal.name eq member.memberId && list.projectStatus==4}">
 							<div id="showreason" align="center">
 								<h2>거절 사유</h2>
-								${reason }
+								<hr/>
+								<span id="reason">${reason }</span>
 							</div>
 			</c:when>
 			</c:choose>
