@@ -110,28 +110,29 @@ public class GraphController {
 		List<Integer> hashList = dao.monthGraph(vo);
 
 		JSONObject monthObject1 = new JSONObject();
+		JSONObject monthObject2 = new JSONObject();
+		JSONObject monthObject3 = new JSONObject();
 		monthObject1.put("x", "12월");
+		monthObject2.put("x", "11월");
+		monthObject3.put("x", "10월");
+		
 		if(hashList.size()==0) {
 			monthObject1.put("y", 0);
-		}else {
-			monthObject1.put("y", hashList.get(0));
-		}
-		
-		JSONObject monthObject2 = new JSONObject();
-		monthObject2.put("x", "11월");
-		if(hashList.size()==1) {
 			monthObject2.put("y", 0);
-		}else {
-			monthObject2.put("y", hashList.get(1));
-		}
-		
-		JSONObject monthObject3 = new JSONObject();
-		monthObject3.put("x", "10월");
-		if(hashList.size()==2) {
 			monthObject3.put("y", 0);
-		}else {
+		}else if(hashList.size()==1){
+			monthObject1.put("y", hashList.get(0));
+			monthObject2.put("y", 0);
+			monthObject3.put("y", 0);
+		}else if(hashList.size()==2) {
+			monthObject1.put("y", hashList.get(0));
+			monthObject2.put("y", hashList.get(1));
+			monthObject3.put("y", 0);
+		}else if(hashList.size()==3) {
+			monthObject1.put("y", hashList.get(0));
+			monthObject2.put("y", hashList.get(1));
 			monthObject3.put("y", hashList.get(2));
-		}		
+		}	
 		
 		monthArray.add(monthObject1);
 		monthArray.add(monthObject2);

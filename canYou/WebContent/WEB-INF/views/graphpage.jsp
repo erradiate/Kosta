@@ -39,6 +39,24 @@ svg text{
 	float: right;
    width: 50%;
 }
+/* .graph{
+	marign: 0 auto;
+} */
+
+#circle_graph{
+	align-content: right;
+}
+
+#graphM_explain{
+	background-color: #0048E5;
+	width: 30px;
+	height: 30px;
+}
+#graphG_explain{
+	background-color: #EF00A3;
+	width: 30px;
+	height: 30px;
+}
 </style> 
 <input type="hidden" id="teen" value="">
 
@@ -66,14 +84,30 @@ svg text{
             </div> 
 <!-- Nav tabs --> 
 <!-- 스토리 부분 -->
-<div class="divStory">
-	<p id="pStyle">이 프로젝트를 후원한 나이대 별 현황</p>
-	<p id="pStyle2">최근 3개월간 이 카테고리 후원 현황</p>
-<svg class="svg" width="650" height="400"></svg> 
-<svg class="svg2" width="650" height="400"></svg> 
-<div class="graph"></div>
+<table>
+	<tr>
+		<td colspan="2">
+			<div class="divStory">
+				<p id="pStyle">이 프로젝트를 후원한 나이대 별 현황</p>
+				<p id="pStyle2">최근 3개월간 이 카테고리 후원 현황</p>
+				<svg class="svg" width="650" height="400"></svg> 
+				<svg class="svg2" width="650" height="400"></svg> 
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td id="circle_graph">
+			<div class="graph"></div>
+		</td>
+		<td>
+			<div id="graphM_explain"></div> 남자
+			<div id="graphG_explain"></div> 여자
+		</td>
+	</tr>
+</table>
 <input type="hidden" value="${Man}" id="Man">
 <input type="hidden" value="${Girl}" id="Girl">
+
 <script> 
 
 var aj = eval('<%=request.getAttribute("ageArray")%>');
@@ -204,6 +238,4 @@ var data = [{x:mj[0].x, y:mj[0].y }, {x:mj[1].x, y:mj[1].y}, {x:mj[2].x, y:mj[2]
    });
    //끝
 </script>
-
-</div>
 
