@@ -51,7 +51,7 @@
 	<ul>
 		<!-- <li><a href="./">Home</a></li> -->
 		<!-- 세션이 있으면 :로그아웃, 세션이 없으면 : 로그인  -->
-		<li><a href="projectlook">프로젝트 보기</a>
+		<li><a href="lookaround">프로젝트 보기</a>
 			<ul>
 				<li><a href="AllList">모든 프로젝트</a></li>
 

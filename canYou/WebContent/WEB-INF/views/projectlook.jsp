@@ -1,12 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
 <style>
+	#searchType{
+		 width: 200px; /* 원하는 너비설정 */
+	    padding: .2em .3em; /* 여백으로 높이 설정 */
+	    font-family: inherit;  /* 폰트 상속 */
+	    background: url('resources\images\down.png') no-repeat 95% 50%; /* 네이티브 화살표를 커스텀 화살표로 대체 */
+	    border: 1px solid #999;
+	    -webkit-appearance: none; /* 네이티브 외형 감추기 */
+	    -moz-appearance: none;
+	    appearance: none;
+		border-radius: 5px;
+	}
+	
+	#searchIndex{
+		border: 1px solid #999;
+		border-radius: 5px;
+	}
 </style>
 <div align="center">
 	<h1>프로젝트 둘러보기</h1>
 	<form method="POST" action="search">
 		<input type="hidden" name="page" value="1">
-		<select name="searchType">
+		<select name="searchType" id="searchType">
 			<option value="1">작성자</option>
 			<option value="2">프로젝트명</option>
 		</select>&nbsp; <input name="searchValue" id="searchIndex" size="100px"

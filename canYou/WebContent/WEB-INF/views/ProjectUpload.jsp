@@ -269,13 +269,13 @@
 				<p><span class="title">선물 구성 : </span></p>
 				<p><textarea id="productName" class="pupinput" rows="5" cols="50"></textarea></p>
 			
-				<p><span class="title">선물 갯수 : </span><input type="number" class="pupinput" id="productCnt" min=1></p>
+				<p><span class="title">선물 갯수 : </span><input type="number" class="pupinput" id="productCnt" min=1 style="IME-MODE:disabled;"></p>
 				<p><span class="title">선물 설명 : </span></p>
 				<p><textarea id="productInfo" class="pupinput" rows="5" cols="50"></textarea></p>
 		
-				<span class="title">후원 금액 : </span><input type="text" class="pupinput" id="productCost">
+				<span class="title">후원 금액 : </span><input type="text" class="pupinput" id="productCost" style="IME-MODE:disabled;">
 				<input type="button" id="preadd" class="btn btn-default" value="선물 추가">
-				<p><span class="title">목표 금액 : </span><input type="text" id="projectCost" name="projectCost" class="pupinput" required></p>
+				<p><span class="title">목표 금액 : </span><input type="text" id="projectCost" name="projectCost" class="pupinput" required style="IME-MODE:disabled;"></p>
 			</div>	
 		</div>
 	
