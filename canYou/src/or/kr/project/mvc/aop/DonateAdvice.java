@@ -15,7 +15,7 @@ import or.kr.project.dto.MemberVO;
 import or.kr.project.dto.ProjectDonateVO;
 import or.kr.project.dto.ProjectVO;
 import or.kr.project.mvc.dao.LogDao;
-import or.kr.project.mvc.dao.projectDaoImple;
+import or.kr.project.mvc.dao.ProjectDaoImple;
 
 @Component
 @Aspect
@@ -24,7 +24,7 @@ public class DonateAdvice {
 	LogDao dao;
 
 	@Autowired
-	projectDaoImple pdao;
+	ProjectDaoImple pdao;
 
 	@After("execution(* or.kr.project.mvc.controller.*.donateProject*(..))")
 	public void logAfter(JoinPoint jp) {

@@ -11,7 +11,7 @@ import or.kr.project.dto.ProductVO;
 import or.kr.project.dto.ProjectVO;
 
 @Repository
-public class project2DaoImple {
+public class Project2DaoImple {
 	@Autowired
 	private SqlSessionTemplate ss;
 	

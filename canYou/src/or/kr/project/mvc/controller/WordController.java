@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import or.kr.project.dto.MemberVO;
 import or.kr.project.mvc.dao.WordDao;
-import or.kr.project.mvc.dao.projectDao;
+import or.kr.project.mvc.dao.ProjectDao;
 import or.kr.project.word.WordBuilder;
 
 @Controller

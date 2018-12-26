@@ -19,7 +19,7 @@ import or.kr.project.dto.ProductVO;
 import or.kr.project.dto.ProjectVO;
 import or.kr.project.dto.SearchVO;
 import or.kr.project.mvc.dao.AdminDaoImple;
-import or.kr.project.mvc.dao.projectDaoImple;
+import or.kr.project.mvc.dao.ProjectDaoImple;
 
 @Controller
 public class AdminController {
@@ -27,7 +27,7 @@ public class AdminController {
 	private AdminDaoImple dao;
 
 	@Autowired
-	private projectDaoImple dao2;
+	private ProjectDaoImple dao2;
 
 	@RequestMapping(value = "/admin")
 	public String amain() {

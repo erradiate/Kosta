@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 import or.kr.project.dto.ProjectDonateVO;
-import or.kr.project.mvc.dao.projectDaoImple;
+import or.kr.project.mvc.dao.ProjectDaoImple;
 import or.kr.project.mvc.service.Service_Transaction;
 
 
@@ -16,7 +16,7 @@ rollbackFor=Exception.class,readOnly = true)
 @Service
 public class ServiceImple implements Service_Transaction {
 	@Autowired
-	projectDaoImple dao;
+	ProjectDaoImple dao;
 	
 	@Override
 	public void cancle(ProjectDonateVO vo) {

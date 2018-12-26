@@ -13,17 +13,17 @@ import org.springframework.ui.Model;
 
 import or.kr.project.dto.DeniedVO;
 import or.kr.project.dto.MemberVO;
-import or.kr.project.mvc.dao.project2DaoImple;
-import or.kr.project.mvc.dao.projectDaoImple;
+import or.kr.project.mvc.dao.Project2DaoImple;
+import or.kr.project.mvc.dao.ProjectDaoImple;
 
 @Component
 @Aspect
-public class alarmAdvice {
+public class AlarmAdvice {
 	@Autowired
-	private projectDaoImple dao;
+	private ProjectDaoImple dao;
 	
 	@Autowired
-	private project2DaoImple dao2;
+	private Project2DaoImple dao2;
 	
 	@Before("execution(* or.kr.project.mvc.controller.ProjectController.index(..))")
 	public void beforeMethod(JoinPoint jp){

@@ -18,7 +18,7 @@ import or.kr.project.dto.SearchVO;
 import or.kr.project.dto.SubCategoryVO;
 
 @Repository
-public class projectDaoImple implements projectDao {
+public class ProjectDaoImple implements ProjectDao {
 	@Autowired
 	private SqlSessionTemplate ss;
 

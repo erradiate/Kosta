@@ -23,12 +23,12 @@ import or.kr.project.dto.PageVO;
 import or.kr.project.dto.ProjectVO;
 import or.kr.project.dto.SearchVO;
 import or.kr.project.dto.SubCategoryVO;
-import or.kr.project.mvc.dao.projectDaoImple;
+import or.kr.project.mvc.dao.ProjectDaoImple;
 
 @Controller
 public class CategoryController {
 	@Autowired
-	private projectDaoImple dao;
+	private ProjectDaoImple dao;
 	
 	@RequestMapping(value="/subcaname")
 	public ResponseEntity<List<SubCategoryVO>> subcaname(int categoryNo) {

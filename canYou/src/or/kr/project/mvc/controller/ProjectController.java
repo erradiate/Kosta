@@ -48,13 +48,13 @@ import or.kr.project.dto.ProjectVO;
 import or.kr.project.dto.ReplyVO;
 import or.kr.project.dto.SearchVO;
 import or.kr.project.dto.SubCategoryVO;
-import or.kr.project.mvc.dao.projectDaoImple;
+import or.kr.project.mvc.dao.ProjectDaoImple;
 import or.kr.project.mvc.service.Service_Transaction;
 
 @Controller
 public class ProjectController {
 	@Autowired
-	private projectDaoImple dao;
+	private ProjectDaoImple dao;
 	
 	@Autowired
 	private Service_Transaction service;

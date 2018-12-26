@@ -29,16 +29,16 @@ import or.kr.project.dto.ProductVO;
 import or.kr.project.dto.ProjectDonateVO;
 import or.kr.project.dto.ProjectVO;
 import or.kr.project.dto.SubCategoryVO;
-import or.kr.project.mvc.dao.project2DaoImple;
-import or.kr.project.mvc.dao.projectDaoImple;
+import or.kr.project.mvc.dao.Project2DaoImple;
+import or.kr.project.mvc.dao.ProjectDaoImple;
 
 @Controller
 public class Project_2Controller {
 	@Autowired
-	private projectDaoImple dao;
+	private ProjectDaoImple dao;
 	
 	@Autowired
-	private project2DaoImple dao2;
+	private Project2DaoImple dao2;
 	
 	@RequestMapping(value="/request")
 	public String reqeust(int projectNo) {

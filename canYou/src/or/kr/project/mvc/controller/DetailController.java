@@ -22,13 +22,13 @@ import or.kr.project.dto.MemberVO;
 import or.kr.project.dto.ProductVO;
 import or.kr.project.dto.ProjectVO;
 import or.kr.project.dto.ReplyVO;
-import or.kr.project.mvc.dao.projectDaoImple;
+import or.kr.project.mvc.dao.ProjectDaoImple;
 
 @Controller
 // Detail.jsp를 포함하는 각각 jsp를 컨트롤하기 위한 Controller
 public class DetailController {
 	@Autowired
-	projectDaoImple dao;
+	ProjectDaoImple dao;
 
 	// 스토리와 관련된 부분이 detail.jsp와 같이 나오는 메소드
 	@GetMapping("/story")

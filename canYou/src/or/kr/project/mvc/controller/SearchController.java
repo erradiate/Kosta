@@ -21,12 +21,12 @@ import or.kr.project.dto.PageVO;
 import or.kr.project.dto.ProjectDonateVO;
 import or.kr.project.dto.ProjectVO;
 import or.kr.project.dto.SearchVO;
-import or.kr.project.mvc.dao.projectDaoImple;
+import or.kr.project.mvc.dao.ProjectDaoImple;
 
 @Controller
 public class SearchController {
 	@Autowired
-	private projectDaoImple dao;
+	private ProjectDaoImple dao;
 	//모든 프로젝트 검색
 	@RequestMapping(value="/search")
 	public ModelAndView listSearch(int page,String searchType, String searchValue){

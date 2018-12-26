@@ -1,5 +1,5 @@
 package or.kr.project.mvc.dao;
 
-public interface projectDao {
+public interface ProjectDao {
 
 }

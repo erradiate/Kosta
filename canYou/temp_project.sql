@@ -7,7 +7,6 @@ create table tproject(
     tprojectCost number,
     tprojectStartDate date,
     tprojectEndDate date,
-    tprojectFundCnt number,
     tprojectMainImage varchar2(300),
     tprojectStory clob,
     tprojectDate date,

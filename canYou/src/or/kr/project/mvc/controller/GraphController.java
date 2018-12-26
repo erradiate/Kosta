@@ -22,7 +22,7 @@ import com.fasterxml.jackson.databind.util.JSONPObject;
 import or.kr.project.dto.MemberVO;
 import or.kr.project.dto.ProjectVO;
 import or.kr.project.mvc.dao.GraphDaoImple;
-import or.kr.project.mvc.dao.projectDaoImple;
+import or.kr.project.mvc.dao.ProjectDaoImple;
 
 
 @Controller
@@ -30,7 +30,7 @@ public class GraphController {
 	@Autowired
 	private GraphDaoImple dao;
 	@Autowired
-	private projectDaoImple dao2;
+	private ProjectDaoImple dao2;
 	
 	/*
 	@RequestMapping(value = "/graph")
