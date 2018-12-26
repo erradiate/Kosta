@@ -11,6 +11,33 @@
 	.caname:hover{
 		cursor: pointer;
 	}
+	
+	.category div a{
+		color: gray;
+		margin-left:20px;
+		font-size: 20px;
+	}
+	
+	#content{
+		width:40%;
+		margin: 30px auto 0 auto;
+	}
+	
+	#bigtitle{
+		font-size: 40px;
+		font-weight: bold;
+		
+		color: black;
+		
+	}
+	
+	#bigtitle:hover{
+		text-decoration:none;
+	}
+	
+	#list{
+		margin-top: 30px;
+	}
 </style>
 <script>
 $(document).ready(function(){
@@ -43,12 +70,14 @@ $(document).ready(function(){
 	});
 });
 </script>
-<h1><a href="AllList">모든 프로젝트</a></h1>
-<h2>카테고리 별 보기</h2>
-
-<c:forEach var="e" items="${list}" varStatus="idx">
-    <div class="category">
-     <input type="hidden" value="${e.categoryNo }"><span class="caname">▶${e.categoryName}</span>
-     </div>
-
-</c:forEach>
+<div id="content">
+	<h1><a id="bigtitle" href="AllList">모든 프로젝트</a></h1>
+	<div id="list">
+	<c:forEach var="e" items="${list}" varStatus="idx">
+	    <div class="category">
+	     <input type="hidden" value="${e.categoryNo }"><span class="caname">▶${e.categoryName}</span>
+	     </div>
+	
+	</c:forEach>
+	</div>
+</div>
