@@ -112,9 +112,12 @@ public class GraphController {
 		JSONObject monthObject1 = new JSONObject();
 		JSONObject monthObject2 = new JSONObject();
 		JSONObject monthObject3 = new JSONObject();
-		monthObject1.put("x", "12¿ù");
-		monthObject2.put("x", "11¿ù");
-		monthObject3.put("x", "10¿ù");
+		
+		Date date = new Date();
+		int cur_month = date.getMonth();
+		monthObject1.put("x", cur_month+1);
+		monthObject2.put("x", cur_month);
+		monthObject3.put("x", cur_month-1);
 		
 		if(hashList.size()==0) {
 			monthObject1.put("y", 0);
