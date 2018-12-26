@@ -13,17 +13,17 @@ svg text{
 	font-size: 20px;
 	font-weight: bolder;
 }
-#pStyle{
+.pStyle{
 	float: left;
-   width: 50%;
+    width: 50%;
 	text-align: center;
 	font-size: 30px;
 	font-weight: bold;
 	margin-top: 40px;
 }
-#pStyle2{
+.pStyle2{
 	float: left;
-   width: 50%;
+    width: 50%;
 	text-align: center;
 	font-size: 30px;
 	font-weight: bold;
@@ -44,7 +44,7 @@ svg text{
 } */
 
 #circle_graph{
-	align-content: right;
+	text-align: center;
 }
 
 #graphM_explain{
@@ -57,6 +57,17 @@ svg text{
 	width: 30px;
 	height: 30px;
 }
+#graph{
+	margin: 10px 100px 10px 80px;
+}
+
+#pStyle3{
+	font-size: 30px;
+	font-weight: bold;
+	margin-top: 70px;
+	text-align: center;
+}
+
 </style> 
 <input type="hidden" id="teen" value="">
 
@@ -84,19 +95,20 @@ svg text{
             </div> 
 <!-- Nav tabs --> 
 <!-- 스토리 부분 -->
+<div class="divStory">
 <table>
 	<tr>
 		<td colspan="2">
-			<div class="divStory">
-				<p id="pStyle">이 프로젝트를 후원한 나이대 별 현황</p>
-				<p id="pStyle2">최근 3개월간 이 카테고리 후원 현황</p>
+				<p class="pStyle">이 프로젝트를 후원한 나이대 별 현황</p>
+				<p class="pStyle2">최근 3개월간 이 카테고리 후원 현황</p>
 				<svg class="svg" width="650" height="400"></svg> 
 				<svg class="svg2" width="650" height="400"></svg> 
-			</div>
+			
 		</td>
 	</tr>
 	<tr>
 		<td id="circle_graph">
+			<p id="pStyle3">이 프로젝트를 후원한 성비 현황</p>
 			<div class="graph"></div>
 		</td>
 		<td>
@@ -104,7 +116,9 @@ svg text{
 			<div id="graphG_explain"></div> 여자
 		</td>
 	</tr>
+	
 </table>
+</div>
 <input type="hidden" value="${Man}" id="Man">
 <input type="hidden" value="${Girl}" id="Girl">
 
@@ -209,7 +223,7 @@ var data = [{x:mj[0].x, y:mj[0].y }, {x:mj[1].x, y:mj[1].y}, {x:mj[2].x, y:mj[2]
 </script>
 
 <script>
-   var w = 250, h = 250;
+   var w = 400, h = 400;
    d3.select(".graph")
       .append("svg")
       .attr("width", w)
@@ -223,7 +237,7 @@ var data = [{x:mj[0].x, y:mj[0].y }, {x:mj[1].x, y:mj[1].y}, {x:mj[2].x, y:mj[2]
    // pie 생성
    var pie = d3.pie();
    // 안쪽 반지름, 바깥쪽 반지름 설정 // 200x200 의 원 그래프 생성
-   var arc = d3.arc().innerRadius(0).outerRadius(100);
+   var arc = d3.arc().innerRadius(0).outerRadius(150);
    
    // 원 그리기
    var oneGraph = graphWrap.selectAll("path").data(pie(graphData));
