@@ -273,9 +273,9 @@
 				<p><span class="title">선물 설명 : </span></p>
 				<p><textarea id="productInfo" class="pupinput" rows="5" cols="50"></textarea></p>
 		
-				<span class="title">후원 금액 : </span><input type="text" class="pupinput" id="productCost" style="IME-MODE:disabled;">
+				<span class="title">후원 금액 : </span><input type="number" class="pupinput" id="productCost" style="IME-MODE:disabled;">
 				<input type="button" id="preadd" class="btn btn-default" value="선물 추가">
-				<p><span class="title">목표 금액 : </span><input type="text" id="projectCost" name="projectCost" class="pupinput" required style="IME-MODE:disabled;"></p>
+				<p><span class="title">목표 금액 : </span><input type="number" id="projectCost" name="projectCost" class="pupinput" required style="IME-MODE:disabled;"></p>
 			</div>	
 		</div>
 	

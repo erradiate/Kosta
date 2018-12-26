@@ -34,7 +34,7 @@
 					value="${list.memberCash }" readonly="readonly">
 			</p>
 			<p>
-				<span class="title">충전 금액 : </span><input type="text" name="memberCash">
+				<span class="title">충전 금액 : </span><input type="number" name="memberCash">
 			</p>
 			<p>
 				<input type="submit" class="btns" value="충전하기">
