@@ -19,7 +19,7 @@
 	position: absolute;
 	width: 150px;
 	z-index: 200;
-	height: 340px;
+	height: 270px;
 }
 
 .menubar li:hover ul {
@@ -65,8 +65,6 @@
 				<li><a href="categoryproject?categoryNo=8">테크놀로지</a></li>
 				<li><a href="categoryproject?categoryNo=9">기타</a></li>
 
-				<li><a href="">기간 별 보기</a></li>
-				<li><a href="graph">통계 별 보기</a></li>
 			</ul></li>
 		<li><a href="ProjectUpload">프로젝트 업로드</a>
 		<%
