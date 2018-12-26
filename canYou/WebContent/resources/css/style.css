@@ -27,10 +27,12 @@ body div#header1 {
 	clear: both;
 }
 
-body div#header1 #hgroup h1{
-	font-size: 2.5em;
+body div#header1 #hgroup a{
+	font-size: 40px;
 	text-transform: uppercase;
 	color: #2f2929;
+	font-style: italic;
+	font-weight: 700;
 }
 
 body div#header1 #hgroup h2{
