@@ -65,7 +65,6 @@ public class GraphController {
 		hash.put("endAge", 19);
 		ageObject1.put("x", "10대");
 		int count1 = dao.categorygraph(hash);
-		System.out.println("count1 : "+count1);
 		ageObject1.put("y", count1);
 		
 		JSONObject ageObject2 = new JSONObject();
@@ -169,10 +168,8 @@ public class GraphController {
 							String gender = (String)hashMap.get("GENDER");
 							
 							if(gender.equals("남자")) {
-								System.out.println("남자:"+ ((double)y.intValue()/total)*100);
 								m.addAttribute("Man", ((double)y.intValue()/total)*100);
 							} else {
-								System.out.println("여자:"+(double)(x.intValue()/total)*100);
 								m.addAttribute("Girl", ((double)x.intValue()/total)*100);
 							}
 						}

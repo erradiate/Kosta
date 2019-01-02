@@ -45,7 +45,6 @@ public class AdminController {
 		vo.setBegin(String.valueOf(pageInfo.getStartRow()));
 		vo.setEnd(String.valueOf(pageInfo.getEndRow()));
 
-		System.out.println("day" + vo.getDay());
 		ModelAndView m = new ModelAndView();
 		m.setViewName("daegi");
 
@@ -99,7 +98,6 @@ public class AdminController {
 	@RequestMapping(value = "/admin.ok")
 	public String ok(ProjectVO vo) {
 
-		System.out.println(vo.getProjectStep());
 		dao.ok(vo);
 
 		return "redirect:admin.daegi";
@@ -133,9 +131,6 @@ public class AdminController {
 		int startRow = (currentPage - 1) * rowsPerPage + 1; // 시작목록값연산
 		int endRow = currentPage * rowsPerPage;// 마지막 목록값 연산
 
-		// 전체 데이터 값
-
-		System.out.println("totalRows:" + totalRows);
 		// 전체 페이지 구하는 공식
 		int totalPages = 0;
 		if (totalRows % rowsPerPage == 0) {

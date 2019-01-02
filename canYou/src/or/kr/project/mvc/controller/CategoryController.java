@@ -78,9 +78,6 @@ public class CategoryController {
 		m.addAttribute("list", list);
 		m.addAttribute("pageInfo", pageInfo); // pageInfo 전달		
 
-		System.out.println("categoryNo : " +categoryNo);
-		System.out.println("list size2 : "+list.size());
-
 		if (principal != null) {
 			m.addAttribute("principal", principal.getName());
 		}
@@ -106,8 +103,6 @@ public class CategoryController {
 				// 시간차이를 시간,분,초를 곱한 값으로 나누면 하루 단위가 나옴
 		        long diff = endDate.getTime() - sysdate.getTime();
 		        diffDays = diff / (24 * 60 * 60 * 1000);
-		 
-		        System.out.println("날짜차이=" + diffDays);
 		        
 		        //dateList.add(diffDays);
 			} catch (ParseException e) {
@@ -140,10 +135,6 @@ public class CategoryController {
 				  int startRow = (currentPage - 1) * rowsPerPage + 1; // 시작목록값연산
 				  int endRow = currentPage * rowsPerPage;// 마지막 목록값 연산
 
-				  
-				  // 전체 데이터 값
-				  
-				  System.out.println("totalRows:" + totalRows);
 				  // 전체 페이지 구하는 공식
 				  int totalPages = 0;
 				  if (totalRows % rowsPerPage == 0) {

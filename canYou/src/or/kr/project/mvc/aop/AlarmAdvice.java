@@ -33,7 +33,6 @@ public class AlarmAdvice {
 			String implstr = impl.getAuthentication().getName();
 			if(!implstr.equals("anonymousUser")) {
 				MemberVO vo = dao.memname(implstr); // 가져온 ID를 토대로 회원 번호, 이름을 가져온다
-				 System.out.println(vo.getMemberNo());
 				
 				 List<DeniedVO> vo2=dao2.selde(vo.getMemberNo());
 				 Model m = (Model)fd[1];
@@ -52,7 +51,6 @@ public class AlarmAdvice {
 		Object[] fd = jp.getArgs();
 		if(fd[0] instanceof Model) {
 			String projectNo=(String)fd[1];
-			System.out.println(projectNo);
 			int result=dao2.upde(projectNo);
 			if (result!=0) {
 				Model m=(Model)fd[0];

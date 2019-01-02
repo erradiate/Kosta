@@ -129,7 +129,14 @@
     						<div class="progress-bar" style="width:${listv.projectCurCost/listv.projectCost*100}%;height:10px"></div>
   						</div>
 						<p>모인 금액 : ${listv.projectCost}원</p>
-						<p>남은 날짜 : ${dateList[status.index]}일</p>
+						<c:choose>
+							<c:when test="${listv.projectStatus==2}">
+								<p>남은 날짜 : ${dateList[status.index]}일</p>
+							</c:when>
+							<c:otherwise>
+								<p>마감된 프로젝트입니다.</p>
+							</c:otherwise>
+						</c:choose>
 						</div>
 					</div>						
 					</td>

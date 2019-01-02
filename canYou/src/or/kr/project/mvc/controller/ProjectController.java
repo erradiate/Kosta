@@ -70,7 +70,6 @@ public class ProjectController {
 			MemberVO vo = dao.userInfo(memberId);
 
 			session.setAttribute("memberGrant", vo.getMemberGrant());
-			System.out.println("memberGrant : " + vo.getMemberGrant());
 			session.setAttribute("memberImage", vo.getMemberImage());
 			session.setAttribute("memberCash", vo.getMemberCash());
 		}
@@ -153,8 +152,6 @@ public class ProjectController {
 		h.put("memberEmail", vo.getMemberEmail());
 		h.put("memberAge", String.valueOf(vo.getMemberAge()));
 		h.put("memberAccount", vo.getMemberAccount());
-
-		System.out.println(h.get("targetPwd").equals(""));
 
 		int result = dao.editMyInfo(h);
 
@@ -300,8 +297,6 @@ public class ProjectController {
 	public String updateView(Model m, HttpServletRequest req, int projectNo) {
 		ProjectVO vo3 = new ProjectVO();
 
-		System.out.println("프로젝트 번호 : " + projectNo);
-
 		SecurityContext impl = SecurityContextHolder.getContext(); // 세션에서 spring security 정보를 가져옴
 		String implstr = impl.getAuthentication().getName(); // security 정보에서 세션에 담겨있는 로그인 정보 중 ID 가져옴
 		MemberVO vo2 = dao.memname(implstr); // ID를 토대로 회원정보 가져옴 (회원 번호, 회원 이름)
@@ -328,7 +323,6 @@ public class ProjectController {
 		projectMainImage.append(r_path).append(img_path).append("\\");
 		projectMainImage.append(oriFn);
 		File f = new File(projectMainImage.toString());
-		System.out.println("projectMainImage : " + projectMainImage);
 		try {
 			vo.getMultipartFile().transferTo(f);
 			vo.setProjectMainImage(vo.getMultipartFile().getOriginalFilename());
@@ -371,7 +365,6 @@ public class ProjectController {
 
 		List<ProjectVO> list = dao.projectALLlist(vo);
 
-		System.out.println(list.size());
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("AllList");
 		mav.addObject("list", list);
@@ -400,9 +393,6 @@ public class ProjectController {
 				// 시간차이를 시간,분,초를 곱한 값으로 나누면 하루 단위가 나옴
 				long diff = endDate.getTime() - sysdate.getTime();
 				diffDays = diff / (24 * 60 * 60 * 1000);
-
-				System.out.println("날짜차이=" + diffDays);
-
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
@@ -444,9 +434,6 @@ public class ProjectController {
 		m.addAttribute("list", list);
 		m.addAttribute("pageInfo", pageInfo); // pageInfo 전달
 
-		System.out.println("categoryNo : " + categoryNo);
-		System.out.println("list size2 : " + list.size());
-
 		if (principal != null) {
 			m.addAttribute("principal", principal.getName());
 		}
@@ -472,8 +459,6 @@ public class ProjectController {
 				// 시간차이를 시간,분,초를 곱한 값으로 나누면 하루 단위가 나옴
 				long diff = endDate.getTime() - sysdate.getTime();
 				diffDays = diff / (24 * 60 * 60 * 1000);
-
-				System.out.println("날짜차이=" + diffDays);
 
 				// dateList.add(diffDays);
 			} catch (ParseException e) {
@@ -508,9 +493,6 @@ public class ProjectController {
 		int startRow = (currentPage - 1) * rowsPerPage + 1; // 시작목록값연산
 		int endRow = currentPage * rowsPerPage;// 마지막 목록값 연산
 
-		// 전체 데이터 값
-
-		System.out.println("totalRows:" + totalRows);
 		// 전체 페이지 구하는 공식
 		int totalPages = 0;
 		if (totalRows % rowsPerPage == 0) {
@@ -548,7 +530,6 @@ public class ProjectController {
 		vo.setMemberNo(vo2.getMemberNo()); // 프로젝트 테이블에 넣을 회원 번호를 넣음
 		vo.setProjectNo(Integer.parseInt((String) s.getAttribute("projnum"))); // 세션에 등록한 projectNumber를 가져옴
 		s.removeAttribute("projnum"); // 사용한 session 속성 제거
-		System.out.println("reply1 옴");
 		dao.replyInsert(vo);
 
 		return "redirect:story?projectNo=" + vo.getProjectNo();
@@ -599,7 +580,6 @@ public class ProjectController {
 		vo.setDonateNo(donateNo);
 		vo.setMemberNo(memno);
 		vo.setProductNo(productNo);
-		System.out.println("확인확인" + vo.getDonateNo());
 
 		service.cancle(vo);
 
@@ -623,7 +603,6 @@ public class ProjectController {
 		vo.setEnd(String.valueOf(pageInfo.getEndRow()));
 
 		List<HashMap> list = dao.myDonateProject(vo);
-		System.out.println(list.size());
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("mydonate");
 		mav.addObject("list", list);
@@ -641,11 +620,8 @@ public class ProjectController {
 		SecurityContext impl = SecurityContextHolder.getContext(); // 세션에서 spring security 정보를 가져옴
 		String implstr = impl.getAuthentication().getName(); // security 정보에서 세션에 담겨있는 로그인 정보 중 ID 가져옴
 		MemberVO vo2 = dao.memname(implstr); // ID를 토대로 회원정보 가져옴 (회원 번호, 회원 이름)
-		System.out.println("page 들어온 값 : " + page);
-		System.out.println("상태 : " + vo.getProjectStatus());
 		int memno = vo2.getMemberNo();
 		vo.setMemberNo(memno);
-		System.out.println("memno:" + vo.getMemberNo());
 
 		// pageVO의 획득
 		int totalRows = dao.myPTotalCount(vo);
@@ -657,7 +633,6 @@ public class ProjectController {
 
 		List<ProjectVO> list = dao.myProjectlist(vo);
 
-		System.out.println(list.size());
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("myProject");
 		mav.addObject("list", list);
@@ -771,7 +746,6 @@ public class ProjectController {
 	public int memberIdCheck(@RequestBody String memberId) {
 		memberId = memberId.substring(0, memberId.length() - 1);
 		int count = dao.memberIdCheck(memberId);
-		System.out.println(count);
 		return count;
 	}
 
@@ -783,7 +757,6 @@ public class ProjectController {
 		String implstr = impl.getAuthentication().getName(); // security 정보에서 세션에 담겨있는 로그인 정보 중 ID 가져옴
 		MemberVO vo2 = dao.memname(implstr); // ID를 토대로 회원정보 가져옴 (회원 번호, 회원 이름)
 		int memno = vo2.getMemberNo();
-		System.out.println(param.get("replyNo"));
 
 		HashMap<String, String> map = new HashMap<>();
 		map.put("memberNo", String.valueOf(memno));
@@ -791,21 +764,14 @@ public class ProjectController {
 		map.put("replyNo", String.valueOf(param.get("replyNo")));
 		map.put("replyContent", String.valueOf(param.get("replyContent")));
 
-		System.out.println(map.get("memberNo"));
-		System.out.println(map.get("projectNo"));
-		System.out.println(map.get("replyNo"));
-		System.out.println(map.get("replyContent"));
-
 		int ret = dao.comupdate(map);
 		/* return "redirect:/community?projectNo=" + projectNo; */
-		System.out.println(ret);
 		return ret;
 	}
 
 	// 댓글 삭제
 	@RequestMapping(value = "/commentdelete")
 	public String comDelete(int projectNo, int replyNo) {
-		System.out.println(projectNo + " : " + replyNo);
 		SecurityContext impl = SecurityContextHolder.getContext(); // 세션에서 spring security 정보를 가져옴
 		String implstr = impl.getAuthentication().getName(); // security 정보에서 세션에 담겨있는 로그인 정보 중 ID 가져옴
 		MemberVO vo2 = dao.memname(implstr); // ID를 토대로 회원정보 가져옴 (회원 번호, 회원 이름)
@@ -814,16 +780,12 @@ public class ProjectController {
 		vo.setMemberNo(memno);
 		vo.setReplyNo(replyNo);
 		vo.setProjectNo(projectNo);
-		System.out.println("삭제댓글 번호:" + vo.getReplyNo());
-		System.out.println("삭제멤버번호" + vo.getMemberNo());
-		System.out.println("삭제프로젝트 번호 : " + vo.getProjectNo());
 		dao.comdelete(vo);
 		return "redirect:/community?projectNo=" + vo.getProjectNo();
 	}
 
 	@RequestMapping(value = "/communityModify")
 	public String comModd(int projectNo, int replyNo, Model m) {
-		System.out.println(projectNo + " : " + replyNo);
 		SecurityContext impl = SecurityContextHolder.getContext(); // 세션에서 spring security 정보를 가져옴
 		String implstr = impl.getAuthentication().getName(); // security 정보에서 세션에 담겨있는 로그인 정보 중 ID 가져옴
 		MemberVO vo2 = dao.memname(implstr); // ID를 토대로 회원정보 가져옴 (회원 번호, 회원 이름)

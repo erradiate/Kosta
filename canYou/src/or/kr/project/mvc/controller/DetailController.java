@@ -54,7 +54,6 @@ public class DetailController {
 	public String getReply(Model m, HttpServletRequest req, String projectNo) {
 
 		// project 관련한 정보 빼오기
-		System.out.println("num : " + projectNo);
 		ProjectVO list = dao.projectlist(projectNo);
 		String c = dao.caselone(list.getCategoryNo());
 		String sc = dao.subcaselone(list.getSubCategoryNo());
@@ -72,7 +71,6 @@ public class DetailController {
 		List<ReplyVO> replylist = dao.replyList(projectNo);
 		// List<ReplyVO> replylist = dao.replyList(projectNo);
 		m.addAttribute("replylist", replylist);
-		System.out.println("replylist 크기 : " + replylist.size());
 
 		HttpSession s = req.getSession();
 		s.setAttribute("projnum", projectNo); // 프로젝트 세션을 추가
@@ -151,8 +149,6 @@ public class DetailController {
 		HashMap<String, String> map = new HashMap<>();
 		map.put("projectNo", String.valueOf(projectNo));
 		map.put("memberNo", String.valueOf(memno));
-		System.out.println(map.get("memberNo"));
-		System.out.println(map.get("projectNo"));
 		List<MemberVO> excellist = dao.DonateListexcel(map);
 		return new ModelAndView("excelView", "excelview", excellist);
 		// 뷰이름,모델이름,모델값주소

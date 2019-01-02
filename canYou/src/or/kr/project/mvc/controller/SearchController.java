@@ -30,8 +30,6 @@ public class SearchController {
 	//모든 프로젝트 검색
 	@RequestMapping(value="/search")
 	public ModelAndView listSearch(int page,String searchType, String searchValue){
-		System.out.println("SearchType :"+searchType);
-		System.out.println("SearchValue :"+searchValue);
 		//------------------------------
         PageVO pageInfo = new PageVO();
 
@@ -61,7 +59,6 @@ public class SearchController {
 		// 전체 레코드 수 
 		int totalRows = dao.getTotalCount(svo);
 		
-		System.out.println("totalRows:"+totalRows);
 		int totalPages = 0;
 		//전체 페이지를 구하는 공식
 		if(totalRows % rowsPerPage == 0){
@@ -123,8 +120,6 @@ public class SearchController {
 				long diff = endDate.getTime() - sysdate.getTime();
 				diffDays = diff / (24 * 60 * 60 * 1000);
 
-				System.out.println("날짜차이=" + diffDays);
-
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
@@ -143,7 +138,6 @@ public class SearchController {
 		String implstr=impl.getAuthentication().getName();	// security 정보에서 세션에 담겨있는 로그인 정보 중 ID 가져옴
 		MemberVO vo2=dao.memname(implstr);	// ID를 토대로 회원정보 가져옴 (회원 번호, 회원 이름)
 		int memno = vo2.getMemberNo();
-		System.out.println("SearchValue :"+searchValue);
 		//------------------------------
         PageVO pageInfo = new PageVO();
 
@@ -173,7 +167,6 @@ public class SearchController {
 		// 전체 레코드 수 
 		int totalRows = dao.donateTotalCount(svo);
 		
-		System.out.println("totalRows:"+totalRows);
 		int totalPages = 0;
 		//전체 페이지를 구하는 공식
 		if(totalRows % rowsPerPage == 0){
@@ -219,7 +212,6 @@ public class SearchController {
 		String implstr=impl.getAuthentication().getName();	// security 정보에서 세션에 담겨있는 로그인 정보 중 ID 가져옴
 		MemberVO vo2=dao.memname(implstr);	// ID를 토대로 회원정보 가져옴 (회원 번호, 회원 이름)
 		int memno = vo2.getMemberNo();
-		System.out.println("SearchValue :"+searchValue);
 		//------------------------------
         PageVO pageInfo = new PageVO();
 
@@ -249,7 +241,6 @@ public class SearchController {
 		// 전체 레코드 수 
 		int totalRows = dao.mypsearchTotalCount(svo);
 		
-		System.out.println("totalRows:"+totalRows);
 		int totalPages = 0;
 		//전체 페이지를 구하는 공식
 		if(totalRows % rowsPerPage == 0){
