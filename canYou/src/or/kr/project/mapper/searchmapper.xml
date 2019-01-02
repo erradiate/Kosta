@@ -21,7 +21,7 @@
   		</if>
   	</select>
   	
-<!--   	모든 프로젝트 검색  -->
+<!-- 모든 프로젝트 검색  -->
   	  	<select id="aplsearch" resultType="projvo" parameterType="searchvo" >
       select * from (
   		select rownum r_num, a.projectNo, a.projectName, a.projectMainImage, 

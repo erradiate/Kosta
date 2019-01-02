@@ -33,9 +33,9 @@ public class DonateAdvice {
 		
 		if(obj[0] instanceof ProjectDonateVO) {
 			ProjectDonateVO pvo = (ProjectDonateVO)obj[0];
-			SecurityContext impl = SecurityContextHolder.getContext(); // 세션에서 spring security 정보를 가져옴
-			String implstr = impl.getAuthentication().getName(); // security 정보에서 세션에 담겨있는 로그인 정보 중 ID 가져옴
-			MemberVO vo2 = pdao.memname(implstr); // ID를 토대로 회원정보 가져옴 (회원 번호, 회원 이름)
+			SecurityContext impl = SecurityContextHolder.getContext();
+			String implstr = impl.getAuthentication().getName();
+			MemberVO vo2 = pdao.memname(implstr);
 		
 			ProjectVO pvo2 = dao.get_Category(pvo.getProjectNo());
 		

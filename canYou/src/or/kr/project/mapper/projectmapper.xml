@@ -57,7 +57,7 @@
 	<insert id="proin" parameterType="projvo">
 		insert into project
 		values(project_seq.nextVal,#{categoryNo},
-		<if test="subCategoryNo==-1">null,</if>	<!-- 서브 카테고리 미등록일 경우(-1) null이 들어감 -->
+		<if test="subCategoryNo==-1">null,</if>
 		<if test="subCategoryNo!=-1">#{subCategoryNo},</if>
 		#{memberNo}, #{projectName},
 		#{projectCost}, sysdate,

@@ -16,12 +16,14 @@ public class GraphDaoImple implements GraphDao{
 	private SqlSessionTemplate ss;
 	
 	//나이별 카테고리 후원 수 그래프
+	@Override
 	public int categorygraph(Map<String, Integer> hash) {
 		return ss.selectOne("graph.categorygraph",hash);
 	}
 	
 	//최근 3개월간 해당 카테고리 후원 수
-	public List<Integer> monthGraph(ProjectVO vo){
+	@Override
+	public List<Integer> monthGraph(ProjectVO vo) {
 		return ss.selectList("graph.monthgraph",vo.getCategoryNo());
 	}
 	
