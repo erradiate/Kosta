@@ -86,7 +86,6 @@ public class ProjectDaoImple implements ProjectDao {
 	// 프로젝트에 후원하는 메소드 1 (돈 차감)
 	public void donateMoney(Map<String, Integer> m) {
 		ss.update("project.donateMoney", m);
-		// System.out.println("donateNo : "+m);
 	}
 
 	@Override
@@ -103,7 +102,6 @@ public class ProjectDaoImple implements ProjectDao {
 	// 마이페이지 - 후원현황
 	@Override
 	public List<HashMap> myDonateProject(SearchVO vo) {
-		System.out.println("들어온 넘버 값:" + vo);
 		List<HashMap> list = ss.selectList("paging.mydonate", vo);
 		return list;
 	}
@@ -181,8 +179,6 @@ public class ProjectDaoImple implements ProjectDao {
 	// 마이페이지 - 내가만든 프로젝트 리스트
 	@Override
 	public List<ProjectVO> myProjectlist(SearchVO vo) {
-		System.out.println("begin : " + vo.getBegin());
-		System.out.println("End : " + vo.getEnd());
 		return ss.selectList("paging.myProjectlist", vo);
 	}
 
@@ -207,15 +203,7 @@ public class ProjectDaoImple implements ProjectDao {
 	// 카테고리별 프로젝트 보기
 	@Override
 	public List<ProjectVO> lookCategoryProject(Map<String, String> categoryList) {
-		System.out.println("-----------------------------");
-		System.out.println(categoryList.get("categoryNo"));
-		System.out.println(categoryList.get("begin"));
-		System.out.println(categoryList.get("end"));
-		System.out.println("-----------------------------");
-
 		List<ProjectVO> list = ss.selectList("paging.paginglist", categoryList);
-		System.out.println("list size : " + list.size());
-
 		return list;
 	}
 
@@ -229,15 +217,7 @@ public class ProjectDaoImple implements ProjectDao {
 	// 카테고리별 프로젝트 보기 + 서브 카테고리
 	@Override
 	public List<ProjectVO> lookCategoryProject2(Map<String, String> categoryList) {
-		System.out.println("-----------------------------");
-		System.out.println(categoryList.get("categoryNo"));
-		System.out.println(categoryList.get("begin"));
-		System.out.println(categoryList.get("end"));
-		System.out.println("-----------------------------");
-
 		List<ProjectVO> list = ss.selectList("paging.paginglist2", categoryList);
-		System.out.println("list size : " + list.size());
-
 		return list;
 	}
 
@@ -406,7 +386,6 @@ public class ProjectDaoImple implements ProjectDao {
 	// 상세보기 - 관심별 리스트보기
 	@Override
 	public List<ProjectVO> projectlistByCategory(String category) {
-		System.out.println("category : " + category);
 		return ss.selectList("project.listByCategory", category);
 	}
 
