@@ -42,10 +42,8 @@ public class WordBuilder{
 	public static String profileImg;
 	public static String projectImg;
 	
-	// 주석 부분 vo 해야함
 	public void wordCD(MemberVO vo, HttpServletRequest req, 
 			HttpServletResponse resp, HttpSession session) throws Exception {
-		// 문서를 만들기전 초기화 작업.
 		row = 0;
 		
 		List<ProductVO> list = vo.getProject().getProduct();
@@ -269,10 +267,8 @@ public class WordBuilder{
 		    for(int rowIndex = fromRow; rowIndex <= toRow; rowIndex++){
 		        XWPFTableCell cell = table.getRow(rowIndex).getCell(col);
 		        if(rowIndex == fromRow){
-		        	// 합치기 시작하는 처음 세로셀은 RESTART로 설정
 		            cell.getCTTc().addNewTcPr().addNewVMerge().setVal(STMerge.RESTART);
 		        }else{
-		        	// 합치기 시작하는 처음 세로셀은 CONTINUE로 설정
 		            cell.getCTTc().addNewTcPr().addNewVMerge().setVal(STMerge.CONTINUE);
 		        }
 		    }
@@ -283,10 +279,8 @@ public class WordBuilder{
 		    for(int colIndex = fromCol; colIndex <= toCol; colIndex++){
 		        XWPFTableCell cell = table.getRow(row).getCell(colIndex);
 		        if(colIndex == fromCol){
-		            // 합치기 시작하는 처음 가로셀은 RESTART로 설정
 		            cell.getCTTc().addNewTcPr().addNewHMerge().setVal(STMerge.RESTART);
 		        }else{
-		        	// 합쳐지는 가로 셀은 CONTINUE로 설정
 		            cell.getCTTc().addNewTcPr().addNewHMerge().setVal(STMerge.CONTINUE);
 		        }
 		    }
@@ -294,7 +288,6 @@ public class WordBuilder{
 		
 		private void create_Product_Row(XWPFTable table, XWPFParagraph paragraph, 
 				XWPFRun paragraphRunOne, ProductVO productVO) {
-			// row = 16
 			// 상품 설명 행 제목행
 			XWPFTableRow list_Row = table.createRow();
 			
@@ -382,7 +375,6 @@ public class WordBuilder{
 			// 시작점, 끝점의 p 태그 삭제
 			for(int i=0;i<stx.length;i++) {
 				if(stx[i]=="") {
-					System.out.println("빔");
 					continue;
 				}
 				if(i==stx.length-1) {
@@ -390,11 +382,9 @@ public class WordBuilder{
 				} else {
 					stx[i] = stx[i].substring(3,stx[i].length()-4);
 				}
-				System.out.println("stx["+i+"] : "+ stx[i]);
 			}
 			
 			for(int i=0;i<stx.length;i++) {
-				//이미지 태그 (이미지) 가지고 있을 경우
 				if(stx[i].contains("<img")) {
 					image.add(stx[i].substring(stx[i].indexOf("resources/images/")+17, stx[i].indexOf("\"", stx[i].indexOf("resources/images/")+17)));
 					stx[i]="!ime";
