@@ -33,7 +33,6 @@ public class TempAdvice {
 	
 	@Before("execution(* or.kr.project.mvc.controller.ProjectController.ProjectUpload(..))")
 	public void beforeMethod(JoinPoint jp){
-		System.out.println("test");
 		Object[] fd = jp.getArgs();
 		if(fd[0] instanceof Model) {
 			SecurityContext impl = SecurityContextHolder.getContext();
