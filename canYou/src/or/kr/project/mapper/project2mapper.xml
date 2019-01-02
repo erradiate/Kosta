@@ -19,4 +19,8 @@
 	<delete id="delreason" parameterType="int">
 		delete from denied where projectNo=#{projectNo}
 	</delete>
+	
+	<update id="uppro">
+		update project set projectStatus=3 where sysdate>projectEndDate and projectstatus=2
+	</update>
 </mapper>

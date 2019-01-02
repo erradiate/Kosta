@@ -17,4 +17,5 @@ public interface Project2Dao {
 	public List<DeniedVO> selde(int i);
 	public int upde(String s);
 	public String showreason(String projectNo);
+	public void uppro();
 }

@@ -70,4 +70,9 @@ public class Project2DaoImple implements Project2Dao{
 	public String showreason(String projectNo) {
 		return ss.selectOne("project2.showreason", projectNo);
 	}
+	
+	@Override
+	public void uppro() {
+		ss.update("project2.uppro");
+	}
 }
