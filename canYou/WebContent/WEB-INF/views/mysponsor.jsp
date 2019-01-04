@@ -87,15 +87,11 @@ tr .thStyle{
 $(document).ready(function(){
 	var memberId = $('#memberId').val();
 	var userPrincipalName = $('#userPrincipalName').val();
-	
-	//console.log(memberId);
-	//console.log(userPrincipalName);
-	
+
 	if(memberId!=userPrincipalName){
 		alert("프로젝트 진행자만 볼 수 있습니다.");
 		location.href="story?projectNo="+$('#projectNo').val();
 	}
 });
-
 
 </script>

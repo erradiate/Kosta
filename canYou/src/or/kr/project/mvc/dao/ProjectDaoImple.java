@@ -17,77 +17,163 @@ import or.kr.project.dto.ReplyVO;
 import or.kr.project.dto.SearchVO;
 import or.kr.project.dto.SubCategoryVO;
 
+/**
+ * <pre>
+ * <b>ProjectDaoImple 클래스</b>
+ * </pre>
+ * @author 조현무, 김다솜, 전윤지, 변가연
+ * @version ver.1.0
+ * @since jdk.1.8
+ *
+ */
+
 @Repository
 public class ProjectDaoImple implements ProjectDao {
 	@Autowired
 	private SqlSessionTemplate ss;
 
+    /** 
+     * 카테고리 이름을 가져옵니다.
+     * @return List<CategoryVO>
+     */  
 	@Override
 	public List<CategoryVO> casel() {
 		return ss.selectList("project.casel"); // 카테고리 이름 가져오는 sql문
 	}
 
+    /** 
+     * 서브 카테고리 이름을 가져옵니다.
+     * @param int i 
+     * @return List<SubCategoryVO> 
+     */  
 	@Override
 	public List<SubCategoryVO> subcasel(int i) {
 		return ss.selectList("project.subcasel", i);
 	}
 
+	/** (non-Javadoc)
+	 * @see or.kr.project.mvc.dao.ProjectDao#memname(java.lang.String)
+	 * 회원 아이디로 회원이 누구인지 가져옵니다.
+	 * @param String s 
+	 * @return MemberVO
+	 */
 	@Override
 	public MemberVO memname(String s) { // 회원이 누구인지 가져오기 위한 sql문(회원 아이디로 가져옴)
 		return ss.selectOne("project.memname", s);
 	}
 
+	/** (non-Javadoc)
+	 * @see or.kr.project.mvc.dao.ProjectDao#memname2(int)
+	 * 회원 번호로 회원이 누구인지 가져옵니다.
+	 * @param int i 
+	 * @return MemberVO
+	 */
 	@Override
 	public MemberVO memname2(int i) {
 		return ss.selectOne("project.memname2", i); // 회원이 누구인지 가져오기 위한 sql문 (회원 번호로 가져옴)
 	}
 
+	/** (non-Javadoc)
+	 * @see or.kr.project.mvc.dao.ProjectDao#proin(or.kr.project.dto.ProjectVO)
+	 * 프로젝트를 생성합니다.
+	 * @param ProjectVO vo 
+	 */
 	@Override
 	public void proin(ProjectVO vo) { // 프로젝트 insert문
 		ss.insert("project.proin", vo);
 	}
 
+	/** (non-Javadoc)
+	 * @see or.kr.project.mvc.dao.ProjectDao#prodin(or.kr.project.dto.ProductVO)
+	 * 상품을 생성합니다.
+	 * @param ProductVO vo
+	 */
 	@Override
 	public void prodin(ProductVO vo) { // 상품 insert문
 		ss.insert("project.prodin", vo);
 	}
 
+	/** (non-Javadoc)
+	 * @see or.kr.project.mvc.dao.ProjectDao#prodsel(java.lang.String)
+	 * 상품을 리스트로 나오게 합니다.
+	 * @param String s
+	 * @return List<ProductVO>
+	 */
 	@Override
 	public List<ProductVO> prodsel(String s) { // 상품 select문
 		return ss.selectList("project.prodsel", s);
 	}
 
+	/** (non-Javadoc)
+	 * @see or.kr.project.mvc.dao.ProjectDao#modifyview(or.kr.project.dto.ProjectVO)
+	 * 프로젝트를 수정페이지를 나오게 합니다.
+	 * @param ProjectVO vo
+	 * @return ProjectVO
+	 */
 	@Override
 	public ProjectVO modifyview(ProjectVO vo) {
 		return ss.selectOne("project.modifyview", vo);
 	}
 
+	/** (non-Javadoc)
+	 * @see or.kr.project.mvc.dao.ProjectDao#modify(or.kr.project.dto.ProjectVO)
+	 * 프로젝트를 수정합니다.
+	 * @param ProjectVO vo
+	 */
 	@Override
 	public void modify(ProjectVO vo) {
 		ss.update("project.modify", vo);
 	}
 
+	/** (non-Javadoc)
+	 * @see or.kr.project.mvc.dao.ProjectDao#caselone(int)
+	 * 카테고리 번호를 통해 카테고리 이름을 가져옵니다.
+	 * @param int i
+	 * @return String
+	 */
 	@Override
 	public String caselone(int i) {
 		return ss.selectOne("project.caselone", i);
 	}
 
+	/** (non-Javadoc)
+	 * @see or.kr.project.mvc.dao.ProjectDao#subcaselone(int)
+	 * 서브 카테고리 번호를 통해 서브 카테고리 이름을 가져옵니다.
+	 * @param int i
+	 * @return String
+	 */
 	@Override
 	public String subcaselone(int i) {
 		return ss.selectOne("project.subcaselone", i);
 	}
 
+	/** (non-Javadoc)
+	 * @see or.kr.project.mvc.dao.ProjectDao#prodcost(int)
+	 * 상품 가격을 불러옵니다.
+	 * @param int i
+	 * @return int
+	 */
 	@Override
 	public int prodcost(int i) {
 		return ss.selectOne("project.prodcost", i);
 	}
 
+	/** (non-Javadoc)
+	 * @see or.kr.project.mvc.dao.ProjectDao#donateMoney(java.util.Map)
+	 * 후원추가 - 돈을 차감합니다.
+	 * @param Map<String, Integer> m
+	 */
 	@Override
 	// 프로젝트에 후원하는 메소드 1 (돈 차감)
 	public void donateMoney(Map<String, Integer> m) {
 		ss.update("project.donateMoney", m);
 	}
 
+	/** (non-Javadoc)
+	 * @see or.kr.project.mvc.dao.ProjectDao#donate(or.kr.project.dto.ProjectDonateVO)
+	 * 후원추가 - 후원자수 증가 / 모인 금액 업데이트를 해줍니다.
+	 * @param ProjectDonateVO vo
+	 */
 	@Override
 	// 프로젝트에 후원을 하는 메소드2
 	public void donate(ProjectDonateVO vo) {
@@ -100,20 +186,35 @@ public class ProjectDaoImple implements ProjectDao {
 	}
 
 	// 마이페이지 - 후원현황
+	/** (non-Javadoc)
+	 * @see or.kr.project.mvc.dao.ProjectDao#myDonateProject(or.kr.project.dto.SearchVO)
+	 * 마이페이지에서 후원 목록 리스트를 보여줍니다.
+	 * @param SearchVO vo
+	 * @return List<HashMap>
+	 */
 	@Override
 	public List<HashMap> myDonateProject(SearchVO vo) {
-		List<HashMap> list = ss.selectList("paging.mydonate", vo);
-		return list;
+		return ss.selectList("paging.mydonate", vo);
 	}
 
 	// 투자한 프로젝트 총 개수
+	/** (non-Javadoc)
+	 * @see or.kr.project.mvc.dao.ProjectDao#myDonateCount(or.kr.project.dto.SearchVO)
+	 * 마이페이지에서 후원 리스트 총 갯수를 보여줍니다.
+	 * @param SearchVO vo
+	 * @return int
+	 */
 	@Override
 	public int myDonateCount(SearchVO vo) {
 		return ss.selectOne("paging.mydonateTotal", vo);
-
 	}
 
 	// 후원 취소1 (돈 반환 + 선물 반환)
+	/** (non-Javadoc)
+	 * @see or.kr.project.mvc.dao.ProjectDao#returnMoney(or.kr.project.dto.ProjectDonateVO)
+	 * 후원 취소 - 취소할 후원 프로젝트의 돈을 가져옵니다.
+	 * @param ProjectDonateVO vo
+	 */
 	@Override
 	public void returnMoney(ProjectDonateVO vo) {
 		Map<String, Integer> m = new HashMap<>();
@@ -129,12 +230,22 @@ public class ProjectDaoImple implements ProjectDao {
 	}
 
 	// 프로젝트 후원자 감소 + 후원금 차감
+	/** (non-Javadoc)
+	 * @see or.kr.project.mvc.dao.ProjectDao#returnFundCnt(or.kr.project.dto.ProjectDonateVO)
+	 * 후원 취소 - 후원자 감소 / 후원금 차감을 해줍니다.
+	 * @param ProjectDonateVO vo
+	 */
 	@Override
 	public void returnFundCnt(ProjectDonateVO vo) {
 		ss.update("project.returnFundCnt", vo);
 	}
 
 	// 후원 취소2 (행 삭제)
+	/** (non-Javadoc)
+	 * @see or.kr.project.mvc.dao.ProjectDao#donateCancle(or.kr.project.dto.ProjectDonateVO)
+	 * 후원 취소 - 세션에서 가져온 회원 번호와 후원 번호가 일치하면 행을 삭제합니다.
+	 * @param ProjectDonateVO vo
+	 */
 	@Override
 	public void donateCancle(ProjectDonateVO vo) {
 		ss.delete("project.cancle", vo);

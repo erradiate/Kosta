@@ -13,6 +13,16 @@ import or.kr.project.dto.ReplyVO;
 import or.kr.project.dto.SearchVO;
 import or.kr.project.dto.SubCategoryVO;
 
+/**
+ * <pre>
+ * <b>ProjectDao 인터페이스</b>
+ * </pre>
+ * @author 전윤지
+ * @version ver.1.0
+ * @since jdk.1.8
+ *
+ */
+
 public interface ProjectDao {
 	public List<CategoryVO> casel();
 	public List<SubCategoryVO> subcasel(int i);

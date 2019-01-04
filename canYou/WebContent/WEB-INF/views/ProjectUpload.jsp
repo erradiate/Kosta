@@ -235,13 +235,13 @@
 		</p>
 		
 	</div>
-	<p><span class="title">프로젝트 카테고리 : </span><select class="category" id="categoryNo" name="categoryNo" required>
-
+	<p><span class="title">프로젝트 카테고리 : </span>
+		<select class="category" id="categoryNo" name="categoryNo" required>
 					<option value="" selected>선택</option>
 					<c:forEach var="v" items="${category}">
 						<option value="${v.categoryNo}">${v.categoryName}</option>
     				</c:forEach>
-				  </select>
+		</select>
 				  <select class="category" id="subCategoryNo" name="subCategoryNo">
 				     <option value="" selected>선택</option>
 				  </select>

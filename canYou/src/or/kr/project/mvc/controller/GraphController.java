@@ -31,14 +31,7 @@ public class GraphController {
 	private GraphDaoImple dao;
 	@Autowired
 	private ProjectDaoImple dao2;
-	
-	/*
-	@RequestMapping(value = "/graph")
-	public String graphLook() {
-		return "graphpage";
-	}
-	*/
-	
+
 	//그래프 나타내는 함수 
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/graph")
@@ -115,7 +108,12 @@ public class GraphController {
 		//x축의 날짜 지정
 		Date date = new Date();
 		int cur_month = date.getMonth();
-		monthObject1.put("x", cur_month+1);
+		
+		if(cur_month==0) {
+			cur_month +=12;
+		}
+
+		monthObject1.put("x", cur_month%12+1);
 		monthObject2.put("x", cur_month);
 		monthObject3.put("x", cur_month-1);
 		
@@ -143,6 +141,7 @@ public class GraphController {
 		
 		request.setAttribute("monthArray", monthArray);
 		
+		//프로젝트를 후원한 성비를 나타내는 그래프
 		List<HashMap<String, Object>> list2 = dao.countPerGender(vo.getProjectNo());
 		// list 가 null일 경우는 후원이 아직 한번도 안된 프로젝트
 				if(list2 != null) {
