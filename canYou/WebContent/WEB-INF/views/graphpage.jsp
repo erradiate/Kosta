@@ -135,7 +135,7 @@ var dataset = [{x:aj[0].x, y:aj[0].y }, {x:aj[1].x, y:aj[1].y}, {x:aj[2].x, y:aj
 	var height = parseInt(svg.style("height"), 10)-30;
 	
 	var svgG = svg.append("g")                                              
-   				.attr("transform", "translate(30, 5)");
+   				.attr("transform", "translate(15, 5)");
 
 	var yScale = d3.scaleLinear()                                           
 				    .domain([0, d3.max(dataset, function(d){ return d.y; })])
