@@ -3,14 +3,31 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="graph">
-	<!-- 나이별 투자한 카테고리 그래프 -->
-	<select id="ageGraph" resultType="HashMap">
-		select a.memberAge,p.categoryNo
-		from project p, (
-		    select m.memberNo,m.memberAge,d.projectNo
-		    from member m,projectDonate d
-		    where m.memberNo=d.memberNo
-		) a
-		where a.projectNo=p.projectNo
+	<!-- 나이별 카테고리 후원 수 -->
+	<select id="categorygraph" parameterType="hashmap" resultType="int">
+		select NVL(count(*), 0)
+		from logger
+		where memberAge between #{startAge} and #{endAge} and projectNo=#{projectNo}
 	</select>
+	
+	<!-- 최근 3개월간 해당 카테고리 후원 수 -->
+	<select id="monthgraph" parameterType="projvo" resultType="int">
+		select NVL(count(*), 0) count
+		from (
+		    select substr(donateDay,0,5) as d
+		    from logger
+		    where categoryNo=#{categoryNo}
+		) 
+		group by d
+		order by d desc
+	</select> 
+	
+	<!-- 성별 후원한 회원의 수를 뽑아오는 sql 구문 -->
+	<select id="count_per_gender" parameterType="int" resultType="hashmap">
+		select memberGender as gender, count(memberGender) as count
+		from logger
+		where projectNo=#{projectNo}
+		group by memberGender
+	</select>
+	
 </mapper>

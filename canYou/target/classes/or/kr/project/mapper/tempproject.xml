@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tempproject">
+	<!-- 임시 프로젝트 저장 -->
+	<insert id="tproin" parameterType="projvo">
+		insert into tproject
+		values(tproject_seq.nextVal, #{memberNo}, 
+		
+		<if test="categoryNo==0">null,</if>
+		<if test="categoryNo!=0">#{categoryNo},</if>
+		
+		<if test="subCategoryNo==-1">null,</if>	<!-- 서브 카테고리 미등록일 경우(-1) null이 들어감 -->
+		<if test="subCategoryNo==0">null,</if>	<!-- 서브 카테고리 미등록일 경우(-1) null이 들어감 -->
+		<if test="subCategoryNo!=-1 and subCategoryNo!=0">#{subCategoryNo},</if>
+		
+		
+		<if test="projectName==null">null,</if>
+		<if test="projectName!=null">#{projectName},</if>
+		<if test="projectCost==null">null,</if>
+		<if test="projectCost!=null">#{projectCost},</if>
+		<if test="projectStartDate==null">null,</if>
+		<if test="projectStartDate!=null">TO_DATE(#{projectStartDate}, 'yyyy-mm-dd'),</if>
+		<if test="projectEndDate==null">null,</if>
+		<if test="projectEndDate!=null">TO_DATE(#{projectEndDate},'yyyy-mm-dd'),</if>
+		<if test="projectMainImage==null">null,</if>
+		<if test="projectMainImage!=null">#{projectMainImage},</if>
+		<if test="projectStory==null">null,</if>
+		<if test="projectStory!=null">#{projectStory},</if>
+		sysdate
+		)
+		<selectKey keyProperty="projectNo" resultType="int"
+			order="AFTER">
+			SELECT tproject_seq.CURRVAL FROM dual
+		</selectKey>
+	</insert>
+	
+	<!-- 임시 프로젝트의 상품 저장 -->
+	<insert id="tprodin" parameterType="prodvo">
+		insert into tproduct
+		values(tproduct_seq.nextVal, #{productName}, #{productCnt},
+		#{productInfo}, #{productCost}, #{projectNo})
+	</insert>
+	
+	<!-- 해당 회원의 임시 저장 프로젝트가 몇개인지 가져오기 -->
+	<select id="tprocnt" parameterType="int" resultType="int">
+		select count(*) from tproject where memberNo=#{memberNo}
+	</select>
+	
+	<!-- 해당 회원의 임시 저장 프로젝트 가져오기 -->
+	<select id="tprosel" parameterType="int" resultType="projvo">
+		select tprojectNo projectNo, categoryNo, subCategoryNo, tprojectName projectName, tprojectCost projectCost,
+		tprojectStartDate projectStartDate, tprojectEndDate projectEndDate,
+		tprojectMainImage projectMainImage, tprojectStory projectStory
+		 from tproject where memberNo=#{memberNo} order by tprojectNo
+	</select>
+	
+	<!-- 선택한 임시 저장 프로젝트 가져오기 -->
+	<select id="tproselOne" parameterType="int" resultType="projvo">
+		select categoryNo, subCategoryNo, tprojectName projectName, tprojectCost projectCost,
+		to_char(tprojectStartDate, 'yyyy-MM-dd') projectStartDate, to_char(tprojectEndDate, 'yyyy-MM-dd') projectEndDate,
+		tprojectMainImage projectMainImage, tprojectStory projectStory
+		 from tproject where tprojectNo=#{projectNo}
+	</select>
+	
+	<!-- 선택한 임시 저장 프로젝트의 상품 가져오기 -->
+	<select id="tprodsel" parameterType="int" resultType="prodvo">
+		select tproductName productName, tproductCnt productCnt, tproductInfo productInfo, tproductCost productCost
+		from tproduct where tprojectNo=#{projectNo}
+	</select>
+	
+	<!-- 선택한 임시 저장 프로젝트의 상품 삭제 -->
+	<delete id="tproddel" parameterType="int">
+		delete from tproduct where tprojectNo=#{projectNo}
+	</delete>
+	
+	<!-- 선택한 임시 저장 프로젝트 삭제 -->
+	<delete id="tprodel" parameterType="int">
+		delete from tproject where tprojectNo=#{projectNo}
+	</delete>
+</mapper>

@@ -10,7 +10,7 @@
 		parameterType="searchvo">
 		select projectNo, projectMainImage, projectName,
 		projectCurCost, projectEndDate,
-		projectStartDate, projectStatus
+		projectStartDate, projectStatus, projectCost
 		from
 		(
 		select rownum as
@@ -33,7 +33,7 @@
 	<select id="paginglist" resultType="projvo"
 		parameterType="HashMap">
 		select projectNo,
-		projectMainImage,projectName,projectCost,projectEndDate, projectStatus
+		projectMainImage,projectName,projectCost,projectEndDate, projectStatus, projectCurCost
 		from
 		(
 		select rownum as r_num, p.*
@@ -95,7 +95,7 @@
 	<select id="paginglist2" resultType="projvo"
 		parameterType="HashMap">
 		select projectNo,
-		subcategoryNo, projectMainImage,projectName,projectCost,projectEndDate, projectStatus
+		subcategoryNo, projectMainImage,projectName,projectCost,projectEndDate, projectStatus, projectCurCost
 		from
 		(
 		select rownum as r_num, p.*

@@ -13,5 +13,9 @@
 		<typeAlias alias="hvo" type="or.kr.project.dto.HashtagVO"/>
 		<typeAlias alias="dvo" type="or.kr.project.dto.ProjectDonateVO" />
 		<typeAlias alias="searchvo" type="or.kr.project.dto.SearchVO"  />
+		<typeAlias alias="devo" type="or.kr.project.dto.DeniedVO"  />
+		<typeAlias alias="lvo" type="or.kr.project.dto.LoggerVO"/>
 	</typeAliases>
 </configuration>
+
+
