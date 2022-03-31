@@ -29,7 +29,7 @@
 	<!-- properties 추가 -->
 	<properties>
 		<java-version>1.8</java-version>
-		<org.springframework-version>4.0.2.RELEASE</org.springframework-version>
+		<org.springframework-version>5.3.18</org.springframework-version>
 		<org.aspectj-version>1.7.4</org.aspectj-version>
 		<org.slf4j-version>1.7.5</org.slf4j-version>
 	</properties>
@@ -189,7 +189,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
-			<version>4.3.9.RELEASE</version>
+			<version>5.3.18</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
 		<dependency>
